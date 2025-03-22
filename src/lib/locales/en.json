@@ -5,6 +5,7 @@
   "blog": "Blog",
   "contact": "Contact",
   
+  "newGeneration": "New AI Generation",
   "heroTitle": "AI Solutions to Transform Your Business",
   "heroSubtitle": "Harness the power of Artificial Intelligence to accelerate your growth and deliver exceptional experiences to your customers.",
   "chatbotTitle": "AI Assistant",
@@ -182,5 +183,6 @@
   "testimonials": "What Our Clients Say",
   "previousTestimonial": "Previous testimonial",
   "nextTestimonial": "Next testimonial",
-  "viewAllBlogs": "View all our articles"
+  "viewAllBlogs": "View all articles",
+  "developer": "Full-stack Developer"
 }

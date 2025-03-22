@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
@@ -79,8 +78,8 @@ const OtherSolutions: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       <Header />
       
-      <main className="flex-grow pt-24 pb-20">
-        <section className="py-12 md:py-20">
+      <main className="flex-grow">
+        <section className="pt-40 md:pt-44 lg:pt-48 pb-24">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center mb-16">
               <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">

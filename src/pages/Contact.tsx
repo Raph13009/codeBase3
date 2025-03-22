@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
@@ -26,12 +25,12 @@ const Contact: React.FC = () => {
     {
       icon: <Phone className="w-5 h-5" />,
       title: t('phoneTitle'),
-      details: ['+33 1 23 45 67 89'],
+      details: ['+33 6 02 61 73 29'],
     },
     {
       icon: <Mail className="w-5 h-5" />,
       title: t('emailTitle'),
-      details: ['contact@boostaiconsulting.com'],
+      details: ['raphaellevy027@gmail.com'],
     },
     {
       icon: <Globe className="w-5 h-5" />,
@@ -46,14 +45,14 @@ const Contact: React.FC = () => {
 
   const teamMembers = [
     {
-      name: "Sophie Martin",
+      name: "Raphaël",
       role: t('aiConsultant'),
-      photo: "/lovable-uploads/ae9cc7de-acd7-4613-9834-0fdc60117dfe.png"
+      photo: "/assets/raph-pp.jpg"
     },
     {
-      name: "Thomas Dubois",
-      role: t('seoSpecialist'),
-      photo: "/lovable-uploads/1e45b816-f132-479c-8c97-8438831e48bd.png"
+      name: "Sébastien",
+      role: t('developer'),
+      photo: "/assets/seb-pp.png"
     }
   ];
   

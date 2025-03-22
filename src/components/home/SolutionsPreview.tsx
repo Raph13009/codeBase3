@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -104,16 +103,26 @@ const SolutionsPreview: React.FC = () => {
         </div>
 
         <div className="mb-12 flex justify-center">
-          <ToggleGroup type="single" value={activeTab} onValueChange={(value) => value && setActiveTab(value as SolutionType)} className="border border-border p-1 rounded-full bg-background/80 backdrop-blur-sm">
+          <ToggleGroup 
+            type="single" 
+            value={activeTab} 
+            onValueChange={(value) => value && setActiveTab(value as SolutionType)} 
+            className="border border-border/50 p-1.5 rounded-full bg-white/80 backdrop-blur-sm shadow-xl"
+          >
             {solutions.map((solution) => (
               <ToggleGroupItem 
                 key={solution.id} 
                 value={solution.id}
-                className={`rounded-full flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-all
-                  ${activeTab === solution.id ? 'bg-primary text-primary-foreground' : 'hover:bg-secondary'}`}
+                className={`rounded-full flex items-center gap-2 px-5 py-3 text-sm font-medium transition-all
+                  ${activeTab === solution.id 
+                    ? 'bg-primary text-white shadow-md' 
+                    : 'hover:bg-secondary text-muted-foreground hover:text-foreground'
+                  }`}
                 aria-label={solution.title}
               >
-                {solution.icon}
+                <span className={`p-1.5 rounded-full ${activeTab === solution.id ? 'bg-white/20' : 'bg-slate-100'}`}>
+                  {solution.icon}
+                </span>
                 <span className="hidden sm:inline">{solution.title}</span>
               </ToggleGroupItem>
             ))}
@@ -124,6 +133,8 @@ const SolutionsPreview: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             <div className={`
               rounded-2xl overflow-hidden transform transition-all duration-500 
+              shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.25)] 
+              border border-slate-200/50 bg-white/80 backdrop-blur-sm
               ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
             `}>
               {activeSolution.illustration}
@@ -134,7 +145,7 @@ const SolutionsPreview: React.FC = () => {
               ${inView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}
             `} style={{ transitionDelay: '200ms' }}>
               <div className="flex items-center gap-4 mb-4">
-                <div className={`p-3 rounded-xl ${activeSolution.color}`}>
+                <div className={`p-3 rounded-xl ${activeSolution.color} shadow-sm`}>
                   {activeSolution.icon}
                 </div>
                 <h3 className="text-2xl md:text-3xl font-display font-bold">{activeSolution.title}</h3>
@@ -149,7 +160,7 @@ const SolutionsPreview: React.FC = () => {
                 <ul className="space-y-3">
                   {activeSolution.benefits.map((benefit, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <div className="rounded-full bg-primary/10 p-1 mt-1">
+                      <div className="rounded-full bg-primary/10 p-1 mt-1 shadow-sm">
                         <svg className="h-4 w-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                         </svg>
@@ -163,7 +174,7 @@ const SolutionsPreview: React.FC = () => {
               <div className="mt-8">
                 <Link 
                   to="/solutions" 
-                  className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-medium"
+                  className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-medium shadow-md"
                 >
                   {t('exploreOurSolution')} <ArrowRight className="w-5 h-5" />
                 </Link>

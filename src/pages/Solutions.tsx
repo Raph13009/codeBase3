@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -187,17 +186,17 @@ const Solutions: React.FC = () => {
       <Header />
       
       <main className="flex-grow">
-        <section className={`py-24 ${bgClass} transition-colors duration-700`}>
+        <section className={`pt-40 md:pt-44 lg:pt-48 pb-24 ${bgClass} transition-colors duration-700`}>
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-4xl mx-auto text-center mb-12">
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
+              <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
                 {t('solutionsTitle')}
               </h1>
-              <p className="text-muted-foreground text-lg md:text-xl mb-10 animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <p className="text-muted-foreground text-base md:text-xl mb-10 animate-fade-in" style={{ animationDelay: '200ms' }}>
                 {t('solutionsSubtitle')}
               </p>
               
-              <div className="inline-flex p-1.5 border border-border/60 rounded-full bg-background/80 backdrop-blur-sm shadow-lg">
+              <div className="inline-flex p-1 md:p-1.5 border border-border/60 rounded-full bg-background/80 backdrop-blur-sm shadow-lg">
                 <ToggleGroup 
                   type="single" 
                   value={activeSolution} 
@@ -208,7 +207,7 @@ const Solutions: React.FC = () => {
                     <ToggleGroupItem 
                       key={solution.id} 
                       value={solution.id}
-                      className={`rounded-full flex items-center gap-2 px-5 py-3 text-sm font-medium transition-all duration-300
+                      className={`rounded-full flex items-center justify-center gap-1 md:gap-2 px-3 md:px-5 py-2 md:py-3 text-xs md:text-sm font-medium transition-all duration-300
                         ${activeSolution === solution.id ? 'bg-primary text-primary-foreground shadow-md' : 'hover:bg-secondary'}
                       `}
                       aria-label={solution.title}
@@ -230,35 +229,35 @@ const Solutions: React.FC = () => {
                 transition={{ duration: 0.5 }}
                 className="max-w-6xl mx-auto mt-16"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center mb-12 md:mb-20">
                   <motion.div 
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="space-y-8"
+                    className="space-y-6 md:space-y-8"
                   >
-                    <div className="flex items-center gap-4">
-                      <div className={`p-3 rounded-xl ${activeSolutionData.color} shadow-lg`}>
+                    <div className="flex flex-col md:flex-row md:items-center gap-4">
+                      <div className={`p-3 rounded-xl ${activeSolutionData.color} shadow-lg self-start`}>
                         {activeSolutionData.icon}
                       </div>
-                      <h2 className="text-3xl md:text-4xl font-display font-bold">
+                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold">
                         {activeSolutionData.title}
                       </h2>
                     </div>
                     
-                    <p className="text-lg text-muted-foreground">
+                    <p className="text-base md:text-lg text-muted-foreground">
                       {activeSolutionData.longDescription}
                     </p>
                     
-                    <div className="space-y-6">
-                      <h3 className="text-xl font-display font-semibold">{t('keyBenefits')}</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="space-y-4 md:space-y-6">
+                      <h3 className="text-lg md:text-xl font-display font-semibold">{t('keyBenefits')}</h3>
+                      <div className="grid grid-cols-1 gap-3">
                         {activeSolutionData.benefits.map((benefit, index) => (
-                          <div key={index} className="flex items-start gap-3 bg-card/60 backdrop-blur-sm border border-border/50 rounded-lg p-4 shadow-sm">
-                            <div className="rounded-full bg-primary/10 p-1 mt-1">
+                          <div key={index} className="flex items-start gap-3 bg-card/60 backdrop-blur-sm border border-border/50 rounded-lg p-3 md:p-4 shadow-sm">
+                            <div className="rounded-full bg-primary/10 p-1 mt-1 flex-shrink-0">
                               <Check className="h-4 w-4 text-primary" />
                             </div>
-                            <span>{benefit}</span>
+                            <span className="text-sm md:text-base">{benefit}</span>
                           </div>
                         ))}
                       </div>
@@ -266,9 +265,9 @@ const Solutions: React.FC = () => {
                     
                     <Link 
                       to="/contact" 
-                      className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors px-6 py-3 rounded-lg font-medium shadow-md"
+                      className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors px-4 md:px-6 py-2.5 md:py-3 rounded-lg font-medium shadow-md text-sm md:text-base w-full md:w-auto justify-center md:justify-start"
                     >
-                      {t('getCustomQuote')} <ArrowRight className="w-5 h-5" />
+                      {t('getCustomQuote')} <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
                     </Link>
                   </motion.div>
                   
@@ -282,23 +281,23 @@ const Solutions: React.FC = () => {
                   </motion.div>
                 </div>
                 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-20">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-start mb-12 md:mb-20">
                   <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.6 }}
-                    className="space-y-8"
+                    className="space-y-6 md:space-y-8"
                   >
-                    <h3 className="text-2xl font-display font-semibold">{t('keyFeatures')}</h3>
+                    <h3 className="text-xl md:text-2xl font-display font-semibold">{t('keyFeatures')}</h3>
                     
-                    <div className="space-y-4">
+                    <div className="space-y-3 md:space-y-4">
                       {activeSolutionData.features.map((feature, index) => (
-                        <div key={index} className="flex items-start gap-4">
-                          <div className="rounded-full bg-primary/10 p-2 mt-1">
-                            <Check className="h-5 w-5 text-primary" />
+                        <div key={index} className="flex items-start gap-3 md:gap-4">
+                          <div className="rounded-full bg-primary/10 p-1.5 md:p-2 mt-1 flex-shrink-0">
+                            <Check className="h-4 w-4 md:h-5 md:w-5 text-primary" />
                           </div>
                           <div>
-                            <p className="text-lg">{feature}</p>
+                            <p className="text-base md:text-lg">{feature}</p>
                           </div>
                         </div>
                       ))}
@@ -356,20 +355,20 @@ const Solutions: React.FC = () => {
                   transition={{ duration: 0.5, delay: 1.0 }}
                   className="text-center"
                 >
-                  <h3 className="text-2xl font-display font-semibold mb-6">{t('otherSolutions')}</h3>
+                  <h3 className="text-xl md:text-2xl font-display font-semibold mb-4 md:mb-6">{t('otherSolutions')}</h3>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                     {otherSolutions.map((solution) => (
                       <div 
                         key={solution.id}
                         onClick={() => setActiveSolution(solution.id)}
-                        className="bg-white border border-slate-200 rounded-xl p-6 flex flex-col items-center gap-4 hover:shadow-lg transition-all cursor-pointer"
+                        className="bg-white border border-slate-200 rounded-xl p-4 md:p-6 flex flex-col items-center gap-3 md:gap-4 hover:shadow-lg transition-all cursor-pointer"
                       >
-                        <div className={`p-3 rounded-full ${solution.color}`}>
+                        <div className={`p-2 md:p-3 rounded-full ${solution.color}`}>
                           {solution.icon}
                         </div>
-                        <h4 className="text-lg font-medium">{solution.title}</h4>
-                        <p className="text-muted-foreground text-sm text-center">{solution.description}</p>
+                        <h4 className="text-base md:text-lg font-medium">{solution.title}</h4>
+                        <p className="text-muted-foreground text-xs md:text-sm text-center">{solution.description}</p>
                       </div>
                     ))}
                   </div>

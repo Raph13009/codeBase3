@@ -9,7 +9,6 @@ interface Testimonial {
   position: string;
   company: string;
   text: string;
-  image: string;
   language: 'fr' | 'en';
 }
 
@@ -28,7 +27,6 @@ const Testimonials: React.FC = () => {
       position: "Directrice Marketing",
       company: "TechVision France",
       text: "Le chatbot IA développé par l'équipe a révolutionné notre service client. Nos clients sont plus satisfaits que jamais et nos coûts opérationnels ont significativement diminué.",
-      image: "/lovable-uploads/ae9cc7de-acd7-4613-9834-0fdc60117dfe.png",
       language: "fr"
     },
     {
@@ -37,7 +35,6 @@ const Testimonials: React.FC = () => {
       position: "Head of Digital",
       company: "InnovateTech UK",
       text: "Their AI solutions have transformed our business operations. The results exceeded our expectations, with a 200% increase in customer engagement.",
-      image: "/lovable-uploads/1e45b816-f132-479c-8c97-8438831e48bd.png",
       language: "en"
     },
     {
@@ -46,7 +43,6 @@ const Testimonials: React.FC = () => {
       position: "Responsable E-commerce",
       company: "ShopFrance",
       text: "L'optimisation SEO réalisée par leur équipe a boosté notre visibilité en ligne. Notre trafic organique a doublé en seulement 3 mois.",
-      image: "/lovable-uploads/3e45b816-f132-479c-8c97-8438831e48bd.png",
       language: "fr"
     }
   ];
@@ -97,27 +93,18 @@ const Testimonials: React.FC = () => {
               >
                 {testimonials.map((testimonial) => (
                   <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
-                    <div className="flex flex-col md:flex-row gap-8 items-center">
-                      <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-primary/30 flex-shrink-0">
-                        <img 
-                          src={testimonial.image} 
-                          alt={testimonial.name} 
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                        />
-                      </div>
-                      
-                      <div>
-                        <p className="text-lg md:text-xl mb-6 italic">
+                    <div className="flex flex-col gap-6">
+                      <div className="relative max-w-3xl mx-auto">
+                        <p className="text-lg md:text-xl italic text-center line-clamp-6 md:line-clamp-none">
                           "{testimonial.text}"
                         </p>
-                        
-                        <div>
-                          <p className="font-bold text-lg">{testimonial.name}</p>
-                          <p className="text-muted-foreground">
-                            {testimonial.position}, {testimonial.company}
-                          </p>
-                        </div>
+                      </div>
+                      
+                      <div className="text-center mt-4">
+                        <p className="font-bold text-lg">{testimonial.name}</p>
+                        <p className="text-muted-foreground text-sm">
+                          {testimonial.position}, {testimonial.company}
+                        </p>
                       </div>
                     </div>
                   </div>

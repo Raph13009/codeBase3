@@ -1,17 +1,18 @@
-
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@/hooks/use-toast';
 import { SendIcon, Sparkles, User, Mail, Phone, MessageSquare } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const ContactForm: React.FC = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
+  const form = useRef<HTMLFormElement>(null);
   
   const [formData, setFormData] = useState({
-    name: '',
+    nom: '',
     email: '',
-    phone: '',
+    telephone: '',
     service: '',
     message: '',
   });
@@ -25,46 +26,50 @@ const ContactForm: React.FC = () => {
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!form.current) return;
+    
     setIsSubmitting(true);
     
-    // Simulate API call
-    try {
-      // In a real app, you would call your API here
-      // const response = await supabase.from('leads').insert([
-      //   { name: formData.name, email: formData.email, message: formData.message, source: 'contact_form' },
-      // ]);
-      
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Success
-      toast({
-        title: t('contactSuccess'),
-        variant: 'default',
+    // Send email using EmailJS
+    emailjs
+      .sendForm(
+        "service_ldkq8zi",           // Service ID (Gmail)
+        "template_ukvmu8l",          // Template ID
+        form.current,
+        "9Teyr_oI9V0zmkzL6"          // Public key
+      )
+      .then(() => {
+        // Success message
+        toast({
+          title: t('contactSuccess'),
+          variant: 'default',
+        });
+        
+        // Reset form
+        setFormData({
+          nom: '',
+          email: '',
+          telephone: '',
+          service: '',
+          message: '',
+        });
+      })
+      .catch((error) => {
+        console.error('Error submitting form:', error);
+        
+        // Error message
+        toast({
+          title: t('contactError'),
+          variant: 'destructive',
+        });
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: '',
-        message: '',
-      });
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      
-      // Error
-      toast({
-        title: t('contactError'),
-        variant: 'destructive',
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
   };
   
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form ref={form} onSubmit={handleSubmit} className="space-y-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div className="group">
           <label htmlFor="name" className="flex items-center gap-2 text-sm font-medium mb-2 text-slate-700 group-hover:text-primary transition-colors duration-300">
@@ -74,8 +79,8 @@ const ContactForm: React.FC = () => {
           <input
             type="text"
             id="name"
-            name="name"
-            value={formData.name}
+            name="nom"
+            value={formData.nom}
             onChange={handleChange}
             required
             className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 hover:border-primary/50 transition-colors duration-300"
@@ -110,8 +115,8 @@ const ContactForm: React.FC = () => {
           <input
             type="tel"
             id="phone"
-            name="phone"
-            value={formData.phone}
+            name="telephone"
+            value={formData.telephone}
             onChange={handleChange}
             className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 hover:border-primary/50 transition-colors duration-300"
             placeholder="+33 6 12 34 56 78"
@@ -132,11 +137,13 @@ const ContactForm: React.FC = () => {
             className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 hover:border-primary/50 transition-colors duration-300"
           >
             <option value="" disabled>{t('selectService')}</option>
-            <option value="chatbot">{t('chatbotSolution')}</option>
-            <option value="seo">{t('seoSolution')}</option>
-            <option value="content">{t('contentSolution')}</option>
-            <option value="web">{t('webSolution')}</option>
-            <option value="other">{t('otherService')}</option>
+            <option value="Chatbot IA">{t('chatbotSolution')}</option>
+            <option value="SEO IA">{t('seoSolution')}</option>
+            <option value="Création de Contenu">{t('contentSolution')}</option>
+            <option value="Développement Web IA">{t('webSolution')}</option>
+            <option value="Audit">{t('auditService')}</option>
+            <option value="Stratégie IA">{t('strategyService')}</option>
+            <option value="Autre">{t('otherService')}</option>
           </select>
         </div>
       </div>
@@ -182,7 +189,7 @@ const ContactForm: React.FC = () => {
         
         <button 
           type="button"
-          onClick={() => window.location.href = 'tel:+33123456789'}
+          onClick={() => window.location.href = 'tel:+33602617329'}
           className="flex items-center justify-center gap-2 bg-primary/10 text-primary px-6 py-4 rounded-lg font-medium shadow-sm hover:bg-primary/20 hover:scale-[1.02] transition-all duration-300"
         >
           <Phone className="w-4 h-4" />

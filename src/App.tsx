@@ -15,13 +15,14 @@ import NotFound from "./pages/NotFound";
 
 // Import i18n configuration
 import "./lib/i18n";
+import i18n from "./lib/i18n";
 
 const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    // Set default language based on browser preference
-    document.documentElement.lang = navigator.language.split("-")[0];
+    // Set default language to French
+    document.documentElement.lang = i18n.language || 'fr';
   }, []);
 
   return (

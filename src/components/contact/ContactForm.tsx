@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@/hooks/use-toast';
-import { SendIcon, Sparkles, User, Mail, Phone, MessageSquare } from 'lucide-react';
+import { SendIcon, Sparkles, User, Mail, Phone, MessageSquare, Calendar } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 const ContactForm: React.FC = () => {
@@ -189,10 +189,10 @@ const ContactForm: React.FC = () => {
         
         <button 
           type="button"
-          onClick={() => window.location.href = 'tel:+33602617329'}
+          onClick={() => window.open('https://calendly.com/raphaellevy027/30min', '_blank')}
           className="flex items-center justify-center gap-2 bg-primary/10 text-primary px-6 py-4 rounded-lg font-medium shadow-sm hover:bg-primary/20 hover:scale-[1.02] transition-all duration-300"
         >
-          <Phone className="w-4 h-4" />
+          <Calendar className="w-4 h-4" />
           {t('callUsButton')}
         </button>
       </div>

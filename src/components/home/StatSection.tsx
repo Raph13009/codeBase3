@@ -21,20 +21,20 @@ const StatSection: React.FC = () => {
   const stats: Stat[] = [
     {
       id: 'clients',
-      value: '200',
-      label: t('clientsServed'),
+      value: '100',
+      label: t('interactions/jour'),
       suffix: '+',
     },
     {
       id: 'projects',
-      value: '500',
-      label: t('projectsCompleted'),
+      value: '50',
+      label: t('optimisations déployées'),
       suffix: '+',
     },
     {
       id: 'satisfaction',
       value: '98',
-      label: t('satisfactionRate'),
+      label: t('clients satisfaits'),
       suffix: '%',
     },
   ];

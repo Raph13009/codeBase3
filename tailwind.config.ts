@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -19,6 +18,144 @@ export default {
 			}
 		},
 		extend: {
+			typography: {
+				DEFAULT: {
+					css: {
+						maxWidth: '100%',
+						color: 'hsl(var(--foreground))',
+						p: {
+							marginTop: '1.5em',
+							marginBottom: '1.5em',
+						},
+						a: {
+							color: 'hsl(var(--primary))',
+							textDecoration: 'none',
+							fontWeight: '500',
+							'&:hover': {
+								textDecoration: 'underline',
+							},
+						},
+						h2: {
+							marginTop: '2em',
+							marginBottom: '1em',
+							color: 'hsl(var(--foreground))',
+							fontWeight: '700',
+							fontSize: '1.75em',
+							lineHeight: '1.3',
+							'&:first-child': {
+								marginTop: '0',
+							},
+						},
+						h3: {
+							marginTop: '1.6em',
+							marginBottom: '0.8em',
+							color: 'hsl(var(--foreground))',
+							fontWeight: '600',
+							fontSize: '1.5em',
+							lineHeight: '1.3',
+						},
+						h4: {
+							marginTop: '1.5em',
+							marginBottom: '0.7em',
+							color: 'hsl(var(--foreground))',
+							fontWeight: '600',
+							fontSize: '1.25em',
+						},
+						blockquote: {
+							fontStyle: 'italic',
+							color: 'hsl(var(--foreground))',
+							borderLeftWidth: '4px',
+							borderLeftColor: 'hsl(var(--primary) / 0.5)',
+							backgroundColor: 'hsl(var(--primary) / 0.05)',
+							padding: '1rem 1.5rem',
+							marginTop: '2em',
+							marginBottom: '2em',
+							borderRadius: '0 0.375rem 0.375rem 0',
+						},
+						ul: {
+							marginTop: '1.5em',
+							marginBottom: '1.5em',
+							paddingLeft: '1.625em',
+							li: {
+								marginTop: '0.5em',
+								marginBottom: '0.5em',
+							},
+						},
+						ol: {
+							marginTop: '1.5em',
+							marginBottom: '1.5em',
+							paddingLeft: '1.625em',
+							li: {
+								marginTop: '0.5em',
+								marginBottom: '0.5em',
+							},
+						},
+						code: {
+							color: 'hsl(var(--primary))',
+							backgroundColor: 'hsl(var(--muted))',
+							borderRadius: '0.25rem',
+							padding: '0.2em 0.4em',
+							fontWeight: '500',
+							fontSize: '0.875em',
+						},
+						pre: {
+							backgroundColor: 'hsl(var(--card))',
+							borderRadius: '0.375rem',
+							padding: '1rem',
+							overflowX: 'auto',
+							border: '1px solid hsl(var(--border))',
+						},
+						img: {
+							marginTop: '2em',
+							marginBottom: '2em',
+							borderRadius: '0.5rem',
+							boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+						},
+						figure: {
+							marginTop: '2em',
+							marginBottom: '2em',
+							img: {
+								marginTop: '0',
+								marginBottom: '0.5em',
+							},
+							figcaption: {
+								color: 'hsl(var(--muted-foreground))',
+								fontSize: '0.875em',
+								textAlign: 'center',
+							},
+						},
+						hr: {
+							marginTop: '3em',
+							marginBottom: '3em',
+							borderTopWidth: '1px',
+							borderColor: 'hsl(var(--border))',
+						},
+						table: {
+							width: '100%',
+							marginTop: '2em',
+							marginBottom: '2em',
+							borderCollapse: 'collapse',
+							fontSize: '0.875em',
+							lineHeight: '1.5',
+							thead: {
+								borderBottomWidth: '2px',
+								borderBottomColor: 'hsl(var(--border))',
+							},
+							th: {
+								color: 'hsl(var(--foreground))',
+								fontWeight: '600',
+								padding: '0.75em',
+								textAlign: 'left',
+							},
+							td: {
+								padding: '0.75em',
+								borderBottomWidth: '1px',
+								borderBottomColor: 'hsl(var(--border))',
+							},
+						},
+					},
+				},
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -172,5 +309,8 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		require("@tailwindcss/typography")
+	],
 } satisfies Config;

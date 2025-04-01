@@ -30,5 +30,24 @@
     <!-- Botpress Chatbot Integration -->
     <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2025/03/21/09/20250321092854-A091UPQL.js"></script>
+
+  <script>
+    /**
+     * This script hides the "Powered by Botpress" branding in the Botpress webchat iframe.
+     *
+     * TODO: It is not optimized at all: a function is triggered every 25ms to check if the element exists until it does. Please change this.
+     */
+    var checkIfExists = setInterval(function() {
+      var ifrm = document.getElementsByClassName("bpOpen bpWebchat bpReset").item(0);
+      if (ifrm) {
+        var doc = ifrm.contentDocument? ifrm.contentDocument: ifrm.contentWindow.document;
+        var exists = doc.getElementsByClassName("bpComposerPoweredBy").item(0);
+      }
+      if (exists) {
+        clearInterval(checkIfExists);
+        exists.setAttribute("data-hidden", "true");
+      }
+    }, 25);
+  </script>
   </body>
 </html>

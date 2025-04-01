@@ -37,11 +37,12 @@
      *
      * TODO: It is not optimized at all: a function is triggered every 25ms to check if the element exists until it does. Please change this.
      */
-    var checkIfExists = setInterval(function() {
-      var ifrm = document.getElementsByClassName("bpOpen bpWebchat bpReset").item(0);
+    const checkIfExists = setInterval(function() {
+      const ifrm = document.getElementsByClassName("bpOpen bpWebchat bpReset").item(0);
+      let exists = null
       if (ifrm) {
-        var doc = ifrm.contentDocument? ifrm.contentDocument: ifrm.contentWindow.document;
-        var exists = doc.getElementsByClassName("bpComposerPoweredBy").item(0);
+        const doc = ifrm.contentDocument? ifrm.contentDocument: ifrm.contentWindow.document;
+        exists = doc.getElementsByClassName("bpComposerPoweredBy").item(0);
       }
       if (exists) {
         clearInterval(checkIfExists);

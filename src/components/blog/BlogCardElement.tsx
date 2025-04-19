@@ -17,7 +17,7 @@ interface BlogCardProperties {
   isPinned?: boolean;
 }
 
-const BlogCard: React.FC<BlogCardProperties> = ({
+const BlogCardElement: React.FC<BlogCardProperties> = ({
   id,
   slug,
   title,
@@ -104,4 +104,4 @@ const BlogCard: React.FC<BlogCardProperties> = ({
   );
 };
 
-export default BlogCard;
+export default BlogCardElement;

@@ -24,7 +24,7 @@ const FAQ: React.FC = () => {
   const faqItems: FAQItem[] = [
     {
       question: "Qu'est-ce qu'un chatbot IA et comment peut-il aider mon entreprise ?",
-      answer: "Un chatbot IA est un assistant virtuel qui utilise l'intelligence artificielle pour communiquer avec vos clients en langage naturel. Il peut répondre aux questions fréquentes, qualifier des leads, fournir une assistance 24/7 et améliorer l'expérience utilisateur sur votre site. Cela permet de réduire les coûts de support client tout en augmentant la satisfaction."
+      answer: "Un chatbot uu est un assistant virtuel qui utilise l'intelligence artificielle pour communiquer avec vos clients en langage naturel. Il peut répondre aux questions fréquentes, qualifier des leads, fournir une assistance 24/7 et améliorer l'expérience utilisateur sur votre site. Cela permet de réduire les coûts de support client tout en augmentant la satisfaction."
     },
     {
       question: "Comment la solution SEO Boost peut-elle améliorer mon référencement ?",

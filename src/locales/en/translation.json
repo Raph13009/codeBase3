@@ -1,0 +1,12 @@
+{
+  "blog": {
+    "qualityPledge": {
+      "title": "Quality Commitment",
+      "content": "At BoostAI Consulting, we are committed to providing high-quality information based on thorough research and aligned with our values. We encourage you to consult multiple sources to form your opinion. Despite our efforts to ensure the accuracy of our content, we acknowledge that mistakes can happen. If you notice any inconsistencies, please don't hesitate to contact us."
+    },
+    "viewQualityPledge": "View our quality commitment"
+  },
+  "common": {
+    "backToTop": "Back to top"
+  }
+} 

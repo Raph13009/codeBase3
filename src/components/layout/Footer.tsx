@@ -27,9 +27,15 @@ const Footer: React.FC = () => {
               <a href="#" className="text-slate-400 hover:text-primary transition-colors">
                 <Instagram size={18} />
               </a>
-              <a href="#" className="text-slate-400 hover:text-primary transition-colors">
-                <Linkedin size={18} />
+              <a
+                  href="https://www.linkedin.com/company/boostai-consulting"
+                 target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-primary transition-colors"
+                >
+                  <Linkedin size={18} />
               </a>
+
             </div>
           </div>
           

@@ -7,7 +7,6 @@ interface Testimonial {
   id: number;
   name: string;
   position: string;
-  company: string;
   text: string;
   language: 'fr' | 'en';
 }
@@ -24,28 +23,26 @@ const Testimonials: React.FC = () => {
     {
       id: 1,
       name: "Sophie Martin",
-      position: "Directrice Marketing",
-      company: "TechVision France",
-      text: "Le chatbot IA développé par l'équipe a révolutionné notre service client. Nos clients sont plus satisfaits que jamais et nos coûts opérationnels ont significativement diminué.",
+      position: "E-commerce animalier",
+      text: "Le chatbot IA m’a fait gagner un temps fou ces derniers mois. Plus besoin de répondre manuellement aux mêmes questions tous les jours, et l'équipe BoostAI est super réactive pour les mises à jour. Franchement, c’est devenu indispensable pour mon site.",
       language: "fr"
     },
     {
       id: 2,
       name: "John Smith",
-      position: "Head of Digital",
-      company: "InnovateTech UK",
+      position: "Digital",
       text: "Their AI solutions have transformed our business operations. The results exceeded our expectations, with a 200% increase in customer engagement.",
       language: "en"
     },
     {
       id: 3,
       name: "Thomas Dubois",
-      position: "Responsable E-commerce",
-      company: "ShopFrance",
-      text: "L'optimisation SEO réalisée par leur équipe a boosté notre visibilité en ligne. Notre trafic organique a doublé en seulement 3 mois.",
+      position: "E-commerce",
+      text: "L'optimisation SEO réalisée par leur équipe a boosté notre visibilité en ligne. Notre trafic a doublé en seulement 3 mois.",
       language: "fr"
     }
   ];
+  
 
   // Get testimonials based on current language
   const testimonials = i18n.language === 'fr' 
@@ -103,7 +100,7 @@ const Testimonials: React.FC = () => {
                       <div className="text-center mt-4">
                         <p className="font-bold text-lg">{testimonial.name}</p>
                         <p className="text-muted-foreground text-sm">
-                          {testimonial.position}, {testimonial.company}
+                          {testimonial.position}
                         </p>
                       </div>
                     </div>

@@ -8,6 +8,7 @@ import { Search, Filter, BookOpen, PinIcon } from 'lucide-react';
 import { getBlogs, type Blog } from '@/lib/supabase';
 import { format, parseISO, isValid } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import QualityPledge from '@/components/blog/QualityPledge';
 
 const Blog: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -84,6 +85,14 @@ const Blog: React.FC = () => {
       <Header />
       
       <main className="flex-grow pt-24 pb-20">
+        <div className="w-full text-center py-2 bg-slate-50">
+          <a 
+            href="#quality-pledge" 
+            className="text-xs text-slate-500 hover:text-blue-600 transition-colors"
+          >
+            {t('blog.viewQualityPledge', 'Voir notre engagement de qualité')} →
+          </a>
+        </div>
         <section className="py-12 md:py-20">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center mb-16">
@@ -230,6 +239,7 @@ const Blog: React.FC = () => {
         </section>
       </main>
       
+      <QualityPledge />
       <Footer />
     </div>
   );

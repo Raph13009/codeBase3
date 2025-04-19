@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <!-- Google Tag Manager -->
 <script>
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -12,11 +12,61 @@
   
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/Logo2.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/Logo2.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/Logo2.png">
+    <link rel="mask-icon" href="/assets/Logo2.png" color="#2563eb">
+    <meta name="theme-color" content="#2563eb">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BoostAI Consulting</title>
-    <meta name="description" content="BoostAI Consulting - Your partner for AI solutions and digital transformation" />
-    <!-- Add other meta tags as needed -->
+    
+    <!-- Primary Meta Tags -->
+    <title>L'IA au service des freelances créatifs – BoostAI Consulting</title>
+    <meta name="title" content="L'IA au service des freelances créatifs – BoostAI Consulting">
+    <meta name="description" content="Gagnez du temps et boostez votre visibilité avec notre assistant IA éditorial.">
+    <meta name="author" content="BoostAI Consulting">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.boostaiconsulting.com/">
+    <meta property="og:site_name" content="BoostAIConsulting">
+    <meta property="og:title" content="Développez votre activité grace a des solutions IA">
+    <meta property="og:description" content="Planification de contenu, veille créative et outils IA pour freelances et créatifs">
+    <meta property="og:image" content="/images/bc.png?v=1">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.boostaiconsulting.com/">
+    <meta name="twitter:title" content="Développez votre activité grace a des solutions IA">
+    <meta name="twitter:description" content="Planification de contenu, veille créative et outils IA pour freelances et créatifs">
+    <meta name="twitter:image" content="/images/bc.png?v=1">
+    
+    <!-- Additional SEO Tags -->
+    <link rel="canonical" href="https://www.boostaiconsulting.com/">
+    <meta name="keywords" content="IA, intelligence artificielle, freelance, créatifs, assistant IA, productivité, automatisation, contenu, veille">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- Force cache refresh for social media -->
+    <meta property="og:image:alt" content="BoostAI Consulting">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- Botpress Chatbot Style Override -->
+    <style>
+      .bpComposerPoweredBy {
+        display: none !important;
+      }
+      [data-hidden="false"] {
+        display: none !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
@@ -25,5 +75,41 @@
     <!-- Botpress Chatbot Integration -->
     <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2025/03/21/09/20250321092854-A091UPQL.js"></script>
+    <script>
+      function hidePoweredBy() {
+        const poweredByElement = document.querySelector('.bpComposerPoweredBy');
+        if (poweredByElement) {
+          poweredByElement.style.display = 'none';
+          poweredByElement.setAttribute('data-hidden', 'true');
+        }
+      }
+
+      // Première tentative immédiate
+      hidePoweredBy();
+
+      // Deuxième tentative après un court délai
+      setTimeout(hidePoweredBy, 1000);
+
+      // Troisième tentative avec MutationObserver pour s'assurer que ça fonctionne
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.addedNodes.length) {
+            hidePoweredBy();
+          }
+        });
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    </script>
   </body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPKSXQ9F"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 </html> 

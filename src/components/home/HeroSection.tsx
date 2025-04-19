@@ -205,7 +205,7 @@ const HeroSection: React.FC = () => {
             >
               <h1 className="font-serif text-5xl md:text-6xl xl:text-7xl font-bold leading-[1.1] mb-4">
               <span className="inline-block text-[#1a2c4e]">
-  {t('heroTitle')}
+                  {t('heroTitle')}
               </span>
               </h1>
               <p className="text-xl text-slate-600 max-w-lg mt-6 leading-relaxed">
@@ -383,7 +383,8 @@ const HeroSection: React.FC = () => {
         transition={{ delay: 1.5, duration: 0.6 }}
         onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}
       >
-        <p className="text-xs font-medium uppercase tracking-widest">{t('Faire défiler vers le bas')}</p>
+        
+
         <motion.div
           animate={{ y: [0, 5, 0] }}
           transition={{ 

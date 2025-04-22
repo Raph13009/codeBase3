@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import BlogCard from '@/components/blog/BlogCard';
+import BlogCardElement from '@/components/blog/BlogCardElement.tsx';
 import { motion } from 'framer-motion';
 import { Search, Filter, BookOpen, PinIcon } from 'lucide-react';
 import { getBlogs, type Blog } from '@/lib/supabase';
@@ -175,7 +175,7 @@ const Blog: React.FC = () => {
                           transition={{ duration: 0.5, delay: index * 0.1 }}
                           className="bg-white rounded-xl border-2 border-primary/20 overflow-hidden shadow-md hover:shadow-lg transition-all"
                         >
-                          <BlogCard 
+                          <BlogCardElement
                             id={blog.id}
                             slug={blog.slug}
                             title={blog.title}
@@ -201,7 +201,7 @@ const Blog: React.FC = () => {
                     transition={{ duration: 0.5 }}
                   >
                     {regularPosts.map((blog, index) => (
-                      <BlogCard 
+                      <BlogCardElement
                         key={blog.id}
                         id={blog.id}
                         slug={blog.slug}

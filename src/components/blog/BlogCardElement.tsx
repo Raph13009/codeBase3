@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowRight, PinIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-interface BlogCardProps {
+interface BlogCardProperties {
   id: string;
   slug: string;
   title: string;
@@ -17,7 +17,7 @@ interface BlogCardProps {
   isPinned?: boolean;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({
+const BlogCardElement: React.FC<BlogCardProperties> = ({
   id,
   slug,
   title,
@@ -104,4 +104,4 @@ const BlogCard: React.FC<BlogCardProps> = ({
   );
 };
 
-export default BlogCard;
+export default BlogCardElement;

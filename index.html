@@ -1,54 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>fluid-solution-hub</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
-
+    <title>BoostAI Consulting</title>
+    <meta name="description" content="BoostAI Consulting - Votre partenaire pour les solutions IA et la transformation digitale" />
+    
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
 
-    <meta property="og:title" content="Lovable Generated Project" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.boostaiconsulting.com/">
+    <meta property="og:site_name" content="BoostAI Consulting">
+    <meta property="og:title" content="BoostAI Consulting – Créez votre contenu sans stress grâce à l'IA">
+    <meta property="og:description" content="Planification de contenu, veille créative et outils IA pour freelances et créatifs">
+    <meta property="og:image" content="/images/bc.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.boostaiconsulting.com/">
+    <meta name="twitter:title" content="BoostAI Consulting – Créez votre contenu sans stress grâce à l'IA">
+    <meta name="twitter:description" content="Planification de contenu, veille créative et outils IA pour freelances et créatifs">
+    <meta name="twitter:image" content="/images/bc.png">
   </head>
 
   <body>
     <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
     
     <!-- Botpress Chatbot Integration -->
     <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2025/03/21/09/20250321092854-A091UPQL.js"></script>
 
-  <script>
-    /**
-     * This script hides the "Powered by Botpress" branding in the Botpress webchat iframe.
-     *
-     * TODO: It is not optimized at all: a function is triggered every 25ms to check if the element exists until it does. Please change this.
-     */
-    const checkIfExists = setInterval(function() {
-      const ifrm = document.getElementsByClassName("bpOpen bpWebchat bpReset").item(0);
-      let exists = null
-      if (ifrm) {
-        const doc = ifrm.contentDocument? ifrm.contentDocument: ifrm.contentWindow.document;
-        exists = doc.getElementsByClassName("bpComposerPoweredBy").item(0);
-      }
-      if (exists) {
-        clearInterval(checkIfExists);
-        exists.setAttribute("data-hidden", "true");
-      }
-    }, 25);
-  </script>
+    <script>
+      /**
+       * This script hides the "Powered by Botpress" branding in the Botpress webchat iframe.
+       *
+       * TODO: It is not optimized at all: a function is triggered every 25ms to check if the element exists until it does. Please change this.
+       */
+      const checkIfExists = setInterval(function() {
+        const ifrm = document.getElementsByClassName("bpOpen bpWebchat bpReset").item(0);
+        let exists = null
+        if (ifrm) {
+          const doc = ifrm.contentDocument? ifrm.contentDocument: ifrm.contentWindow.document;
+          exists = doc.getElementsByClassName("bpComposerPoweredBy").item(0);
+        }
+        if (exists) {
+          clearInterval(checkIfExists);
+          exists.setAttribute("data-hidden", "true");
+        }
+      }, 25);
+    </script>
   </body>
 </html>

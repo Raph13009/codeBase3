@@ -12,6 +12,10 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import AlliaPage from './pages/AlliaPage'
+import "./allia/index.css";
+
+
 
 // Import i18n configuration
 import "./lib/i18n";
@@ -40,6 +44,7 @@ const App = () => {
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
+              <Route path="/allia" element={<AlliaPage />} />
             </Routes>
           </BrowserRouter>
         </TooltipProvider>

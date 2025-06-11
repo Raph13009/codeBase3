@@ -8,8 +8,10 @@ const Convert = () => {
   const [file, setFile] = useState<File | null>(null);
   const [isConverting, setIsConverting] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const scanDuration = 30000; // 30 secondes
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -49,15 +51,31 @@ const Convert = () => {
     setIsConverting(true);
     setIsScanning(true);
     setError(null);
+    setProgress(0);
+
+    // Animation de progression
+    let start = Date.now();
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - start;
+      let percent = Math.min(100, Math.round((elapsed / scanDuration) * 100));
+      setProgress(percent);
+      if (percent >= 100) clearInterval(interval);
+    }, 300);
 
     try {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch("http://localhost:8000/convert", {
+      const responsePromise = fetch("https://boostai-backend.onrender.com/convert", {
         method: "POST",
         body: formData,
       });
+
+      // Attend soit la fin de l'animation, soit la réponse du backend
+      const [response] = await Promise.all([
+        responsePromise,
+        new Promise((resolve) => setTimeout(resolve, scanDuration)),
+      ]);
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -81,6 +99,7 @@ const Convert = () => {
       setIsScanning(false);
       setIsConverting(false);
       setFile(null);
+      setProgress(0);
     }
   };
 
@@ -168,20 +187,28 @@ const Convert = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+                className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
               >
-                <div className="relative w-64 h-64 bg-white rounded-lg overflow-hidden">
+                <div className="relative w-80 h-80 bg-white rounded-lg overflow-hidden flex flex-col items-center justify-center p-8">
                   <motion.div
                     className="absolute w-full h-1 bg-blue-500"
                     initial={{ top: 0 }}
                     animate={{ top: "100%" }}
                     transition={{
-                      duration: 2,
+                      duration: scanDuration / 1000,
                       ease: "linear",
                     }}
                   />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Loader2 className="h-12 w-12 text-blue-500 animate-spin" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <Loader2 className="h-12 w-12 text-blue-500 animate-spin mb-4" />
+                    <div className="w-full bg-gray-200 rounded-full h-4 mb-4 overflow-hidden">
+                      <div
+                        className="bg-blue-500 h-4 rounded-full transition-all duration-300"
+                        style={{ width: `${progress}%` }}
+                      />
+                    </div>
+                    <div className="text-lg font-semibold text-gray-700 mb-2">Waking up the server... Please wait ~30s</div>
+                    <div className="text-sm text-gray-500">Scanning your PDF and generating your Excel file ({progress}%)</div>
                   </div>
                 </div>
               </motion.div>

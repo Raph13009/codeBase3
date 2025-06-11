@@ -63,6 +63,14 @@ const Header: React.FC = () => {
             }>
               {t('blog')}
             </NavLink>
+            <NavLink to="/convert" className={({ isActive }) => 
+              `nav-link ${isActive ? 'nav-link-active' : ''} relative`
+            }>
+              {t('convert')}
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full animate-pulse">
+                New
+              </span>
+            </NavLink>
             <NavLink to="/contact" className={({ isActive }) => 
               `nav-link ${isActive ? 'nav-link-active' : ''}`
             }>
@@ -127,6 +135,16 @@ const Header: React.FC = () => {
                 onClick={closeMobileMenu}
               >
                 {t('blog')}
+              </NavLink>
+              <NavLink 
+                to="/convert" 
+                className={({ isActive }) => `text-xl font-medium ${isActive ? 'text-primary' : 'text-foreground'} relative`}
+                onClick={closeMobileMenu}
+              >
+                {t('convert')}
+                <span className="ml-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full animate-pulse">
+                  New
+                </span>
               </NavLink>
               <NavLink 
                 to="/contact" 

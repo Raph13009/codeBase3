@@ -1,69 +1,83 @@
-# Welcome to your Lovable project
+# BoostAI Consulting
 
-## Project info
+Welcome to the BoostAI Consulting website repository. This is a modern web application built with React, TypeScript, and Vite, showcasing our AI solutions for businesses.
 
-**URL**: https://lovable.dev/projects/467f396b-f786-430b-ad25-b71d60d13325
+## About BoostAI Consulting
 
-## How can I edit this code?
+BoostAI Consulting specializes in providing AI solutions to help companies streamline their operations and enhance productivity. Our services include:
 
-There are several ways of editing your application.
+- Custom AI Solution Development
+- Business Process Automation
+- AI Integration Consulting
+- Machine Learning Implementation
+- Data Analysis and Insights
 
-**Use Lovable**
+## Getting Started
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/467f396b-f786-430b-ad25-b71d60d13325) and start prompting.
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+### Installation
+1. Clone the repository
+```bash
+git clone [your-repo-url]
 ```
 
-**Edit a file directly in GitHub**
+2. Install dependencies
+```bash
+npm install
+# or
+yarn install
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+3. Start the development server
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-**Use GitHub Codespaces**
+## Development
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Project Structure
+```
+src/
+  ├── components/     # React components
+  ├── pages/         # Page components
+  ├── lib/           # Utility functions and configurations
+  ├── styles/        # Global styles and CSS modules
+  └── types/         # TypeScript type definitions
+```
 
-## What technologies are used for this project?
+### Available Scripts
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+- `npm run type-check` - Run TypeScript type checking
 
-This project is built with .
+## Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Production Build
+To create a production build:
+```bash
+npm run build
+```
 
-## How can I deploy this project?
+### Custom Domain Setup
+To set up a custom domain for your project:
 
-Simply open [Lovable](https://lovable.dev/projects/467f396b-f786-430b-ad25-b71d60d13325) and click on Share -> Publish.
+1. Configure your DNS settings to point to your hosting provider
+2. Set up SSL certificates
+3. Configure your hosting provider to serve the built files
 
-## I want to use a custom domain - is that possible?
+## Contributing
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.

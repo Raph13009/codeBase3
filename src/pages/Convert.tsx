@@ -8,10 +8,10 @@ const Convert = () => {
   const [file, setFile] = useState<File | null>(null);
   const [isConverting, setIsConverting] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [showWakeMsg, setShowWakeMsg] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const scanDuration = 30000; // 30 secondes
+  const wakeTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -51,31 +51,19 @@ const Convert = () => {
     setIsConverting(true);
     setIsScanning(true);
     setError(null);
-    setProgress(0);
+    setShowWakeMsg(false);
 
-    // Animation de progression
-    let start = Date.now();
-    const interval = setInterval(() => {
-      const elapsed = Date.now() - start;
-      let percent = Math.min(100, Math.round((elapsed / scanDuration) * 100));
-      setProgress(percent);
-      if (percent >= 100) clearInterval(interval);
-    }, 300);
+    // Affiche le message "Waking up the server..." après 8s si la réponse n'est pas arrivée
+    wakeTimeout.current = setTimeout(() => setShowWakeMsg(true), 8000);
 
     try {
       const formData = new FormData();
       formData.append("file", file);
 
-      const responsePromise = fetch("https://boostai-backend.onrender.com/convert", {
+      const response = await fetch("https://boostai-backend.onrender.com/convert", {
         method: "POST",
         body: formData,
       });
-
-      // Attend soit la fin de l'animation, soit la réponse du backend
-      const [response] = await Promise.all([
-        responsePromise,
-        new Promise((resolve) => setTimeout(resolve, scanDuration)),
-      ]);
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -99,7 +87,8 @@ const Convert = () => {
       setIsScanning(false);
       setIsConverting(false);
       setFile(null);
-      setProgress(0);
+      setShowWakeMsg(false);
+      if (wakeTimeout.current) clearTimeout(wakeTimeout.current);
     }
   };
 
@@ -189,26 +178,21 @@ const Convert = () => {
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
               >
-                <div className="relative w-80 h-80 bg-white rounded-lg overflow-hidden flex flex-col items-center justify-center p-8">
-                  <motion.div
-                    className="absolute w-full h-1 bg-blue-500"
-                    initial={{ top: 0 }}
-                    animate={{ top: "100%" }}
-                    transition={{
-                      duration: scanDuration / 1000,
-                      ease: "linear",
-                    }}
-                  />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <Loader2 className="h-12 w-12 text-blue-500 animate-spin mb-4" />
-                    <div className="w-full bg-gray-200 rounded-full h-4 mb-4 overflow-hidden">
-                      <div
-                        className="bg-blue-500 h-4 rounded-full transition-all duration-300"
-                        style={{ width: `${progress}%` }}
-                      />
-                    </div>
-                    <div className="text-lg font-semibold text-gray-700 mb-2">Waking up the server... Please wait ~30s</div>
-                    <div className="text-sm text-gray-500">Scanning your PDF and generating your Excel file ({progress}%)</div>
+                <div className="relative w-full max-w-xs sm:max-w-md md:max-w-lg bg-white rounded-2xl shadow-2xl flex flex-col items-center justify-center p-8 mx-4">
+                  <div className="mb-6">
+                    <motion.div
+                      className="w-20 h-20 rounded-full bg-gradient-to-tr from-blue-400 via-blue-200 to-blue-500 flex items-center justify-center shadow-lg"
+                      animate={{ rotate: 360 }}
+                      transition={{ repeat: Infinity, duration: 1.2, ease: "linear" }}
+                    >
+                      <span className="block w-12 h-12 rounded-full bg-gradient-to-br from-blue-100 to-blue-300 blur-sm opacity-70 animate-pulse" />
+                    </motion.div>
+                  </div>
+                  <div className="text-xl font-semibold text-gray-700 mb-2 text-center">
+                    {showWakeMsg ? "Waking up the server, please wait..." : "Processing your file..."}
+                  </div>
+                  <div className="text-sm text-gray-500 text-center">
+                    This may take up to 30 seconds if the server is cold.
                   </div>
                 </div>
               </motion.div>

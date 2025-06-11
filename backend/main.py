@@ -10,11 +10,8 @@ import json
 import pandas as pd
 from pdf2image import convert_from_path
 from openai import OpenAI
-from dotenv import load_dotenv
 
-# Chargement clé API
-load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI()
 
 app = FastAPI()
 

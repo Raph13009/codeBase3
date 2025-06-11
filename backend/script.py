@@ -4,14 +4,11 @@ import base64
 import time
 import pandas as pd
 from openai import OpenAI
-from dotenv import load_dotenv
 from pathlib import Path
 from pdf2image import convert_from_path
 from PIL import Image
 
-# Chargement clé API
-load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI()
 
 INPUT_DIR = "input_png"
 OUTPUT_DIR = "output_excel"

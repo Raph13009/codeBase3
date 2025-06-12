@@ -34,35 +34,35 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled 
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
             ? 'py-3 bg-background shadow-lg backdrop-blur-md' 
             : 'py-4 bg-white/90 backdrop-blur-md shadow-md'
-        }`}
-      >
-        <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-          <NavLink to="/" className="flex items-center" onClick={closeMobileMenu}>
+      }`}
+    >
+      <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
+        <NavLink to="/" className="flex items-center" onClick={closeMobileMenu}>
             <img src="/assets/Logo.png" alt="BoostAI Consulting" className="h-16" />
-          </NavLink>
+        </NavLink>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <NavLink to="/" className={({ isActive }) => 
-              `nav-link ${isActive ? 'nav-link-active' : ''}`
-            }>
-              {t('home')}
-            </NavLink>
-            <NavLink to="/solutions" className={({ isActive }) => 
-              `nav-link ${isActive ? 'nav-link-active' : ''}`
-            }>
-              {t('solutions')}
-            </NavLink>
-            <NavLink to="/blog" className={({ isActive }) => 
-              `nav-link ${isActive ? 'nav-link-active' : ''}`
-            }>
-              {t('blog')}
-            </NavLink>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-8">
+          <NavLink to="/" className={({ isActive }) => 
+            `nav-link ${isActive ? 'nav-link-active' : ''}`
+          }>
+            {t('home')}
+          </NavLink>
+          <NavLink to="/solutions" className={({ isActive }) => 
+            `nav-link ${isActive ? 'nav-link-active' : ''}`
+          }>
+            {t('solutions')}
+          </NavLink>
+          <NavLink to="/blog" className={({ isActive }) => 
+            `nav-link ${isActive ? 'nav-link-active' : ''}`
+          }>
+            {t('blog')}
+          </NavLink>
             <NavLink to="/convert" className={({ isActive }) => 
               `nav-link ${isActive ? 'nav-link-active' : ''} relative`
             }>
@@ -71,31 +71,31 @@ const Header: React.FC = () => {
                 New
               </span>
             </NavLink>
-            <NavLink to="/contact" className={({ isActive }) => 
-              `nav-link ${isActive ? 'nav-link-active' : ''}`
-            }>
-              {t('contact')}
-            </NavLink>
-          </nav>
+          <NavLink to="/contact" className={({ isActive }) => 
+            `nav-link ${isActive ? 'nav-link-active' : ''}`
+          }>
+            {t('contact')}
+          </NavLink>
+        </nav>
 
-          <div className="hidden md:flex items-center space-x-4">
-            <LanguageSwitcher />
-            <NavLink to="/contact" className="button-primary">
-              {t('contactUs')}
-            </NavLink>
-          </div>
+        <div className="hidden md:flex items-center space-x-4">
+          <LanguageSwitcher />
+          <NavLink to="/contact" className="button-primary">
+            {t('contactUs')}
+          </NavLink>
+        </div>
 
-          {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center space-x-4">
-            <LanguageSwitcher />
-            <button 
-              onClick={toggleMobileMenu} 
-              className="p-2 rounded-md text-foreground"
-              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-            >
+        {/* Mobile Menu Button */}
+        <div className="flex md:hidden items-center space-x-4">
+          <LanguageSwitcher />
+          <button 
+            onClick={toggleMobileMenu} 
+            className="p-2 rounded-md text-foreground"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          >
               <Menu className="w-6 h-6" />
-            </button>
-          </div>
+          </button>
+        </div>
         </div>
       </header>
 
@@ -111,8 +111,8 @@ const Header: React.FC = () => {
             >
               <X className="w-6 h-6" />
             </button>
-          </div>
-          
+      </div>
+
           <div className="p-6">
             <nav className="flex flex-col space-y-6">
               <NavLink 
@@ -120,22 +120,22 @@ const Header: React.FC = () => {
                 className={({ isActive }) => `text-xl font-medium ${isActive ? 'text-primary' : 'text-foreground'}`} 
                 onClick={closeMobileMenu}
               >
-                {t('home')}
-              </NavLink>
+            {t('home')}
+          </NavLink>
               <NavLink 
                 to="/solutions" 
                 className={({ isActive }) => `text-xl font-medium ${isActive ? 'text-primary' : 'text-foreground'}`}
                 onClick={closeMobileMenu}
               >
-                {t('solutions')}
-              </NavLink>
+            {t('solutions')}
+          </NavLink>
               <NavLink 
                 to="/blog" 
                 className={({ isActive }) => `text-xl font-medium ${isActive ? 'text-primary' : 'text-foreground'}`}
                 onClick={closeMobileMenu}
               >
-                {t('blog')}
-              </NavLink>
+            {t('blog')}
+          </NavLink>
               <NavLink 
                 to="/convert" 
                 className={({ isActive }) => `text-xl font-medium ${isActive ? 'text-primary' : 'text-foreground'} relative`}
@@ -151,21 +151,21 @@ const Header: React.FC = () => {
                 className={({ isActive }) => `text-xl font-medium ${isActive ? 'text-primary' : 'text-foreground'}`}
                 onClick={closeMobileMenu}
               >
-                {t('contact')}
-              </NavLink>
+            {t('contact')}
+          </NavLink>
             </nav>
-            
+          
             <div className="mt-8 pt-6 border-t border-gray-200">
-              <NavLink 
-                to="/contact" 
+            <NavLink 
+              to="/contact" 
                 className="flex items-center justify-center w-full py-3 px-4 bg-primary text-white font-medium rounded-lg shadow-md hover:bg-primary/90 transition-colors"
-                onClick={closeMobileMenu}
-              >
-                {t('contactUs')}
-              </NavLink>
-            </div>
+              onClick={closeMobileMenu}
+            >
+              {t('contactUs')}
+            </NavLink>
           </div>
-        </div>
+          </div>
+      </div>
       )}
     </>
   );

@@ -23,9 +23,8 @@ const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    // Set default language to French
-    document.documentElement.lang = i18n.language || 'fr';
-  }, []);
+    document.documentElement.lang = i18n.language || 'en';
+  }, [i18n.language]);
 
   return (
     <HelmetProvider>

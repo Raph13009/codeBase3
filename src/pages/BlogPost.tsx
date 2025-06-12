@@ -6,7 +6,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { getBlogBySlug, getBlogs, type Blog } from '@/lib/supabase';
 import { format, parseISO, isValid } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { enUS } from 'date-fns/locale';
 import { ArrowLeft, Calendar, Clock, Tag, BookOpen, ArrowRight, MessageSquare, Share2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -25,7 +25,7 @@ const BlogPost: React.FC = () => {
     try {
       const date = parseISO(dateString);
       if (isValid(date)) {
-        return format(date, 'dd MMMM yyyy', { locale: fr });
+        return format(date, 'MMMM dd, yyyy', { locale: enUS });
       }
       return 'Date inconnue';
     } catch (error) {

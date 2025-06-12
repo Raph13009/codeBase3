@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { Search, Filter, BookOpen, PinIcon } from 'lucide-react';
 import { getBlogs, type Blog } from '@/lib/supabase';
 import { format, parseISO, isValid } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { enUS } from 'date-fns/locale';
 import QualityPledge from '@/components/blog/QualityPledge';
 
 const Blog: React.FC = () => {
@@ -23,7 +23,7 @@ const Blog: React.FC = () => {
     try {
       const date = parseISO(dateString);
       if (isValid(date)) {
-        return format(date, 'dd MMMM yyyy', { locale: fr });
+        return format(date, 'MMMM dd, yyyy', { locale: enUS });
       }
       return 'Date inconnue';
     } catch (error) {

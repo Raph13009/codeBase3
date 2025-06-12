@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -11,11 +10,9 @@ const NotFound: React.FC = () => {
   
   useEffect(() => {
     // Update document metadata
-    document.title = t('notFoundTitle') + ' | AI Agency';
-    
-    // Set document language
-    document.documentElement.lang = i18n.language;
-  }, [t, i18n.language]);
+    document.title = t('notFoundTitle') + ' | BoostAI Consulting';
+    document.documentElement.lang = 'en';
+  }, [t]);
   
   return (
     <div className="flex flex-col min-h-screen">

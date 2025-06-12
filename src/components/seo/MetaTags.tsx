@@ -1,29 +1,57 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 
-const MetaTags: React.FC = () => {
-  const { t } = useTranslation();
-  
+interface MetaTagsProps {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  keywords?: string;
+}
+
+const MetaTags: React.FC<MetaTagsProps> = ({
+  title = "BoostAI Consulting | AI Solutions & Digital Transformation Experts",
+  description = "Transform your business with AI-powered solutions. Expert in chatbots, SEO optimization, content creation, and intelligent web development. Boost productivity and customer engagement.",
+  image = "https://www.boostaiconsulting.com/images/bc.png",
+  type = "website",
+  keywords = "AI solutions, digital transformation, chatbots, SEO optimization, content creation, web development, business automation, artificial intelligence"
+}) => {
+  const location = useLocation();
+  const url = `https://www.boostaiconsulting.com${location.pathname}`;
+
   return (
-    <>
-      <title>BoostAI Consulting — IA Agents & Process Automation</title>
-      <meta name="description" content="BoostAI crée des agents IA pour automatiser vos process métier, améliorer votre efficacité et gagner un temps précieux." />
-      
-      {/* Open Graph pour les réseaux sociaux */}
-      <meta property="og:title" content="BoostAI Consulting — IA Agents & Process Automation" />
-      <meta property="og:description" content="On conçoit des agents IA pour automatiser vos process, optimiser votre temps et booster votre productivité." />
-      <meta property="og:image" content="https://www.boostaiconsulting.com/assets/Logo2.png" />
-      <meta property="og:url" content="https://www.boostaiconsulting.com/" />
-      <meta property="og:type" content="website" />
-      
-      {/* Twitter Card */}
+    <Helmet>
+      {/* Primary Meta Tags */}
+      <title>{title}</title>
+      <meta name="title" content={title} />
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
+      <link rel="canonical" href={url} />
+
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content={type} />
+      <meta property="og:url" content={url} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={image} />
+      <meta property="og:site_name" content="BoostAI Consulting" />
+      <meta property="og:locale" content="en_US" />
+
+      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="BoostAI Consulting — IA Agents & Automation" />
-      <meta name="twitter:description" content="Automatisez vos tâches avec des agents IA sur mesure." />
-      <meta property="twitter:domain" content="boostaiconsulting.com" />
-      <meta property="twitter:url" content="https://www.boostaiconsulting.com/" />
-      <meta name="twitter:image" content="https://www.boostaiconsulting.com/assets/Logo2.png" />
-    </>
+      <meta name="twitter:url" content={url} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
+      <meta name="twitter:creator" content="@BoostAIConsult" />
+
+      {/* Additional SEO Meta Tags */}
+      <meta name="geo.region" content="FR" />
+      <meta name="geo.placename" content="Paris" />
+      <meta name="geo.position" content="48.8566;2.3522" />
+      <meta name="ICBM" content="48.8566, 2.3522" />
+    </Helmet>
   );
 };
 

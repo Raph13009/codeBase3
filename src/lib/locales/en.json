@@ -4,6 +4,7 @@
   "solutions": "Solutions",
   "blog": "Blog",
   "contact": "Contact",
+  "convert": "Convert",
   
   "newGeneration": "New AI Generation",
   "heroTitle": "AI Solutions to Transform Your Business",
@@ -185,5 +186,8 @@
   "previousTestimonial": "Previous testimonial",
   "nextTestimonial": "Next testimonial",
   "viewAllBlogs": "View all articles",
-  "developer": "Full-stack Developer"
+  "developer": "Full-stack Developer",
+  "notFoundTitle": "Page Not Found",
+  "notFoundText": "Sorry, the page you are looking for does not exist. Explore our AI solutions or return to the homepage.",
+  "backToHome": "Back to Home"
 }

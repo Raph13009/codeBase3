@@ -26,7 +26,7 @@ i18n
   .use(initReactI18next)
   .init({
     debug: false,
-    fallbackLng: 'fr',
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
     },
@@ -34,16 +34,13 @@ i18n
       en: {
         translation: enTranslation,
       },
-      fr: {
-        translation: frTranslation,
-      },
     },
     detection: {
       order: ['localStorage', 'navigator'],
       lookupLocalStorage: 'i18nextLng',
       caches: ['localStorage'],
     },
-    lng: 'fr', // Set French as the default language
+    lng: 'en', // Set English as the default language
   });
 
 export default i18n;

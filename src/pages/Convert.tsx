@@ -3,6 +3,23 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Upload, FileSpreadsheet, Loader2 } from "lucide-react";
 import Header from "@/components/layout/Header";
 
+const CodigBanner = () => (
+  <div className="w-full flex justify-center mt-8 mb-8">
+    <div className="flex items-center bg-white rounded-xl shadow-md px-6 py-4 max-w-2xl w-full">
+      <a href="https://www.codig-sa.com/" target="_blank" rel="noopener noreferrer" className="flex-shrink-0 mr-4">
+        <img src="/CodigLogo.png" alt="Codig Logo" className="h-16 w-16 rounded bg-white object-contain border border-gray-200" />
+      </a>
+      <div className="flex-1">
+        <div className="font-semibold text-lg sm:text-xl text-gray-800">Custom OCR feature for Codig</div>
+        <div className="text-gray-500 text-sm sm:text-base mt-1">This converter was built specifically for Codig.<br />
+          Want a custom OCR flow for your company?{' '}
+          <a href="/contact" className="text-blue-600 underline hover:text-blue-800">Let's talk</a>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 const Convert = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -101,7 +118,7 @@ const Convert = () => {
             <h1 className="text-4xl font-bold text-gray-900 mb-4">PDF to Excel Converter</h1>
             <p className="text-lg text-gray-600">Upload your PDF file and convert it to Excel format</p>
           </div>
-
+          <CodigBanner />
           <div
             className={`relative border-2 border-dashed rounded-lg p-12 text-center ${
               isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"

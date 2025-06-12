@@ -40,31 +40,31 @@ const ContactForm: React.FC = () => {
       )
       .then(() => {
         // Success message
-        toast({
-          title: t('contactSuccess'),
-          variant: 'default',
-        });
-        
-        // Reset form
-        setFormData({
+      toast({
+        title: t('contactSuccess'),
+        variant: 'default',
+      });
+      
+      // Reset form
+      setFormData({
           nom: '',
-          email: '',
+        email: '',
           telephone: '',
-          service: '',
-          message: '',
-        });
+        service: '',
+        message: '',
+      });
       })
       .catch((error) => {
-        console.error('Error submitting form:', error);
-        
+      console.error('Error submitting form:', error);
+      
         // Error message
-        toast({
-          title: t('contactError'),
-          variant: 'destructive',
-        });
+      toast({
+        title: t('contactError'),
+        variant: 'destructive',
+      });
       })
       .finally(() => {
-        setIsSubmitting(false);
+      setIsSubmitting(false);
       });
   };
   

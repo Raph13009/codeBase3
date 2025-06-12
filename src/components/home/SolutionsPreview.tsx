@@ -121,7 +121,7 @@ const SolutionsPreview: React.FC = () => {
                 aria-label={solution.title}
               >
                 <span className={`p-1.5 rounded-full ${activeTab === solution.id ? 'bg-white/20' : 'bg-slate-100'}`}>
-                  {solution.icon}
+                {solution.icon}
                 </span>
                 <span className="hidden sm:inline">{solution.title}</span>
               </ToggleGroupItem>

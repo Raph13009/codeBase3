@@ -299,7 +299,7 @@ const BlogPost: React.FC = () => {
                   </span>
                 )}
               </div>
-              
+
               {/* Titre principal h1 */}
               <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 leading-tight">
                 {blog.title}
@@ -311,7 +311,7 @@ const BlogPost: React.FC = () => {
                   {blog.excerpt}
                 </div>
               )}
-              
+
               {/* Tags */}
               {blog.tags && blog.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-8">
@@ -335,7 +335,7 @@ const BlogPost: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             />
-            
+
             {/* CTA */}
             <motion.div
               className="my-16 p-8 bg-primary/10 rounded-xl border border-primary/20 shadow-md"
@@ -429,11 +429,11 @@ const BlogPost: React.FC = () => {
                       </div>
                       <div className="p-5">
                         <h3 className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                          {relatedBlog.title}
-                        </h3>
+                        {relatedBlog.title}
+                      </h3>
                         <p className="text-slate-600 text-sm line-clamp-2 mb-3">
-                          {relatedBlog.excerpt || ''}
-                        </p>
+                        {relatedBlog.excerpt || ''}
+                      </p>
                         <div className="flex items-center justify-between text-xs text-slate-500">
                           <span className="flex items-center gap-1">
                             <Calendar className="w-3 h-3" />

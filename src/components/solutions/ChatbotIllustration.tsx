@@ -20,19 +20,19 @@ const ChatbotIllustration: React.FC = () => {
       <div className="flex flex-col gap-4 p-6 relative z-10">
         <div className="flex items-center gap-3 mb-3 border-b border-slate-100 pb-3">
           <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600">
-              <path d="M12 2v0a10 10 0 0 1 10 10c0 3.5-2.33 6.82-4.92 9.12a17.49 17.49 0 0 1-5.08 3.88"></path>
-              <path d="M12 2C6.26 2 2 6.26 2 12c0 3.5 2.33 6.82 4.92 9.12a17.49 17.49 0 0 0 5.08 3.88"></path>
-              <path d="M5 9c2 0 2-2 4-2 1 0 1 1 2 1 4 0 4-3 4-3"></path>
-              <path d="M14.5 16.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 1 0-3 0"></path>
-            </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600">
+                <path d="M12 2v0a10 10 0 0 1 10 10c0 3.5-2.33 6.82-4.92 9.12a17.49 17.49 0 0 1-5.08 3.88"></path>
+                <path d="M12 2C6.26 2 2 6.26 2 12c0 3.5 2.33 6.82 4.92 9.12a17.49 17.49 0 0 0 5.08 3.88"></path>
+                <path d="M5 9c2 0 2-2 4-2 1 0 1 1 2 1 4 0 4-3 4-3"></path>
+                <path d="M14.5 16.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 1 0-3 0"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 className="font-semibold text-slate-800">{t('aiChatbot')}</h3>
+              <p className="text-sm text-slate-500">{t('liveDemo')}</p>
+            </div>
           </div>
-          <div>
-            <h3 className="font-semibold text-slate-800">{t('aiChatbot')}</h3>
-            <p className="text-sm text-slate-500">{t('liveDemo')}</p>
-          </div>
-        </div>
-        
+          
         <div className="flex flex-col gap-4">
           {/* User message */}
           <motion.div 

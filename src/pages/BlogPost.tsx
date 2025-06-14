@@ -102,7 +102,7 @@ const BlogPost: React.FC = () => {
         
         if (!slug) {
           console.error('Slug parameter is missing');
-          setError(t('articleNotFound'));
+          setError('Article not found');
           return;
         }
         
@@ -110,7 +110,7 @@ const BlogPost: React.FC = () => {
         const data = await getBlogBySlug(slug);
         
         if (!data) {
-          setError(t('articleNotFound'));
+          setError('Article not found');
           return;
         }
 
@@ -132,7 +132,7 @@ const BlogPost: React.FC = () => {
         setRelatedPosts(relatedPostsData.slice(0, 3));
       } catch (error) {
         console.error('Error fetching blog details:', error);
-        setError(t('loadingError'));
+        setError('Error loading article');
       } finally {
         setIsLoading(false);
       }
@@ -171,9 +171,9 @@ const BlogPost: React.FC = () => {
         <main className="flex-grow pt-24 pb-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-2xl font-bold mb-4">{error || t('articleNotFound')}</h1>
+              <h1 className="text-2xl font-bold mb-4">{error || 'Article not found'}</h1>
               <Link to="/blog" className="text-primary hover:underline">
-                {t('backToBlog')}
+                Back to blog
               </Link>
             </div>
           </div>
@@ -250,7 +250,7 @@ const BlogPost: React.FC = () => {
               className="inline-flex items-center gap-2 text-slate-600 hover:text-primary mb-8 text-sm font-medium"
             >
               <ArrowLeft className="w-4 h-4" />
-              {t('backToBlog')}
+              Back to blog
             </Link>
           </div>
           
@@ -288,7 +288,7 @@ const BlogPost: React.FC = () => {
                 {blog.readingtime && (
                   <span className="flex items-center gap-1 bg-slate-100 px-2 py-1 rounded-full">
                     <Clock className="w-4 h-4" />
-                    {blog.readingtime} {t('readingTime')}
+                    {blog.readingtime} min read
                   </span>
                 )}
                 
@@ -347,7 +347,7 @@ const BlogPost: React.FC = () => {
                 👉 Need AI solutions for your business?
               </h3>
               <p className="text-lg mb-6 text-slate-700">
-                Découvrez comment nos solutions d'intelligence artificielle peuvent transformer votre entreprise et accélérer votre croissance digitale.
+                Discover how our artificial intelligence solutions can transform your business and accelerate your digital growth.
               </p>
               <Link 
                 to="/contact" 
@@ -360,12 +360,12 @@ const BlogPost: React.FC = () => {
             {/* Partage */}
             <div className="border-t border-slate-200 pt-8 mb-16">
               <div className="flex items-center justify-between">
-                <h4 className="font-medium text-slate-800">Partager cet article</h4>
+                <h4 className="font-medium text-slate-800">Share this article</h4>
                 <div className="flex gap-4">
                   <button 
                     onClick={() => window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(blog.title)}`, '_blank')}
                     className="p-2 rounded-full bg-slate-100 text-slate-600 hover:bg-primary/10 hover:text-primary transition-colors"
-                    aria-label="Partager sur Twitter"
+                    aria-label="Share on Twitter"
                   >
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
@@ -374,7 +374,7 @@ const BlogPost: React.FC = () => {
                   <button 
                     onClick={() => window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(blog.title)}`, '_blank')}
                     className="p-2 rounded-full bg-slate-100 text-slate-600 hover:bg-primary/10 hover:text-primary transition-colors"
-                    aria-label="Partager sur LinkedIn"
+                    aria-label="Share on LinkedIn"
                   >
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd"></path>
@@ -383,7 +383,7 @@ const BlogPost: React.FC = () => {
                   <button 
                     onClick={() => window.open(`mailto:?subject=${encodeURIComponent(blog.title)}&body=${encodeURIComponent(window.location.href)}`, '_blank')}
                     className="p-2 rounded-full bg-slate-100 text-slate-600 hover:bg-primary/10 hover:text-primary transition-colors"
-                    aria-label="Partager par email"
+                    aria-label="Share via email"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>

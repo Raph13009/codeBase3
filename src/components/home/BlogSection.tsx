@@ -89,7 +89,7 @@ const BlogSection: React.FC = () => {
                   {blog.excerpt}
                 </p>
                 <Link to={`/blog/${blog.slug}`} className="text-blue-600 hover:text-blue-700 font-medium">
-                  Lire la suite →
+                  Read more →
                 </Link>
               </div>
             </article>

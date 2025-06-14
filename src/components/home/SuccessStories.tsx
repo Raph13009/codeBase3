@@ -18,7 +18,7 @@ const SuccessStories: React.FC = () => (
             />
             <div>
               <h3 className="font-semibold">Codig</h3>
-              <p className="text-sm text-gray-500">Property Management Solution</p>
+              <p className="text-sm text-gray-500">International chemical distribution company</p>
             </div>
           </div>
           <p className="text-gray-700 italic mb-4">
@@ -38,7 +38,7 @@ const SuccessStories: React.FC = () => (
             />
             <div>
               <h3 className="font-semibold">Blue Garden</h3>
-              <p className="text-sm text-gray-500">Design Agency</p>
+              <p className="text-sm text-gray-500">Social impact organization</p>
             </div>
           </div>
           <p className="text-gray-700 italic mb-4">

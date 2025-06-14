@@ -344,7 +344,7 @@ const BlogPost: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.5 }}
             >
               <h3 className="text-2xl font-bold mb-4 text-slate-900">
-                👉 Besoin de solutions IA pour votre business ?
+                👉 Need AI solutions for your business?
               </h3>
               <p className="text-lg mb-6 text-slate-700">
                 Découvrez comment nos solutions d'intelligence artificielle peuvent transformer votre entreprise et accélérer votre croissance digitale.
@@ -353,7 +353,7 @@ const BlogPost: React.FC = () => {
                 to="/contact" 
                 className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors shadow-md"
               >
-                Contactez-nous <ArrowRight className="w-5 h-5" />
+                Contact us <ArrowRight className="w-5 h-5" />
               </Link>
             </motion.div>
             

@@ -86,8 +86,7 @@ const OtherSolutions: React.FC = () => {
                 {t('otherSolutions')}
               </h1>
               <p className="text-muted-foreground text-lg md:text-xl">
-                Découvrez nos solutions IA complémentaires pour répondre à tous vos besoins digitaux.
-              </p>
+              Discover how our artificial intelligence solutions can transform your business and accelerate your digital growth.              </p>
             </div>
             
             <motion.div 

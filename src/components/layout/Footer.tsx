@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
           
           {/* Resources */}
           <div>
-            <h3 className="text-white font-medium text-lg mb-4">{t('resources')}</h3>
+            <h3 className="text-white font-medium text-lg mb-4">{t('Resources')}</h3>
             <ul className="space-y-3">
               <li>
                 <a href="#" className="text-slate-400 hover:text-primary transition-colors">

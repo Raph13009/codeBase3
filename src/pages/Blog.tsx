@@ -88,9 +88,9 @@ const Blog: React.FC = () => {
         <div className="w-full text-center py-2 bg-slate-50">
           <a 
             href="#quality-pledge" 
-            className="text-xs text-slate-500 hover:text-blue-600 transition-colors"
+            className="text-gray-500 hover:text-blue-600 text-sm font-medium transition-colors"
           >
-            {t('blog.viewQualityPledge', 'Voir notre engagement de qualité')} →
+            See our quality commitment →
           </a>
         </div>
         <section className="py-12 md:py-20">

@@ -2,12 +2,28 @@ import React from 'react';
 
 const HeroSection: React.FC = () => (
   <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white px-4">
+    <style>{`
+      .animated-gradient-text {
+        background: linear-gradient(270deg, #2563eb, #6366f1, #0ea5e9, #2563eb);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        animation: gradientMove 5s ease-in-out infinite;
+      }
+      @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+    `}</style>
     <div className="max-w-4xl mx-auto text-center">
-      <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800">
-      Your tech partner for smart tools and websites.
+      <h1 className="animated-gradient-text text-5xl md:text-6xl font-bold mb-6">
+        Your tech partner for smart tools and websites.
       </h1>
       <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed">
-      OCR, dashboards, websites, landing pages, all tailored for you.
+        OCR, dashboards, websites, landing pages, all tailored for you.
       </p>
       <a
         href="#contact"
@@ -15,8 +31,8 @@ const HeroSection: React.FC = () => (
       >
         Let's talk
       </a>
-        </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 
 export default HeroSection;

@@ -7,7 +7,7 @@ import 'swiper/css/effect-coverflow';
 
 const baseTestimonials = [
   {
-    quote: "Huge thanks for the OCR tool — I used to waste over 30 minutes manually entering data. Now it's done in seconds. Total game-changer for my team.",
+    quote: "Huge thanks for the OCR tool, I used to waste over 30 minutes manually entering data. Now it's done in seconds. Thanks a lot.",
     name: "Sophie",
     role: "Head of Accounting",
     company: "Codig",

@@ -32,58 +32,58 @@ const SolutionsPreview: React.FC = () => {
   const solutions: Solution[] = [
     {
       id: 'chatbot',
-      title: t('chatbotSolution'),
-      description: t('chatbotDesc'),
+      title: 'Chatbot Solutions',
+      description: 'Intelligent chatbots that handle customer inquiries 24/7',
       icon: <MessageSquare className="w-6 h-6" />,
-      color: 'bg-blue-100 text-blue-600',
+      color: 'bg-cyan-500/20 text-cyan-400',
       illustration: <ChatbotIllustration />,
       benefits: [
-        t('chatbotBenefit1'),
-        t('chatbotBenefit2'),
-        t('chatbotBenefit3'),
-        t('chatbotBenefit4')
+        '24/7 customer support',
+        'Instant response times',
+        'Reduced workload for your team',
+        'Improved customer satisfaction'
       ]
     },
     {
       id: 'seo',
-      title: t('seoSolution'),
-      description: t('seoDesc'),
+      title: 'SEO Optimization',
+      description: 'Boost your website visibility in search engines',
       icon: <TrendingUp className="w-6 h-6" />,
-      color: 'bg-green-100 text-green-600',
+      color: 'bg-green-500/20 text-green-400',
       illustration: <SeoPerformanceCard />,
       benefits: [
-        t('seoBenefit1'),
-        t('seoBenefit2'),
-        t('seoBenefit3'),
-        t('seoBenefit4')
+        'Higher search rankings',
+        'Increased organic traffic',
+        'Better user experience',
+        'Long-term growth strategy'
       ]
     },
     {
       id: 'content',
-      title: t('contentSolution'),
-      description: t('contentDesc'),
+      title: 'Content Creation',
+      description: 'Engaging content that connects with your audience',
       icon: <FileText className="w-6 h-6" />,
-      color: 'bg-purple-100 text-purple-600',
+      color: 'bg-purple-500/20 text-purple-400',
       illustration: <ContentCreationIllustration />,
       benefits: [
-        t('contentBenefit1'),
-        t('contentBenefit2'),
-        t('contentBenefit3'),
-        t('contentBenefit4')
+        'SEO-optimized content',
+        'Engaging storytelling',
+        'Consistent brand voice',
+        'Increased engagement'
       ]
     },
     {
       id: 'web',
-      title: t('webSolution'),
-      description: t('webDesc'),
+      title: 'Web Development',
+      description: 'Modern, responsive websites that convert visitors',
       icon: <Globe className="w-6 h-6" />,
-      color: 'bg-amber-100 text-amber-600',
+      color: 'bg-amber-500/20 text-amber-400',
       illustration: <WebsiteIllustration />,
       benefits: [
-        t('webBenefit1'),
-        t('webBenefit2'),
-        t('webBenefit3'),
-        t('webBenefit4')
+        'Mobile-first design',
+        'Fast loading times',
+        'SEO-friendly structure',
+        'Conversion optimization'
       ]
     },
   ];
@@ -91,14 +91,14 @@ const SolutionsPreview: React.FC = () => {
   const activeSolution = solutions.find(solution => solution.id === activeTab) || solutions[0];
 
   return (
-    <section ref={ref} className="py-24 bg-gradient-to-b from-background to-secondary/20">
+    <section ref={ref} className="py-24 relative z-10">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            {t('ourSolutions')}
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-white">
+            Our Solutions
           </h2>
-          <p className="text-muted-foreground text-lg">
-            {t('solutionsDescription')}
+          <p className="text-gray-300 text-lg">
+            Discover how we can transform your business with our innovative solutions
           </p>
         </div>
 
@@ -107,7 +107,7 @@ const SolutionsPreview: React.FC = () => {
             type="single" 
             value={activeTab} 
             onValueChange={(value) => value && setActiveTab(value as SolutionType)} 
-            className="border border-border/50 p-1.5 rounded-full bg-white/80 backdrop-blur-sm shadow-xl"
+            className="border border-gray-700 p-1.5 rounded-full bg-gray-900/50 backdrop-blur-sm shadow-xl"
           >
             {solutions.map((solution) => (
               <ToggleGroupItem 
@@ -115,12 +115,12 @@ const SolutionsPreview: React.FC = () => {
                 value={solution.id}
                 className={`rounded-full flex items-center gap-2 px-5 py-3 text-sm font-medium transition-all
                   ${activeTab === solution.id 
-                    ? 'bg-primary text-white shadow-md' 
-                    : 'hover:bg-secondary text-muted-foreground hover:text-foreground'
+                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md' 
+                    : 'hover:bg-gray-800 text-gray-300 hover:text-white'
                   }`}
                 aria-label={solution.title}
               >
-                <span className={`p-1.5 rounded-full ${activeTab === solution.id ? 'bg-white/20' : 'bg-slate-100'}`}>
+                <span className={`p-1.5 rounded-full ${activeTab === solution.id ? 'bg-white/20' : 'bg-gray-700'}`}>
                 {solution.icon}
                 </span>
                 <span className="hidden sm:inline">{solution.title}</span>
@@ -133,8 +133,8 @@ const SolutionsPreview: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             <div className={`
               rounded-2xl overflow-hidden transform transition-all duration-500 
-              shadow-[0_20px_50px_-10px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.25)] 
-              border border-slate-200/50 bg-white/80 backdrop-blur-sm
+              shadow-[0_20px_50px_-10px_rgba(0,212,255,0.1)] hover:shadow-[0_30px_60px_-12px_rgba(0,212,255,0.2)] 
+              border border-gray-700 bg-gray-900/50 backdrop-blur-sm
               ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
             `}>
               {activeSolution.illustration}
@@ -148,24 +148,24 @@ const SolutionsPreview: React.FC = () => {
                 <div className={`p-3 rounded-xl ${activeSolution.color} shadow-sm`}>
                   {activeSolution.icon}
                 </div>
-                <h3 className="text-2xl md:text-3xl font-display font-bold">{activeSolution.title}</h3>
+                <h3 className="text-2xl md:text-3xl font-display font-bold text-white">{activeSolution.title}</h3>
               </div>
               
-              <p className="text-muted-foreground text-lg">
+              <p className="text-gray-300 text-lg">
                 {activeSolution.description}
               </p>
               
               <div className="space-y-3 mt-8">
-                <h4 className="font-medium text-lg">{t('keyBenefits')}</h4>
+                <h4 className="font-medium text-lg text-white">Key Benefits</h4>
                 <ul className="space-y-3">
                   {activeSolution.benefits.map((benefit, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <div className="rounded-full bg-primary/10 p-1 mt-1 shadow-sm">
-                        <svg className="h-4 w-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <div className="rounded-full bg-cyan-500/20 p-1 mt-1 shadow-sm">
+                        <svg className="h-4 w-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <span>{benefit}</span>
+                      <span className="text-gray-300">{benefit}</span>
                     </li>
                   ))}
                 </ul>
@@ -174,9 +174,9 @@ const SolutionsPreview: React.FC = () => {
               <div className="mt-8">
                 <Link 
                   to="/solutions" 
-                  className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-medium shadow-md"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-3 rounded-lg hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 font-medium shadow-md transform hover:scale-105"
                 >
-                  {t('exploreOurSolution')} <ArrowRight className="w-5 h-5" />
+                  Explore Our Solutions <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
             </div>

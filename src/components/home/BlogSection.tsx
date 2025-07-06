@@ -41,16 +41,20 @@ const BlogSection: React.FC = () => {
 
   if (isLoading) {
     return (
-      <section className="py-20 bg-white">
+      <section className="py-20 relative z-10">
         <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-4 text-white">Latest Articles</h2>
+          <p className="text-xl text-gray-300 text-center mb-16 max-w-3xl mx-auto">
+            Discover our insights and tips
+          </p>
           <div className="grid md:grid-cols-3 gap-8">
             {[...Array(3)].map((_, index) => (
-              <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden animate-pulse">
-                <div className="h-48 bg-slate-200"></div>
+              <div key={index} className="bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden animate-pulse border border-gray-700">
+                <div className="h-48 bg-gray-800"></div>
                 <div className="p-6">
-                  <div className="h-6 bg-slate-200 rounded w-3/4 mb-3"></div>
-                  <div className="h-4 bg-slate-200 rounded w-full mb-2"></div>
-                  <div className="h-4 bg-slate-200 rounded w-2/3"></div>
+                  <div className="h-6 bg-gray-800 rounded w-3/4 mb-3"></div>
+                  <div className="h-4 bg-gray-800 rounded w-full mb-2"></div>
+                  <div className="h-4 bg-gray-800 rounded w-2/3"></div>
                 </div>
               </div>
             ))}
@@ -61,18 +65,25 @@ const BlogSection: React.FC = () => {
   }
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 relative z-10">
       <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-4xl font-bold text-center mb-4 text-white">Latest Articles</h2>
+        <p className="text-xl text-gray-300 text-center mb-16 max-w-3xl mx-auto">
+          Discover our insights and tips
+        </p>
         <div className="grid md:grid-cols-3 gap-8">
           {blogs.map((blog) => (
-            <article key={blog.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <img 
-                src={blog.thumbnail} 
-                alt={blog.title} 
-                className="w-full h-48 object-cover"
-              />
+            <article key={blog.id} className="bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden hover:bg-gray-800/50 transition-all duration-300 border border-gray-700 hover:border-cyan-500 group">
+              <div className="relative overflow-hidden">
+                <img 
+                  src={blog.thumbnail} 
+                  alt={blog.title} 
+                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
               <div className="p-6">
-                <div className="flex items-center gap-4 text-sm text-slate-500 mb-3">
+                <div className="flex items-center gap-4 text-sm text-gray-400 mb-3">
                   <span className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
                     {formatDate(blog.createdAt)}
@@ -84,12 +95,13 @@ const BlogSection: React.FC = () => {
                     </span>
                   )}
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{blog.title}</h3>
-                <p className="text-gray-600 mb-4 line-clamp-2">
+                <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-cyan-400 transition-colors">{blog.title}</h3>
+                <p className="text-gray-300 mb-4 line-clamp-2">
                   {blog.excerpt}
                 </p>
-                <Link to={`/blog/${blog.slug}`} className="text-blue-600 hover:text-blue-700 font-medium">
-                  Read more →
+                <Link to={`/blog/${blog.slug}`} className="text-cyan-400 hover:text-cyan-300 font-medium inline-flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+                  Read more 
+                  <span className="text-lg">→</span>
                 </Link>
               </div>
             </article>
@@ -99,7 +111,7 @@ const BlogSection: React.FC = () => {
         <div className="mt-16 text-center">
           <Link 
             to="/blog" 
-            className="inline-block bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
+            className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25 transform hover:scale-105"
           >
             See our articles
           </Link>

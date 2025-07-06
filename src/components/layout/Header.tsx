@@ -34,138 +34,118 @@ const Header: React.FC = () => {
 
   return (
     <>
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-            ? 'py-3 bg-background shadow-lg backdrop-blur-md' 
-            : 'py-4 bg-white/90 backdrop-blur-md shadow-md'
-      }`}
-    >
-      <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        <NavLink to="/" className="flex items-center" onClick={closeMobileMenu}>
-            <img src="/assets/Logo.png" alt="BoostAI Consulting" className="h-16" />
-        </NavLink>
+      <header
+        className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90vw] max-w-xs md:max-w-4xl rounded-full shadow-2xl border border-cyan-900/40 bg-gradient-to-br from-[#232733] via-[#232a38] to-[#181c23] backdrop-blur-md px-4 md:px-12 py-4 md:py-4 flex items-center justify-between transition-all duration-300"
+        style={{
+          boxShadow: '0 4px 32px 0 rgba(0,255,255,0.08), 0 1.5px 8px 0 rgba(0,0,0,0.18)',
+          border: '1.5px solid rgba(0,255,255,0.10)',
+        }}
+      >
+        {/* Logo mobile (centré) */}
+        <div className="flex-1 flex md:block justify-center md:justify-start">
+          <NavLink to="/" className="flex items-center min-w-[120px] mx-auto md:hidden" onClick={closeMobileMenu}>
+            <img src="/assets/logo-header-mobile.png" alt="BoostAI Consulting" className="h-7 w-auto" />
+          </NavLink>
+          {/* Logo desktop (à gauche) */}
+          <NavLink to="/" className="hidden md:flex items-center min-w-[120px] md:mx-0" onClick={closeMobileMenu}>
+            <img src="/assets/Logo2.png" alt="BoostAI Consulting" className="h-14 md:h-16 w-auto" />
+          </NavLink>
+        </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          <NavLink to="/" className={({ isActive }) => 
-            `nav-link ${isActive ? 'nav-link-active' : ''}`
+        <nav className="hidden md:flex items-center space-x-8 mx-auto">
+          <NavLink to="/" className={({ isActive }) =>
+            `text-white text-lg font-medium px-2 py-1 transition-colors duration-200 rounded hover:text-cyan-400 hover:bg-cyan-400/10 focus:outline-none focus:text-cyan-400 ${isActive ? 'text-cyan-400' : ''}`
+          }>Home</NavLink>
+          <NavLink to="/solutions" className={({ isActive }) =>
+            `text-white text-lg font-medium px-2 py-1 transition-colors duration-200 rounded hover:text-cyan-400 hover:bg-cyan-400/10 focus:outline-none focus:text-cyan-400 ${isActive ? 'text-cyan-400' : ''}`
+          }>Solutions</NavLink>
+          <NavLink to="/blog" className={({ isActive }) =>
+            `text-white text-lg font-medium px-2 py-1 transition-colors duration-200 rounded hover:text-cyan-400 hover:bg-cyan-400/10 focus:outline-none focus:text-cyan-400 ${isActive ? 'text-cyan-400' : ''}`
+          }>Blog</NavLink>
+          <NavLink to="/convert" className={({ isActive }) =>
+            `text-white text-lg font-medium px-2 py-1 transition-colors duration-200 rounded hover:text-cyan-400 hover:bg-cyan-400/10 focus:outline-none focus:text-cyan-400 ${isActive ? 'text-cyan-400' : ''} relative`
           }>
-            {t('home')}
+            Convert
+            <span className="absolute -top-2 -right-2 bg-cyan-400 text-black text-xs px-2 py-0.5 rounded-full animate-pulse border border-cyan-200">New</span>
           </NavLink>
-          <NavLink to="/solutions" className={({ isActive }) => 
-            `nav-link ${isActive ? 'nav-link-active' : ''}`
-          }>
-            {t('solutions')}
-          </NavLink>
-          <NavLink to="/blog" className={({ isActive }) => 
-            `nav-link ${isActive ? 'nav-link-active' : ''}`
-          }>
-            {t('blog')}
-          </NavLink>
-            <NavLink to="/convert" className={({ isActive }) => 
-              `nav-link ${isActive ? 'nav-link-active' : ''} relative`
-            }>
-              {t('convert')}
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full animate-pulse">
-                New
-              </span>
-            </NavLink>
-          <NavLink to="/contact" className={({ isActive }) => 
-            `nav-link ${isActive ? 'nav-link-active' : ''}`
-          }>
-            {t('contact')}
-          </NavLink>
+          <NavLink to="/contact" className={({ isActive }) =>
+            `text-white text-lg font-medium px-2 py-1 transition-colors duration-200 rounded hover:text-cyan-400 hover:bg-cyan-400/10 focus:outline-none focus:text-cyan-400 ${isActive ? 'text-cyan-400' : ''}`
+          }>Contact</NavLink>
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
           <LanguageSwitcher />
-          <NavLink to="/contact" className="button-primary">
-            {t('contactUs')}
-          </NavLink>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="flex md:hidden items-center space-x-4">
           <LanguageSwitcher />
-          <button 
-            onClick={toggleMobileMenu} 
-            className="p-2 rounded-md text-foreground"
+          <button
+            onClick={toggleMobileMenu}
+            className="p-2 rounded-md text-white hover:bg-cyan-400/10 transition-colors"
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
-              <Menu className="w-6 h-6" />
+            <Menu className="w-7 h-7" />
           </button>
-        </div>
         </div>
       </header>
 
       {/* Mobile Menu - Full Screen Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-white z-50 md:hidden overflow-y-auto">
-          <div className="flex justify-between items-center p-4 border-b border-gray-200">
-            <span className="font-display text-lg font-medium">{t('menu')}</span>
-            <button 
-              onClick={closeMobileMenu} 
-              className="p-2 text-foreground hover:bg-gray-100 rounded-full transition-colors"
+        <div className="fixed inset-0 bg-black/95 backdrop-blur-md z-50 md:hidden overflow-y-auto">
+          <div className="flex justify-between items-center p-4 border-b border-cyan-900/40">
+            <span className="font-display text-lg font-medium text-white">Menu</span>
+            <button
+              onClick={closeMobileMenu}
+              className="p-2 text-white hover:bg-cyan-400/10 rounded-full transition-colors"
               aria-label="Close menu"
             >
-              <X className="w-6 h-6" />
+              <X className="w-7 h-7" />
             </button>
-      </div>
+          </div>
 
           <div className="p-6">
             <nav className="flex flex-col space-y-6">
-              <NavLink 
-                to="/" 
-                className={({ isActive }) => `text-xl font-medium ${isActive ? 'text-primary' : 'text-foreground'}`} 
+              <NavLink
+                to="/"
+                className={({ isActive }) => `text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'}`}
                 onClick={closeMobileMenu}
               >
-            {t('home')}
-          </NavLink>
-              <NavLink 
-                to="/solutions" 
-                className={({ isActive }) => `text-xl font-medium ${isActive ? 'text-primary' : 'text-foreground'}`}
-                onClick={closeMobileMenu}
-              >
-            {t('solutions')}
-          </NavLink>
-              <NavLink 
-                to="/blog" 
-                className={({ isActive }) => `text-xl font-medium ${isActive ? 'text-primary' : 'text-foreground'}`}
-                onClick={closeMobileMenu}
-              >
-            {t('blog')}
-          </NavLink>
-              <NavLink 
-                to="/convert" 
-                className={({ isActive }) => `text-xl font-medium ${isActive ? 'text-primary' : 'text-foreground'} relative`}
-                onClick={closeMobileMenu}
-              >
-                {t('convert')}
-                <span className="ml-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full animate-pulse">
-                  New
-                </span>
+                Home
               </NavLink>
-              <NavLink 
-                to="/contact" 
-                className={({ isActive }) => `text-xl font-medium ${isActive ? 'text-primary' : 'text-foreground'}`}
+              <NavLink
+                to="/solutions"
+                className={({ isActive }) => `text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'}`}
                 onClick={closeMobileMenu}
               >
-            {t('contact')}
-          </NavLink>
+                Solutions
+              </NavLink>
+              <NavLink
+                to="/blog"
+                className={({ isActive }) => `text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'}`}
+                onClick={closeMobileMenu}
+              >
+                Blog
+              </NavLink>
+              <NavLink
+                to="/convert"
+                className={({ isActive }) => `text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'} relative`}
+                onClick={closeMobileMenu}
+              >
+                Convert
+                <span className="ml-2 bg-cyan-400 text-black text-xs px-2 py-0.5 rounded-full animate-pulse border border-cyan-200">New</span>
+              </NavLink>
+              <NavLink
+                to="/contact"
+                className={({ isActive }) => `text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'}`}
+                onClick={closeMobileMenu}
+              >
+                Contact
+              </NavLink>
             </nav>
-          
-            <div className="mt-8 pt-6 border-t border-gray-200">
-            <NavLink 
-              to="/contact" 
-                className="flex items-center justify-center w-full py-3 px-4 bg-primary text-white font-medium rounded-lg shadow-md hover:bg-primary/90 transition-colors"
-              onClick={closeMobileMenu}
-            >
-              {t('contactUs')}
-            </NavLink>
           </div>
-          </div>
-      </div>
+        </div>
       )}
     </>
   );

@@ -75,11 +75,11 @@ const BlogSection: React.FC = () => {
           {blogs.map((blog) => (
             <article key={blog.id} className="bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden hover:bg-gray-800/50 transition-all duration-300 border border-gray-700 hover:border-cyan-500 group">
               <div className="relative overflow-hidden">
-                <img 
-                  src={blog.thumbnail} 
-                  alt={blog.title} 
+              <img 
+                src={blog.thumbnail} 
+                alt={blog.title} 
                   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+              />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className="p-6">

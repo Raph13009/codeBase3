@@ -90,21 +90,21 @@ const Blog: React.FC = () => {
         
         <main className="relative z-10 pt-32 pb-20">
           {/* Hero Section */}
-          <section className="px-4 md:px-6 mb-20">
+          <section className="px-4 md:px-6 mb-20 py-8 pb-16">
             <div className="max-w-6xl mx-auto text-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <div className="inline-flex items-center gap-2 bg-cyan-900/30 backdrop-blur-sm px-4 py-2 rounded-full border border-cyan-500/30 mb-6">
+                <div className="inline-flex items-center gap-2 bg-cyan-900/30 backdrop-blur-sm px-4 py-2 rounded-full border border-cyan-500/30 mb-8">
                   <Sparkles className="w-4 h-4 text-cyan-400" />
                   <span className="text-cyan-300 text-sm font-medium">AI INSIGHTS</span>
                 </div>
                 
-                <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent leading-tight">
+                <h1 className="text-5xl md:text-7xl font-bold mb-12 bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent leading-[1.1] md:leading-[1.05]">
                   Latest AI & Innovation
-                  <span className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+                  <span className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mt-2 pb-4">
                     Insights
                   </span>
                 </h1>

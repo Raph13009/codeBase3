@@ -26,7 +26,7 @@ const HowWeHelp: React.FC = () => (
           </div>
           <h3 className="text-xl font-semibold mb-4 text-white group-hover:text-cyan-400 transition-colors">Online Presence</h3>
           <p className="text-gray-300">
-            Websites, landing pages, and Instagram to make your business visible and credible.
+            Websites, landing pages, and digital platforms to make your business visible and credible.
           </p>
         </div>
 

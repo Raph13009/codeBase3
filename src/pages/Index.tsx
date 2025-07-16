@@ -75,21 +75,29 @@ const FAQSection: React.FC = () => (
 
 const Index: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-black relative">
-      <MetaTags />
+    <>
+      <MetaTags 
+        title="BoostAI Consulting | AI Solutions & Digital Transformation Experts"
+        description="Transform your business with AI-powered solutions. Expert in chatbots, SEO optimization, content creation, and intelligent web development. Boost productivity and customer engagement."
+        keywords="AI solutions, digital transformation, chatbots, SEO optimization, content creation, web development, business automation, artificial intelligence"
+      />
       <GoogleAnalytics />
-      <AnimatedBackground />
-      <Header />
-      <main className="flex-grow relative z-10">
-        <HeroSection />
-        <HowWeHelp />
-        <SuccessStories />
-        <SolutionsPreview />
-        <BlogSection />
-        <FAQSection />
-      </main>
-      <Footer />
-    </div>
+      <div className="min-h-screen relative overflow-x-hidden bg-[#0B0D14]">
+        <AnimatedBackground />
+        <Header />
+        
+        <main className="relative z-10">
+          <HeroSection />
+          <HowWeHelp />
+          <SuccessStories />
+          <SolutionsPreview />
+          <BlogSection />
+          <FAQSection />
+        </main>
+        
+        <Footer />
+      </div>
+    </>
   );
 };
 

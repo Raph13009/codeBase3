@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import AnimatedBackground from '@/components/ui/AnimatedBackground';
+import MetaTags from '@/components/seo/MetaTags';
 import { MessageSquare, TrendingUp, FileText, Globe, ArrowRight, Check, ExternalLink } from 'lucide-react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Link } from 'react-router-dom';
@@ -32,12 +33,9 @@ interface Solution {
 }
 
 const Solutions: React.FC = () => {
-  const [activeSolution, setActiveSolution] = useState<SolutionType>('chatbot');
+  const [selectedSolution, setSelectedSolution] = useState<SolutionType>('chatbot');
 
   useEffect(() => {
-    // Update document metadata for SEO
-    document.title = 'Our Solutions | BoostAI Consulting';
-    
     // Scroll to top on page load
     window.scrollTo(0, 0);
   }, []);
@@ -173,13 +171,19 @@ const Solutions: React.FC = () => {
     },
   ];
 
-  const activeSolutionData = solutions.find(solution => solution.id === activeSolution) || solutions[0];
-  const otherSolutions = solutions.filter(solution => solution.id !== activeSolution);
+  const activeSolutionData = solutions.find(solution => solution.id === selectedSolution) || solutions[0];
+  const otherSolutions = solutions.filter(solution => solution.id !== selectedSolution);
 
   return (
-    <div className="flex flex-col min-h-screen bg-black relative">
-      <AnimatedBackground />
-      <Header />
+    <>
+      <MetaTags 
+        title="AI Solutions & Digital Transformation | BoostAI Consulting"
+        description="Discover our AI-powered solutions: intelligent chatbots, SEO optimization, content creation, and smart web development. Transform your business with cutting-edge technology."
+        keywords="AI solutions, chatbots, SEO optimization, content creation, web development, digital transformation, artificial intelligence, business automation"
+      />
+      <div className="flex flex-col min-h-screen bg-black relative">
+        <AnimatedBackground />
+        <Header />
       
       <main className="flex-grow relative z-10">
         <section className="pt-40 md:pt-44 lg:pt-48 pb-24 relative z-10">
@@ -195,8 +199,8 @@ const Solutions: React.FC = () => {
               <div className="inline-flex p-1 md:p-1.5 border border-gray-700 rounded-full bg-gray-900/50 backdrop-blur-sm shadow-lg">
                 <ToggleGroup 
                   type="single" 
-                  value={activeSolution} 
-                  onValueChange={(value) => value && setActiveSolution(value as SolutionType)}
+                  value={selectedSolution} 
+                  onValueChange={(value) => value && setSelectedSolution(value as SolutionType)}
                   className="w-full"
                 >
                   {solutions.map((solution) => (
@@ -204,7 +208,7 @@ const Solutions: React.FC = () => {
                       key={solution.id} 
                       value={solution.id}
                       className={`rounded-full flex items-center justify-center gap-1 md:gap-2 px-3 md:px-5 py-2 md:py-3 text-xs md:text-sm font-medium transition-all duration-300
-                        ${activeSolution === solution.id ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md' : 'hover:bg-gray-800 text-gray-300 hover:text-white'}
+                        ${selectedSolution === solution.id ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md' : 'hover:bg-gray-800 text-gray-300 hover:text-white'}
                       `}
                       aria-label={solution.title}
                     >
@@ -218,7 +222,7 @@ const Solutions: React.FC = () => {
             
             <AnimatePresence mode="wait">
               <motion.div
-                key={activeSolution}
+                key={selectedSolution}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
@@ -357,7 +361,7 @@ const Solutions: React.FC = () => {
                     {otherSolutions.map((solution) => (
                       <div 
                         key={solution.id}
-                        onClick={() => setActiveSolution(solution.id)}
+                        onClick={() => setSelectedSolution(solution.id)}
                         className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl p-4 md:p-6 flex flex-col items-center gap-3 md:gap-4 hover:shadow-lg hover:border-cyan-500 transition-all cursor-pointer group"
                       >
                         <div className={`p-2 md:p-3 rounded-full ${solution.color} group-hover:scale-110 transition-transform duration-300`}>
@@ -377,6 +381,7 @@ const Solutions: React.FC = () => {
       
       <Footer />
     </div>
+    </>
   );
 };
 

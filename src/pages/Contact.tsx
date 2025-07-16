@@ -4,6 +4,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ContactForm from '@/components/contact/ContactForm';
 import Map from '@/components/contact/Map';
+import MetaTags from '@/components/seo/MetaTags';
 import { Phone, Mail, Globe, Calendar, Clock, Map as MapIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -11,15 +12,12 @@ const Contact: React.FC = () => {
   const { t, i18n } = useTranslation();
   
   useEffect(() => {
-    // Update document metadata for SEO
-    document.title = t('contactTitle') + ' | BoostAI Consulting';
-    
-    // Set document language
-    document.documentElement.lang = i18n.language;
+    // Set document language to English
+    document.documentElement.lang = 'en';
     
     // Scroll to top on page load
     window.scrollTo(0, 0);
-  }, [t, i18n.language]);
+  }, []);
   
   const contactInfo = [
     {
@@ -57,8 +55,14 @@ const Contact: React.FC = () => {
   ];
   
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50">
-      <Header />
+          <>
+        <MetaTags
+          title="Contact Us | BoostAI Consulting"
+          description="Get in touch with our AI experts. Let's discuss your needs and see how our AI expertise can help transform your business."
+          keywords="contact, AI consulting, business transformation, chatbots, SEO optimization, content creation, web development"
+        />
+        <div className="flex flex-col min-h-screen bg-slate-50">
+          <Header />
       
       <main className="flex-grow pt-24 pb-20">
         <section className="py-12 md:py-20">

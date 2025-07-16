@@ -23,8 +23,10 @@ const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    document.documentElement.lang = i18n.language || 'en';
-  }, [i18n.language]);
+    // Force English language
+    i18n.changeLanguage('en');
+    document.documentElement.lang = 'en';
+  }, []);
 
   return (
     <HelmetProvider>

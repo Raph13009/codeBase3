@@ -22,11 +22,16 @@ const MetaTags: React.FC<MetaTagsProps> = ({
 
   return (
     <Helmet>
+      {/* Set document language to English */}
+      <html lang="en" />
+      
       {/* Primary Meta Tags */}
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
+      <meta name="author" content="BoostAI Consulting" />
+      <meta name="robots" content="index, follow" />
       <link rel="canonical" href={url} />
 
       {/* Open Graph / Facebook */}
@@ -35,6 +40,9 @@ const MetaTags: React.FC<MetaTagsProps> = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:type" content="image/png" />
       <meta property="og:site_name" content="BoostAI Consulting" />
       <meta property="og:locale" content="en_US" />
 

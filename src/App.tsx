@@ -24,7 +24,7 @@ const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    // Force English language
+    // English language
     i18n.changeLanguage('en');
     document.documentElement.lang = 'en';
   }, []);

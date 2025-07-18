@@ -132,7 +132,7 @@ const WhatWeOffer = memo(() => {
         </div>
 
         <div className="max-w-6xl mx-auto space-y-20">
-          {/* MVP Builder Card */}
+          {/* MVP Boost Card */}
           <div className={`
             rounded-2xl overflow-hidden transform transition-all duration-500 
             shadow-[0_20px_50px_-10px_rgba(0,212,255,0.1)] hover:shadow-[0_30px_60px_-12px_rgba(0,212,255,0.2)] 
@@ -145,7 +145,7 @@ const WhatWeOffer = memo(() => {
                   <Rocket className="w-8 h-8" />
                 </div>
                 <div>
-                  <h3 className="text-3xl font-display font-bold text-white">MVP Builder</h3>
+                  <h3 className="text-3xl font-display font-bold text-white">MVP Boost</h3>
                   <p className="text-cyan-400 text-lg font-medium">Launch your idea in 1-2 weeks</p>
                 </div>
               </div>
@@ -282,7 +282,7 @@ const WhatWeOffer = memo(() => {
                 <thead>
                   <tr className="border-b border-gray-700">
                     <th className="text-left p-4 text-gray-400 font-medium">Feature</th>
-                    <th className="text-center p-4 text-cyan-400 font-semibold">MVP Builder</th>
+                    <th className="text-center p-4 text-cyan-400 font-semibold">MVP Boost</th>
                     <th className="text-center p-4 text-purple-400 font-semibold">Custom Tool</th>
                   </tr>
                 </thead>

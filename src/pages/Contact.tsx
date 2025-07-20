@@ -47,7 +47,7 @@ const Contact: React.FC = () => {
   const teamMembers = [
     {
       name: 'Raphaël Levy',
-      role: "AI Consultant",
+      role: "Founder & CEO",
       image: '/assets/raph-pp.jpg',
       description: "Expert in AI solutions and digital transformation"
     },

@@ -4,6 +4,7 @@ import HowWeHelp from '../components/home/HowWeHelp';
 import SuccessStories from '../components/home/SuccessStories';
 import WhatWeOffer from '../components/home/WhatWeOffer';
 import BlogSection from '../components/home/BlogSection';
+import OngoingProjects from '../components/home/OngoingProjects';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
@@ -38,6 +39,7 @@ const Index: React.FC = () => {
         </main>
         
         <Footer />
+        <OngoingProjects />
       </div>
     </>
   );

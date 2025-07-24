@@ -9,7 +9,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import MetaTags from '@/components/seo/MetaTags';
-import AnimatedBackground from '@/components/ui/AnimatedBackground';
+import DarkVeil from '@/components/DarkVeil';
 
 // Lazy load FAQSection for better performance
 const FAQSection = lazy(() => import('../components/home/FAQSection'));
@@ -23,8 +23,18 @@ const Index: React.FC = () => {
         keywords="AI solutions, digital transformation, chatbots, SEO optimization, content creation, web development, business automation, artificial intelligence"
       />
       <GoogleAnalytics />
-      <div className="min-h-screen relative overflow-x-hidden bg-[#0B0D14]">
-        <AnimatedBackground />
+      <div className="min-h-screen relative bg-[#0B0D14]">
+        <div className="fixed inset-0 z-0">
+          <DarkVeil
+            hueShift={0}
+            noiseIntensity={0.05}
+            scanlineIntensity={0}
+            speed={0.3}
+            scanlineFrequency={0}
+            warpAmount={0.1}
+            resolutionScale={1}
+          />
+        </div>
         <Header />
         
         <main className="relative z-10">

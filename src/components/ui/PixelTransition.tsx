@@ -29,6 +29,7 @@ function PixelTransition({
   const delayedCallRef = useRef<any>(null);
 
   const [isActive, setIsActive] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   const isTouchDevice = false; // Force hover mode for now
 
@@ -55,6 +56,9 @@ function PixelTransition({
   }, [gridSize, pixelColor]);
 
   const animatePixels = (activate: boolean) => {
+    // Si l'animation a déjà été jouée, ne pas la relancer
+    if (hasAnimated && !activate) return;
+    
     setIsActive(activate);
 
     const pixelGridEl = pixelGridRef.current;
@@ -88,6 +92,11 @@ function PixelTransition({
         activeEl.style.display = activate ? 'block' : 'none';
         activeEl.style.pointerEvents = activate ? 'none' : '';
       }
+      
+      // Marquer l'animation comme terminée quand elle se termine
+      if (activate) {
+        setHasAnimated(true);
+      }
     });
 
     gsap.to(pixels, {
@@ -103,7 +112,7 @@ function PixelTransition({
 
   const handleMouseEnter = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (!isActive) animatePixels(true);
+    if (!isActive && !hasAnimated) animatePixels(true);
   };
   const handleMouseLeave = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -111,7 +120,9 @@ function PixelTransition({
   };
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    animatePixels(!isActive);
+    if (!hasAnimated) {
+      animatePixels(!isActive);
+    }
   };
 
   return (

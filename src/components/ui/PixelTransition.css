@@ -12,7 +12,7 @@
 @media (max-width: 768px) {
   .pixelated-image-card {
     width: 100px;
-    height: 180px;
+    height: 250px;
     border-radius: 8px;
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import RotatingText from '../ui/RotatingText';
 
 const HeroSection: React.FC = () => (
   <section className="min-h-screen flex items-center justify-center relative z-10 px-4">
@@ -34,12 +35,40 @@ const HeroSection: React.FC = () => (
       <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
         OCR, dashboards, websites, landing pages, all tailored for you.
       </p>
-      <Link
-        to="/contact"
-        className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-10 py-5 rounded-full text-lg font-semibold hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 glow-effect transform hover:scale-105"
-      >
-        Let's talk
-      </Link>
+      
+      <div className="mb-12 flex items-center justify-center">
+        <div className="flex items-center space-x-3">
+          <span className="text-white text-xl md:text-2xl font-medium">
+            Our Stack
+          </span>
+          <div className="relative">
+            <RotatingText
+              texts={[
+                'Cursor', 'n8n', 'Figma', 'Supabase', 'React', 'TypeScript', 
+                'Tailwind CSS', 'Vite', 'Node.js', 'PostgreSQL', 'GitHub', 'Vercel',
+                'OpenAI', 'Anthropic', 'Zapier', 'Airtable', 'Notion', 'Slack'
+              ]}
+              mainClassName="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl shadow-xl overflow-hidden border border-purple-400/30"
+              staggerFrom="last"
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "-120%", opacity: 0 }}
+              staggerDuration={0.03}
+              splitLevelClassName="overflow-hidden"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={2500}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="mt-16">
+        <Link
+          to="/contact"
+          className="inline-block bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-12 py-6 rounded-full text-xl font-bold hover:from-emerald-400 hover:to-teal-500 transition-all duration-300 glow-effect transform hover:scale-105 shadow-2xl border border-emerald-400/30"
+        >
+          Let's talk
+        </Link>
+      </div>
     </div>
   </section>
 );

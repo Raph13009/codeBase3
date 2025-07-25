@@ -112,28 +112,28 @@ const Header: React.FC = () => {
             <nav className="flex flex-col space-y-6">
               <NavLink 
                 to="/" 
-                className={({ isActive }) => `text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'}`}
+                className={({ isActive }) => `cursor-target text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'}`}
                 onClick={closeMobileMenu}
               >
                 Home
           </NavLink>
               <NavLink 
                 to="/solutions" 
-                className={({ isActive }) => `text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'}`}
+                className={({ isActive }) => `cursor-target text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'}`}
                 onClick={closeMobileMenu}
               >
                 Solutions
           </NavLink>
               <NavLink 
                 to="/blog" 
-                className={({ isActive }) => `text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'}`}
+                className={({ isActive }) => `cursor-target text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'}`}
                 onClick={closeMobileMenu}
               >
                 Blog
           </NavLink>
               <NavLink 
                 to="/convert" 
-                className={({ isActive }) => `text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'} relative`}
+                className={({ isActive }) => `cursor-target text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'} relative`}
                 onClick={closeMobileMenu}
               >
                 Convert
@@ -141,14 +141,14 @@ const Header: React.FC = () => {
               </NavLink>
               <NavLink 
                 to="/about" 
-                className={({ isActive }) => `text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'}`}
+                className={({ isActive }) => `cursor-target text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'}`}
                 onClick={closeMobileMenu}
               >
                 About
               </NavLink>
               <NavLink 
                 to="/contact" 
-                className={({ isActive }) => `text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'}`}
+                className={({ isActive }) => `cursor-target text-xl font-medium transition-colors ${isActive ? 'text-cyan-400' : 'text-gray-300 hover:text-white'}`}
                 onClick={closeMobileMenu}
               >
                 Contact

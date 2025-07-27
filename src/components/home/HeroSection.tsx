@@ -30,9 +30,15 @@ const HeroSection: React.FC = () => (
       .glow-effect:hover {
         box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
       }
+      
+      @media (max-width: 768px) {
+        .hero-title {
+          line-height: 1.1 !important;
+        }
+      }
     `}</style>
     <div className="max-w-4xl mx-auto text-center">
-      <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-loose pb-8">
+      <h1 className="hero-title text-5xl md:text-7xl font-bold mb-6 leading-loose pb-8">
         <TextType
           as="span"
           text={["We build fast, smart & beautiful digital products."]}

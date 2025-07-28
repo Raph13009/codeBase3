@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import AnimatedBackground from '@/components/ui/AnimatedBackground';
+
 import MetaTags from '@/components/seo/MetaTags';
 import { MessageSquare, TrendingUp, FileText, Globe, ArrowRight, Check, ExternalLink } from 'lucide-react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
@@ -182,7 +182,7 @@ const Solutions: React.FC = () => {
         keywords="AI solutions, chatbots, SEO optimization, content creation, web development, digital transformation, artificial intelligence, business automation"
       />
       <div className="flex flex-col min-h-screen bg-black relative">
-        <AnimatedBackground />
+
         <Header />
       
       <main className="flex-grow relative z-10">

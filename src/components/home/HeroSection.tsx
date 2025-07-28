@@ -1,90 +1,252 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import RotatingText from '../ui/RotatingText';
+import React, { useRef, useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import TextType from '../ui/TextType';
 
-const HeroSection: React.FC = () => (
-  <section className="min-h-screen flex items-center justify-center relative z-10 px-4">
-    <style>{`
-      .animated-gradient-text {
-        background: linear-gradient(270deg, #00d4ff, #0099cc, #00ffff, #00d4ff);
-        background-size: 200% 200%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-fill-color: transparent;
-        animation: gradientMove 5s ease-in-out infinite;
-        padding-bottom: 0.5rem;
-        display: inline-block;
-      }
-      @keyframes gradientMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-      
-      .glow-effect {
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-      }
-      
-      .glow-effect:hover {
-        box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
-      }
-      
-      @media (max-width: 768px) {
-        .hero-title {
-          line-height: 1.1 !important;
+const HeroSection: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (video) {
+      const handleVideoLoadedData = () => {
+        setIsVideoLoaded(true);
+        video.play().catch(console.error);
+      };
+
+      const handleVideoTimeUpdate = () => {
+        if (video.currentTime < 0.1) {
+          video.pause();
+          setTimeout(() => {
+            video.play().catch(console.error);
+          }, 1000);
         }
-      }
-    `}</style>
-    <div className="max-w-4xl mx-auto text-center">
-      <h1 className="hero-title text-5xl md:text-7xl font-bold mb-6 leading-loose pb-8">
-        <TextType
-          as="span"
-          text={["We build fast, smart & beautiful digital products."]}
-          typingSpeed={75}
-          pauseDuration={1500}
-          showCursor={true}
-          cursorCharacter="|"
-          className="animated-gradient-text"
-        />
-      </h1>
+      };
+
+      video.addEventListener('loadeddata', handleVideoLoadedData);
+      video.addEventListener('timeupdate', handleVideoTimeUpdate);
+
+      return () => {
+        video.removeEventListener('loadeddata', handleVideoLoadedData);
+        video.removeEventListener('timeupdate', handleVideoTimeUpdate);
+      };
+    }
+  }, []);
+
+  // Méthode propre pour mobile seulement
+  useEffect(() => {
+    const mobileVideo = mobileVideoRef.current;
+    
+    if (mobileVideo) {
+      const handleMobileTimeUpdate = () => {
+        if (mobileVideo.currentTime < 0.1) {
+          mobileVideo.pause();
+          setTimeout(() => {
+            mobileVideo.play().catch(console.error);
+          }, 1000);
+        }
+      };
+
+      mobileVideo.addEventListener('timeupdate', handleMobileTimeUpdate);
+
+      return () => {
+        mobileVideo.removeEventListener('timeupdate', handleMobileTimeUpdate);
+      };
+    }
+  }, []);
+
+  return (
+    <section className="relative min-h-screen sm:min-h-screen lg:min-h-[35vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%239C92AC&quot; fill-opacity=&quot;0.05&quot;%3E%3Ccircle cx=&quot;30&quot; cy=&quot;30&quot; r=&quot;2&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
       
-      <div className="mb-12 flex items-center justify-center">
-        <div className="flex items-center space-x-3">
-          <span className="text-white text-xl md:text-2xl font-medium">
-            Our Stack
-          </span>
-          <div className="relative">
-            <RotatingText
-              texts={[
-                'Cursor', 'n8n', 'Figma', 'Supabase', 'React', 'TypeScript', 
-                'Tailwind CSS', 'Vite', 'Node.js', 'PostgreSQL', 'GitHub', 'Vercel',
-                'OpenAI', 'Anthropic', 'Zapier', 'Airtable', 'Notion', 'Slack'
-              ]}
-              mainClassName="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl shadow-xl overflow-hidden border border-purple-400/30"
-              staggerFrom="last"
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: "-120%", opacity: 0 }}
-              staggerDuration={0.03}
-              splitLevelClassName="overflow-hidden"
-              transition={{ type: "spring", damping: 30, stiffness: 400 }}
-              rotationInterval={2500}
-            />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Mobile Layout */}
+        <div className="block sm:block lg:hidden">
+          <div className="flex flex-col justify-end min-h-screen pt-64">
+            {/* Title and CTA - Bottom of screen */}
+            <div className="text-center px-4 mb-32">
+              <motion.div 
+                className="hero-title text-4xl sm:text-5xl font-bold mb-4 leading-tight min-h-[200px] sm:min-h-[240px]"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              >
+                <div className="text-white" style={{ color: '#EAF4FF' }}>
+                  <TextType
+                    as="span"
+                    text={["L'agence qui code pour vous, vite et sur-mesure."]}
+                    typingSpeed={75}
+                    pauseDuration={1500}
+                    showCursor={true}
+                    cursorCharacter="|"
+                    className="block"
+                  />
+                </div>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+              >
+                <Button 
+                  size="lg" 
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+                >
+                  Contactez-nous
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+                </Button>
+              </motion.div>
+            </div>
+
+            {/* Mobile Mockup - Small and centered */}
+            <motion.div 
+              className="flex justify-center mb-16"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            >
+              <div className="relative w-64 h-[500px] bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 rounded-[2.5rem] p-2 shadow-2xl border border-gray-700">
+                {/* Notch - Realistic */}
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-black rounded-b-2xl z-10 flex items-center justify-center">
+                  <div className="w-12 h-0.5 bg-gray-700 rounded-full"></div>
+                </div>
+                
+                {/* Screen - Video Container */}
+                <div className="w-full h-full bg-black rounded-[2rem] overflow-hidden relative">
+                  <video
+                    ref={mobileVideoRef}
+                    className="w-full h-full object-cover"
+                    muted
+                    playsInline
+                    loop
+                    autoPlay
+                  >
+                    <source src="/mobile-video.mov" type="video/quicktime" />
+                    <source src="/mobile-video.mov" type="video/mp4" />
+                    Votre navigateur ne supporte pas la vidéo.
+                  </video>
+                </div>
+                
+                {/* Home Indicator - Realistic */}
+                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-0.5 bg-white rounded-full opacity-80"></div>
+                
+                {/* Side Button - Volume */}
+                <div className="absolute top-16 -left-0.5 w-0.5 h-6 bg-gray-700 rounded-l-full"></div>
+                <div className="absolute top-24 -left-0.5 w-0.5 h-6 bg-gray-700 rounded-l-full"></div>
+                
+                {/* Side Button - Power */}
+                <div className="absolute top-12 -right-0.5 w-0.5 h-8 bg-gray-700 rounded-r-full"></div>
+              </div>
+            </motion.div>
           </div>
         </div>
+
+        {/* Desktop Layout */}
+        <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center min-h-[35vh] py-6">
+          {/* Left Side - Title and CTA */}
+          <motion.div 
+            className="text-left relative"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            {/* Main Title - Fixed Position */}
+            <motion.div 
+              className="hero-title text-6xl xl:text-7xl font-bold mb-8 leading-tight min-h-[320px] xl:min-h-[360px]"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            >
+              <div className="text-white" style={{ color: '#EAF4FF' }}>
+                <TextType
+                  as="span"
+                  text={["L'agence qui code pour vous, vite et sur-mesure."]}
+                  typingSpeed={75}
+                  pauseDuration={1500}
+                  showCursor={true}
+                  cursorCharacter="|"
+                  className="block"
+                />
+              </div>
+            </motion.div>
+
+            {/* CTA Button - Position fixe */}
+            <motion.div 
+              className="absolute top-80 left-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            >
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+              >
+                Contactez-nous
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+              </Button>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Side - iPhone Mockup */}
+          <motion.div 
+            className="flex justify-end relative"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          >
+            <div className="relative -translate-x-4 translate-y-32">
+              {/* iPhone Mockup - CSS Realistic */}
+              <div className="relative w-[420px] h-[900px] bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 rounded-[3.5rem] p-4 shadow-2xl border border-gray-700">
+                {/* Notch - Realistic */}
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-36 h-8 bg-black rounded-b-3xl z-10 flex items-center justify-center">
+                  <div className="w-16 h-1 bg-gray-700 rounded-full"></div>
+                </div>
+                
+                {/* Screen - Video Container */}
+                <div className="w-full h-full bg-black rounded-[3rem] overflow-hidden relative">
+                  {/* Video Container */}
+                  <div className="w-full h-full relative">
+                    {!isVideoLoaded && (
+                      <div className="absolute inset-0 bg-slate-900 flex items-center justify-center">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                      </div>
+                    )}
+                    <video
+                      ref={videoRef}
+                      className="w-full h-full object-cover"
+                      muted
+                      playsInline
+                      loop
+                    >
+                      <source src="/mobile-video.mov" type="video/quicktime" />
+                      <source src="/mobile-video.mov" type="video/mp4" />
+                      Votre navigateur ne supporte pas la vidéo.
+                    </video>
+                  </div>
+                </div>
+                
+                {/* Home Indicator - Realistic */}
+                <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-white rounded-full opacity-80"></div>
+                
+                {/* Side Button - Volume */}
+                <div className="absolute top-20 -left-1 w-1 h-8 bg-gray-700 rounded-l-full"></div>
+                <div className="absolute top-32 -left-1 w-1 h-8 bg-gray-700 rounded-l-full"></div>
+                
+                {/* Side Button - Power */}
+                <div className="absolute top-16 -right-1 w-1 h-12 bg-gray-700 rounded-r-full"></div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
-      <div className="mt-16">
-        <Link
-          to="/contact"
-          className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 shadow-lg border border-cyan-400/20 backdrop-blur-sm"
-        >
-          Let's talk
-        </Link>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default HeroSection;

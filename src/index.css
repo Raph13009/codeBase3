@@ -103,11 +103,11 @@
   }
   
   .glass-panel {
-    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-sm;
+    @apply bg-white/80 border border-white/20 shadow-sm;
   }
   
   .glass-button {
-    @apply bg-white/20 backdrop-blur-sm border border-white/30 shadow-sm hover:bg-white/30 transition-all duration-300;
+    @apply bg-white/20 border border-white/30 shadow-sm hover:bg-white/30 transition-all duration-300;
   }
   
   .nav-link {
@@ -200,4 +200,91 @@ html {
 /* Prevent iOS text size adjustment on orientation change */
 html {
   -webkit-text-size-adjust: 100%;
+}
+
+/* Force horizontal scroll on mobile */
+@media (max-width: 768px) {
+  .overflow-x-scroll {
+    overflow-x: scroll !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Mobile Carousel Styles */
+.mobile-carousel {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.mobile-carousel-item {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+}
+
+/* Enhanced scroll snap for mobile */
+@media (max-width: 768px) {
+  .mobile-carousel {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    overflow-y: visible; /* Allow vertical overflow for badges */
+    /* Force scroll to work */
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+    /* Ensure proper spacing */
+    padding-left: 0;
+    padding-right: 0;
+    /* Ensure cards are not cut off */
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .mobile-carousel-item {
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    /* Fixed width for consistent navigation */
+    width: 280px !important;
+    min-width: 280px !important;
+    /* Ensure proper height */
+    height: auto;
+    margin: 0 8px;
+  }
+  
+  .mobile-carousel-item:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Force horizontal scroll */
+  .mobile-carousel::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .mobile-carousel {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  /* Ensure touch scrolling works */
+  .mobile-carousel {
+    touch-action: pan-x;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Navigation arrows styling */
+  .mobile-carousel + div button {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  /* Ensure cards have proper spacing */
+  .mobile-carousel .flex {
+    gap: 16px;
+  }
 }

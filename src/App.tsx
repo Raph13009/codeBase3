@@ -15,7 +15,7 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/layout/Navbar";
 import Convert from "./pages/Convert";
 import About from "./pages/About";
-import SplashCursor from "./components/ui/SplashCursor";
+
 
 // Import i18n configuration
 import "./lib/i18n";
@@ -36,7 +36,7 @@ const App = () => {
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <SplashCursor />
+
           <div className="min-h-screen bg-gray-50">
             <Navbar />
             <Routes>

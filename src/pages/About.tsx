@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import MetaTags from '@/components/seo/MetaTags';
-import AnimatedBackground from '@/components/ui/AnimatedBackground';
+
 import { Check, ArrowRight, Coffee, Zap, Target, Users, Brain } from 'lucide-react';
 
 const About: React.FC = () => {
@@ -57,7 +57,7 @@ const About: React.FC = () => {
       />
       
       <div className="min-h-screen relative overflow-x-hidden bg-black">
-        <AnimatedBackground />
+
         <Header />
         
         <main className="relative z-10 pt-32 pb-20">

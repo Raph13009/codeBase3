@@ -1,45 +1,42 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Clock, 
-  Zap, 
-  BarChart3, 
-  Eye, 
-  Target,
-  CheckCircle,
-  TrendingDown,
-  Users,
-  Activity,
-  Sparkles
-} from 'lucide-react';
+import { Clock, AlertTriangle, Sparkles, BarChart3, TrendingUp, Users, Zap, Settings, CheckCircle, ArrowRight, Calendar, FileText, PieChart, Activity, Target, Award } from 'lucide-react';
 
-const CustomToolAnimation: React.FC = React.memo(() => {
-  const [currentScene, setCurrentScene] = useState<'pain' | 'turning' | 'daily' | 'ux' | 'market'>('pain');
+const CustomToolAnimation: React.FC = () => {
+  const [currentScene, setCurrentScene] = useState<'pain' | 'turning' | 'daily' | 'seo' | 'content'>('pain');
 
   useEffect(() => {
-    const sceneDuration = 5000; // 5 seconds per scene
+    const scenes: Array<'pain' | 'turning' | 'daily' | 'seo' | 'content'> = ['pain', 'turning', 'daily', 'seo', 'content'];
+    let currentIndex = 0;
 
     const interval = setInterval(() => {
-      setCurrentScene((prev) => {
-        if (prev === 'pain') return 'turning';
-        if (prev === 'turning') return 'daily';
-        if (prev === 'daily') return 'ux';
-        if (prev === 'ux') return 'market';
-        return 'pain';
-      });
-    }, sceneDuration);
+      currentIndex = (currentIndex + 1) % scenes.length;
+      setCurrentScene(scenes[currentIndex]);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, []);
 
-  const dashboardTabs = useMemo(() => [
-    { name: "Daily Report", icon: BarChart3, active: true },
-    { name: "UX Monitor", icon: Eye, active: false },
-    { name: "Market Watch", icon: Target, active: false }
-  ], []);
+  const dashboardTabs = [
+    { name: "Daily Report", icon: FileText },
+    { name: "Analytics", icon: BarChart3 },
+    { name: "Performance", icon: TrendingUp }
+  ];
+
+  const seoTabs = [
+    { name: "Keywords", icon: Target },
+    { name: "Traffic", icon: TrendingUp },
+    { name: "Rankings", icon: Award }
+  ];
+
+  const contentTabs = [
+    { name: "Articles", icon: FileText },
+    { name: "Engagement", icon: Users },
+    { name: "Analytics", icon: PieChart }
+  ];
 
   return (
-    <div className="relative rounded-xl overflow-hidden bg-gray-900/50 border border-gray-700 h-80">
+    <div className="relative rounded-xl overflow-hidden bg-black border border-gray-700 h-80">
       <AnimatePresence mode="wait">
         {/* Scene 1 - The Pain */}
         {currentScene === 'pain' && (
@@ -51,11 +48,29 @@ const CustomToolAnimation: React.FC = React.memo(() => {
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="absolute inset-0 flex flex-col items-center justify-center p-8"
           >
+            {/* Floating pain indicators */}
+            {[0, 1, 2, 3].map((i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0.2, scale: 1 }}
+                transition={{ delay: 0.8 + i * 0.1, duration: 0.5 }}
+                className="absolute w-8 h-8 border border-red-500/20 rounded-lg flex items-center justify-center"
+                style={{
+                  left: `${15 + (i * 20)}%`,
+                  top: `${20 + (i * 15)}%`
+                }}
+              >
+                <AlertTriangle className="w-4 h-4 text-red-400" />
+              </motion.div>
+            ))}
+
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ delay: 0.2, duration: 0.5, type: "spring", stiffness: 200 }}
-              className="w-20 h-20 bg-red-500/10 border-2 border-red-500/20 rounded-2xl flex items-center justify-center mb-6"
+              className="w-20 h-20 border-2 border-red-500/20 rounded-2xl flex items-center justify-center mb-6"
             >
               <Clock className="w-10 h-10 text-red-400" />
             </motion.div>
@@ -67,31 +82,12 @@ const CustomToolAnimation: React.FC = React.memo(() => {
               className="text-center max-w-lg"
             >
               <h3 className="text-2xl font-bold text-white mb-4">
-                Still stuck doing everything manually?
+                Manual tasks taking forever?
               </h3>
               <p className="text-gray-400 text-base leading-relaxed">
-                No dashboards. No visibility. Just messy processes and wasted hours.
+                Reports, data entry, repetitive workflows... there's a better way.
               </p>
             </motion.div>
-
-            {/* Floating timer icons */}
-            <div className="absolute inset-0 pointer-events-none">
-              {[...Array(4)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 0.2, scale: 1 }}
-                  transition={{ delay: 0.8 + i * 0.1, duration: 0.5 }}
-                  className="absolute w-8 h-8 bg-red-500/20 rounded-lg flex items-center justify-center"
-                  style={{
-                    left: `${15 + (i * 20)}%`,
-                    top: `${20 + (i * 15)}%`,
-                  }}
-                >
-                  <Clock className="w-4 h-4 text-red-400" />
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
         )}
 
@@ -103,13 +99,13 @@ const CustomToolAnimation: React.FC = React.memo(() => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.05 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="absolute inset-0 flex flex-col items-center justify-center p-8 bg-gradient-to-br from-cyan-500/5 to-blue-500/5"
+            className="absolute inset-0 flex flex-col items-center justify-center p-8"
           >
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ delay: 0.2, duration: 0.6, type: "spring", stiffness: 200 }}
-              className="w-24 h-24 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-3xl flex items-center justify-center mb-6 shadow-2xl"
+              className="w-24 h-24 border border-white/20 rounded-3xl flex items-center justify-center mb-6 shadow-2xl"
             >
               <Sparkles className="w-12 h-12 text-white" />
             </motion.div>
@@ -135,7 +131,7 @@ const CustomToolAnimation: React.FC = React.memo(() => {
               transition={{ delay: 1, duration: 0.6, type: "spring", stiffness: 200 }}
               className="mt-8"
             >
-              <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl px-6 py-4 shadow-2xl">
+              <div className="bg-black border border-white/20 rounded-2xl px-6 py-4 shadow-2xl">
                 <img src="/assets/Logo2.png" alt="BoostAI Consulting" className="h-10 w-auto" />
               </div>
             </motion.div>
@@ -160,7 +156,7 @@ const CustomToolAnimation: React.FC = React.memo(() => {
               className="flex items-center justify-between mb-4"
             >
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 border border-white/20 rounded-lg flex items-center justify-center">
                   <BarChart3 className="w-5 h-5 text-white" />
                 </div>
                 <span className="text-white font-semibold text-sm">Daily Report Dashboard</span>
@@ -198,82 +194,69 @@ const CustomToolAnimation: React.FC = React.memo(() => {
             <div className="grid grid-cols-2 gap-3 mb-4">
               {/* AI Summary Card */}
               <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="bg-gray-800/50 rounded-lg p-3 border border-gray-700"
+                className="bg-black rounded-lg p-3 border border-gray-700"
               >
-                <div className="flex items-center space-x-2 mb-2">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs text-gray-400">AI Summary</span>
                   <Zap className="w-4 h-4 text-cyan-400" />
-                  <span className="text-white text-xs font-medium">AI Summary</span>
                 </div>
                 <div className="text-cyan-400 text-sm font-medium">Daily insights generated</div>
               </motion.div>
 
-              {/* Automation Toggle */}
+              {/* Time Saved Card */}
               <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.8 }}
-                className="bg-gray-800/50 rounded-lg p-3 border border-gray-700"
+                initial={{ x: 20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.7 }}
+                className="bg-black rounded-lg p-3 border border-gray-700"
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-white text-xs font-medium">Auto Reports</span>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs text-gray-400">Time Saved</span>
                   <div className="w-6 h-3 bg-cyan-500 rounded-full relative">
                     <div className="w-2 h-2 bg-white rounded-full absolute right-0.5 top-0.5"></div>
                   </div>
                 </div>
+                <div className="text-white text-sm font-medium">2.5 hours/day</div>
               </motion.div>
 
-              {/* Chart Preview */}
+              {/* Chart */}
               <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 1.0 }}
-                className="bg-gray-800/50 rounded-lg p-3 border border-gray-700"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.8 }}
+                className="bg-black rounded-lg p-3 border border-gray-700 col-span-2"
               >
-                <div className="flex items-center space-x-2 mb-2">
-                  <Activity className="w-4 h-4 text-green-400" />
-                  <span className="text-white text-xs font-medium">Performance</span>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs text-gray-400">Weekly Progress</span>
+                  <div className="flex space-x-1">
+                    <div className="w-2 bg-green-400 rounded-t" style={{ height: '60%' }}></div>
+                    <div className="w-2 bg-green-400 rounded-t" style={{ height: '80%' }}></div>
+                    <div className="w-2 bg-green-400 rounded-t" style={{ height: '40%' }}></div>
+                    <div className="w-2 bg-green-400 rounded-t" style={{ height: '90%' }}></div>
+                    <div className="w-2 bg-green-400 rounded-t" style={{ height: '70%' }}></div>
+                    <div className="w-2 bg-green-400 rounded-t" style={{ height: '85%' }}></div>
+                    <div className="w-2 bg-green-400 rounded-t" style={{ height: '95%' }}></div>
+                  </div>
                 </div>
-                <div className="w-full h-8 bg-gray-700 rounded flex items-end space-x-1 p-1">
-                  <div className="w-2 bg-green-400 rounded-t" style={{ height: '60%' }}></div>
-                  <div className="w-2 bg-green-400 rounded-t" style={{ height: '80%' }}></div>
-                  <div className="w-2 bg-green-400 rounded-t" style={{ height: '40%' }}></div>
-                  <div className="w-2 bg-green-400 rounded-t" style={{ height: '90%' }}></div>
-                </div>
-              </motion.div>
-
-              {/* Status Card */}
-              <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 1.2 }}
-                className="bg-gray-800/50 rounded-lg p-3 border border-gray-700"
-              >
-                <div className="flex items-center space-x-2 mb-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  <span className="text-white text-xs font-medium">Status</span>
-                </div>
-                <div className="text-green-400 text-sm font-medium">Report ready</div>
               </motion.div>
             </div>
-
-
           </motion.div>
         )}
 
-        {/* Scene 4 - UX Monitor Solution */}
-        {currentScene === 'ux' && (
+        {/* Scene 4 - SEO Solution */}
+        {currentScene === 'seo' && (
           <motion.div
-            key="ux"
+            key="seo"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.05 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="absolute inset-0 p-4"
           >
-            {/* Dashboard Header */}
+            {/* SEO Header */}
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -281,10 +264,10 @@ const CustomToolAnimation: React.FC = React.memo(() => {
               className="flex items-center justify-between mb-4"
             >
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
-                  <Eye className="w-5 h-5 text-white" />
+                <div className="w-8 h-8 border border-white/20 rounded-lg flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-white font-semibold text-sm">UX Monitor Dashboard</span>
+                <span className="text-white font-semibold text-sm">SEO Performance</span>
               </div>
               <div className="flex space-x-1">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
@@ -293,19 +276,19 @@ const CustomToolAnimation: React.FC = React.memo(() => {
               </div>
             </motion.div>
 
-            {/* Tabs */}
+            {/* SEO Tabs */}
             <motion.div
               initial={{ y: -10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
               className="flex space-x-1 mb-4"
             >
-              {dashboardTabs.map((tab, index) => (
+              {seoTabs.map((tab, index) => (
                 <div
                   key={tab.name}
                   className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                    tab.name === "UX Monitor"
-                      ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' 
+                    tab.name === "Keywords"
+                      ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
                       : 'text-gray-400 hover:text-gray-300'
                   }`}
                 >
@@ -315,81 +298,71 @@ const CustomToolAnimation: React.FC = React.memo(() => {
               ))}
             </motion.div>
 
-            {/* Dashboard Content */}
+            {/* SEO Content */}
             <div className="grid grid-cols-2 gap-3 mb-4">
-              {/* User Behavior Card */}
+              {/* Keyword Rankings */}
               <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="bg-gray-800/50 rounded-lg p-3 border border-gray-700"
+                className="bg-black rounded-lg p-3 border border-gray-700"
               >
-                <div className="flex items-center space-x-2 mb-2">
-                  <Users className="w-4 h-4 text-purple-400" />
-                  <span className="text-white text-xs font-medium">User Behavior</span>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs text-gray-400">Top Keywords</span>
+                  <Target className="w-4 h-4 text-purple-400" />
                 </div>
-                <div className="text-purple-400 text-sm font-medium">Real-time tracking</div>
+                <div className="text-purple-400 text-sm font-medium">15 ranking #1-3</div>
               </motion.div>
 
-              {/* Heatmap Toggle */}
+              {/* Traffic Growth */}
               <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.8 }}
-                className="bg-gray-800/50 rounded-lg p-3 border border-gray-700"
+                initial={{ x: 20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.7 }}
+                className="bg-black rounded-lg p-3 border border-gray-700"
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-white text-xs font-medium">Heatmap</span>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs text-gray-400">Traffic Growth</span>
                   <div className="w-6 h-3 bg-purple-500 rounded-full relative">
                     <div className="w-2 h-2 bg-white rounded-full absolute right-0.5 top-0.5"></div>
                   </div>
                 </div>
+                <div className="text-white text-sm font-medium">+127% this month</div>
               </motion.div>
 
-              {/* Session Recording */}
+              {/* Rankings Chart */}
               <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 1.0 }}
-                className="bg-gray-800/50 rounded-lg p-3 border border-gray-700"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.8 }}
+                className="bg-black rounded-lg p-3 border border-gray-700 col-span-2"
               >
-                <div className="flex items-center space-x-2 mb-2">
-                  <Activity className="w-4 h-4 text-pink-400" />
-                  <span className="text-white text-xs font-medium">Sessions</span>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs text-gray-400">Keyword Rankings</span>
+                  <div className="flex space-x-1">
+                    <div className="w-2 bg-purple-400 rounded-t" style={{ height: '90%' }}></div>
+                    <div className="w-2 bg-purple-400 rounded-t" style={{ height: '75%' }}></div>
+                    <div className="w-2 bg-purple-400 rounded-t" style={{ height: '85%' }}></div>
+                    <div className="w-2 bg-purple-400 rounded-t" style={{ height: '60%' }}></div>
+                    <div className="w-2 bg-purple-400 rounded-t" style={{ height: '95%' }}></div>
+                  </div>
                 </div>
-                <div className="text-pink-400 text-sm font-medium">1,247 recorded</div>
-              </motion.div>
-
-              {/* Conversion Rate */}
-              <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 1.2 }}
-                className="bg-gray-800/50 rounded-lg p-3 border border-gray-700"
-              >
-                <div className="flex items-center space-x-2 mb-2">
-                  <TrendingDown className="w-4 h-4 text-green-400" />
-                  <span className="text-white text-xs font-medium">Conversion</span>
-                </div>
-                <div className="text-green-400 text-sm font-medium">+23% this week</div>
               </motion.div>
             </div>
-
-
           </motion.div>
         )}
 
-        {/* Scene 5 - Market Watch Solution */}
-        {currentScene === 'market' && (
+        {/* Scene 5 - Content Solution */}
+        {currentScene === 'content' && (
           <motion.div
-            key="market"
+            key="content"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.05 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="absolute inset-0 p-4"
           >
-            {/* Dashboard Header */}
+            {/* Content Header */}
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -397,10 +370,10 @@ const CustomToolAnimation: React.FC = React.memo(() => {
               className="flex items-center justify-between mb-4"
             >
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
-                  <Target className="w-5 h-5 text-white" />
+                <div className="w-8 h-8 border border-white/20 rounded-lg flex items-center justify-center">
+                  <FileText className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-white font-semibold text-sm">Market Watch Dashboard</span>
+                <span className="text-white font-semibold text-sm">Content Hub</span>
               </div>
               <div className="flex space-x-1">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
@@ -409,19 +382,19 @@ const CustomToolAnimation: React.FC = React.memo(() => {
               </div>
             </motion.div>
 
-            {/* Tabs */}
+            {/* Content Tabs */}
             <motion.div
               initial={{ y: -10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
               className="flex space-x-1 mb-4"
             >
-              {dashboardTabs.map((tab, index) => (
+              {contentTabs.map((tab, index) => (
                 <div
                   key={tab.name}
                   className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                    tab.name === "Market Watch"
-                      ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' 
+                    tab.name === "Articles"
+                      ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
                       : 'text-gray-400 hover:text-gray-300'
                   }`}
                 >
@@ -431,72 +404,62 @@ const CustomToolAnimation: React.FC = React.memo(() => {
               ))}
             </motion.div>
 
-            {/* Dashboard Content */}
+            {/* Content Stats */}
             <div className="grid grid-cols-2 gap-3 mb-4">
-              {/* Competitor Alert */}
+              {/* Articles Published */}
               <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="bg-gray-800/50 rounded-lg p-3 border border-gray-700"
+                className="bg-black rounded-lg p-3 border border-gray-700"
               >
-                <div className="flex items-center space-x-2 mb-2">
-                  <Activity className="w-4 h-4 text-orange-400" />
-                  <span className="text-white text-xs font-medium">Competitor Alert</span>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs text-gray-400">Published</span>
+                  <FileText className="w-4 h-4 text-orange-400" />
                 </div>
-                <div className="text-orange-400 text-sm font-medium">New feature detected</div>
+                <div className="text-orange-400 text-sm font-medium">47 articles this month</div>
               </motion.div>
 
-              {/* Market Trends */}
+              {/* Engagement Rate */}
               <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.8 }}
-                className="bg-gray-800/50 rounded-lg p-3 border border-gray-700"
+                initial={{ x: 20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.7 }}
+                className="bg-black rounded-lg p-3 border border-gray-700"
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-white text-xs font-medium">Trends</span>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs text-gray-400">Engagement</span>
                   <div className="w-6 h-3 bg-orange-500 rounded-full relative">
                     <div className="w-2 h-2 bg-white rounded-full absolute right-0.5 top-0.5"></div>
                   </div>
                 </div>
+                <div className="text-white text-sm font-medium">8.9% avg. rate</div>
               </motion.div>
 
-              {/* Market Share */}
+              {/* Performance Chart */}
               <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 1.0 }}
-                className="bg-gray-800/50 rounded-lg p-3 border border-gray-700"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.8 }}
+                className="bg-black rounded-lg p-3 border border-gray-700 col-span-2"
               >
-                <div className="flex items-center space-x-2 mb-2">
-                  <BarChart3 className="w-4 h-4 text-red-400" />
-                  <span className="text-white text-xs font-medium">Market Share</span>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs text-gray-400">Content Performance</span>
+                  <div className="flex space-x-1">
+                    <div className="w-2 bg-orange-400 rounded-t" style={{ height: '70%' }}></div>
+                    <div className="w-2 bg-orange-400 rounded-t" style={{ height: '85%' }}></div>
+                    <div className="w-2 bg-orange-400 rounded-t" style={{ height: '60%' }}></div>
+                    <div className="w-2 bg-orange-400 rounded-t" style={{ height: '90%' }}></div>
+                    <div className="w-2 bg-orange-400 rounded-t" style={{ height: '75%' }}></div>
+                  </div>
                 </div>
-                <div className="text-red-400 text-sm font-medium">+5.2% this month</div>
-              </motion.div>
-
-              {/* Price Monitoring */}
-              <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 1.2 }}
-                className="bg-gray-800/50 rounded-lg p-3 border border-gray-700"
-              >
-                <div className="flex items-center space-x-2 mb-2">
-                  <TrendingDown className="w-4 h-4 text-green-400" />
-                  <span className="text-white text-xs font-medium">Price Changes</span>
-                </div>
-                <div className="text-green-400 text-sm font-medium">3 alerts today</div>
               </motion.div>
             </div>
-
-
           </motion.div>
         )}
       </AnimatePresence>
     </div>
   );
-});
+};
 
 export default CustomToolAnimation; 

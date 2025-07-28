@@ -5,7 +5,7 @@ import Footer from '@/components/layout/Footer';
 import ContactForm from '@/components/contact/ContactForm';
 import Map from '@/components/contact/Map';
 import MetaTags from '@/components/seo/MetaTags';
-import AnimatedBackground from '@/components/ui/AnimatedBackground';
+
 import { Phone, Mail, Globe, Calendar, Clock, Map as MapIcon, Star, Zap, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -85,7 +85,7 @@ const Contact: React.FC = () => {
         keywords="contact, AI consulting, business transformation, chatbots, SEO optimization, content creation, web development"
       />
       <div className="min-h-screen relative overflow-x-hidden bg-[#0B0D14]">
-        <AnimatedBackground />
+
         <Header />
         
         <main className="relative z-10 pt-32 pb-20">

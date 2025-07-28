@@ -276,6 +276,18 @@ export default {
 				'shimmer': {
 					'0%': { backgroundPosition: '-1000px 0' },
 					'100%': { backgroundPosition: '1000px 0' }
+				},
+				'marquee': {
+					'from': { transform: 'translateX(0%)' },
+					'to': { transform: 'translateX(-50%)' }
+				},
+				'shine': {
+					'0%': { 'background-position': '100%' },
+					'100%': { 'background-position': '-100%' }
+				},
+				'shine-slow': {
+					'0%': { 'background-position': '200%' },
+					'100%': { 'background-position': '-200%' }
 				}
 			},
 			animation: {
@@ -294,7 +306,10 @@ export default {
 				'typing': 'typing 3.5s steps(40, end)',
 				'blink-caret': 'blink 0.75s step-end infinite',
 				'float': 'float 3s ease-in-out infinite',
-				'shimmer': 'shimmer 2s infinite linear'
+				'shimmer': 'shimmer 2s infinite linear',
+				'marquee': 'marquee 15s linear infinite',
+				'shine': 'shine 5s linear infinite',
+				'shine-slow': 'shine-slow 8s linear infinite'
 			},
 			fontFamily: {
 				sans: ['var(--font-sans)', 'sans-serif'],

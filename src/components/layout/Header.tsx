@@ -35,10 +35,10 @@ const Header: React.FC = () => {
   return (
     <>
     <header 
-        className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90vw] max-w-xs md:max-w-4xl rounded-full shadow-2xl border border-cyan-900/40 bg-gradient-to-br from-[#232733] via-[#232a38] to-[#181c23] backdrop-blur-md px-4 md:px-12 py-4 md:py-4 flex items-center justify-between transition-all duration-300"
+        className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90vw] max-w-xs md:max-w-4xl rounded-full border border-white/20 bg-black px-4 md:px-12 py-4 md:py-4 flex items-center justify-between transition-all duration-300"
         style={{
-          boxShadow: '0 4px 32px 0 rgba(0,255,255,0.08), 0 1.5px 8px 0 rgba(0,0,0,0.18)',
-          border: '1.5px solid rgba(0,255,255,0.10)',
+          boxShadow: '0 0 20px rgba(173,216,230,0.3)',
+          border: '1px solid rgba(173,216,230,0.3)'
         }}
     >
         {/* Logo mobile (centré) */}
@@ -96,7 +96,7 @@ const Header: React.FC = () => {
 
       {/* Mobile Menu - Full Screen Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-black/95 backdrop-blur-md z-50 md:hidden overflow-y-auto">
+        <div className="fixed inset-0 bg-black/95 z-50 md:hidden overflow-y-auto">
           <div className="flex justify-between items-center p-4 border-b border-cyan-900/40">
             <span className="font-display text-lg font-medium text-white">Menu</span>
             <button 

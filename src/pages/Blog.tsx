@@ -4,7 +4,7 @@ import Footer from '@/components/layout/Footer';
 import BlogCard from '@/components/blog/BlogCard';
 import QualityPledge from '@/components/blog/QualityPledge';
 import MetaTags from '@/components/seo/MetaTags';
-import AnimatedBackground from '@/components/ui/AnimatedBackground';
+
 import { motion } from 'framer-motion';
 import { Search, Filter, BookOpen, PinIcon, Sparkles } from 'lucide-react';
 import { getBlogs, type Blog } from '@/lib/supabase';
@@ -85,7 +85,7 @@ const Blog: React.FC = () => {
       />
       
       <div className="min-h-screen relative overflow-x-hidden bg-[#0B0D14]">
-        <AnimatedBackground />
+
         <Header />
         
         <main className="relative z-10 pt-32 pb-20">

@@ -107,7 +107,7 @@ const SolutionsPreview: React.FC = () => {
             type="single" 
             value={activeTab} 
             onValueChange={(value) => value && setActiveTab(value as SolutionType)} 
-            className="border border-gray-700 p-1.5 rounded-full bg-gray-900/50 backdrop-blur-sm shadow-xl"
+            className="border border-gray-700 p-1.5 rounded-full bg-black shadow-xl"
           >
             {solutions.map((solution) => (
               <ToggleGroupItem 
@@ -115,12 +115,12 @@ const SolutionsPreview: React.FC = () => {
                 value={solution.id}
                 className={`rounded-full flex items-center gap-2 px-5 py-3 text-sm font-medium transition-all
                   ${activeTab === solution.id 
-                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md' 
+                    ? 'bg-white text-gray-900 shadow-md' 
                     : 'hover:bg-gray-800 text-gray-300 hover:text-white'
                   }`}
                 aria-label={solution.title}
               >
-                <span className={`p-1.5 rounded-full ${activeTab === solution.id ? 'bg-white/20' : 'bg-gray-700'}`}>
+                <span className={`p-1.5 rounded-full ${activeTab === solution.id ? 'bg-black border border-white/20' : 'bg-gray-700'}`}>
                 {solution.icon}
                 </span>
                 <span className="hidden sm:inline">{solution.title}</span>
@@ -133,8 +133,8 @@ const SolutionsPreview: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             <div className={`
               rounded-2xl overflow-hidden transform transition-all duration-500 
-              shadow-[0_20px_50px_-10px_rgba(0,212,255,0.1)] hover:shadow-[0_30px_60px_-12px_rgba(0,212,255,0.2)] 
-              border border-gray-700 bg-gray-900/50 backdrop-blur-sm
+                              shadow-lg hover:shadow-xl 
+                              border border-gray-700 bg-black
               ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
             `}>
               {activeSolution.illustration}

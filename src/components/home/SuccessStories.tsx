@@ -1,166 +1,164 @@
-import React, { useState, useEffect, useRef } from 'react';
-import InfiniteCarousel from '../ui/InfiniteCarousel';
-import CountUp from '../ui/CountUp';
-import GradientText from '../ui/GradientText';
-
-const testimonials = [
-  {
-    id: "sophie",
-    name: "Sophie",
-    role: "Head of Accounting",
-    company: "Codig",
-    description: "Huge thanks for the OCR tool, I used to waste over 30 minutes manually entering data. Now it's done in seconds. Thanks a lot.",
-    logo: "/images/CodigLogo.png",
-    moneySaved: 3000
-  },
-  {
-    id: "nacia",
-    name: "Nacia",
-    role: "Director",
-    company: "Blue Garden",
-    description: "The site is exactly what I had in mind. Clean, modern and perfectly aligned with Blue Garden's spirit. I'm proud to share it with my clients.",
-    logo: "/images/bluegarden.png",
-    moneySaved: 1300
-  },
-  {
-    id: "nicolas",
-    name: "Nicolas",
-    role: "CEO",
-    company: "MusicLinks",
-    description: "Raphaël helped me build the MVP of MusicLinks. He delivered a clean and functional marketplace with a well-structured database. It was exactly what I needed to launch.",
-    logo: "/images/musicLinks.png",
-    moneySaved: 15000
-  }
-];
-
-const TestimonialCard: React.FC<{ 
-  testimonial: typeof testimonials[0];
-  isInCenter: boolean;
-}> = ({ testimonial, isInCenter }) => {
-  return (
-    <div className="w-64 md:w-80 lg:w-96 h-72 md:h-80 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 hover:bg-white/10 transition-all duration-300 hover:border-white/20">
-      <div className="flex flex-col h-full">
-        {/* Header */}
-        <div className="flex justify-between items-start mb-4 md:mb-6">
-          <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-lg md:rounded-xl flex items-center justify-center overflow-hidden border border-white/20">
-            <img 
-              src={testimonial.logo} 
-              alt={testimonial.company} 
-              className="w-6 h-6 md:w-8 md:h-8 object-contain"
-            />
-          </div>
-          <div className="bg-gradient-to-r from-cyan-500/20 to-blue-600/20 px-2 py-1 md:px-3 md:py-2 rounded-lg text-center border border-cyan-500/30">
-            <div className="text-xs font-medium text-cyan-400 uppercase tracking-wide">Money saved</div>
-            <div className="text-xs md:text-sm font-bold">
-              {isInCenter ? (
-                <GradientText className="text-xs md:text-sm font-bold">
-                  <CountUp
-                    from={0}
-                    to={testimonial.moneySaved}
-                    separator=","
-                    direction="up"
-                    duration={1.5}
-                    className=""
-                    startWhen={isInCenter}
-                  />
-                  €
-                </GradientText>
-              ) : (
-                <GradientText className="text-xs md:text-sm font-bold">
-                  {testimonial.moneySaved.toLocaleString()}€
-                </GradientText>
-              )}
-            </div>
-          </div>
-        </div>
-        
-        {/* Content */}
-        <div className="flex-1 flex flex-col justify-center">
-          <h3 className="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">{testimonial.name}</h3>
-          <p className="text-cyan-400 text-xs md:text-sm mb-3 md:mb-4 opacity-80">{testimonial.role} - {testimonial.company}</p>
-          <p className="text-gray-300 text-sm md:text-base leading-relaxed">"{testimonial.description}"</p>
-        </div>
-      </div>
-    </div>
-  );
-};
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Globe, Smartphone, Zap, Check, ArrowRight } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const SuccessStories: React.FC = () => {
-  const [centerCardIndex, setCenterCardIndex] = useState<number | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    const checkCenterCards = () => {
-      const cards = document.querySelectorAll('[data-index]');
-      let closestToCenter = null;
-      let minDistance = Infinity;
-
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const windowCenter = window.innerWidth / 2;
-        const cardCenter = rect.left + rect.width / 2;
-        const distance = Math.abs(cardCenter - windowCenter);
-
-        // Vérifier si la carte est visible et proche du centre
-        if (rect.left < window.innerWidth && rect.right > 0 && distance < minDistance) {
-          minDistance = distance;
-          closestToCenter = parseInt(card.getAttribute('data-index') || '0');
-        }
-      });
-
-      // Seulement mettre à jour si la carte au centre a changé
-      if (closestToCenter !== centerCardIndex) {
-        setCenterCardIndex(closestToCenter);
-      }
-    };
-
-    // Fonction optimisée pour RAF
-    const updateCenterCard = () => {
-      checkCenterCards();
-      animationRef.current = requestAnimationFrame(updateCenterCard);
-    };
-
-    // Démarrer la boucle RAF
-    animationRef.current = requestAnimationFrame(updateCenterCard);
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [centerCardIndex]);
-
-  const carouselItems = testimonials.map((testimonial, index) => ({
-    id: testimonial.id,
-    content: (
-      <div data-index={index} key={`card-${index}`}>
-        <TestimonialCard 
-          testimonial={testimonial} 
-          isInCenter={centerCardIndex === index}
-        />
-      </div>
-    )
-  }));
+  const offers = [
+    {
+      icon: Globe,
+      title: "Pack Site Web",
+      price: "à partir de 199€",
+      description: "Un site moderne et professionnel pour votre business",
+      features: [
+        "Design responsive et moderne",
+        "Optimisation SEO de base",
+        "Formulaire de contact",
+        "Hébergement inclus 1 an",
+        "Formation d'utilisation",
+        "Support 30 jours"
+      ],
+      color: "from-blue-500 to-cyan-500",
+      popular: false
+    },
+    {
+      icon: Smartphone,
+      title: "Pack MVP",
+      price: "à partir de 1 500€",
+      description: "Lancez votre idée rapidement avec un produit fonctionnel",
+      features: [
+        "Application web complète",
+        "Base de données sécurisée",
+        "Authentification utilisateurs",
+        "Dashboard administrateur",
+        "API REST complète",
+        "Support 90 jours"
+      ],
+      color: "from-purple-500 to-pink-500",
+      popular: true
+    },
+    {
+      icon: Zap,
+      title: "Pack Lancement complet",
+      price: "sur devis",
+      description: "Site + MVP + automatisations pour un lancement optimal",
+      features: [
+        "Site web professionnel",
+        "Application MVP complète",
+        "Automatisations IA",
+        "Intégrations tierces",
+        "Formation équipe",
+        "Support 6 mois"
+      ],
+      color: "from-orange-500 to-red-500",
+      popular: false
+    }
+  ];
 
   return (
-    <section className="py-16 md:py-20 lg:py-32 relative z-10 bg-gradient-to-b from-[#0B0D14] to-[#1a1a2e] w-full max-w-none">
-      <div className="w-full max-w-none mx-auto">
-        <div className="text-center mb-8 md:mb-12 lg:mb-16 px-4">
-          <h2 className="text-2xl md:text-3xl lg:text-5xl xl:text-6xl font-bold mb-3 md:mb-4 lg:mb-6 text-white">They Trusted Us</h2>
-          <p className="text-sm md:text-base lg:text-xl text-gray-300 max-w-2xl mx-auto">
-            Real feedback from clients who transformed their business with our solutions
+    <section className="py-20 bg-slate-900 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%239C92AC&quot; fill-opacity=&quot;0.03&quot;%3E%3Ccircle cx=&quot;30&quot; cy=&quot;30&quot; r=&quot;2&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Nos offres
+          </h2>
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+            Des solutions adaptées à chaque étape de votre business
           </p>
+        </motion.div>
+
+        {/* Offers Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {offers.map((offer, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.2 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              {offer.popular && (
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                  <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                    Le plus populaire
+                  </span>
+                </div>
+              )}
+              
+              <Card className={`bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-all duration-300 hover:shadow-2xl hover:shadow-slate-900/50 group h-full ${offer.popular ? 'ring-2 ring-purple-500/50' : ''}`}>
+                <CardHeader className="text-center pb-4">
+                  <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${offer.color} p-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <offer.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <CardTitle className="text-2xl font-bold text-white mb-2">
+                    {offer.title}
+                  </CardTitle>
+                  <div className="text-3xl font-bold text-white mb-2">
+                    {offer.price}
+                  </div>
+                  <p className="text-slate-300 text-sm leading-relaxed">
+                    {offer.description}
+                  </p>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <ul className="space-y-3 text-left mb-8">
+                    {offer.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center text-slate-300 text-sm">
+                        <Check className="w-4 h-4 text-green-400 mr-3 flex-shrink-0" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <Button 
+                    className={`w-full bg-gradient-to-r ${offer.color} hover:from-opacity-90 hover:to-opacity-90 text-white font-semibold py-3 rounded-xl transition-all duration-300 group-hover:shadow-lg`}
+                  >
+                    Demander un devis
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
         </div>
-        
-        <div className="py-4 md:py-8" ref={containerRef}>
-          <InfiniteCarousel 
-            items={carouselItems}
-            speed={50}
-            direction="left"
-            className="py-2 md:py-4"
-          />
-        </div>
+
+        {/* Bottom CTA */}
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <div className="bg-gradient-to-r from-slate-700 to-slate-800 rounded-2xl p-8 border border-slate-600">
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Besoin d'une solution sur-mesure ?
+            </h3>
+            <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
+              Chaque business est unique. Discutons de vos besoins spécifiques pour créer la solution parfaite.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25">
+                Consultation gratuite
+              </Button>
+              <Button variant="outline" className="border-2 border-slate-500 text-slate-300 hover:bg-slate-700 hover:border-slate-400 px-8 py-4 rounded-xl font-semibold transition-all duration-300">
+                Voir nos réalisations
+              </Button>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

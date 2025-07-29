@@ -3,8 +3,8 @@
   "short_name": "BoostAI",
   "icons": [
     {
-      "src": "/images/favicon.png",
-      "sizes": "192x192",
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
       "type": "image/png"
     },
     {

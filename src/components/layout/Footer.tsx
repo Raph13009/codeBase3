@@ -93,9 +93,9 @@ const Footer: React.FC = () => {
               >
                 <div className="relative">
                   <img 
-                    src="/public/images/logo-white-long.png" 
-                    alt="BoostAI Logo" 
-                    className="h-10 w-auto transition-all duration-300 hover:drop-shadow-[0_0_10px_rgba(139,92,246,0.5)]" 
+                    src="/images/logo-white-long.png" 
+                    alt="BoostAI Consulting" 
+                    className="h-8 w-auto transition-transform duration-300 hover:scale-110 drop-shadow-lg"
                   />
                 </div>
               </motion.div>
@@ -249,7 +249,7 @@ const Footer: React.FC = () => {
             >
               <div className="flex justify-between items-start mb-4">
                 <div className="flex items-center gap-3">
-                  <img src="/public/images/logo-white-long.png" alt="BoostAI Logo" className="h-6 w-auto" />
+                  <img src="/images/logo-white-long.png" alt="BoostAI Logo" className="h-6 w-auto" />
                 </div>
                 <button
                   onClick={() => setShowMentionsLegales(false)}

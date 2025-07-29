@@ -200,7 +200,7 @@ const BlogPost: React.FC = () => {
       name: 'BoostAI Consulting',
       logo: {
         '@type': 'ImageObject',
-        url: '/public/images/favicon.png'
+        url: '/images/favicon.png'
       }
     },
     mainEntityOfPage: {

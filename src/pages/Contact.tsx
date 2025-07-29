@@ -183,7 +183,7 @@ const Contact: React.FC = () => {
                   <Step>
                     <div className="text-center">
                       <div className="mb-6">
-                        <img src="/public/images/favicon.png" alt="BoostAI" className="w-16 h-16 mx-auto mb-4" />
+                        <img src="/images/favicon.png" alt="BoostAI" className="w-16 h-16 mx-auto mb-4" />
                       </div>
                       <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Bienvenue chez BoostAI !</h2>
                       <p className="text-slate-300 text-lg">Expliquez-nous votre besoin, nous vous recontacterons rapidement.</p>

@@ -55,7 +55,7 @@ const Header: React.FC = () => {
             className="flex items-center" 
             onClick={closeMobileMenu}
           >
-            <img src="/public/images/favicon.png" alt="BoostAI Consulting" className="w-8 h-8 md:w-9 md:h-9" />
+            <img src="/images/favicon.png" alt="BoostAI Consulting" className="w-8 h-8 md:w-9 md:h-9" />
           </NavLink>
 
           {/* Desktop Navigation - Minimalist */}
@@ -122,7 +122,7 @@ const Header: React.FC = () => {
             {/* Header */}
             <div className="flex justify-between items-center p-6 border-b border-gray-800">
               <div className="flex items-center">
-                <img src="/public/images/favicon.png" alt="BoostAI Consulting" className="w-8 h-8" />
+                <img src="/images/favicon.png" alt="BoostAI Consulting" className="w-8 h-8" />
               </div>
               <button 
                 onClick={closeMobileMenu} 

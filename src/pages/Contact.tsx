@@ -2,117 +2,93 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import ContactForm from '@/components/contact/ContactForm';
-import Map from '@/components/contact/Map';
+import Stepper, { Step } from '@/components/ui/Stepper';
+import { supabase } from '@/lib/supabase';
 import MetaTags from '@/components/seo/MetaTags';
-
-import { Phone, Mail, Globe, Calendar, Clock, Map as MapIcon, Star, Zap, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 const Contact: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [showNameError, setShowNameError] = useState(false);
+  const [showEmailError, setShowEmailError] = useState(false);
   
   useEffect(() => {
-    // Set document language to English
-    document.documentElement.lang = 'en';
+    // Set document language to French
+    document.documentElement.lang = 'fr';
     
     // Scroll to top on page load
     window.scrollTo(0, 0);
+
+    // Event listener pour la touche Entrée
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        // Trouver le bouton Suivant et le cliquer
+        const nextButton = document.querySelector('[data-stepper-next]') as HTMLButtonElement;
+        if (nextButton && !nextButton.disabled) {
+          nextButton.click();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyPress);
+
+    // Cleanup
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
   }, []);
-
-  const contactInfo = [
-    {
-      icon: <Phone className="w-6 h-6" />,
-      title: "Phone",
-      details: ['+33 6 02 61 73 29'],
-      color: "from-cyan-500 to-blue-600",
-      hoverColor: "hover:border-cyan-500",
-    },
-    {
-      icon: <Mail className="w-6 h-6" />,
-      title: "Email",
-      details: ['contact@boostaiconsulting.com'],
-      color: "from-purple-500 to-pink-600",
-      hoverColor: "hover:border-purple-500",
-    },
-    {
-      icon: <Globe className="w-6 h-6" />,
-      title: "Our Presence",
-      details: ['Paris, France'],
-      color: "from-green-500 to-emerald-600",
-      hoverColor: "hover:border-green-500",
-    },
-  ];
-
-  const teamMembers = [
-    {
-      name: 'Raphaël Levy',
-      role: "Founder & CEO",
-      image: '/assets/raph-pp.jpg',
-      description: "Expert in AI solutions and digital transformation"
-    },
-    {
-      name: 'Sébastien',
-      role: "Full-stack Developer",
-      image: '/assets/seb-pp.png',
-      description: "Specialized in modern web technologies"
-    },
-  ];
-
-  const benefits = [
-    {
-      icon: <Zap className="w-5 h-5" />,
-      title: "Fast Response",
-      description: "24h response time guaranteed"
-    },
-    {
-      icon: <Star className="w-5 h-5" />,
-      title: "Expert Team",
-      description: "Experienced AI specialists"
-    },
-    {
-      icon: <MessageCircle className="w-5 h-5" />,
-      title: "Free Consultation",
-      description: "No-cost initial project assessment"
-    }
-  ];
 
   return (
     <>
       <MetaTags
-        title="Contact Us | BoostAI Consulting"
-        description="Get in touch with our AI experts. Let's discuss your needs and see how our AI expertise can help transform your business."
-        keywords="contact, AI consulting, business transformation, chatbots, SEO optimization, content creation, web development"
+        title="Contactez-Nous | BoostAI Consulting - Consultation Gratuite IA"
+        description="Contactez nos experts IA pour une consultation gratuite. Transformez votre entreprise avec des solutions IA sur-mesure. Réponse garantie sous 24h."
+        keywords="contact IA, consultation gratuite, transformation digitale, chatbots, optimisation SEO, création contenu, développement web, BoostAI Consulting"
       />
       <div className="min-h-screen relative overflow-x-hidden bg-[#0B0D14]">
-
         <Header />
         
-        <main className="relative z-10 pt-32 pb-20">
-          {/* Hero Section */}
-          <section className="py-20 relative">
-            <div className="container mx-auto px-4 md:px-6">
-              <div className="max-w-4xl mx-auto text-center mb-20">
+        <main className="relative z-10">
+          {/* Hero Section avec Stepper */}
+          <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%239C92AC&quot; fill-opacity=&quot;0.03&quot;%3E%3Ccircle cx=&quot;30&quot; cy=&quot;30&quot; r=&quot;2&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+            
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              {/* Titre SEO et vendeur */}
+              <motion.div 
+                className="text-center mb-16"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
+                  transition={{ duration: 0.8, delay: 0.1 }}
                   className="mb-6"
                 >
-                  <span className="inline-block bg-gradient-to-r from-cyan-500/10 to-blue-600/10 border border-cyan-500/20 text-cyan-400 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
-                    💬 Let's Talk Business
+                  <span className="inline-block bg-gradient-to-r from-purple-500/10 to-blue-600/10 border border-purple-500/20 text-purple-400 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                    🚀 Consultation Gratuite
                   </span>
                 </motion.div>
                 
                 <motion.h1 
-                  className="text-5xl md:text-7xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-cyan-400"
+                  className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-100 to-purple-400"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  Ready to Transform
-                  <span className="block text-gradient bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                    Your Business?
+                  Transformez Votre Entreprise
+                  <span className="block text-gradient bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
+                    Avec l'IA
                   </span>
                 </motion.h1>
                 
@@ -120,201 +96,160 @@ const Contact: React.FC = () => {
                   className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                  Get a <span className="text-cyan-400 font-semibold">free consultation</span> and discover how AI can revolutionize your operations
-                </motion.p>
-
-                {/* Benefits Grid */}
-                <motion.div 
-                  className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
                 >
-                  {benefits.map((benefit, index) => (
-                    <div key={index} className="bg-gray-900/30 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 hover:border-cyan-500/50 transition-all duration-300 group">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-lg text-cyan-400 group-hover:scale-110 transition-transform duration-300">
-                          {benefit.icon}
-                        </div>
-                        <h3 className="font-semibold text-white">{benefit.title}</h3>
-                      </div>
-                      <p className="text-gray-400 text-sm">{benefit.description}</p>
-                    </div>
-                  ))}
-                </motion.div>
-              </div>
-            </div>
-          </section>
-
-          {/* Main Content */}
-          <section className="pb-20">
-            <div className="container mx-auto px-4 md:px-6">
-              <div className="grid grid-cols-1 xl:grid-cols-2 gap-16 max-w-7xl mx-auto">
-                
-                {/* Contact Form */}
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  className="order-2 xl:order-1"
-                >
-                  <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 md:p-10 hover:border-cyan-500/30 transition-all duration-500">
-                    <div className="mb-8">
-                      <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                        Start Your AI Journey
-                      </h2>
-                      <p className="text-gray-300 text-lg">
-                        Fill out the form below and get a <span className="text-cyan-400 font-semibold">free quote</span> for your project. 
-                        Our team will get back to you within <span className="text-cyan-400 font-semibold">24 hours</span>.
-                      </p>
-                    </div>
-                    <ContactForm />
-                  </div>
-                </motion.div>
-
-                {/* Contact Information */}
-                <motion.div
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
-                  className="order-1 xl:order-2 space-y-8"
-                >
-                  {/* Contact Info Cards */}
-                  <div>
-                    <h2 className="text-3xl font-bold text-white mb-8">Get In Touch</h2>
-                    <div className="space-y-6">
-                      {contactInfo.map((info, index) => (
-                        <motion.div 
-                          key={index} 
-                          className={`bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 ${info.hoverColor} transition-all duration-300 group hover:bg-gray-800/50`}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                        >
-                          <div className="flex items-start gap-4">
-                            <div className={`p-3 bg-gradient-to-r ${info.color} rounded-xl text-white group-hover:scale-110 transition-transform duration-300`}>
-                              {info.icon}
-                            </div>
-                            <div className="flex-1">
-                              <h3 className="font-semibold text-white text-lg mb-2">{info.title}</h3>
-                              {info.details.map((detail, idx) => (
-                                <p key={idx} className="text-gray-300 hover:text-cyan-400 transition-colors cursor-pointer">
-                                  {detail}
-                                </p>
-                              ))}
-                            </div>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Availability Card */}
-                  <motion.div 
-                    className="bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300 group"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.9 }}
-                  >
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl text-white group-hover:scale-110 transition-transform duration-300">
-                        <Calendar className="w-6 h-6" />
-                      </div>
-                      <h3 className="font-semibold text-white text-xl">Available Hours</h3>
-                    </div>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                        <span className="text-gray-300">Monday - Friday</span>
-                        <span className="text-cyan-400 font-medium">9:00 AM - 6:00 PM CET</span>
-                      </div>
-                      <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                        <span className="text-gray-300">Saturday</span>
-                        <span className="text-cyan-400 font-medium">10:00 AM - 2:00 PM CET</span>
-                      </div>
-                      <div className="flex justify-between items-center py-2">
-                        <span className="text-gray-300">Sunday</span>
-                        <span className="text-red-400 font-medium">Closed</span>
-                      </div>
-                    </div>
-                    <div className="mt-6 p-4 bg-gradient-to-r from-cyan-500/10 to-blue-600/10 border border-cyan-500/20 rounded-lg">
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-cyan-400" />
-                        <span className="text-cyan-400 font-medium">Guaranteed response within 24 hours</span>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Map Card */}
-                  <motion.div 
-                    className="bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 hover:border-green-500/50 transition-all duration-300"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 1.0 }}
-                  >
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl text-white">
-                        <MapIcon className="w-6 h-6" />
-                      </div>
-                      <h3 className="font-semibold text-white text-xl">Our Location</h3>
-                    </div>
-                    <div className="rounded-lg overflow-hidden">
-                      <Map />
-                    </div>
-                  </motion.div>
-                </motion.div>
-              </div>
-            </div>
-          </section>
-
-          {/* Team Section */}
-          <section className="py-20 relative">
-            <div className="container mx-auto px-4 md:px-6">
-              <motion.div
-                className="text-center mb-16"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.1 }}
-              >
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                  Meet Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Expert Team</span>
-                </h2>
-                <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                  Industry professionals dedicated to transforming your business with cutting-edge AI solutions
-                </p>
+                  Obtenez une <span className="text-purple-400 font-semibold">consultation gratuite</span> et découvrez comment nos solutions IA peuvent révolutionner vos opérations en moins de 2 minutes
+                </motion.p>
               </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                {teamMembers.map((member, index) => (
-                  <motion.div 
-                    key={index} 
-                    className="bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 hover:border-cyan-500/50 transition-all duration-500 group hover:bg-gray-800/50"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 1.2 + index * 0.1 }}
+              {/* Stepper au milieu */}
+              <motion.div 
+                className="flex justify-center"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                                  <Stepper
+                    initialStep={1}
+                    onStepChange={(step) => {
+                      console.log(step);
+                      setCurrentStep(step);
+                      // Réinitialiser les erreurs quand on change d'étape
+                      setShowNameError(false);
+                      setShowEmailError(false);
+                    }}
+                    onFinalStepCompleted={async () => {
+                      // L'étape 5 ne fait que montrer la confirmation
+                      setIsSubmitted(true);
+                    }}
+                    validateStep={(step) => {
+                      if (step === 2) {
+                        if (!name.trim()) {
+                          setShowNameError(true);
+                          return false;
+                        }
+                      } else if (step === 4) {
+                        if (!email.trim() || !email.includes('@')) {
+                          setShowEmailError(true);
+                          return false;
+                        }
+                        
+                        // Envoyer les données à l'étape 4
+                        if (!isSubmitting) {
+                          setIsSubmitting(true);
+                          (async () => {
+                            try {
+                              console.log('Sending data:', { name, email, message, source: 'contact' });
+                              
+                              const { data, error } = await supabase.from('leads').insert([{
+                                name: name.trim(),
+                                email: email.trim(),
+                                message: message.trim(),
+                                source: 'contact'
+                              }]);
+                              
+                              if (error) {
+                                console.error('Error saving lead:', error);
+                                alert('Erreur lors de l\'enregistrement: ' + error.message);
+                                setIsSubmitting(false);
+                                return false;
+                              } else {
+                                console.log('Lead saved successfully:', data);
+                                setIsSubmitting(false);
+                                return true;
+                              }
+                            } catch (error) {
+                              console.error("Error saving lead:", error);
+                              alert('Erreur lors de l\'enregistrement');
+                              setIsSubmitting(false);
+                              return false;
+                            }
+                          })();
+                        }
+                      }
+                      return true;
+                    }}
+                    backButtonText="Précédent"
+                    nextButtonText={isSubmitting ? "Enregistrement..." : "Suivant"}
+                    nextButtonProps={{
+                      disabled: isSubmitting,
+                      className: `duration-350 flex items-center justify-center rounded-full py-2 px-4 font-medium tracking-tight text-white transition-all shadow-lg hover:shadow-xl ${
+                        isSubmitting
+                          ? 'bg-gray-500 cursor-not-allowed opacity-50'
+                          : 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 active:from-purple-800 active:to-blue-800'
+                      }`
+                    }}
                   >
+                  <Step>
                     <div className="text-center">
-                      <div className="relative w-32 h-32 mx-auto mb-6">
-                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full p-1 group-hover:scale-105 transition-transform duration-300">
-                          <div className="w-full h-full rounded-full overflow-hidden">
-                            <img
-                              src={member.image}
-                              alt={member.name}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
+                      <div className="mb-6">
+                        <img src="/public/images/favicon.png" alt="BoostAI" className="w-16 h-16 mx-auto mb-4" />
+                      </div>
+                      <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Bienvenue chez BoostAI !</h2>
+                      <p className="text-slate-300 text-lg">Expliquez-nous votre besoin, nous vous recontacterons rapidement.</p>
+                    </div>
+                  </Step>
+                  <Step>
+                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Comment vous appelez-vous ? *</h2>
+                    <input 
+                      type="text"
+                      value={name} 
+                      onChange={(e) => setName(e.target.value)} 
+                      placeholder="Ex. Marie Dupont" 
+                      required
+                      className="w-full p-4 bg-slate-700 border border-slate-600 text-white rounded-xl focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all text-lg"
+                    />
+                    {showNameError && name.trim() === '' && (
+                      <p className="text-red-400 text-sm mt-2">Le nom est obligatoire</p>
+                    )}
+                  </Step>
+                  <Step>
+                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Parlez-nous un peu de votre projet</h2>
+                    <p className="text-slate-300 mb-4">Quelques lignes suffisent pour comprendre vos besoins.</p>
+                    <textarea 
+                      value={message} 
+                      onChange={(e) => setMessage(e.target.value)} 
+                      placeholder="Ex. Je veux lancer une marketplace pour..." 
+                      rows={4}
+                      className="w-full p-4 bg-slate-700 border border-slate-600 text-white rounded-xl focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all text-lg resize-none"
+                    />
+                  </Step>
+                  <Step>
+                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Votre meilleure adresse pour échanger *</h2>
+                    <input 
+                      type="email"
+                      value={email} 
+                      onChange={(e) => setEmail(e.target.value)} 
+                      placeholder="vous@email.com" 
+                      required
+                      className="w-full p-4 bg-slate-700 border border-slate-600 text-white rounded-xl focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all text-lg"
+                    />
+                    {showEmailError && email.trim() === '' && (
+                      <p className="text-red-400 text-sm mt-2">L'email est obligatoire</p>
+                    )}
+                    {showEmailError && email.trim() !== '' && !email.includes('@') && (
+                      <p className="text-red-400 text-sm mt-2">Veuillez entrer un email valide</p>
+                    )}
+                  </Step>
+                  <Step>
+                    <div className="text-center">
+                      <div className="mb-6">
+                        <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                          >
+                            <span className="text-3xl">✅</span>
+                          </motion.div>
                         </div>
                       </div>
-                      <h3 className="font-bold text-2xl text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                        {member.name}
-                      </h3>
-                      <p className="text-cyan-400 font-medium mb-3">{member.role}</p>
-                      <p className="text-gray-400 leading-relaxed">{member.description}</p>
+                      <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Merci !</h2>
+                      <p className="text-slate-300 text-lg">Votre demande a bien été envoyée. Nous revenons vers vous rapidement.</p>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
+                  </Step>
+                </Stepper>
+              </motion.div>
             </div>
           </section>
         </main>

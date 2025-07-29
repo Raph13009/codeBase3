@@ -69,39 +69,55 @@ const HeroSection: React.FC = () => {
         <div className="block sm:block lg:hidden">
           <div className="flex flex-col justify-end min-h-screen pt-64">
             {/* Title and CTA - Bottom of screen */}
-            <div className="text-center px-4 mb-32">
-              <motion.div 
-                className="hero-title text-4xl sm:text-5xl font-bold mb-4 leading-tight min-h-[200px] sm:min-h-[240px]"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              >
-                <div className="text-white" style={{ color: '#EAF4FF' }}>
-                  <TextType
-                    as="span"
-                    text={["L'agence qui code pour vous, vite et sur-mesure."]}
-                    typingSpeed={75}
-                    pauseDuration={1500}
-                    showCursor={true}
-                    cursorCharacter="|"
+            <div className="flex justify-center mb-32">
+                            <div className="w-64 px-2 text-left">
+                <motion.div 
+                  className="hero-title text-3xl sm:text-4xl font-bold mb-24 leading-tight h-32"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                >
+                  <div className="text-white h-full" style={{ color: '#EAF4FF' }}>
+        <TextType
+                    as="h1"
+                    text={["Votre agence web sur-mesure : code rapide & solutions innovantes."]}
+          typingSpeed={75}
+          pauseDuration={1500}
+          showCursor={true}
+          cursorCharacter="|"
                     className="block"
                   />
-                </div>
-              </motion.div>
+                  </div>
+                </motion.div>
 
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-              >
-                <Button 
-                  size="lg" 
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+                {/* SEO Subtitle - Invisible for users, visible for Google */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                  className="mb-6"
                 >
-                  Contactez-nous
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
-                </Button>
-              </motion.div>
+                  <p className="text-xs text-transparent absolute -left-[9999px]">
+                    Agence digitale spécialisée dans le développement web sur-mesure. Création de sites internet, refonte et audit SEO pour faire grandir votre business.
+                  </p>
+                </motion.div>
+
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+                  className="text-center"
+                >
+                  <div className="w-60">
+                    <Button 
+                      size="lg" 
+                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-3 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+                    >
+                      Demander un devis gratuit
+                    </Button>
+                  </div>
+                </motion.div>
+              </div>
             </div>
 
             {/* Mobile Mockup - Small and centered */}
@@ -156,41 +172,39 @@ const HeroSection: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            {/* Main Title - Fixed Position */}
-            <motion.div 
-              className="hero-title text-6xl xl:text-7xl font-bold mb-8 leading-tight min-h-[320px] xl:min-h-[360px]"
+            {/* Main Title */}
+                        <motion.div 
+              className="hero-title text-6xl xl:text-7xl font-bold mb-24 leading-none h-48"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             >
-              <div className="text-white" style={{ color: '#EAF4FF' }}>
+              <div className="text-white h-full" style={{ color: '#EAF4FF' }}>
                 <TextType
-                  as="span"
-                  text={["L'agence qui code pour vous, vite et sur-mesure."]}
+                  as="h1"
+                  text={["Votre agence web sur-mesure : code rapide & solutions innovantes."]}
                   typingSpeed={75}
                   pauseDuration={1500}
                   showCursor={true}
                   cursorCharacter="|"
                   className="block"
                 />
-              </div>
+      </div>
             </motion.div>
 
-            {/* CTA Button - Position fixe */}
+            {/* SEO Subtitle */}
             <motion.div 
-              className="absolute top-80 left-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+              className="mb-6"
             >
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
-              >
-                Contactez-nous
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
-              </Button>
+              <p className="text-xs text-transparent absolute -left-[9999px]">
+                Agence digitale spécialisée dans le développement web sur-mesure. Création de sites internet, refonte et audit SEO pour faire grandir votre business.
+              </p>
             </motion.div>
+
+
           </motion.div>
 
           {/* Right Side - iPhone Mockup */}
@@ -243,10 +257,10 @@ const HeroSection: React.FC = () => {
               </div>
             </div>
           </motion.div>
-        </div>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 };
 
 export default HeroSection;

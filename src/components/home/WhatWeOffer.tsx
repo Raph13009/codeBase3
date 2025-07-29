@@ -8,19 +8,19 @@ const WhatWeOffer: React.FC = () => {
   const menuItems = [
     {
       title: "Livraison rapide",
-      subtitle: "Vos projets livrés en jours, pas en mois. On respecte vos deadlines.",
+      subtitle: "Vos projets livrés en jours.",
       icon: "⚡",
       image: "/images/livraison.png"
     },
     {
       title: "Tarifs abordables",
-      subtitle: "Des prix adaptés aux petites entreprises. Pas de surprise.",
+      subtitle: "Des prix adaptés aux petites entreprises.",
       icon: "💰",
       image: "/images/tarif.png"
     },
     {
       title: "Design pro",
-      subtitle: "Des interfaces modernes et élégantes. Pas de templates basiques.",
+      subtitle: "Des interfaces modernes.",
       icon: "🎨",
       image: "/images/design.png"
     },
@@ -47,14 +47,14 @@ const WhatWeOffer: React.FC = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Pourquoi BoostAI ?
+            Pourquoi choisir notre agence web ?
           </h2>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            La différence qui fait que vos projets réussissent
+            Les critères pour choisir la meilleure agence web : expertise technique, livraison rapide et accompagnement personnalisé
           </p>
         </motion.div>
-      </div>
-
+              </div>
+              
       {/* Flowing Menu - Full Width */}
       <motion.div 
         className="mb-16"
@@ -85,7 +85,7 @@ const WhatWeOffer: React.FC = () => {
               className="text-2xl font-bold"
             />
           </div>
-          
+
           <ComparisonTable />
         </motion.div>
       </div>

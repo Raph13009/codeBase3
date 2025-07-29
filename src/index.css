@@ -169,6 +169,24 @@
   @apply bg-muted-foreground/30;
 }
 
+/* Custom scrollbar for modal */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #6b7280;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
@@ -216,6 +234,7 @@ html {
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
+  margin: 0 -16px;
 }
 
 .mobile-carousel-item {
@@ -240,6 +259,11 @@ html {
     /* Ensure cards are not cut off */
     padding-top: 20px;
     padding-bottom: 20px;
+    /* Remove horizontal padding */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    /* Remove margins to let cards extend beyond screen */
+    margin: 0 -16px;
   }
   
   .mobile-carousel-item {

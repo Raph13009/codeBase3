@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MessageCircle, Send, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MessageCircle, Send, ArrowRight, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { sendEmailDev } from '@/lib/emailService';
 
 const ContactForm: React.FC = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const contactMethods = [
     {
       icon: Mail,
@@ -18,19 +28,55 @@ const ContactForm: React.FC = () => {
     {
       icon: Phone,
       title: "Téléphone",
-      value: "+33 6 12 34 56 78",
-      description: "Lun-Ven, 9h-18h",
+      value: "06 02 61 73 29",
+      description: "Lun-Sam, 9h-18h",
       color: "from-green-500 to-emerald-500"
-    },
-    {
-      icon: MessageCircle,
-      title: "WhatsApp",
-      value: "+33 6 12 34 56 78",
-      description: "Réponse rapide",
-      color: "from-green-500 to-teal-500"
     }
   ];
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const templateParams = {
+        from_name: `${formData.firstName} ${formData.lastName}`,
+        from_email: formData.email,
+        message: formData.message,
+        to_name: 'BoostAI Team',
+        reply_to: formData.email
+      };
+
+      // Envoi via MailJS (simulation en développement)
+      const result = await sendEmailDev(templateParams);
+
+      if (result.success) {
+        setIsSubmitted(true);
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          message: ''
+        });
+      } else {
+        throw new Error('Erreur lors de l\'envoi');
+      }
+    } catch (error) {
+      console.error('Erreur:', error);
+      alert('Erreur lors de l\'envoi du message. Veuillez réessayer.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  
   return (
     <section className="py-20 bg-slate-900 relative overflow-hidden">
       {/* Background Pattern */}
@@ -46,10 +92,10 @@ const ContactForm: React.FC = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Parlons de votre projet
+            Demander un devis agence web
           </h2>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Prêt à transformer votre business ? Contactez-nous pour discuter de vos besoins
+            Besoin d'un devis pour votre site internet ? Contactez notre agence web pour un audit gratuit
           </p>
         </motion.div>
 
@@ -64,73 +110,111 @@ const ContactForm: React.FC = () => {
             <Card className="bg-slate-800/50 border-slate-700">
               <CardHeader>
                 <CardTitle className="text-2xl font-bold text-white">
-                  Envoyez-nous un message
+                  Demander un devis pour votre site web
                 </CardTitle>
                 <p className="text-slate-300">
-                  Remplissez le formulaire ci-dessous et nous vous répondrons rapidement
+                  Remplissez le formulaire ci-dessous pour recevoir un devis agence web personnalisé
                 </p>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">
-                      Prénom
-                    </label>
-                    <Input 
-                      placeholder="Votre prénom"
-                      className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">
-                      Nom
-                    </label>
-                    <Input 
-                      placeholder="Votre nom"
-                      className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500"
-                    />
-                  </div>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
-                    Email
-                  </label>
-                  <Input 
-                    type="email"
-                    placeholder="votre@email.com"
-                    className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
-                    Type de projet
-                  </label>
-                  <select className="w-full bg-slate-700 border border-slate-600 text-white rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none">
-                    <option value="">Sélectionnez un type</option>
-                    <option value="site">Site web</option>
-                    <option value="mvp">MVP / Application</option>
-                    <option value="automation">Automatisation</option>
-                    <option value="other">Autre</option>
-                  </select>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
-                    Message
-                  </label>
-                  <Textarea 
-                    placeholder="Décrivez votre projet, vos besoins et vos objectifs..."
-                    rows={5}
-                    className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500 resize-none"
-                  />
-                </div>
-                
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 group">
-                  Envoyer le message
-                  <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
-                </Button>
+              <CardContent>
+                {isSubmitted ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center py-8"
+                  >
+                    <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
+                    <h3 className="text-xl font-bold text-white mb-2">Message envoyé !</h3>
+                    <p className="text-slate-300">
+                      Nous vous répondrons dans les plus brefs délais.
+                    </p>
+                    <Button 
+                      onClick={() => setIsSubmitted(false)}
+                      className="mt-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                    >
+                      Envoyer un autre message
+                    </Button>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-slate-300 mb-2">
+                          Prénom *
+                        </label>
+                        <Input 
+                          name="firstName"
+                          value={formData.firstName}
+                          onChange={handleInputChange}
+                          placeholder="Votre prénom"
+                          required
+                          className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-slate-300 mb-2">
+                          Nom *
+                        </label>
+                        <Input 
+                          name="lastName"
+                          value={formData.lastName}
+                          onChange={handleInputChange}
+                          placeholder="Votre nom"
+                          required
+                          className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-slate-300 mb-2">
+                        Email *
+                      </label>
+                      <Input 
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="votre@email.com"
+                        required
+                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-slate-300 mb-2">
+                        Message *
+                      </label>
+                      <Textarea 
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        placeholder="Décrivez votre projet, vos besoins et vos objectifs..."
+                        rows={5}
+                        required
+                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500 resize-none"
+                      />
+                    </div>
+                    
+                    <Button 
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 group disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          Envoi en cours...
+                          <div className="ml-2 w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        </>
+                      ) : (
+                        <>
+                          Demander un devis agence web
+                          <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
+                        </>
+                      )}
+                    </Button>
+                  </form>
+                )}
               </CardContent>
             </Card>
           </motion.div>
@@ -146,7 +230,7 @@ const ContactForm: React.FC = () => {
             {/* Contact Methods */}
             <div className="space-y-6">
               <h3 className="text-2xl font-bold text-white mb-6">
-                Autres moyens de nous contacter
+                Contactez notre agence web
               </h3>
               
               {contactMethods.map((method, index) => (
@@ -180,7 +264,7 @@ const ContactForm: React.FC = () => {
                 </motion.div>
               ))}
             </div>
-
+            
             {/* Quick Info */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -191,24 +275,24 @@ const ContactForm: React.FC = () => {
               <Card className="bg-gradient-to-r from-slate-700 to-slate-800 border-slate-600">
                 <CardContent className="p-6">
                   <h4 className="text-lg font-semibold text-white mb-4">
-                    Pourquoi nous contacter ?
+                    Pourquoi choisir notre agence web ?
                   </h4>
                   <ul className="space-y-3 text-slate-300">
                     <li className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      Consultation gratuite de 30 minutes
+                      Audit gratuit de votre site web
                     </li>
                     <li className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      Devis transparent et détaillé
+                      Devis agence web transparent
                     </li>
                     <li className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      Réponse sous 24h maximum
+                      Développement web sur-mesure
                     </li>
                     <li className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      Aucun engagement de votre part
+                      Accompagnement digital complet
                     </li>
                   </ul>
                 </CardContent>
@@ -216,28 +300,6 @@ const ContactForm: React.FC = () => {
             </motion.div>
           </motion.div>
         </div>
-
-        {/* Bottom CTA */}
-        <motion.div 
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <div className="bg-gradient-to-r from-slate-700 to-slate-800 rounded-2xl p-8 border border-slate-600">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Prêt à démarrer votre projet ?
-            </h3>
-            <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-              Rejoignez les entreprises qui ont transformé leur business avec BoostAI
-            </p>
-            <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 group">
-              Réserver un appel gratuit
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
-            </Button>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

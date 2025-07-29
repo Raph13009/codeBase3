@@ -121,4 +121,28 @@ export async function getBlogsByCategory(category: string) {
     console.error('Error in getBlogsByCategory:', error);
     throw error;
   }
+}
+
+export async function saveLeadToSupabase(email: string) {
+  try {
+    const { data, error } = await supabase.from('leads').insert([
+      {
+        name: '',
+        email: email,
+        message: '',
+        source: 'stepper',
+      },
+    ]);
+
+    if (error) {
+      console.error('Error saving lead:', error);
+      throw error;
+    } else {
+      console.log('Lead saved successfully:', data);
+      return data;
+    }
+  } catch (error) {
+    console.error('Error in saveLeadToSupabase:', error);
+    throw error;
+  }
 } 

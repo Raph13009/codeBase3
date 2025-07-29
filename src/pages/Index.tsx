@@ -3,10 +3,7 @@ import HeroSection from '../components/home/HeroSection';
 import HowWeHelp from '../components/home/HowWeHelp';
 import WhatWeOffer from '../components/home/WhatWeOffer';
 import OurOffers from '../components/home/OurOffers';
-import FAQSection from '../components/home/FAQSection';
-import OngoingProjects from '../components/home/OngoingProjects';
-import StackTech from '../components/home/StackTech';
-import ContactForm from '../components/contact/ContactForm';
+import StepperSection from '../components/home/StepperSection';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
@@ -16,9 +13,9 @@ const Index: React.FC = () => {
   return (
     <>
       <MetaTags 
-        title="BoostAI Consulting | Outils modernes pour faire grandir votre business"
-        description="BoostAI crée des sites, MVP et automatisations pour les petites entreprises qui veulent avancer sans se ruiner. Livraison rapide, tarifs abordables, design pro."
-        keywords="site web, MVP, automatisation, IA, business, développement, nocode, React, TypeScript, Supabase"
+        title="Agence Web BoostAI - Développement Web Sur-Mesure | Sites Internet & Solutions Digitales"
+        description="Agence web spécialisée dans la création de sites internet sur-mesure et le développement web. Code rapide, clients conquis, solutions innovantes. Choisissez la meilleure agence web pour votre projet digital."
+        keywords="agence web, développement web sur-mesure, agence digitale, création site internet, agence code, audit site web, refonte de site, accompagnement digital, agence SEO, choisir agence web, meilleure agence web, devis agence web"
       />
       <GoogleAnalytics />
       <div className="relative" style={{ backgroundColor: '#121417' }}>
@@ -37,17 +34,8 @@ const Index: React.FC = () => {
           {/* 4. Nos offres */}
           <OurOffers />
           
-          {/* 5. Réalisations / Cas clients */}
-          <OngoingProjects />
-          
-          {/* 6. Process */}
-          <FAQSection />
-          
-          {/* 7. Stack & Tech */}
-          <StackTech />
-          
-          {/* 8. Contact */}
-          <ContactForm />
+          {/* 5. Processus Stepper */}
+          <StepperSection />
         </main>
         
         <Footer />

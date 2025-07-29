@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 const SuccessStories: React.FC = () => {
   const offers = [
-    {
+  {
       icon: Globe,
       title: "Pack Site Web",
       price: "à partir de 199€",
@@ -21,8 +21,8 @@ const SuccessStories: React.FC = () => {
       ],
       color: "from-blue-500 to-cyan-500",
       popular: false
-    },
-    {
+  },
+  {
       icon: Smartphone,
       title: "Pack MVP",
       price: "à partir de 1 500€",
@@ -37,8 +37,8 @@ const SuccessStories: React.FC = () => {
       ],
       color: "from-purple-500 to-pink-500",
       popular: true
-    },
-    {
+  },
+  {
       icon: Zap,
       title: "Pack Lancement complet",
       price: "sur devis",
@@ -94,20 +94,20 @@ const SuccessStories: React.FC = () => {
                   <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
                     Le plus populaire
                   </span>
-                </div>
+          </div>
               )}
               
               <Card className={`bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-all duration-300 hover:shadow-2xl hover:shadow-slate-900/50 group h-full ${offer.popular ? 'ring-2 ring-purple-500/50' : ''}`}>
                 <CardHeader className="text-center pb-4">
                   <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${offer.color} p-4 group-hover:scale-110 transition-transform duration-300`}>
                     <offer.icon className="w-8 h-8 text-white" />
-                  </div>
+            </div>
                   <CardTitle className="text-2xl font-bold text-white mb-2">
                     {offer.title}
                   </CardTitle>
                   <div className="text-3xl font-bold text-white mb-2">
                     {offer.price}
-                  </div>
+          </div>
                   <p className="text-slate-300 text-sm leading-relaxed">
                     {offer.description}
                   </p>
@@ -133,7 +133,7 @@ const SuccessStories: React.FC = () => {
             </motion.div>
           ))}
         </div>
-
+        
         {/* Bottom CTA */}
         <motion.div 
           className="text-center"
@@ -156,8 +156,8 @@ const SuccessStories: React.FC = () => {
               <Button variant="outline" className="border-2 border-slate-500 text-slate-300 hover:bg-slate-700 hover:border-slate-400 px-8 py-4 rounded-xl font-semibold transition-all duration-300">
                 Voir nos réalisations
               </Button>
-            </div>
-          </div>
+        </div>
+      </div>
         </motion.div>
       </div>
     </section>

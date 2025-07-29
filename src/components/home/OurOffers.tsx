@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Globe, Smartphone, Zap, Check, ArrowRight, Lightbulb, Rocket, Users, Globe2, Bot } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import BlobCursor from '../ui/BlobCursor';
 import DecryptedText from '../ui/DecryptedText';
 
 const OurOffers: React.FC = () => {
@@ -161,27 +160,7 @@ const OurOffers: React.FC = () => {
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%239C92AC&quot; fill-opacity=&quot;0.03&quot;%3E%3Ccircle cx=&quot;30&quot; cy=&quot;30&quot; r=&quot;2&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
       
-      {/* BlobCursor - Desktop Only */}
-      <div className="absolute inset-0 hidden md:block">
-        <BlobCursor
-          blobType="circle"
-          fillColor="#5227FF"
-          trailCount={3}
-          sizes={[30, 60, 40]}
-          innerSizes={[10, 20, 15]}
-          innerColor="rgba(255,255,255,0.8)"
-          opacities={[0.6, 0.6, 0.6]}
-          shadowColor="rgba(0,0,0,0.75)"
-          shadowBlur={5}
-          shadowOffsetX={10}
-          shadowOffsetY={10}
-          filterStdDeviation={30}
-          useFilter={true}
-          fastDuration={0.1}
-          slowDuration={0.5}
-          zIndex={100}
-        />
-      </div>
+
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
@@ -193,101 +172,14 @@ const OurOffers: React.FC = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Nous boostons votre business à chaque étape
+            Nos services d'agence web sur-mesure
           </h2>
           <p className="text-xl text-slate-300 max-w-4xl mx-auto">
-            De votre première présence en ligne jusqu'à l'automatisation avancée, BoostAI vous accompagne.
+            De la création de site internet à l'accompagnement digital complet, notre agence web vous accompagne à chaque étape.
           </p>
         </motion.div>
 
-        {/* Journey Steps - Horizontal Timeline */}
-        <div className="mb-20">
-          {/* Desktop Version */}
-          <div className="hidden md:block">
-            <div className="text-center mb-12">
-              <p className="text-slate-400 text-sm italic">
-                Choisissez la solution qui correspond à votre stade actuel.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              
-              {journeySteps.map((step, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
-                  viewport={{ once: true }}
-                  className="text-center relative"
-                >
-                  {/* Title with accent color */}
-                  <h3 className={`text-2xl font-bold mb-3 leading-tight ${
-                    index === 0 ? 'text-blue-400' : 
-                    index === 1 ? 'text-purple-400' : 
-                    'text-orange-400'
-                  }`}>
-                    {step.title}
-                  </h3>
-                  
-                  {/* Description */}
-                  <p className="text-slate-300 text-sm leading-relaxed max-w-xs mx-auto">
-                    {step.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
 
-          {/* Mobile Version - Dynamic Titles */}
-          <div className="md:hidden">
-            <div className="text-center mb-12">
-              <p className="text-slate-400 text-sm italic mb-8">
-                Choisissez la solution qui correspond à votre stade actuel.
-              </p>
-              
-              {/* Dynamic Title Section */}
-              <div className="h-32 flex items-center justify-center">
-                <div className="relative">
-                  {journeySteps.map((step, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ 
-                        opacity: currentSlide === index ? 1 : 0,
-                        y: currentSlide === index ? 0 : 20,
-                        scale: currentSlide === index ? 1 : 0.95
-                      }}
-                      transition={{ duration: 0.6, ease: "easeInOut" }}
-                      className={`absolute inset-0 flex flex-col items-center justify-center ${
-                        currentSlide === index ? 'pointer-events-auto' : 'pointer-events-none'
-                      }`}
-                    >
-                      <DecryptedText
-                        text={step.title}
-                        animateOn="view"
-                        revealDirection="center"
-                        className={`text-2xl font-bold mb-3 leading-tight ${
-                          index === 0 ? 'text-blue-400' : 
-                          index === 1 ? 'text-purple-400' : 
-                          'text-orange-400'
-                        }`}
-                        encryptedClassName="text-slate-400"
-                      />
-                      <DecryptedText
-                        text={step.description}
-                        animateOn="view"
-                        revealDirection="center"
-                        className="text-slate-300 text-sm leading-relaxed max-w-xs"
-                        encryptedClassName="text-slate-500"
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Offers Grid */}
         {/* Desktop Version */}
@@ -301,7 +193,7 @@ const OurOffers: React.FC = () => {
               viewport={{ once: true }}
               className="relative group"
             >
-              <Card className={`bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-all duration-300 hover:shadow-2xl hover:shadow-slate-900/50 group h-full ${offer.popular ? 'ring-2 ring-purple-500/50 scale-105' : 'hover:scale-105'} ${offer.futuristic ? 'ring-1 ring-orange-500/30 hover:ring-orange-500/50 hover:shadow-orange-500/20' : ''}`}>
+              <Card className={`bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-all duration-300 hover:shadow-2xl hover:shadow-slate-900/50 group h-full flex flex-col ${offer.popular ? 'ring-2 ring-purple-500/50 scale-105' : 'hover:scale-105'} ${offer.futuristic ? 'ring-1 ring-orange-500/30 hover:ring-orange-500/50 hover:shadow-orange-500/20' : ''}`}>
                 {offer.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
                     <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
@@ -309,7 +201,7 @@ const OurOffers: React.FC = () => {
                     </span>
                   </div>
                 )}
-                <CardHeader className="text-center pb-4">
+                <CardHeader className="text-center pb-4 flex-shrink-0">
                   <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${offer.color} p-4 group-hover:scale-110 transition-transform duration-300 ${offer.futuristic ? 'shadow-lg shadow-orange-500/30' : ''}`}>
                     <offer.icon className="w-8 h-8 text-white" />
                   </div>
@@ -327,14 +219,14 @@ const OurOffers: React.FC = () => {
                 </CardHeader>
 
                 {/* Mockup Placeholder */}
-                <div className="px-6 mb-6">
+                <div className="px-6 mb-6 flex-shrink-0">
                   <div className={`w-full h-32 bg-slate-700/30 rounded-lg flex items-center justify-center border border-slate-600 ${offer.futuristic ? 'border-orange-500/30 group-hover:border-orange-500/50' : ''}`}>
                     <span className="text-slate-400 text-sm">Mockup {offer.title}</span>
                   </div>
                 </div>
 
-                <CardContent className="text-center">
-                  <ul className="space-y-3 text-left mb-8">
+                <CardContent className="text-center flex-grow flex flex-col">
+                  <ul className="space-y-3 text-left mb-8 flex-grow">
                     {offer.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-center text-slate-300 text-sm">
                         <Check className="w-4 h-4 text-green-400 mr-3 flex-shrink-0" />
@@ -344,10 +236,10 @@ const OurOffers: React.FC = () => {
                   </ul>
 
                   <Button
-                    className={`w-full bg-gradient-to-r ${offer.color} hover:from-opacity-90 hover:to-opacity-90 text-white font-semibold py-3 rounded-xl transition-all duration-300 group-hover:shadow-lg ${offer.futuristic ? 'shadow-orange-500/20 group-hover:shadow-orange-500/40' : ''}`}
+                    className={`w-full bg-gradient-to-r ${offer.color} hover:from-opacity-90 hover:to-opacity-90 text-white font-semibold py-3 rounded-xl transition-all duration-300 group-hover:shadow-lg mt-auto relative z-10 ${offer.futuristic ? 'shadow-orange-500/20 group-hover:shadow-orange-500/40' : ''}`}
                     onClick={() => window.location.href = '/contact'}
                   >
-                    Demander un devis
+                    Demander un devis agence web
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
                   </Button>
                 </CardContent>
@@ -357,7 +249,7 @@ const OurOffers: React.FC = () => {
         </div>
 
         {/* Mobile Version - Horizontal Scroll Snap Carousel */}
-        <div className="md:hidden mb-16">
+        <div className="md:hidden mb-16 -mx-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -369,7 +261,7 @@ const OurOffers: React.FC = () => {
 
             {/* Navigation Arrows */}
             {currentSlide > 0 && (
-              <div className="absolute left-2 top-1/2 transform -translate-y-1/2 z-20">
+              <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20">
                 <button
                   onClick={prevSlide}
                   className="w-10 h-10 bg-slate-800/80 hover:bg-slate-700/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -382,7 +274,7 @@ const OurOffers: React.FC = () => {
             )}
 
             {currentSlide < offers.length - 1 && (
-              <div className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20">
+              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20">
                 <button
                   onClick={nextSlide}
                   className="w-10 h-10 bg-slate-800/80 hover:bg-slate-700/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -395,18 +287,19 @@ const OurOffers: React.FC = () => {
             )}
 
             {/* Carousel Container */}
-            <div className="mobile-carousel flex overflow-x-auto scrollbar-hide px-4" ref={carouselRef}>
-              <div className="flex space-x-4" style={{ width: 'max-content' }}>
+            <div className="mobile-carousel flex overflow-x-auto scrollbar-hide" ref={carouselRef}>
+              <div className="flex" style={{ width: 'max-content', paddingLeft: 'calc(50vw - 140px)', paddingRight: 'calc(50vw - 140px)' }}>
                 {offers.map((offer, index) => (
                   <div
                     key={index}
                     className="mobile-carousel-item relative group"
                     style={{ 
                       width: '280px',
-                      flexShrink: 0
+                      flexShrink: 0,
+                      marginRight: '16px'
                     }}
                   >
-                    <Card className={`bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-all duration-300 group h-full shadow-lg hover:shadow-xl ${offer.popular ? 'ring-2 ring-purple-500/50' : ''} ${offer.futuristic ? 'ring-1 ring-orange-500/30 hover:ring-orange-500/50' : ''}`}>
+                    <Card className={`bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-all duration-300 group h-full shadow-lg hover:shadow-xl flex flex-col ${offer.popular ? 'ring-2 ring-purple-500/50' : ''} ${offer.futuristic ? 'ring-1 ring-orange-500/30 hover:ring-orange-500/50' : ''}`}>
                       {offer.popular && (
                         <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
                           <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
@@ -414,7 +307,7 @@ const OurOffers: React.FC = () => {
                           </span>
                         </div>
                       )}
-                      <CardHeader className="text-center pb-4 pt-6 px-4">
+                      <CardHeader className="text-center pb-4 pt-6 px-4 flex-shrink-0">
                         <div className={`w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-to-r ${offer.color} p-3 group-hover:scale-110 transition-transform duration-300 ${offer.futuristic ? 'shadow-lg shadow-orange-500/30' : ''}`}>
                           {React.createElement(offer.icon, { className: "w-6 h-6 text-white" })}
                         </div>
@@ -432,14 +325,14 @@ const OurOffers: React.FC = () => {
                       </CardHeader>
 
                       {/* Mockup Placeholder */}
-                      <div className="px-4 mb-6">
+                      <div className="px-4 mb-6 flex-shrink-0">
                         <div className={`w-full h-20 bg-slate-700/30 rounded-lg flex items-center justify-center border border-slate-600 ${offer.futuristic ? 'border-orange-500/30 group-hover:border-orange-500/50' : ''}`}>
                           <span className="text-slate-400 text-xs">Mockup {offer.title}</span>
                         </div>
                       </div>
 
-                      <CardContent className="text-center px-4 pb-6">
-                        <ul className="space-y-2 text-left mb-6">
+                      <CardContent className="text-center px-4 pb-6 flex-grow flex flex-col">
+                        <ul className="space-y-2 text-left mb-6 flex-grow">
                           {offer.features.slice(0, 3).map((feature, featureIndex) => (
                             <li key={featureIndex} className="flex items-center text-slate-300 text-xs">
                               <Check className="w-3 h-3 text-green-400 mr-2 flex-shrink-0" />
@@ -449,11 +342,11 @@ const OurOffers: React.FC = () => {
                         </ul>
 
                         <Button
-                          className={`w-full bg-gradient-to-r ${offer.color} hover:from-opacity-90 hover:to-opacity-90 text-white font-semibold py-3 rounded-xl transition-all duration-300 group-hover:shadow-lg ${offer.futuristic ? 'shadow-orange-500/20 group-hover:shadow-orange-500/40' : ''}`}
+                          className={`w-full bg-gradient-to-r ${offer.color} hover:from-opacity-90 hover:to-opacity-90 text-white font-semibold py-3 rounded-xl transition-all duration-300 group-hover:shadow-lg mt-auto text-xs relative z-10 ${offer.futuristic ? 'shadow-orange-500/20 group-hover:shadow-orange-500/40' : ''}`}
                           onClick={() => window.location.href = '/contact'}
                         >
                           Demander un devis
-                          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+                          <ArrowRight className="ml-2 h-3 w-3 group-hover:translate-x-1 transition-transform duration-200" />
                         </Button>
                       </CardContent>
                     </Card>
@@ -499,7 +392,7 @@ const OurOffers: React.FC = () => {
         >
           {/* Animated Title */}
           <DecryptedText
-            text="Pas sûr de ce qui vous convient ?"
+            text="Besoin d'un audit de votre site web ?"
             animateOn="view"
             revealDirection="center"
             className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"
@@ -508,7 +401,7 @@ const OurOffers: React.FC = () => {
 
           {/* Subtitle */}
           <p className="mt-2 text-slate-300 text-lg">
-            Diagnostic gratuit avec un expert BoostAI
+            Audit gratuit de votre site internet avec un expert de notre agence web
           </p>
 
           {/* CTA Button */}
@@ -521,7 +414,7 @@ const OurOffers: React.FC = () => {
               className="px-6 py-3 text-lg font-semibold text-white rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 shadow-md hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
               onClick={() => window.location.href = '/contact'}
             >
-              Réserver un diagnostic gratuit
+              Demander un audit site web gratuit
             </Button>
           </motion.div>
         </motion.div>

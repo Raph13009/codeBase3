@@ -17,6 +17,7 @@ import Convert from "./pages/Convert";
 import About from "./pages/About";
 
 
+
 // Import i18n configuration
 import "./lib/i18n";
 import i18n from "./lib/i18n";
@@ -43,6 +44,7 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/solutions" element={<Solutions />} />
               <Route path="/other-solutions" element={<OtherSolutions />} />
+      
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/contact" element={<Contact />} />

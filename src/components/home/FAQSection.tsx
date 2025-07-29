@@ -4,54 +4,22 @@ import { MessageCircle, FileText, Rocket, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const FAQSection: React.FC = () => {
-  const processSteps = [
+  const criteria = [
     {
-      icon: MessageCircle,
-      title: "1. On échange sur vos besoins",
-      description: "Appel gratuit de 30 minutes pour comprendre votre projet et vos objectifs",
-      details: [
-        "Analyse de vos besoins",
-        "Définition des objectifs",
-        "Estimation du budget",
-        "Planning prévisionnel"
-      ],
-      color: "from-blue-500 to-cyan-500"
+      title: "Expertise technique",
+      description: "Maîtrise des technologies modernes et bonnes pratiques"
     },
     {
-      icon: FileText,
-      title: "2. On propose un plan clair",
-      description: "Devis détaillé et transparent avec planning précis",
-      details: [
-        "Devis simple et clair",
-        "Planning détaillé",
-        "Livrables définis",
-        "Modalités de paiement"
-      ],
-      color: "from-purple-500 to-pink-500"
+      title: "Transparence",
+      description: "Devis détaillés, planning clair, communication régulière"
     },
     {
-      icon: Rocket,
-      title: "3. On livre rapidement",
-      description: "Développement agile avec suivi régulier et livraison rapide",
-      details: [
-        "Développement en sprints",
-        "Suivi hebdomadaire",
-        "Tests et validation",
-        "Livraison progressive"
-      ],
-      color: "from-orange-500 to-red-500"
+      title: "Références",
+      description: "Portfolio de projets réussis et témoignages clients"
     },
     {
-      icon: CheckCircle,
-      title: "4. On reste avec vous",
-      description: "Support et maintenance pour assurer le succès de votre projet",
-      details: [
-        "Formation d'utilisation",
-        "Support technique",
-        "Maintenance évolutive",
-        "Optimisations continues"
-      ],
-      color: "from-green-500 to-emerald-500"
+      title: "Support",
+      description: "Accompagnement post-livraison et maintenance continue"
     }
   ];
 
@@ -70,91 +38,55 @@ const FAQSection: React.FC = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Notre processus
+            Comment choisir une agence web fiable ?
           </h2>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Simple, transparent et efficace. Voici comment nous travaillons ensemble
+            Découvrez notre processus transparent et les critères pour choisir la meilleure agence web
           </p>
         </motion.div>
 
-        {/* Process Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {processSteps.map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
-            >
-              <Card className="bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-all duration-300 hover:shadow-xl group h-full">
-                <CardHeader className="text-center pb-4">
-                  <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${step.color} p-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <step.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle className="text-lg font-bold text-white mb-2">
-                    {step.title}
-                  </CardTitle>
-                  <p className="text-slate-300 text-sm leading-relaxed">
-                    {step.description}
-                  </p>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {step.details.map((detail, detailIndex) => (
-                      <li key={detailIndex} className="flex items-center text-slate-300 text-sm">
-                        <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${step.color} mr-3 flex-shrink-0`}></div>
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Timeline Visualization */}
-        <motion.div 
-          className="mb-16"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <div className="bg-slate-700/50 rounded-2xl p-8 border border-slate-600">
-            <h3 className="text-2xl font-bold text-white text-center mb-8">
-              Timeline typique d'un projet
-            </h3>
-            
-            <div className="relative">
-              {/* Timeline Line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 via-purple-500 to-green-500"></div>
-              
-              {/* Timeline Steps */}
-              <div className="space-y-8">
-                {[
-                  { week: "Semaine 1", title: "Découverte & Planning", description: "Analyse des besoins et définition du projet" },
-                  { week: "Semaine 2-3", title: "Développement", description: "Création de votre solution avec suivi régulier" },
-                  { week: "Semaine 4", title: "Tests & Livraison", description: "Validation et mise en production" },
-                  { week: "Semaine 5+", title: "Support & Optimisation", description: "Accompagnement et améliorations" }
-                ].map((item, index) => (
-                  <div key={index} className="relative flex items-center">
-                    <div className={`w-4 h-4 rounded-full bg-gradient-to-r ${index === 0 ? 'from-blue-500 to-cyan-500' : index === 1 ? 'from-purple-500 to-pink-500' : index === 2 ? 'from-orange-500 to-red-500' : 'from-green-500 to-emerald-500'} absolute left-1/2 transform -translate-x-1/2 z-10`}></div>
-                    
-                    <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-                      <div className="bg-slate-600/50 rounded-lg p-4 border border-slate-500">
-                        <div className="text-sm font-semibold text-blue-400 mb-1">{item.week}</div>
-                        <div className="text-white font-semibold mb-1">{item.title}</div>
-                        <div className="text-slate-300 text-sm">{item.description}</div>
-                      </div>
+        {/* Modern Criteria Display */}
+        <div className="max-w-6xl mx-auto mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {criteria.map((criterion, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group relative"
+              >
+                <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700 rounded-2xl p-6 h-full hover:border-slate-600 transition-all duration-300 hover:shadow-xl hover:shadow-slate-900/50">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <span className="text-white font-bold text-lg">{index + 1}</span>
+                    </div>
+                    <div className="w-8 h-8 bg-slate-700 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors duration-300">
+                    {criterion.title}
+                  </h3>
+                  <p className="text-slate-300 leading-relaxed text-sm">
+                    {criterion.description}
+                  </p>
+                  <div className="mt-4 pt-4 border-t border-slate-700">
+                    <div className="flex items-center text-xs text-slate-500">
+                      <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mr-2"></div>
+                      Critère essentiel
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
+        </div>
+
+
 
         {/* Bottom CTA */}
         <motion.div 

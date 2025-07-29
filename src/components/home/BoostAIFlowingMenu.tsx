@@ -70,21 +70,22 @@ function MenuItem({ title, subtitle, icon, image, isLast }: MenuItem & { isLast:
 
   const repeatedMarqueeContent = Array.from({ length: 4 }).map((_, idx) => (
     <React.Fragment key={idx}>
-      <div className="flex items-center gap-6">
+      <div className="flex items-center justify-center gap-8 w-full px-16">
         <span className="text-transparent bg-gradient-to-r from-[#4B49D1] to-[#8B5CF6] bg-clip-text uppercase font-bold text-[3vh] leading-[1.2] p-[1vh_1vw_0] drop-shadow-[0_0_10px_rgba(75,73,209,0.5)]">
           {title}
         </span>
         <img 
           src={image} 
           alt={title}
-          className={`object-contain ${title.toLowerCase().includes('tarif') ? 'w-[100px] h-[100px]' : 'w-[60px] h-[60px]'}`}
+          className={`object-contain ${title.toLowerCase().includes('tarif') ? 'w-[80px] h-[80px]' : 'w-[50px] h-[50px]'}`}
         />
       </div>
-      <div className="w-[350px] h-[5vh] my-[1.5em] mx-[2vw] p-[0.5em_0]">
-        <p className="text-[#060010] text-[1.8vh] leading-relaxed font-light">
+      <div className="w-[95%] h-[2vh] my-[0.5em] mx-auto p-[0.1em_4em] text-center">
+        <p className="text-[#060010] text-[1.8vh] leading-none font-light whitespace-nowrap">
           {subtitle}
         </p>
       </div>
+      <div className="w-full h-[2vh]"></div>
     </React.Fragment>
   ));
 
@@ -109,8 +110,8 @@ function MenuItem({ title, subtitle, icon, image, isLast }: MenuItem & { isLast:
         className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none bg-gradient-to-br from-white via-gray-50 to-gray-100 translate-y-[101%] shadow-2xl"
         ref={marqueeRef}
       >
-        <div className="h-full w-[200%] flex" ref={marqueeInnerRef}>
-          <div className="flex items-center relative h-full w-[200%] will-change-transform animate-marquee">
+        <div className="h-full w-[200%] flex justify-center" ref={marqueeInnerRef}>
+          <div className="flex items-center justify-center relative h-full w-[200%] will-change-transform animate-marquee">
             {repeatedMarqueeContent}
           </div>
         </div>

@@ -276,6 +276,9 @@ html {
     /* Ensure proper height */
     height: auto;
     margin: 0 8px;
+    /* Allow vertical scroll */
+    touch-action: pan-x pan-y;
+    pointer-events: auto;
   }
   
   .mobile-carousel-item:hover {
@@ -294,7 +297,7 @@ html {
   
   /* Ensure touch scrolling works */
   .mobile-carousel {
-    touch-action: pan-x;
+    touch-action: pan-x pan-y;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -310,5 +313,12 @@ html {
   /* Ensure cards have proper spacing */
   .mobile-carousel .flex {
     gap: 16px;
+  }
+  
+  /* Allow vertical scroll on cards */
+  .mobile-carousel .card,
+  .mobile-carousel .bg-slate-800\/50 {
+    touch-action: pan-x pan-y;
+    pointer-events: auto;
   }
 }

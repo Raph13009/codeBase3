@@ -67,10 +67,10 @@ const HeroSection: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Mobile Layout */}
         <div className="block sm:block lg:hidden">
-          <div className="flex flex-col justify-end min-h-screen pt-64">
+          <div className="flex flex-col justify-end min-h-screen pt-32">
             {/* Title and CTA - Bottom of screen */}
-            <div className="flex justify-center mb-32">
-                            <div className="w-64 px-2 text-left">
+            <div className="flex justify-center mb-16">
+              <div className="w-64 px-2 text-left">
                 <motion.div 
                   className="hero-title text-3xl sm:text-4xl font-bold mb-24 leading-tight h-32"
                   initial={{ opacity: 0, y: 30 }}

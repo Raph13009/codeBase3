@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
       </section>
     </div>
   `;
-
+  
   return (
     <>
       <footer className="bg-gradient-to-br from-[#0B0E1A] to-[#121826] border-t border-transparent relative">
@@ -97,13 +97,13 @@ const Footer: React.FC = () => {
                     alt="BoostAI Consulting" 
                     className="h-8 w-auto transition-transform duration-300 hover:scale-110 drop-shadow-lg"
                   />
-                </div>
+              </div>
               </motion.div>
               <p className="text-slate-400 text-sm leading-relaxed">
                 Votre partenaire digital pour transformer vos idées en solutions innovantes
               </p>
             </div>
-
+            
             {/* Center Column - Navigation */}
             <div className="text-center">
               <h3 className="text-white font-semibold mb-4">Navigation</h3>
@@ -143,13 +143,13 @@ const Footer: React.FC = () => {
                       >
                         {link.label}
                         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-300 group-hover:w-full"></span>
-                      </Link>
+                  </Link>
                     )}
                   </motion.div>
                 ))}
               </nav>
             </div>
-
+            
             {/* Right Column - Contact & Tech Stack */}
             <div className="text-center md:text-right">
               {/* Contact Information */}
@@ -187,9 +187,9 @@ const Footer: React.FC = () => {
                     <Linkedin className="h-4 w-4" />
                     <span>LinkedIn</span>
                   </motion.a>
-                </div>
-              </div>
-
+            </div>
+          </div>
+          
               {/* Tech Stack */}
               <div className="mb-4">
                 <p className="text-slate-400 text-sm mb-2">

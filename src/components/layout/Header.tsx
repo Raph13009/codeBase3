@@ -41,7 +41,7 @@ const Header: React.FC = () => {
   return (
     <>
       {/* Minimalist Header */}
-      <header 
+    <header 
         className={`fixed top-0 left-0 right-0 z-50 h-12 md:h-14 transition-all duration-300 ease-out ${
           isScrolled 
             ? 'bg-black/60 backdrop-blur-md shadow-sm' 
@@ -95,22 +95,22 @@ const Header: React.FC = () => {
                     <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full scale-x-0 transition-transform duration-200 group-hover:scale-x-100" />
                   </>
                 )}
-              </NavLink>
+            </NavLink>
             ))}
-          </nav>
+        </nav>
 
           {/* Right side - Language Switcher & Mobile Menu */}
           <div className="flex items-center space-x-3">
-            <LanguageSwitcher />
-            
+          <LanguageSwitcher />
+
             {/* Mobile Menu Button - Minimalist */}
-            <button 
-              onClick={toggleMobileMenu} 
+          <button 
+            onClick={toggleMobileMenu} 
               className="md:hidden p-1.5 text-gray-300 hover:text-white transition-colors duration-200"
-              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-            >
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          >
               <Menu className="w-5 h-5" />
-            </button>
+          </button>
           </div>
         </div>
       </header>
@@ -124,14 +124,14 @@ const Header: React.FC = () => {
               <div className="flex items-center">
                 <img src="/images/favicon.png" alt="BoostAI Consulting" className="w-8 h-8" />
               </div>
-              <button 
-                onClick={closeMobileMenu} 
+            <button 
+              onClick={closeMobileMenu} 
                 className="p-2 text-gray-300 hover:text-white transition-colors duration-200"
-                aria-label="Close menu"
-              >
+              aria-label="Close menu"
+            >
                 <X className="w-5 h-5" />
-              </button>
-            </div>
+            </button>
+      </div>
 
             {/* Navigation Links */}
             <div className="flex-1 flex items-center justify-center">
@@ -143,7 +143,7 @@ const Header: React.FC = () => {
                    { to: '/about', label: 'À propos' },
                    { to: '/contact', label: 'Contact' }
                  ].map((link) => (
-                   <NavLink
+              <NavLink 
                      key={link.to}
                      to={link.to}
                      className={({ isActive }) => `
@@ -154,8 +154,8 @@ const Header: React.FC = () => {
                        }
                        hover:scale-105
                      `}
-                     onClick={closeMobileMenu}
-                   >
+                onClick={closeMobileMenu}
+              >
                      {({ isActive }) => (
                        <>
                          <div className="flex items-center space-x-3">
@@ -172,12 +172,12 @@ const Header: React.FC = () => {
                          )}
                        </>
                      )}
-                   </NavLink>
+          </NavLink>
                  ))}
-              </nav>
+            </nav>
             </div>
           </div>
-        </div>
+      </div>
       )}
     </>
   );

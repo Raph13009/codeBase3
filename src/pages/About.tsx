@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import MetaTags from '@/components/seo/MetaTags';
+import ProfileCard from '@/components/ui/ProfileCard';
 
 import { Check, ArrowRight, Coffee, Zap, Target, Users, Brain } from 'lucide-react';
 
@@ -56,7 +57,9 @@ const About: React.FC = () => {
         keywords="AI consultant, independent consultant, digital transformation, business automation, startup MVP, SME solutions"
       />
       
-      <div className="min-h-screen relative overflow-x-hidden bg-black">
+      <div className="min-h-screen relative overflow-x-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%239C92AC&quot; fill-opacity=&quot;0.05&quot;%3E%3Ccircle cx=&quot;30&quot; cy=&quot;30&quot; r=&quot;2&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
 
         <Header />
         
@@ -70,13 +73,47 @@ const About: React.FC = () => {
                 transition={{ duration: 0.8 }}
               >
                 <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 text-white leading-tight">
-                  Who's behind <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">BoostAI</span>?
+                  Qui se cache derrière <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">BoostAI</span> ?
                 </h1>
                 
                 <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                  Independent AI consultant helping real businesses solve real problems. No corporate BS, just practical solutions that work.
+                  Consultant IA indépendant qui aide les vraies entreprises à résoudre de vrais problèmes. Pas de jargon corporate, juste des solutions pratiques qui fonctionnent.
                 </p>
               </motion.div>
+            </div>
+          </section>
+
+          {/* Profile Card Section */}
+          <section className="px-4 md:px-6 mb-20">
+            <div className="max-w-4xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="text-center mb-12"
+              >
+                <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+                  Rencontrez Raphaël
+                </h2>
+                <p className="text-xl text-gray-300">
+                  Le fondateur derrière BoostAI Consulting
+                </p>
+              </motion.div>
+              
+              <div className="flex justify-center">
+                <ProfileCard
+                  name="Raphaël B."
+                  title="Fondateur & Créateur digital"
+                  handle="boostaiconsulting"
+                  status="Disponible"
+                  contactText="Me Contacter"
+                  avatarUrl="/raphael.png"
+                  showUserInfo={true}
+                  enableTilt={true}
+                  enableMobileTilt={false}
+                  onContactClick={() => navigate('/contact')}
+                />
+              </div>
             </div>
           </section>
 

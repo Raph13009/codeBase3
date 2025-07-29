@@ -121,7 +121,7 @@ export async function getBlogsByCategory(category: string) {
     console.error('Error in getBlogsByCategory:', error);
     throw error;
   }
-}
+} 
 
 export async function saveLeadToSupabase(email: string) {
   try {

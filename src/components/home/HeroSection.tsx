@@ -3,11 +3,13 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import TextType from '../ui/TextType';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const video = videoRef.current;
@@ -112,6 +114,7 @@ const HeroSection: React.FC = () => {
                     <Button 
                       size="lg" 
                       className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-3 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+                      onClick={() => navigate('/contact')}
                     >
                       Demander un devis gratuit
                     </Button>

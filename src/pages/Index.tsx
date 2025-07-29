@@ -4,6 +4,7 @@ import HowWeHelp from '../components/home/HowWeHelp';
 import WhatWeOffer from '../components/home/WhatWeOffer';
 import OurOffers from '../components/home/OurOffers';
 import StepperSection from '../components/home/StepperSection';
+import ScrollVelocity from '../components/ui/ScrollVelocity';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
@@ -24,6 +25,27 @@ const Index: React.FC = () => {
         <main className="relative z-10">
           {/* 1. Hero Section */}
           <HeroSection />
+          
+          {/* Scroll Velocity */}
+          <div className="relative overflow-hidden bg-gradient-to-r from-[#0b0f1a] to-[#1c2233] bg-opacity-95" style={{ backgroundColor: 'rgba(17, 24, 39, 0.95)' }}>
+            <ScrollVelocity
+              texts={[
+                <>
+                  <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">+10 projets (2025)</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">100% satisfaits</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">Livraison rapide</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">Sur-mesure</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">Code propre</span> <span className="text-blue-400 mx-2">•</span>
+                  <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">+10 projets (2025)</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">100% satisfaits</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">Livraison rapide</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">Sur-mesure</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">Code propre</span> <span className="text-blue-400 mx-2">•</span>
+                </>,
+                <>
+                  <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">Support premium</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">IA intégrée</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">SEO optimisé</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">Sans stress</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">Audit offert</span> <span className="text-blue-400 mx-2">•</span>
+                  <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">Support premium</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">IA intégrée</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">SEO optimisé</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">Sans stress</span> <span className="text-blue-400 mx-2">•</span> <span className="text-[#e5e7eb] hover:bg-gradient-to-r hover:from-purple-400 hover:to-blue-300 hover:bg-clip-text hover:text-transparent transition-all duration-300">Audit offert</span> <span className="text-blue-400 mx-2">•</span>
+                </>
+              ]} 
+              velocity={100} 
+              className="text-base md:text-xl"
+              parallaxClassName="py-8"
+              scrollerClassName="text-base md:text-xl"
+              parallaxStyle={{ marginTop: '-20px', marginBottom: '-20px' }}
+            />
+          </div>
           
           {/* 2. Comment on vous aide */}
           <HowWeHelp />

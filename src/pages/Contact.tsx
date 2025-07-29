@@ -100,10 +100,10 @@ const Contact: React.FC = () => {
                 >
                   Obtenez une <span className="text-purple-400 font-semibold">consultation gratuite</span> et découvrez comment nos solutions IA peuvent révolutionner vos opérations en moins de 2 minutes
                 </motion.p>
-              </motion.div>
+                </motion.div>
 
               {/* Stepper au milieu */}
-              <motion.div 
+                <motion.div
                 className="flex justify-center"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -249,7 +249,7 @@ const Contact: React.FC = () => {
                     </div>
                   </Step>
                 </Stepper>
-              </motion.div>
+                  </motion.div>
             </div>
           </section>
         </main>

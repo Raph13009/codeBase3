@@ -1,59 +1,179 @@
-import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useLayoutEffect, useState } from "react";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useMotionValue,
+  useVelocity,
+  useAnimationFrame,
+} from "framer-motion";
 
-interface ScrollVelocityProps {
-  texts: string[];
-  velocity: number;
-  className?: string;
+function useElementWidth(ref) {
+  const [width, setWidth] = useState(0);
+
+  useLayoutEffect(() => {
+    function updateWidth() {
+      if (ref.current) {
+        setWidth(ref.current.offsetWidth);
+      }
+    }
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, [ref]);
+
+  return width;
 }
 
-const ScrollVelocity: React.FC<ScrollVelocityProps> = ({ texts, velocity, className = "" }) => {
-  const [scrollY, setScrollY] = useState(0);
-  const { scrollYProgress } = useScroll();
-  
-  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+export const ScrollVelocity = ({
+  scrollContainerRef,
+  texts = [],
+  velocity = 100,
+  className = "",
+  damping = 50,
+  stiffness = 400,
+  numCopies = 6,
+  velocityMapping = { input: [0, 1000], output: [0, 5] },
+  parallaxClassName = "",
+  scrollerClassName = "",
+  parallaxStyle = {},
+  scrollerStyle = {},
+}: {
+  scrollContainerRef?: any;
+  texts?: React.ReactNode[];
+  velocity?: number;
+  className?: string;
+  damping?: number;
+  stiffness?: number;
+  numCopies?: number;
+  velocityMapping?: { input: number[]; output: number[] };
+  parallaxClassName?: string;
+  scrollerClassName?: string;
+  parallaxStyle?: any;
+  scrollerStyle?: any;
+}) => {
+  function VelocityText({
+    children,
+    baseVelocity = velocity,
+    scrollContainerRef,
+    className = "",
+    damping,
+    stiffness,
+    numCopies,
+    velocityMapping,
+    parallaxClassName,
+    scrollerClassName,
+    parallaxStyle,
+    scrollerStyle,
+  }: {
+    children: React.ReactNode;
+    baseVelocity?: number;
+    scrollContainerRef?: any;
+    className?: string;
+    damping?: number;
+    stiffness?: number;
+    numCopies?: number;
+    velocityMapping?: { input: number[]; output: number[] };
+    parallaxClassName?: string;
+    scrollerClassName?: string;
+    parallaxStyle?: any;
+    scrollerStyle?: any;
+  }) {
+    const baseX = useMotionValue(0);
+    const scrollOptions = scrollContainerRef
+      ? { container: scrollContainerRef }
+      : {};
+    const { scrollY } = useScroll(scrollOptions);
+    const scrollVelocity = useVelocity(scrollY);
+    const smoothVelocity = useSpring(scrollVelocity, {
+      damping: damping ?? 50,
+      stiffness: stiffness ?? 400,
+    });
+    const velocityFactor = useTransform(
+      smoothVelocity,
+      velocityMapping?.input || [0, 1000],
+      velocityMapping?.output || [0, 5],
+      { clamp: false }
+    );
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
+    const copyRef = useRef(null);
+    const copyWidth = useElementWidth(copyRef);
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    function wrap(min, max, v) {
+      const range = max - min;
+      const mod = (((v - min) % range) + range) % range;
+      return mod + min;
+    }
 
-  return (
-    <motion.div 
-      className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none ${className}`}
-      style={{ y, opacity }}
-    >
-      <div className="text-center">
-        {texts.map((text, index) => (
-          <motion.div
-            key={index}
-            className="text-white text-2xl md:text-4xl font-bold mb-2"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.2 }}
-          >
-            {text}
-          </motion.div>
-        ))}
-        <motion.div
-          className="w-6 h-10 border-2 border-white rounded-full mx-auto mt-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+    const x = useTransform(baseX, (v) => {
+      if (copyWidth === 0) return "0px";
+      return `${wrap(-copyWidth, 0, v)}px`;
+    });
+
+    const directionFactor = useRef(1);
+    useAnimationFrame((t, delta) => {
+      let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+
+      if (velocityFactor.get() < 0) {
+        directionFactor.current = -1;
+      } else if (velocityFactor.get() > 0) {
+        directionFactor.current = 1;
+      }
+
+      moveBy += directionFactor.current * moveBy * velocityFactor.get();
+      baseX.set(baseX.get() + moveBy);
+    });
+
+    const spans = [];
+    for (let i = 0; i < (numCopies ?? 1); i++) {
+      spans.push(
+        <span
+          className={`flex-shrink-0 ${className}`}
+          key={i}
+          ref={i === 0 ? copyRef : null}
         >
-          <motion.div
-            className="w-1 h-3 bg-white rounded-full mx-auto mt-2"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          />
+          {children}
+        </span>
+      );
+    }
+
+    return (
+      <div
+        className={`${parallaxClassName} relative overflow-hidden`}
+        style={parallaxStyle}
+      >
+        <motion.div
+          className={`${scrollerClassName} flex whitespace-nowrap text-center font-sans text-4xl font-bold tracking-[-0.02em] drop-shadow md:text-[5rem] md:leading-[5rem]`}
+          style={{ x, ...scrollerStyle }}
+        >
+          {spans}
         </motion.div>
       </div>
-    </motion.div>
+    );
+  }
+
+  return (
+    <section>
+      {texts.map((text, index) => (
+        <VelocityText
+          key={index}
+          className={className}
+          baseVelocity={index % 2 !== 0 ? -velocity : velocity}
+          scrollContainerRef={scrollContainerRef}
+          damping={damping}
+          stiffness={stiffness}
+          numCopies={numCopies}
+          velocityMapping={velocityMapping}
+          parallaxClassName={parallaxClassName}
+          scrollerClassName={scrollerClassName}
+          parallaxStyle={parallaxStyle}
+          scrollerStyle={scrollerStyle}
+        >
+          {text}
+        </VelocityText>
+      ))}
+    </section>
   );
 };
 

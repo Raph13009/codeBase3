@@ -5,10 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { HelmetProvider } from 'react-helmet-async';
-import ScrollToTop from "./components/ScrollToTop";
+import { useScrollToTop } from "@/hooks/useScrollToTop";
 import Index from "./pages/Index";
-import Solutions from "./pages/Solutions";
-import OtherSolutions from "./pages/OtherSolutions";
+
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
@@ -26,6 +25,9 @@ import i18n from "./lib/i18n";
 const queryClient = new QueryClient();
 
 const App = () => {
+  // Global scroll to top behavior
+  useScrollToTop();
+  
   useEffect(() => {
     // English language
     i18n.changeLanguage('en');
@@ -40,13 +42,9 @@ const App = () => {
           <Sonner />
 
           <div className="min-h-screen bg-gray-50">
-            <ScrollToTop />
             <Navbar />
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/solutions" element={<Solutions />} />
-              <Route path="/other-solutions" element={<OtherSolutions />} />
-      
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/contact" element={<Contact />} />

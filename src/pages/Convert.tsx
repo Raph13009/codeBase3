@@ -13,7 +13,7 @@ const CodigBanner = () => (
       </a>
       <div className="flex-1">
         <div className="font-semibold text-lg sm:text-xl text-gray-800">Fonctionnalité OCR personnalisée pour Codig</div>
-        <div className="text-gray-500 text-sm sm:text-base mt-1">Ce convertisseur a été conçu spécialement pour Codig.<br />
+        <div className="text-gray-500 text-sm sm:text-base mt-1">Ce Convertisseur a été conçu spécialement pour Codig.<br />
           Vous voulez un flux OCR personnalisé pour votre entreprise ?{' '}
           <a href="/contact" className="text-blue-600 underline hover:text-blue-800">Parlons-en</a>
         </div>
@@ -79,7 +79,7 @@ const Convert = () => {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch("https://boostai-backend.onrender.com/convert", {
+      const response = await fetch("https://boostai-backend.onrender.com/Convert", {
         method: "POST",
         body: formData,
       });
@@ -94,7 +94,7 @@ const Convert = () => {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = file.name.replace(/\.pdf$/i, "_converted.xlsx");
+      a.download = file.name.replace(/\.pdf$/i, "_Converted.xlsx");
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -116,7 +116,7 @@ const Convert = () => {
       <MetaTags
         title="Convertir PDF en Excel | BoostAI Consulting - Convertisseur Gratuit"
         description="Convertissez vos fichiers PDF en Excel gratuitement. Outil OCR avancé pour extraire les données de vos documents PDF."
-        keywords="convertisseur PDF Excel, OCR, extraction données, PDF to Excel, BoostAI Consulting"
+        keywords="Convertisseur PDF Excel, OCR, extraction données, PDF to Excel, BoostAI Consulting"
       />
       <div className="min-h-screen relative overflow-x-hidden bg-[#0B0D14]">
       <Header />
@@ -164,7 +164,7 @@ const Convert = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
                   >
-                    Téléchargez votre fichier PDF et convertissez-le en format Excel avec notre <span className="text-purple-400 font-semibold">outil OCR avancé</span>
+                    Téléchargez votre fichier PDF et Convertissez-le en format Excel avec notre <span className="text-purple-400 font-semibold">outil OCR avancé</span>
                   </motion.p>
                 </motion.div>
 

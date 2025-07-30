@@ -62,8 +62,8 @@ const Header: React.FC = () => {
           <nav className="hidden md:flex items-center space-x-12">
             {[
               { to: '/', label: 'Accueil' },
-              { to: '/blog', label: 'Blog' },
-              { to: '/convert', label: 'Convert', isNew: true },
+              { to: '/blog', label: 'Blog 🇬🇧' },
+              { to: '/convert', label: 'Convertir', isNew: true },
               { to: '/about', label: 'À propos' },
               { to: '/contact', label: 'Contact' }
             ].map((link) => (
@@ -138,8 +138,8 @@ const Header: React.FC = () => {
               <nav className="flex flex-col items-center space-y-8">
                                  {[
                    { to: '/', label: 'Accueil' },
-                   { to: '/blog', label: 'Blog' },
-                   { to: '/convert', label: 'Convert', isNew: true },
+                   { to: '/blog', label: 'Blog 🇬🇧' },
+                   { to: '/convert', label: 'Convertir', isNew: true },
                    { to: '/about', label: 'À propos' },
                    { to: '/contact', label: 'Contact' }
                  ].map((link) => (

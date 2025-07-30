@@ -75,7 +75,7 @@ const SolutionsPreview: React.FC = () => {
     {
       id: 'web',
       title: 'Web Development',
-      description: 'Modern, responsive websites that convert visitors',
+      description: 'Modern, responsive websites that Convert visitors',
       icon: <Globe className="w-6 h-6" />,
       color: 'bg-amber-500/20 text-amber-400',
       illustration: <WebsiteIllustration />,

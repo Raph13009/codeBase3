@@ -8,7 +8,7 @@ import os
 import base64
 import json
 import pandas as pd
-from pdf2image import convert_from_path
+from pdf2image import Convert_from_path
 from openai import OpenAI
 
 client = OpenAI()
@@ -35,8 +35,8 @@ PROMPT = (
 def healthcheck():
     return {"status": "ok"}
 
-@app.post("/convert")
-async def convert_file(file: UploadFile = File(...)):
+@app.post("/Convert")
+async def Convert_file(file: UploadFile = File(...)):
     # Création d'un dossier temporaire unique
     job_id = str(uuid.uuid4())
     temp_dir = Path("temp") / job_id
@@ -50,7 +50,7 @@ async def convert_file(file: UploadFile = File(...)):
         shutil.copyfileobj(file.file, buffer)
 
     # Convertit le PDF en PNG (une page à la fois)
-    images = convert_from_path(str(pdf_path), dpi=300)
+    images = Convert_from_path(str(pdf_path), dpi=300)
     png_paths = []
     for i, img in enumerate(images):
         out_path = png_dir / f"page_{i+1}.png"
@@ -94,6 +94,6 @@ async def convert_file(file: UploadFile = File(...)):
     # Retourne le fichier Excel
     return FileResponse(
         path=str(excel_path),
-        filename="converted.xlsx",
+        filename="Converted.xlsx",
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )

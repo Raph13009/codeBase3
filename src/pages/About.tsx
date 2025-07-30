@@ -55,7 +55,7 @@ const About: React.FC = () => {
             <div className="max-w-6xl mx-auto">
               <div className="flex flex-col lg:flex-row items-start gap-12">
                 {/* Profile Card - Left side on desktop, top on mobile */}
-                <div className="lg:w-1/2 flex justify-center">
+                <div className="lg:w-1/2 flex justify-center w-full items-center">
                   <ProfileCard
                     name="Raphaël L."
                     title="Expert Web & IA"

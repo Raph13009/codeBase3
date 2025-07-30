@@ -110,6 +110,9 @@ const Footer: React.FC = () => {
               <nav className="flex flex-col space-y-3">
                 {[
                   { to: '/', label: 'Accueil' },
+                  { to: '/blog', label: 'Blog 🇬🇧' },
+                                     { to: '/convert', label: 'Convertir' },
+                  { to: '/about', label: 'À propos' },
                   { to: '/contact', label: 'Contact' },
                   { 
                     label: 'Mentions légales', 

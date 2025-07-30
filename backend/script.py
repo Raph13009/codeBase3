@@ -5,7 +5,7 @@ import time
 import pandas as pd
 from openai import OpenAI
 from pathlib import Path
-from pdf2image import convert_from_path
+from pdf2image import Convert_from_path
 from PIL import Image
 
 client = OpenAI()
@@ -69,17 +69,17 @@ def save_excel(json_data, excel_path):
         header_df.to_excel(writer, index=False, startrow=0, startcol=0, sheet_name="Sheet1")
         table_df.to_excel(writer, index=False, startrow=len(header_df) + 2, startcol=0, sheet_name="Sheet1")
 
-def convert_pdf_to_pngs(pdf_dir, png_dir):
+def Convert_pdf_to_pngs(pdf_dir, png_dir):
     """Convertit tous les PDF de pdf_dir en PNG dans png_dir (1 PNG par page, nommés <pdfname>_pageN.png)."""
     os.makedirs(png_dir, exist_ok=True)
     for pdf_path in Path(pdf_dir).glob("*.pdf"):
         pdf_stem = pdf_path.stem
-        # Vérifie si déjà converti (première page)
+        # Vérifie si déjà Converti (première page)
         first_png = Path(png_dir) / f"{pdf_stem}_page1.png"
         if first_png.exists():
             continue
         try:
-            images = convert_from_path(str(pdf_path), dpi=300)
+            images = Convert_from_path(str(pdf_path), dpi=300)
             for i, img in enumerate(images):
                 out_path = Path(png_dir) / f"{pdf_stem}_page{i+1}.png"
                 img.save(out_path, "PNG")
@@ -89,7 +89,7 @@ def convert_pdf_to_pngs(pdf_dir, png_dir):
 
 def main():
     # Conversion PDF->PNG avant tout
-    convert_pdf_to_pngs("input_pdf", "input_png")
+    Convert_pdf_to_pngs("input_pdf", "input_png")
     png_files = list(Path(INPUT_DIR).glob("*.png"))
     if not png_files:
         print("📂 No PNG files found in input_png/")

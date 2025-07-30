@@ -41,11 +41,11 @@ const ContactForm: React.FC = () => {
       [name]: value
     }));
   };
-
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
+    
     try {
       const templateParams = {
         from_name: `${formData.firstName} ${formData.lastName}`,
@@ -60,12 +60,12 @@ const ContactForm: React.FC = () => {
 
       if (result.success) {
         setIsSubmitted(true);
-        setFormData({
+      setFormData({
           firstName: '',
           lastName: '',
-          email: '',
+        email: '',
           message: ''
-        });
+      });
       } else {
         throw new Error('Erreur lors de l\'envoi');
       }
@@ -141,35 +141,35 @@ const ContactForm: React.FC = () => {
                       <div>
                         <label className="block text-sm font-medium text-slate-300 mb-2">
                           Prénom *
-                        </label>
+          </label>
                         <Input 
                           name="firstName"
                           value={formData.firstName}
                           onChange={handleInputChange}
                           placeholder="Votre prénom"
-                          required
+            required
                           className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500"
-                        />
-                      </div>
+          />
+        </div>
                       <div>
                         <label className="block text-sm font-medium text-slate-300 mb-2">
                           Nom *
-                        </label>
+          </label>
                         <Input 
                           name="lastName"
                           value={formData.lastName}
                           onChange={handleInputChange}
                           placeholder="Votre nom"
-                          required
+            required
                           className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500"
-                        />
-                      </div>
-                    </div>
-                    
+          />
+        </div>
+      </div>
+      
                     <div>
                       <label className="block text-sm font-medium text-slate-300 mb-2">
                         Email *
-                      </label>
+          </label>
                       <Input 
                         name="email"
                         type="email"
@@ -178,40 +178,40 @@ const ContactForm: React.FC = () => {
                         placeholder="votre@email.com"
                         required
                         className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500"
-                      />
-                    </div>
-                    
+          />
+        </div>
+        
                     <div>
                       <label className="block text-sm font-medium text-slate-300 mb-2">
                         Message *
-                      </label>
+          </label>
                       <Textarea 
-                        name="message"
-                        value={formData.message}
+          name="message"
+          value={formData.message}
                         onChange={handleInputChange}
                         placeholder="Décrivez votre projet, vos besoins et vos objectifs..."
                         rows={5}
-                        required
+          required
                         className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500 resize-none"
                       />
-                    </div>
-                    
+      </div>
+      
                     <Button 
-                      type="submit"
-                      disabled={isSubmitting}
+          type="submit" 
+          disabled={isSubmitting}
                       className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 group disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isSubmitting ? (
-                        <>
+        >
+          {isSubmitting ? (
+            <>
                           Envoi en cours...
                           <div className="ml-2 w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        </>
-                      ) : (
-                        <>
+            </>
+          ) : (
+            <>
                           Demander un devis agence web
                           <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
-                        </>
-                      )}
+            </>
+          )}
                     </Button>
                   </form>
                 )}

@@ -45,10 +45,10 @@ const HowWeHelp: React.FC = () => {
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
             Comment choisir son agence web ?
-          </h2>
+            </h2>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto">
             Découvrez pourquoi choisir une agence web spécialisée comme BoostAI pour votre projet digital
-          </p>
+            </p>
         </motion.div>
 
         {/* Services Grid */}
@@ -74,7 +74,7 @@ const HowWeHelp: React.FC = () => {
               />
             </motion.div>
           ))}
-        </div>
+            </div>
 
         {/* Bottom CTA */}
         <motion.div 
@@ -86,7 +86,7 @@ const HowWeHelp: React.FC = () => {
         >
           <p className="text-slate-300 mb-6 text-lg">
             Besoin d'un devis pour votre projet web ? Audit gratuit de votre site existant ?
-          </p>
+              </p>
           <Link 
             to="/contact"
             className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25"

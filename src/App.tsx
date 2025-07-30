@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { HelmetProvider } from 'react-helmet-async';
+import ScrollToTop from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import Solutions from "./pages/Solutions";
 import OtherSolutions from "./pages/OtherSolutions";
@@ -39,6 +40,7 @@ const App = () => {
           <Sonner />
 
           <div className="min-h-screen bg-gray-50">
+            <ScrollToTop />
             <Navbar />
             <Routes>
               <Route path="/" element={<Index />} />

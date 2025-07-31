@@ -64,6 +64,7 @@ const Header: React.FC = () => {
               { to: '/', label: 'Accueil' },
               { to: '/blog', label: 'Blog 🇬🇧' },
               { to: '/convert', label: 'Convertir', isNew: true },
+              { to: '/guide', label: 'Tuto gratuit' },
               { to: '/about', label: 'À propos' },
               { to: '/contact', label: 'Contact' }
             ].map((link) => (
@@ -140,6 +141,7 @@ const Header: React.FC = () => {
                    { to: '/', label: 'Accueil' },
                    { to: '/blog', label: 'Blog 🇬🇧' },
                    { to: '/convert', label: 'Convertir', isNew: true },
+                   { to: '/guide', label: 'Tuto gratuit' },
                    { to: '/about', label: 'À propos' },
                    { to: '/contact', label: 'Contact' }
                  ].map((link) => (

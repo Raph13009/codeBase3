@@ -111,7 +111,8 @@ const Footer: React.FC = () => {
                 {[
                   { to: '/', label: 'Accueil' },
                   { to: '/blog', label: 'Blog 🇬🇧' },
-                                     { to: '/convert', label: 'Convertir' },
+                  { to: '/convert', label: 'Convertir' },
+                  { to: '/guide', label: 'Tuto gratuit' },
                   { to: '/about', label: 'À propos' },
                   { to: '/contact', label: 'Contact' },
                   { 

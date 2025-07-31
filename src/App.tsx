@@ -15,7 +15,7 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/layout/Navbar";
 import Convert from "./pages/Convert";
 import About from "./pages/About";
-
+import GuideVibeCoding from "./pages/GuideVibeCoding";
 
 
 // Import i18n configuration
@@ -50,6 +50,7 @@ const App = () => {
               <Route path="/contact" element={<Contact />} />
               <Route path="/Convert" element={<Convert />} />
               <Route path="/about" element={<About />} />
+              <Route path="/guide" element={<GuideVibeCoding />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

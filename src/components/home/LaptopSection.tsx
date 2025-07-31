@@ -25,6 +25,21 @@ const LaptopSection: React.FC = () => {
     }
   }, []);
 
+  // Gestion spécifique pour mobile
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video && /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      // Forcer le chargement sur mobile
+      video.load();
+      video.play().catch(() => {
+        // Si ça échoue, retenter après un délai
+        setTimeout(() => {
+          video.play().catch(console.error);
+        }, 500);
+      });
+    }
+  }, []);
+
   return (
     <section className="py-20 bg-slate-900 relative overflow-hidden">
       {/* Background Pattern */}

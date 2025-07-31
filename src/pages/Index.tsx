@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import HeroSection from '../components/home/HeroSection';
 import HowWeHelp from '../components/home/HowWeHelp';
+import LaptopSection from '../components/home/LaptopSection';
 import WhatWeOffer from '../components/home/WhatWeOffer';
 import OurOffers from '../components/home/OurOffers';
 import StepperSection from '../components/home/StepperSection';
@@ -50,13 +51,16 @@ const Index: React.FC = () => {
           {/* 2. Comment on vous aide */}
           <HowWeHelp />
           
-          {/* 3. Pourquoi BoostAI ? */}
+          {/* 3. Laptop Section */}
+          <LaptopSection />
+          
+          {/* 4. Pourquoi BoostAI ? */}
           <WhatWeOffer />
           
-          {/* 4. Nos offres */}
+          {/* 5. Nos offres */}
           <OurOffers />
           
-          {/* 5. Processus Stepper */}
+          {/* 6. Processus Stepper */}
           <StepperSection />
         </main>
         

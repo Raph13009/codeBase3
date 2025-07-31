@@ -115,19 +115,9 @@ export default function ServiceTiltedCard({
           </div>
 
           {/* Description */}
-          <p className="text-slate-300 mb-6 leading-relaxed text-center">
+          <p className="text-slate-300 leading-relaxed text-left">
             {description}
           </p>
-
-          {/* Features */}
-          <ul className="space-y-3">
-            {features.map((feature, index) => (
-              <li key={index} className="flex items-center text-slate-300">
-                <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${color} mr-3 flex-shrink-0`}></div>
-                {feature}
-              </li>
-            ))}
-          </ul>
         </div>
       </motion.div>
 

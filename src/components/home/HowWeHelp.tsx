@@ -8,22 +8,22 @@ const HowWeHelp: React.FC = () => {
   const services = [
     {
       icon: Globe,
-      title: "Agence web – Sites modernes et rapides",
-      description: "Boostez votre présence en ligne avec un site optimisé qui attire vos premiers clients.",
+      title: "Développement web sur-mesure",
+      description: "Nous développons des sites web rapides et des applications personnalisées pour répondre à vos besoins métiers. Chaque projet est optimisé pour le SEO, compatible mobile et pensé pour générer des résultats concrets.",
       features: ["Design responsive", "SEO optimisé", "Performance maximale"],
       color: "from-blue-500 to-cyan-500"
     },
     {
       icon: Smartphone,
-      title: "Développement web sur-mesure – De l'idée au produit",
-      description: "Transformez votre idée en un produit digital performant (MVP, marketplace, outil métier).",
+      title: "Accompagnement digital pour vos projets",
+      description: "Nous vous aidons à digitaliser votre idée en créant votre MVP, votre plateforme ou votre outil interne. De la conception à la mise en ligne, nous mettons en place un environnement complet pour lancer rapidement votre produit.",
       features: ["On clarifie votre idée", "Prototype rapide", "Lancement express"],
       color: "from-purple-500 to-pink-500"
     },
     {
       icon: Zap,
-      title: "Accompagnement digital – Automatisations & IA",
-      description: "Automatisez vos processus et intégrez des assistants IA pour gagner du temps et augmenter vos résultats.",
+      title: "Automatisations et optimisation des workflows",
+      description: "Nous concevons des automatisations et des systèmes connectés qui suppriment les tâches répétitives, centralisent vos données et améliorent l'efficacité de votre entreprise.",
       features: ["Vos tâches répétitives, terminées", "Assistant IA intégré", "Productivité boostée"],
       color: "from-orange-500 to-red-500"
     }
@@ -44,11 +44,8 @@ const HowWeHelp: React.FC = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Comment choisir son agence web ?
-            </h2>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Découvrez pourquoi choisir une agence web spécialisée comme BoostAI pour votre projet digital
-            </p>
+            Ce que nous faisons pour booster votre business digital
+          </h2>
         </motion.div>
 
         {/* Services Grid */}
@@ -74,26 +71,7 @@ const HowWeHelp: React.FC = () => {
               />
             </motion.div>
           ))}
-            </div>
-
-        {/* Bottom CTA */}
-        <motion.div 
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-slate-300 mb-6 text-lg">
-            Besoin d'un devis pour votre projet web ? Audit gratuit de votre site existant ?
-              </p>
-          <Link 
-            to="/contact"
-            className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25"
-          >
-            Demander un devis agence web
-          </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

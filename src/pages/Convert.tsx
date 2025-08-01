@@ -79,13 +79,19 @@ const Convert = () => {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch("https://boostai-backend.onrender.com/Convert", {
+      const response = await fetch("https://boostai-backend.onrender.com/convert", {
         method: "POST",
         body: formData,
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        if (response.status === 404) {
+          throw new Error("Le service de conversion est temporairement indisponible. Veuillez réessayer plus tard.");
+        }
+        if (response.status === 0 || response.status === 500) {
+          throw new Error("Le serveur de conversion est en cours de démarrage. Veuillez patienter quelques secondes et réessayer.");
+        }
+        const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.error || "La conversion a échoué");
       }
 
@@ -101,7 +107,12 @@ const Convert = () => {
       window.URL.revokeObjectURL(url);
 
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Une erreur s'est produite lors de la conversion");
+      console.error('Conversion error:', err);
+      if (err instanceof Error && err.message.includes('Failed to fetch')) {
+        setError("Le service de conversion est temporairement indisponible. Veuillez réessayer dans quelques minutes.");
+      } else {
+        setError(err instanceof Error ? err.message : "Une erreur s'est produite lors de la conversion");
+      }
     } finally {
       setIsScanning(false);
       setIsConverting(false);

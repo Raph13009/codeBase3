@@ -290,13 +290,25 @@ const GuideVibeCoding: React.FC = () => {
 
                             {/* Step 2: Download Button */}
                             {step.current && step.id === 2 && (
-                              <div className="mt-4">
+                              <div className="mt-4 space-y-3">
                                 <Button 
                                   onClick={handleDownload}
                                   className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
                                 >
                                   📩 J'ai accès à mon tuto
                                 </Button>
+                                
+                                <div className="text-center">
+                                  <p className="text-slate-400 text-sm mb-2">
+                                    Vous n'avez pas reçu le tuto ?
+                                  </p>
+                                  <a 
+                                    href="mailto:contact@boostaiconsulting.com?subject=Je n'ai pas reçu le tuto gratuit"
+                                    className="text-blue-400 hover:text-blue-300 text-sm underline"
+                                  >
+                                    Contacter le support
+                                  </a>
+                                </div>
                               </div>
                             )}
 
@@ -313,7 +325,7 @@ const GuideVibeCoding: React.FC = () => {
                                 <Button 
                                   onClick={() => setCurrentStep(1)}
                                   variant="outline"
-                                  className="mt-3 w-full border-slate-500 text-slate-200 hover:bg-slate-700 hover:text-white hover:border-slate-400"
+                                  className="mt-3 w-full border-slate-400 text-slate-100 hover:bg-slate-600 hover:text-white hover:border-slate-300 bg-slate-800/50"
                                 >
                                   🎉 Terminé !
                                 </Button>

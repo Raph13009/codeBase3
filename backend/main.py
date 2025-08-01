@@ -8,7 +8,7 @@ import os
 import base64
 import json
 import pandas as pd
-from pdf2image import Convert_from_path
+from pdf2image import convert_from_path
 from openai import OpenAI
 
 client = OpenAI()
@@ -50,7 +50,7 @@ async def Convert_file(file: UploadFile = File(...)):
         shutil.copyfileobj(file.file, buffer)
 
     # Convertit le PDF en PNG (une page à la fois)
-    images = Convert_from_path(str(pdf_path), dpi=300)
+    images = convert_from_path(str(pdf_path), dpi=300)
     png_paths = []
     for i, img in enumerate(images):
         out_path = png_dir / f"page_{i+1}.png"

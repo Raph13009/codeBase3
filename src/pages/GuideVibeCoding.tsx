@@ -98,13 +98,11 @@ const GuideVibeCoding: React.FC = () => {
 
   const handleDownload = () => {
     setCurrentStep(3);
-    // Téléchargement du PDF
+    // Confirmation que l'utilisateur a accès au tuto
     toast({
-      title: "Téléchargement en cours...",
-      description: "Le tuto va s'ouvrir dans un nouvel onglet.",
+      title: "Parfait !",
+      description: "Vous avez maintenant accès à votre tuto par email.",
     });
-    // Lien vers le PDF
-    window.open('/assets/Vibe Coding Your Website 2025.pdf', '_blank');
   };
 
   const steps = [
@@ -283,7 +281,7 @@ const GuideVibeCoding: React.FC = () => {
                                 <Button 
                                   type="submit" 
                                   disabled={isLoading}
-                                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                   {isLoading ? "Envoi..." : "Accéder au tuto"}
                                 </Button>
@@ -313,12 +311,11 @@ const GuideVibeCoding: React.FC = () => {
                                   Vous pouvez maintenant commencer à créer votre site web.
                                 </p>
                                 <Button 
-                                  onClick={handleDownload}
+                                  onClick={() => setCurrentStep(1)}
                                   variant="outline"
                                   className="mt-3 w-full border-slate-500 text-slate-200 hover:bg-slate-700 hover:text-white hover:border-slate-400"
                                 >
-                                  <Download className="w-4 h-4 mr-2" />
-                                  Télécharger à nouveau
+                                  🎉 Terminé !
                                 </Button>
                               </div>
                             )}

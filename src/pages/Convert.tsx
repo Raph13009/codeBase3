@@ -79,7 +79,7 @@ const Convert = () => {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch("https://boostai-backend.onrender.com/convert", {
+      const response = await fetch("https://boostai-backend.onrender.com/Convert", {
         method: "POST",
         body: formData,
       });

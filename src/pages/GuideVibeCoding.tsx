@@ -35,7 +35,8 @@ const GuideVibeCoding: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const { error } = await supabase
+      // 1. Enregistrer dans Supabase
+      const { error: supabaseError } = await supabase
         .from('leads')
         .insert([
           {
@@ -45,7 +46,36 @@ const GuideVibeCoding: React.FC = () => {
           }
         ]);
 
-      if (error) throw error;
+      if (supabaseError) throw supabaseError;
+
+      // 2. Envoyer à MailerLite
+      const mailerliteToken = import.meta.env.VITE_MAILERLITE_TOKEN;
+      console.log('MailerLite token exists:', !!mailerliteToken);
+      console.log('MailerLite token preview:', mailerliteToken ? `${mailerliteToken.substring(0, 10)}...` : 'undefined');
+      
+      if (!mailerliteToken) {
+        console.error('MailerLite token not configured. Please add VITE_MAILERLITE_TOKEN to your .env file');
+      } else {
+        const mailerliteResponse = await fetch('https://connect.mailerlite.com/api/subscribers', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${mailerliteToken}`,
+          },
+          body: JSON.stringify({
+            email: email,
+            groups: ['161527665974576689'] // ID du groupe au lieu du nom
+          }),
+        });
+
+        if (!mailerliteResponse.ok) {
+          const errorText = await mailerliteResponse.text();
+          console.error('MailerLite error:', errorText);
+          console.error('MailerLite status:', mailerliteResponse.status);
+        } else {
+          console.log('MailerLite success');
+        }
+      }
 
       toast({
         title: "Email enregistré !",
@@ -267,8 +297,7 @@ const GuideVibeCoding: React.FC = () => {
                                   onClick={handleDownload}
                                   className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
                                 >
-                                  <Download className="w-4 h-4 mr-2" />
-                                  Télécharger le tuto PDF
+                                  📩 J'ai accès à mon tuto
                                 </Button>
                               </div>
                             )}

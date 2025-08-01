@@ -16,7 +16,7 @@ const Index: React.FC = () => {
     <>
       <MetaTags 
         title="Agence Web BoostAI - Développement Web Sur-Mesure | Sites Internet & Solutions Digitales"
-        description="Agence web spécialisée dans la création de sites internet sur-mesure et le développement web. Code rapide, clients conquis, solutions innovantes. Choisissez la meilleure agence web pour votre projet digital."
+        description="Agence web spécialisée dans la création de sites internet sur-mesure et le développement web. Code rapide, solutions innovantes. Choisissez la meilleure agence web pour votre projet digital."
         keywords="agence web, développement web sur-mesure, agence digitale, création site internet, agence code, audit site web, refonte de site, accompagnement digital, agence SEO, choisir agence web, meilleure agence web, devis agence web"
       />
       <GoogleAnalytics />

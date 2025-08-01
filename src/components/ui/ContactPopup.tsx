@@ -22,7 +22,7 @@ const ContactPopup: React.FC<ContactPopupProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const handleEmailClick = () => {
-    window.open('mailto:raphaellevy027@gmail.com', '_blank');
+    window.open('mailto:raphael@boostaiconsulting.com', '_blank');
   };
 
   const handleLinkedInClick = () => {
@@ -56,7 +56,7 @@ const ContactPopup: React.FC<ContactPopupProps> = ({ isOpen, onClose }) => {
             </div>
             <div className="contact-info">
               <h4>Gmail</h4>
-              <p>raphaellevy027@gmail.com</p>
+              <p>raphael@boostaiconsulting.com</p>
             </div>
           </div>
 

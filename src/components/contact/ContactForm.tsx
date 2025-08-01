@@ -21,7 +21,7 @@ const ContactForm: React.FC = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "contact@boostai.com",
+      value: "contact@boostaiconsulting.com",
       description: "Réponse sous 24h",
       color: "from-blue-500 to-cyan-500"
     },

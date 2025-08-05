@@ -130,6 +130,10 @@ const Convert = () => {
       const response = await fetch("https://boostai-backend.onrender.com/Convert", {
         method: "POST",
         body: formData,
+        headers: {
+          'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        },
+        mode: 'cors',
       });
 
       if (!response.ok) {

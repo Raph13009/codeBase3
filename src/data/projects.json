@@ -1,0 +1,96 @@
+{
+  "web": [
+    {
+      "id": 1,
+      "title": "Site Avenirea",
+      "tags": ["#React", "#TypeScript", "#Tailwind", "#Vercel"],
+      "description": "Site vitrine moderne pour une entreprise de conseil en transformation digitale. Design épuré avec animations fluides et optimisation SEO complète.",
+      "image": "/assets/images/web-avenirea.jpg",
+      "category": "web",
+      "technologies": ["React", "TypeScript", "Tailwind CSS", "Vercel"],
+      "year": 2024
+    },
+    {
+      "id": 2,
+      "title": "Landing page Notion AI",
+      "tags": ["#Next.js", "#Framer Motion", "#Notion API", "#AI"],
+      "description": "Landing page interactive pour présenter les fonctionnalités IA de Notion. Intégration API et animations personnalisées.",
+      "image": "/assets/images/web-notion-ai.jpg",
+      "category": "web",
+      "technologies": ["Next.js", "Framer Motion", "Notion API"],
+      "year": 2024
+    },
+    {
+      "id": 3,
+      "title": "Refonte site e-commerce",
+      "tags": ["#Shopify", "#Liquid", "#CSS3", "#UX/UI"],
+      "description": "Refonte complète d'un site e-commerce avec amélioration de l'expérience utilisateur et optimisation des conversions.",
+      "image": "/assets/images/web-ecommerce.jpg",
+      "category": "web",
+      "technologies": ["Shopify", "Liquid", "CSS3"],
+      "year": 2023
+    },
+    {
+      "id": 4,
+      "title": "Portfolio artistique",
+      "tags": ["#Three.js", "#WebGL", "#Creative", "#Portfolio"],
+      "description": "Portfolio immersif avec animations 3D et galerie interactive pour un artiste digital.",
+      "image": "/assets/images/web-portfolio.jpg",
+      "category": "web",
+      "technologies": ["Three.js", "WebGL", "React"],
+      "year": 2024
+    }
+  ],
+  "ia": [
+    {
+      "id": 1,
+      "title": "Agent IA de veille hebdo Notion",
+      "tags": ["#Python", "#OpenAI", "#Notion API", "#Automation"],
+      "description": "Bot automatisé qui analyse les tendances du web et génère un rapport hebdomadaire directement dans Notion.",
+      "image": "/assets/images/ia-notion-bot.jpg",
+      "category": "ia",
+      "technologies": ["Python", "OpenAI API", "Notion API"],
+      "year": 2024
+    },
+    {
+      "id": 2,
+      "title": "Générateur de factures Factur-X",
+      "tags": ["#Node.js", "#PDF", "#XML", "#Facturation"],
+      "description": "Système automatisé de génération de factures au format Factur-X avec intégration comptable.",
+      "image": "/assets/images/ia-invoice.jpg",
+      "category": "ia",
+      "technologies": ["Node.js", "PDF", "XML"],
+      "year": 2023
+    },
+    {
+      "id": 3,
+      "title": "Bot de micro-trading crypto (KuCoin)",
+      "tags": ["#Python", "#KuCoin API", "#Trading", "#Crypto"],
+      "description": "Bot de trading automatisé pour les cryptomonnaies avec stratégies personnalisables et gestion des risques.",
+      "image": "/assets/images/ia-trading-bot.jpg",
+      "category": "ia",
+      "technologies": ["Python", "KuCoin API", "Trading"],
+      "year": 2024
+    },
+    {
+      "id": 4,
+      "title": "Assistant IA pour support client",
+      "tags": ["#GPT-4", "#Zendesk", "#NLP", "#Support"],
+      "description": "Assistant intelligent qui répond automatiquement aux questions fréquentes et route les cas complexes.",
+      "image": "/assets/images/ia-support-bot.jpg",
+      "category": "ia",
+      "technologies": ["GPT-4", "Zendesk API", "NLP"],
+      "year": 2024
+    },
+    {
+      "id": 5,
+      "title": "Système de recommandation produits",
+      "tags": ["#Machine Learning", "#Python", "#Pandas", "#Scikit-learn"],
+      "description": "Algorithme de recommandation basé sur l'historique d'achat et les préférences utilisateur.",
+      "image": "/assets/images/ia-recommendation.jpg",
+      "category": "ia",
+      "technologies": ["Python", "Pandas", "Scikit-learn"],
+      "year": 2023
+    }
+  ]
+}

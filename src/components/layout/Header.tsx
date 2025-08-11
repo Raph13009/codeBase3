@@ -63,6 +63,7 @@ const Header: React.FC = () => {
             {[
               { to: '/', label: 'Accueil' },
               { to: '/blog', label: 'Blog 🇬🇧' },
+              { to: '/realisations', label: 'Réalisations' },
               { to: '/convert', label: 'Convertir' },
               { to: '/guide', label: 'Tuto gratuit', isNew: true },
               { to: '/about', label: 'À propos' },
@@ -140,6 +141,7 @@ const Header: React.FC = () => {
                                  {[
                    { to: '/', label: 'Accueil' },
                    { to: '/blog', label: 'Blog 🇬🇧' },
+                   { to: '/realisations', label: 'Réalisations' },
                    { to: '/convert', label: 'Convertir' },
                    { to: '/guide', label: 'Tuto gratuit', isNew: true },
                    { to: '/about', label: 'À propos' },

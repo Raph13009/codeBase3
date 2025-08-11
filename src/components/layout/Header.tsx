@@ -62,11 +62,11 @@ const Header: React.FC = () => {
           <nav className="hidden md:flex items-center space-x-12">
             {[
               { to: '/', label: 'Accueil' },
-              { to: '/blog', label: 'Blog 🇬🇧' },
               { to: '/realisations', label: 'Réalisations' },
               { to: '/convert', label: 'Convertir' },
               { to: '/guide', label: 'Tuto gratuit', isNew: true },
               { to: '/about', label: 'À propos' },
+              { to: '/blog', label: 'Blog 🇬🇧' },
               { to: '/contact', label: 'Contact' }
             ].map((link) => (
               <NavLink
@@ -140,11 +140,11 @@ const Header: React.FC = () => {
               <nav className="flex flex-col items-center space-y-8">
                                  {[
                    { to: '/', label: 'Accueil' },
-                   { to: '/blog', label: 'Blog 🇬🇧' },
                    { to: '/realisations', label: 'Réalisations' },
                    { to: '/convert', label: 'Convertir' },
                    { to: '/guide', label: 'Tuto gratuit', isNew: true },
                    { to: '/about', label: 'À propos' },
+                   { to: '/blog', label: 'Blog 🇬🇧' },
                    { to: '/contact', label: 'Contact' }
                  ].map((link) => (
               <NavLink 

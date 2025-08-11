@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Monitor, Brain } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import MetaTags from "@/components/seo/MetaTags";
 import BlurText from "@/components/ui/BlurText";
 import GooeyNav from "@/components/ui/GooeyNav";
+import AgentsShowcase from "@/components/AgentsShowcase";
 
 const projectsData = {
   web: [
@@ -167,6 +168,13 @@ const Realisations = () => {
   const [activeTab, setActiveTab] = useState<'web' | 'agents'>('web');
   const navigate = useNavigate();
 
+  // Detect hash and set active tab accordingly
+  useEffect(() => {
+    if (window.location.hash === '#agents') {
+      setActiveTab('agents');
+    }
+  }, []);
+
   return (
     <>
       <MetaTags
@@ -299,22 +307,8 @@ const Realisations = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.5 }}
-                      className="text-center py-20"
                     >
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="max-w-2xl mx-auto"
-                      >
-                        <div className="text-6xl mb-6">🤖</div>
-                        <h3 className="text-2xl font-bold text-white mb-4">
-                          Section en cours de préparation
-                        </h3>
-                        <p className="text-gray-400 text-lg">
-                          Nos agents IA et automatisations arrivent bientôt...
-                        </p>
-                      </motion.div>
+                      <AgentsShowcase />
                     </motion.div>
                   </AnimatePresence>
                 )}

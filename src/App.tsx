@@ -18,6 +18,7 @@ import About from "./pages/About";
 import GuideVibeCoding from "./pages/GuideVibeCoding";
 import Realisations from "./pages/Realisations";
 import ProjectDetail from "./pages/ProjectDetail";
+import AgentDetail from "./pages/AgentDetail";
 
 
 // Import i18n configuration
@@ -55,6 +56,7 @@ const App = () => {
               <Route path="/Convert" element={<Convert />} />
               <Route path="/about" element={<About />} />
               <Route path="/guide" element={<GuideVibeCoding />} />
+              <Route path="/agent/:id" element={<AgentDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

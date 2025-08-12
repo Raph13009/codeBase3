@@ -477,11 +477,10 @@ const GuideVibeCoding: React.FC = () => {
                     <div className="text-center md:text-left">
                       <h3 className="text-2xl font-bold text-white mb-2">Raphaël Levy</h3>
                       <p className="text-slate-300 mb-4">
-                        Développeur web et entrepreneur depuis 2019. J'ai créé plus de 50 sites web et applications pour des clients du monde entier. Passionné par les outils no-code et le partage de connaissances.
+                        Développeur web et entrepreneur depuis 2019. J'ai créé plus de 50 sites web et applications pour des clients du monde entier.
                       </p>
                       <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                         <Badge className="bg-blue-500">Développeur Web</Badge>
-                        <Badge className="bg-purple-500">No-Code Expert</Badge>
                         <Badge className="bg-green-500">Entrepreneur</Badge>
                       </div>
                     </div>

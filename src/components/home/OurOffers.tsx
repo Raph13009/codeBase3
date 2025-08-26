@@ -52,7 +52,7 @@ const OurOffers: React.FC = () => {
       ],
       color: "from-blue-500 to-cyan-500",
       popular: false,
-      mockup: "/images/website-mockup.png" // Placeholder
+      mockup: "/images/services/website.png"
     },
     {
       icon: Smartphone,
@@ -69,7 +69,7 @@ const OurOffers: React.FC = () => {
       ],
       color: "from-purple-500 to-pink-500",
       popular: true,
-      mockup: "/images/mvp-mockup.png" // Placeholder
+      mockup: "/images/services/MVP.png"
     },
     {
       icon: Zap,
@@ -86,7 +86,7 @@ const OurOffers: React.FC = () => {
       ],
       color: "from-orange-500 to-red-500",
       popular: false,
-      mockup: "/images/complete-mockup.png", // Placeholder
+      mockup: "/images/services/agent.png",
       futuristic: true
     }
   ];
@@ -218,10 +218,14 @@ const OurOffers: React.FC = () => {
                   </p>
                 </CardHeader>
 
-                {/* Mockup Placeholder */}
+                {/* Mockup Image */}
                 <div className="px-6 mb-6 flex-shrink-0">
-                  <div className={`w-full h-32 bg-slate-700/30 rounded-lg flex items-center justify-center border border-slate-600 ${offer.futuristic ? 'border-orange-500/30 group-hover:border-orange-500/50' : ''}`}>
-                    <span className="text-slate-400 text-sm">Mockup {offer.title}</span>
+                  <div className={`w-full aspect-[3/2] rounded-lg overflow-hidden border border-slate-600 ${offer.futuristic ? 'border-orange-500/30 group-hover:border-orange-500/50' : ''}`}>
+                    <img 
+                      src={offer.mockup} 
+                      alt={`Mockup ${offer.title}`}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
 
@@ -324,10 +328,14 @@ const OurOffers: React.FC = () => {
                         </p>
                       </CardHeader>
 
-                      {/* Mockup Placeholder */}
+                      {/* Mockup Image */}
                       <div className="px-4 mb-6 flex-shrink-0">
-                        <div className={`w-full h-20 bg-slate-700/30 rounded-lg flex items-center justify-center border border-slate-600 ${offer.futuristic ? 'border-orange-500/30 group-hover:border-orange-500/50' : ''}`}>
-                          <span className="text-slate-400 text-xs">Mockup {offer.title}</span>
+                        <div className={`w-full aspect-[3/2] rounded-lg overflow-hidden border border-slate-600 ${offer.futuristic ? 'border-orange-500/30 group-hover:border-orange-500/50' : ''}`}>
+                          <img 
+                            src={offer.mockup} 
+                            alt={`Mockup ${offer.title}`}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
                       </div>
 

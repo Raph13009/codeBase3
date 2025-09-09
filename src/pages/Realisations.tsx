@@ -12,6 +12,34 @@ import AgentsShowcase from "@/components/AgentsShowcase";
 const projectsData = {
   web: [
     {
+      id: 6,
+      title: "Kivaiakids – Plateforme éducative",
+      image: "/realisation/kivaiakids1.png",
+      tags: ["Next.js", "Supabase", "CMS", "Upload", "Multi-média"],
+      description: "Plateforme complète d'apprentissage des langues pour enfants avec interface professeur dédiée et système de gestion de contenu.",
+      fullTitle: "Kivaiakids – Plateforme éducative multilingue pour enfants",
+      stack: ["Next.js", "Supabase (auth + base de données)", "TailwindCSS", "Upload de fichiers", "Système de cours"],
+      features: [
+        "Interface professeur complète avec éditeur de cours intégré",
+        "Système de création de cours avec éditeur de texte avancé (type Word)",
+        "Upload et gestion de livres, audios et documents multimédias",
+        "Organisation des cours par niveaux et catégories",
+        "Interface élève intuitive et gamifiée",
+        "Système de progression et de suivi des apprentissages",
+        "Gestion des utilisateurs (professeurs et élèves)",
+        "Design responsive optimisé pour tablettes et mobiles"
+      ],
+      summary: "Kivaiakids révolutionne l'apprentissage des langues pour les enfants avec une plateforme complète qui donne aux professeurs tous les outils nécessaires pour créer des cours engageants. L'interface professeur permet de gérer facilement le contenu, tandis que les enfants bénéficient d'une expérience d'apprentissage moderne et interactive.",
+      images: [
+        "/realisation/kivaiakids1.png",
+        "/realisation/kivaiakids2.png",
+        "/realisation/kivaiakids3.png",
+        "/realisation/kivaiakids4.png",
+        "/realisation/kivaiakids5.png",
+        "/realisation/kivaiakids6.png"
+      ]
+    },
+    {
       id: 1,
       title: "Avenirea",
       image: "/realisation/avenireaCover.png",
@@ -120,11 +148,11 @@ const projectsData = {
       stack: ["React", "Vite", "TailwindCSS", "EmailJS (contact)"],
       features: [
         "Design responsive et épuré",
-        "Formulaire de contact avec envoi d’e-mail",
+        "Formulaire de contact avec envoi d'e-mail",
         "Section Événements: ajout/modification simple sans base de données",
         "Pages statiques performantes (SEO-ready)"
       ],
-      summary: "Un site vitrine moderne et rapide pour l’association Blue Garden, pensé pour être maintenu sans back-end lourd, avec un système simple pour publier des événements.",
+      summary: "Un site vitrine moderne et rapide pour l'association Blue Garden, pensé pour être maintenu sans back-end lourd, avec un système simple pour publier des événements.",
       images: [
         "/realisation/bluegarden1.png",
         "/realisation/bluegarden2.png",

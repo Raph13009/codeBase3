@@ -117,15 +117,43 @@ const projectsData = {
     stack: ["React", "Vite", "TailwindCSS", "EmailJS (contact)", "Static content"],
     features: [
       "Design responsive et épuré",
-      "Formulaire de contact avec envoi d’e-mail",
+      "Formulaire de contact avec envoi d'e-mail",
       "Section Événements: ajout/modification simple sans base de données",
       "Pages statiques performantes (SEO-ready)"
     ],
-    summary: "Un site vitrine moderne et rapide pour l’association Blue Garden, pensé pour être maintenu sans back-end lourd, avec un système simple pour publier des événements.",
+    summary: "Un site vitrine moderne et rapide pour l'association Blue Garden, pensé pour être maintenu sans back-end lourd, avec un système simple pour publier des événements.",
     images: [
       "/realisation/bluegarden1.png",
       "/realisation/bluegarden2.png",
       "/realisation/bluegarden3.png"
+    ]
+  },
+  "6": {
+    id: "6",
+    title: "Kivaiakids – Plateforme éducative",
+    fullTitle: "Kivaiakids – Plateforme éducative multilingue pour enfants",
+    image: "/realisation/kivaiakids1.png",
+    tags: ["Next.js", "Supabase", "CMS", "Upload", "Multi-média"],
+    description: "Plateforme complète d'apprentissage des langues pour enfants avec interface professeur dédiée et système de gestion de contenu.",
+    stack: ["Next.js", "Supabase (auth + base de données)", "TailwindCSS", "Upload de fichiers", "Système de cours"],
+    features: [
+      "Interface professeur complète avec éditeur de cours intégré",
+      "Système de création de cours avec éditeur de texte avancé (type Word)",
+      "Upload et gestion de livres, audios et documents multimédias",
+      "Organisation des cours par niveaux et catégories",
+      "Interface élève intuitive et gamifiée",
+      "Système de progression et de suivi des apprentissages",
+      "Gestion des utilisateurs (professeurs et élèves)",
+      "Design responsive optimisé pour tablettes et mobiles"
+    ],
+    summary: "Kivaiakids révolutionne l'apprentissage des langues pour les enfants avec une plateforme complète qui donne aux professeurs tous les outils nécessaires pour créer des cours engageants. L'interface professeur permet de gérer facilement le contenu, tandis que les enfants bénéficient d'une expérience d'apprentissage moderne et interactive.",
+    images: [
+      "/realisation/kivaiakids1.png",
+      "/realisation/kivaiakids2.png",
+      "/realisation/kivaiakids3.png",
+      "/realisation/kivaiakids4.png",
+      "/realisation/kivaiakids5.png",
+      "/realisation/kivaiakids6.png"
     ]
   }
 };
@@ -182,18 +210,18 @@ const ProjectDetail = () => {
         <main className="relative z-10">
 
           {/* Hero Section */}
-          <section className="py-16">
+          <section className="py-24">
             <div className="container mx-auto px-4">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="max-w-5xl mx-auto"
+                className="max-w-6xl mx-auto"
               >
                 {/* Project Header */}
-                <div className="text-center mb-16">
+                <div className="text-center mb-16 min-h-[300px] flex flex-col justify-center">
                   <motion.h1 
-                    className="text-4xl sm:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-100 to-purple-400 mb-8"
+                    className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-100 to-purple-400 mb-8 leading-relaxed py-8"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}

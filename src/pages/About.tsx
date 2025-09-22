@@ -81,35 +81,6 @@ const About: React.FC = () => {
                     transition={{ duration: 0.8, delay: 0.3 }}
                     className="space-y-6"
                   >
-                    {/* ProgOnline Logo */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.4 }}
-                      className="text-center mb-8 p-4 bg-slate-800/30 border border-slate-700/30 rounded-lg"
-                    >
-                      <a 
-                        title='PRESTATAIRE ProgOnline' 
-                        href='https://www.progonline.com/-freelance-prestataire-teletravail-raphaellevy027.html'
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block hover:scale-105 transition-transform duration-300"
-                      >
-                        <img 
-                          alt="PRESTATAIRE ProgOnline" 
-                          src='https://www.progonline.com/images/certif.php?nickname=raphaellevy027' 
-                          className="mx-auto mb-2 h-16 w-auto"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
-                          }}
-                        />
-                        <div className="text-center">
-                          <span className="text-gray-400 text-sm block">Prestataire</span>
-                          <span className="text-gray-300 text-base font-medium">ProgOnline</span>
-                        </div>
-                      </a>
-                    </motion.div>
 
                     <h2 className="text-3xl md:text-4xl font-display font-bold text-white">
                       <TextType

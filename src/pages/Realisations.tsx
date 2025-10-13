@@ -117,6 +117,31 @@ const projectsData = {
       ]
     },
     {
+      id: 7,
+      title: "Fast Consulting – Automatisation de démarches administratives",
+      image: "/realisation/fast-consulting.png",
+      tags: ["Next.js", "Supabase", "Stripe", "Email automation", "Vercel"],
+      description: "Application web permettant d'automatiser les démarches administratives avec questionnaire intelligent, paiement sécurisé et notifications email.",
+      fullTitle: "Fast Consulting – Plateforme d'automatisation des démarches administratives",
+      stack: ["Next.js 14 (App Router)", "Supabase (auth + base de données)", "Stripe (paiement)", "Hostinger (email SMTP)", "Vercel (déploiement)", "TailwindCSS"],
+      features: [
+        "Formulaire dynamique multi-étapes avec validation en temps réel",
+        "Système de questionnaire intelligent adaptatif selon le type de démarche",
+        "Intégration Stripe pour paiement sécurisé avec confirmation instantanée",
+        "Envoi automatique d'emails récapitulatifs via Hostinger SMTP",
+        "Notification email entreprise avec toutes les réponses du questionnaire formatées",
+        "Dashboard de gestion des demandes avec statuts en temps réel",
+        "Stockage sécurisé des données dans Supabase avec politique de confidentialité RGPD",
+        "Interface responsive optimisée mobile et desktop",
+        "Système de suivi des demandes pour les clients",
+        "Gestion des pièces justificatives et documents administratifs"
+      ],
+      summary: "Fast Consulting révolutionne la gestion des démarches administratives en automatisant entièrement le processus : du questionnaire client au paiement, jusqu'à la notification de l'entreprise. Architecture moderne avec Next.js 14, base de données temps réel Supabase, paiements sécurisés Stripe, et emails transactionnels via Hostinger. Une solution complète déployée sur Vercel pour des performances optimales.",
+      images: [
+        "/realisation/fast-consulting.png"
+      ]
+    },
+    {
       id: 4,
       title: "MusicLinks Landing Page",
       image: "/realisation/musicklinkslanding.png",

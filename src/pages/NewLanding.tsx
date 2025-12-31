@@ -148,7 +148,7 @@ const NewLanding: React.FC = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="space-y-4 md:space-y-0"
+                  className="space-y-4"
                 >
                   <h3 className="uppercase font-bold bg-gradient-to-r from-[#3D2F57] to-[#5a4a6f] bg-clip-text text-transparent text-sm md:text-lg tracking-[4px] mb-2 md:mb-4">STUDIO TECH & IA</h3>
                   <h2 className="font-bold text-3xl md:text-6xl lg:text-7xl leading-tight mb-4 md:mb-8 relative text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] md:drop-shadow-none h-[140px] md:h-[240px] flex flex-col justify-start">
@@ -166,10 +166,10 @@ const NewLanding: React.FC = () => {
                     </div>
                     <span className="absolute bottom-[-15px] md:bottom-[-25px] left-0 w-[30%] md:w-[15%] h-[3px] bg-gradient-to-r from-[#3D2F57] to-[#222054] rounded-full"></span>
                   </h2>
-                  <p className="text-white text-sm md:text-base mt-6 md:mt-16 mb-6 md:mb-8 leading-relaxed max-w-lg mx-0">
+                  <p className="text-white text-sm md:text-base mt-6 md:mt-16 mb-6 md:mb-16 leading-relaxed max-w-lg mx-0">
                     Développement sur-mesure & solutions intelligentes. Nous concevons des MVP, outils digitaux et solutions IA pour accélérer la croissance de votre business.
                   </p>
-                  <div className="flex items-center justify-start md:justify-start mt-4 md:mt-5">
+                  <div className="flex items-center justify-start md:justify-start mt-4 md:mt-12">
                     <div className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center me-3 md:me-4" style={{ background: 'radial-gradient(circle, #3D2F57 0%, #222054 100%)' }}>
                       <Play className="w-4 h-4 md:w-5 md:h-5 text-white" />
                     </div>

@@ -7,55 +7,45 @@ import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import { ScrollVelocity } from '@/components/ui/ScrollVelocity';
 import TextType from '@/components/ui/TextType';
 import BoostAIFlowingMenu from '@/components/home/BoostAIFlowingMenu';
-import Loader from '@/components/ui/Loader';
+import CinematicIntro from '@/components/ui/CinematicIntro';
 
 const NewLanding: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Preload hero image - ensure it's fully loaded before showing content
+  // Play intro on every page load
   useEffect(() => {
+    // Check for environment flag to disable intro
+    const disableIntro = import.meta.env.VITE_DISABLE_INTRO === 'true';
+    
+    if (disableIntro) {
+      setIsLoading(false);
+      return;
+    }
+
+    // Preload hero image
     const preloadImage = () => {
       const img = new Image();
-      // Force reload to ensure fresh image
-      img.src = '/lp/LP-BC/img/portrait.png?' + new Date().getTime();
+      img.src = '/lp/LP-BC/img/portrait.png';
       
-      // Check if image is already cached
-      if (img.complete) {
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 300);
-        return;
-      }
-      
-      img.onload = () => {
-        // Ensure image is fully decoded
-        if (img.complete && img.naturalHeight !== 0) {
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 300);
-        }
-      };
-      
-      img.onerror = () => {
-        // Even if image fails, show content after a delay
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 1000);
-      };
+      // Preload in a link tag for better browser caching
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = '/lp/LP-BC/img/portrait.png';
+      document.head.appendChild(link);
     };
     
-    // Start preloading immediately
     preloadImage();
     
-    // Also preload in a link tag for better browser caching
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = '/lp/LP-BC/img/portrait.png';
-    document.head.appendChild(link);
+    // Show intro on every page load
+    setIsLoading(true);
   }, []);
+
+  const handleIntroComplete = () => {
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -110,25 +100,19 @@ const NewLanding: React.FC = () => {
       />
       <GoogleAnalytics />
       
-      {/* Loader */}
-      <AnimatePresence>
-        {isLoading && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Loader />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Cinematic Intro - shows once per session on initial load */}
+      {isLoading && (
+        <CinematicIntro
+          onComplete={handleIntroComplete}
+        />
+      )}
 
-      {/* Main Content */}
-      {!isLoading && (
+      {/* Main Content - Always mounted (no reflow), pointer-events disabled during intro */}
+      <div style={{ pointerEvents: isLoading ? 'none' : 'auto' }}>
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={{ opacity: isLoading ? 0 : 1 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: isLoading ? 0 : 0.5 }}
           className="min-h-screen text-white"
           style={{ 
             background: 'radial-gradient(ellipse at top, #3D2F57 0%, #222054 50%, #0a0a0f 100%)'
@@ -805,7 +789,7 @@ const NewLanding: React.FC = () => {
           </div>
         </footer>
         </motion.div>
-      )}
+      </div>
     </>
   );
 };

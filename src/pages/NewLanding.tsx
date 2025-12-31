@@ -185,18 +185,14 @@ const NewLanding: React.FC = () => {
               willChange: 'transform'
             }}
           ></div>
-          {/* Image Background - Mobile: fixed position to prevent zoom on scroll */}
+          {/* Image Background - Mobile: absolute position, scrolls with content, no zoom */}
           <div 
-            className="fixed top-0 left-0 w-full h-full bg-cover bg-no-repeat z-0 opacity-80 md:hidden"
+            className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat z-0 opacity-80 md:hidden"
             style={{ 
               backgroundImage: 'url(/lp/LP-BC/img/portrait.png)',
               backgroundPosition: 'center right',
               backgroundSize: 'cover',
-              transform: 'translateZ(0)',
-              WebkitTransform: 'translateZ(0)',
-              willChange: 'transform',
-              backfaceVisibility: 'hidden',
-              WebkitBackfaceVisibility: 'hidden'
+              backgroundAttachment: 'scroll'
             }}
           ></div>
           {/* Dark overlay - Mobile only */}

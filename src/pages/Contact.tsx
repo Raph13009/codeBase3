@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Stepper, { Step } from '@/components/ui/Stepper';
-import { supabase } from '@/lib/supabase';
 import MetaTags from '@/components/seo/MetaTags';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -134,33 +133,36 @@ const Contact: React.FC = () => {
                           return false;
                         }
                         
-                        // Envoyer les données à l'étape 4
+                        // Envoyer les données à l'étape 4 via FormSubmit
                         if (!isSubmitting) {
                           setIsSubmitting(true);
                           (async () => {
                             try {
-                              console.log('Sending data:', { name, email, message, source: 'contact' });
+                              const formData = new FormData();
+                              formData.append('name', name.trim());
+                              formData.append('email', email.trim());
+                              formData.append('message', message.trim() || '(Aucun message)');
+                              formData.append('_subject', 'Nouveau message depuis le formulaire de contact');
+                              formData.append('_captcha', 'false');
                               
-                              const { data, error } = await supabase.from('leads').insert([{
-                                name: name.trim(),
-                                email: email.trim(),
-                                message: message.trim(),
-                                source: 'contact'
-                              }]);
+                              const response = await fetch('https://formsubmit.co/raphael@boostaiconsulting.com', {
+                                method: 'POST',
+                                body: formData
+                              });
                               
-                              if (error) {
-                                console.error('Error saving lead:', error);
-                                alert('Erreur lors de l\'enregistrement: ' + error.message);
-                                setIsSubmitting(false);
-                                return false;
-                              } else {
-                                console.log('Lead saved successfully:', data);
+                              if (response.ok) {
+                                console.log('Email sent successfully');
                                 setIsSubmitting(false);
                                 return true;
+                              } else {
+                                console.error('Error sending email:', response.statusText);
+                                alert('Erreur lors de l\'envoi du message. Veuillez réessayer.');
+                                setIsSubmitting(false);
+                                return false;
                               }
                             } catch (error) {
-                              console.error("Error saving lead:", error);
-                              alert('Erreur lors de l\'enregistrement');
+                              console.error("Error sending email:", error);
+                              alert('Erreur lors de l\'envoi du message. Veuillez réessayer.');
                               setIsSubmitting(false);
                               return false;
                             }

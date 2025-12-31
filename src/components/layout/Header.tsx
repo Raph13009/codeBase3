@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { Menu, X } from 'lucide-react';
-import LanguageSwitcher from './LanguageSwitcher';
+import { Menu, X, Search } from 'lucide-react';
 
 const Header: React.FC = () => {
-  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -13,7 +10,6 @@ const Header: React.FC = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -22,168 +18,66 @@ const Header: React.FC = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
     if (!isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
     } else {
       document.body.style.overflow = 'auto';
-      document.body.style.position = '';
-      document.body.style.width = '';
     }
   };
 
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-    document.body.style.overflow = 'auto';
-    document.body.style.position = '';
-    document.body.style.width = '';
-  };
-
   return (
-    <>
-      {/* Minimalist Header */}
-    <header 
-        className={`fixed top-0 left-0 right-0 z-50 h-12 md:h-14 transition-all duration-300 ease-out ${
-          isScrolled 
-            ? 'bg-black/60 backdrop-blur-md shadow-sm' 
-            : 'bg-transparent'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 md:px-8 h-full flex items-center justify-between">
-          {/* Logo - Minimalist */}
-          <NavLink 
-            to="/" 
-            className="flex items-center" 
-            onClick={closeMobileMenu}
-          >
-            <img src="/images/favicon.png" alt="BoostAI Consulting" className="w-8 h-8 md:w-9 md:h-9" />
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-[#151515]/95 shadow-lg' : 'bg-[#151515]'
+    }`}>
+      <div className="container mx-auto px-5">
+        <div className="flex items-center justify-between h-20">
+          <NavLink to="/" className="text-center">
+            <h1 className="mb-0 font-bold text-4xl md:text-5xl" style={{ fontFamily: "'Darker Grotesque', sans-serif", color: '#ffffff' }}>
+              BoostAI Consulting<span className="ml-3 md:ml-4" style={{ color: '#5a4a6f', textShadow: '0 0 15px rgba(90, 74, 111, 1), 0 0 30px rgba(90, 74, 111, 0.8), 0 0 45px rgba(90, 74, 111, 0.6)', filter: 'drop-shadow(0 0 8px rgba(90, 74, 111, 0.9))' }}>.</span>
+            </h1>
           </NavLink>
-
-          {/* Desktop Navigation - Minimalist */}
-          <nav className="hidden md:flex items-center space-x-12">
-            {[
-              { to: '/', label: 'Accueil' },
-              { to: '/realisations', label: 'Réalisations' },
-              { to: '/convert', label: 'Convertir' },
-              { to: '/guide', label: 'Tuto gratuit', isNew: true },
-              { to: '/about', label: 'À propos' },
-              { to: '/blog', label: 'Blog 🇬🇧' },
-              { to: '/contact', label: 'Contact' }
-            ].map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                className={({ isActive }) => `
-                  relative text-sm font-medium transition-all duration-200
-                  ${isActive 
-                    ? 'text-white' 
-                    : 'text-gray-300 hover:text-white'
-                  }
-                  hover:scale-105
-                `}
-              >
-                {({ isActive }) => (
-                  <>
-                    {link.label}
-                                    {link.isNew && (
-                  <span className="absolute -top-3 -right-6 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs px-1.5 py-0.5 rounded-full">
-                    New
-                  </span>
-                )}
-                    {/* Active underline */}
-                    {isActive && (
-                      <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
-                    )}
-                    {/* Hover underline */}
-                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full scale-x-0 transition-transform duration-200 group-hover:scale-x-100" />
-                  </>
-                )}
+          
+          <div className="hidden lg:flex items-center gap-6">
+            <NavLink to="/" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Accueil</NavLink>
+            <NavLink to="/realisations" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Réalisations</NavLink>
+            <NavLink to="/Convert" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Convertir</NavLink>
+            <NavLink to="/guide" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Tuto gratuit</NavLink>
+            <NavLink to="/about" className="font-bold text-white hover:text-[#3D2F57] transition-colors">À propos</NavLink>
+            <NavLink to="/blog" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Blog</NavLink>
+            <NavLink to="/contact" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Contact</NavLink>
+            <NavLink to="#" className="text-[#3D2F57] hover:text-white transition-colors">
+              <Search className="w-5 h-5" />
             </NavLink>
-            ))}
-        </nav>
+          </div>
 
-          {/* Right side - Language Switcher & Mobile Menu */}
-          <div className="flex items-center space-x-3">
-          <LanguageSwitcher />
-
-            {/* Mobile Menu Button - Minimalist */}
           <button 
-            onClick={toggleMobileMenu} 
-              className="md:hidden p-1.5 text-gray-300 hover:text-white transition-colors duration-200"
-            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            onClick={toggleMobileMenu}
+            className="lg:hidden text-[#3D2F57] text-2xl"
           >
-              <Menu className="w-5 h-5" />
+            <Menu className="w-6 h-6" />
           </button>
-          </div>
         </div>
-      </header>
+      </div>
 
-      {/* Mobile Menu - Minimalist Full Screen */}
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 md:hidden">
-          <div className="flex flex-col h-full">
-            {/* Header */}
-            <div className="flex justify-between items-center p-6 border-b border-gray-800">
-              <div className="flex items-center">
-                <img src="/images/favicon.png" alt="BoostAI Consulting" className="w-8 h-8" />
-              </div>
-            <button 
-              onClick={closeMobileMenu} 
-                className="p-2 text-gray-300 hover:text-white transition-colors duration-200"
-              aria-label="Close menu"
-            >
-                <X className="w-5 h-5" />
-            </button>
-      </div>
-
-            {/* Navigation Links */}
-            <div className="flex-1 flex items-center justify-center">
-              <nav className="flex flex-col items-center space-y-8">
-                                 {[
-                   { to: '/', label: 'Accueil' },
-                   { to: '/realisations', label: 'Réalisations' },
-                   { to: '/convert', label: 'Convertir' },
-                   { to: '/guide', label: 'Tuto gratuit', isNew: true },
-                   { to: '/about', label: 'À propos' },
-                   { to: '/blog', label: 'Blog 🇬🇧' },
-                   { to: '/contact', label: 'Contact' }
-                 ].map((link) => (
-              <NavLink 
-                     key={link.to}
-                     to={link.to}
-                     className={({ isActive }) => `
-                       relative text-xl font-medium transition-all duration-200
-                       ${isActive 
-                         ? 'text-white' 
-                         : 'text-gray-300 hover:text-white'
-                       }
-                       hover:scale-105
-                     `}
-                onClick={closeMobileMenu}
-              >
-                     {({ isActive }) => (
-                       <>
-                         <div className="flex items-center space-x-3">
-                           <span>{link.label}</span>
-                           {link.isNew && (
-                             <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs px-2 py-1 rounded-full">
-                               New
-                             </span>
-                           )}
-                         </div>
-                         {/* Active underline */}
-                         {isActive && (
-                           <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
-                         )}
-                       </>
-                     )}
-          </NavLink>
-                 ))}
-            </nav>
-            </div>
+        <div className="lg:hidden fixed inset-0 z-50 pt-20" style={{ background: 'radial-gradient(circle at center, #3D2F57 0%, #222054 100%)' }}>
+          <div className="flex flex-col gap-4 px-5">
+            <NavLink to="/" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Accueil</NavLink>
+            <NavLink to="/realisations" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Réalisations</NavLink>
+            <NavLink to="/Convert" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Convertir</NavLink>
+            <NavLink to="/guide" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Tuto gratuit</NavLink>
+            <NavLink to="/about" className="text-white text-lg py-2" onClick={toggleMobileMenu}>À propos</NavLink>
+            <NavLink to="/blog" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Blog</NavLink>
+            <NavLink to="/contact" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Contact</NavLink>
           </div>
-      </div>
+          <button 
+            onClick={toggleMobileMenu}
+            className="absolute top-4 right-4 text-[#3D2F57] p-2"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
       )}
-    </>
+    </nav>
   );
 };
 

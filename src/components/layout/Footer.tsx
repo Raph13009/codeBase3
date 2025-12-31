@@ -1,280 +1,40 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Heart, Phone, Mail, Linkedin } from 'lucide-react';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Footer: React.FC = () => {
-  const [showMentionsLegales, setShowMentionsLegales] = useState(false);
-
-  // Empêcher le scroll du body quand la modal est ouverte
-  React.useEffect(() => {
-    const preventScroll = (e: Event) => {
-      e.preventDefault();
-    };
-
-    if (showMentionsLegales) {
-      // Bloquer le scroll avec event listener
-      document.addEventListener('wheel', preventScroll, { passive: false });
-      document.addEventListener('touchmove', preventScroll, { passive: false });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'PageUp' || e.key === 'PageDown' || e.key === 'Home' || e.key === 'End') {
-          e.preventDefault();
-        }
-      });
-    } else {
-      // Retirer les event listeners
-      document.removeEventListener('wheel', preventScroll);
-      document.removeEventListener('touchmove', preventScroll);
-    }
-
-    return () => {
-      document.removeEventListener('wheel', preventScroll);
-      document.removeEventListener('touchmove', preventScroll);
-    };
-  }, [showMentionsLegales]);
-
-  const mentionsLegalesContent = `
-    <h2 style="color: white; font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;">Mentions Légales</h2>
-    
-    <div style="color: #cbd5e1; margin-top: 1.5rem;">
-      <section style="margin-bottom: 1.5rem;">
-        <h3 style="color: white; font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem;">Éditeur</h3>
-        <p style="color: #cbd5e1;">BoostAI Consulting<br />
-        Créé pour les petites entreprises ambitieuses<br />
-        Contact : contact@boostai.fr</p>
-      </section>
-
-      <section style="margin-bottom: 1.5rem;">
-        <h3 style="color: white; font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem;">Hébergement</h3>
-        <p style="color: #cbd5e1;">Ce site est hébergé par Vercel Inc.<br />
-        340 S Lemon Ave #4133<br />
-        Walnut, CA 91789<br />
-        États-Unis</p>
-      </section>
-
-      <section style="margin-bottom: 1.5rem;">
-        <h3 style="color: white; font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem;">Propriété Intellectuelle</h3>
-        <p style="color: #cbd5e1;">L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés, y compris pour les documents téléchargeables et les représentations iconographiques et photographiques.</p>
-      </section>
-
-      <section style="margin-bottom: 1.5rem;">
-        <h3 style="color: white; font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem;">Protection des Données</h3>
-        <p style="color: #cbd5e1;">Conformément à la loi Informatique et Libertés du 6 janvier 1978 modifiée et au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, de suppression et d'opposition aux données personnelles vous concernant.</p>
-      </section>
-
-      <section style="margin-bottom: 1.5rem;">
-        <h3 style="color: white; font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem;">Cookies</h3>
-        <p style="color: #cbd5e1;">Ce site utilise des cookies pour améliorer votre expérience de navigation. Vous pouvez désactiver les cookies dans les paramètres de votre navigateur.</p>
-      </section>
-    </div>
-  `;
-  
   return (
-    <>
-      <footer className="bg-gradient-to-br from-[#0B0E1A] to-[#121826] border-t border-transparent relative">
-        {/* Top Border Gradient */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600"></div>
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          {/* Main Footer Content - 3 Columns */}
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            {/* Left Column - Logo & Tagline */}
-            <div className="text-center md:text-left">
-              <motion.div 
-                className="flex items-center justify-center md:justify-start gap-3 mb-4"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="relative">
-                  <img 
-                    src="/images/logo-white-long.png" 
-                    alt="BoostAI Consulting" 
-                    className="h-8 w-auto transition-transform duration-300 hover:scale-110 drop-shadow-lg"
-                  />
-              </div>
-              </motion.div>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Votre partenaire digital pour transformer vos idées en solutions innovantes
-              </p>
-            </div>
-            
-            {/* Center Column - Navigation */}
-            <div className="text-center">
-              <h3 className="text-white font-semibold mb-4">Navigation</h3>
-              <nav className="flex flex-col space-y-3">
-                {[
-                  { to: '/', label: 'Accueil' },
-                  { to: '/realisations', label: 'Réalisations' },
-                  { to: '/convert', label: 'Convertir' },
-                  { to: '/guide', label: 'Tuto gratuit' },
-                  { to: '/about', label: 'À propos' },
-                  { to: '/blog', label: 'Blog 🇬🇧' },
-                  { to: '/contact', label: 'Contact' },
-                  { 
-                    label: 'Mentions légales', 
-                    onClick: () => setShowMentionsLegales(true),
-                    isButton: true 
-                  }
-                ].map((link, index) => (
-                  <motion.div
-                    key={link.label}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    {link.isButton ? (
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          link.onClick();
-                        }}
-                        className="text-slate-300 hover:text-white transition-all duration-300 font-medium relative group"
-                      >
-                        {link.label}
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-300 group-hover:w-full"></span>
-                      </button>
-                    ) : (
-                      <Link 
-                        to={link.to!}
-                        className="text-slate-300 hover:text-white transition-all duration-300 font-medium relative group"
-                        onClick={link.to === '/' ? () => window.scrollTo({ top: 0, behavior: 'smooth' }) : undefined}
-                      >
-                        {link.label}
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-300 group-hover:w-full"></span>
-                  </Link>
-                    )}
-                  </motion.div>
-                ))}
-              </nav>
-            </div>
-            
-            {/* Right Column - Contact & Tech Stack */}
-            <div className="text-center md:text-right">
-              {/* Contact Information */}
-              <div className="mb-6">
-                <h3 className="text-white font-semibold mb-4">Contact</h3>
-                <div className="space-y-3 text-slate-400 text-sm">
-                  <motion.a 
-                    href="tel:+33602617329"
-                    className="flex items-center justify-center md:justify-end gap-2 hover:text-white transition-colors duration-200"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Phone className="h-4 w-4" />
-                    <span>+33 6 02 61 73 29</span>
-                  </motion.a>
-                  
-                  <motion.a 
-                    href="mailto:contact@boostaiconsulting.com"
-                    className="flex items-center justify-center md:justify-end gap-2 hover:text-white transition-colors duration-200"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Mail className="h-4 w-4" />
-                    <span>contact@boostaiconsulting.com</span>
-                  </motion.a>
-                  
-                  <motion.a 
-                    href="https://www.linkedin.com/company/boostai-consulting"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center md:justify-end gap-2 hover:text-white transition-colors duration-200"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Linkedin className="h-4 w-4" />
-                    <span>LinkedIn</span>
-                  </motion.a>
-            </div>
-          </div>
-          
-              {/* Tech Stack */}
-              <div className="mb-4">
-                <p className="text-slate-400 text-sm mb-2">
-                  Propulsé par React, TypeScript et Tailwind CSS
-                </p>
-                <motion.div 
-                  className="flex items-center justify-center md:justify-end gap-2 text-slate-400 text-sm"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <span>Made with</span>
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
-                  >
-                    <Heart className="h-4 w-4 text-red-500 fill-current" />
-                  </motion.div>
-                  <span>pour les entrepreneurs</span>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Copyright */}
-          <motion.div 
-            className="text-center pt-8 border-t border-slate-800"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-slate-500 text-sm">
-              © 2025 BoostAI Consulting – Créé pour les petites entreprises ambitieuses.
-            </p>
-          </motion.div>
+    <footer className="py-12 relative" style={{ background: 'radial-gradient(ellipse at top, #222054 0%, #0a0a0f 100%)' }}>
+      <div className="container mx-auto px-5 text-center">
+        <div className="mb-6">
+          <h1 className="mb-0 font-bold text-4xl md:text-5xl text-center" style={{ fontFamily: "'Darker Grotesque', sans-serif", color: '#ffffff' }}>
+            BoostAI Consulting<span className="ml-3 md:ml-4" style={{ color: '#5a4a6f', textShadow: '0 0 15px rgba(90, 74, 111, 1), 0 0 30px rgba(90, 74, 111, 0.8), 0 0 45px rgba(90, 74, 111, 0.6)', filter: 'drop-shadow(0 0 8px rgba(90, 74, 111, 0.9))' }}>.</span>
+          </h1>
         </div>
-      </footer>
-
-      {/* Mentions Légales Modal */}
-      <AnimatePresence>
-        {showMentionsLegales && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
-            onClick={() => setShowMentionsLegales(false)}
-
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.3 }}
-              className="bg-slate-900 border border-purple-500/20 rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex items-center gap-3">
-                  <img src="/images/logo-white-long.png" alt="BoostAI Logo" className="h-6 w-auto" />
-                </div>
-                <button
-                  onClick={() => setShowMentionsLegales(false)}
-                  className="text-slate-400 hover:text-white transition-colors duration-200 p-1"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-              
-              <div className="overflow-y-auto max-h-[60vh] pr-2 custom-scrollbar">
-                <div 
-                  className="prose prose-invert max-w-none text-white"
-                  dangerouslySetInnerHTML={{ __html: mentionsLegalesContent }}
-                />
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+        <ul className="flex flex-wrap justify-center gap-6 mb-6">
+          <li><NavLink to="/" className="hover:text-[#3D2F57] transition-colors">Accueil</NavLink></li>
+          <li><NavLink to="/realisations" className="hover:text-[#3D2F57] transition-colors">Réalisations</NavLink></li>
+          <li><NavLink to="/Convert" className="hover:text-[#3D2F57] transition-colors">Convertir</NavLink></li>
+          <li><NavLink to="/guide" className="hover:text-[#3D2F57] transition-colors">Tuto gratuit</NavLink></li>
+          <li><NavLink to="/about" className="hover:text-[#3D2F57] transition-colors">À propos</NavLink></li>
+          <li><NavLink to="/blog" className="hover:text-[#3D2F57] transition-colors">Blog</NavLink></li>
+          <li><NavLink to="/contact" className="hover:text-[#3D2F57] transition-colors">Contact</NavLink></li>
+        </ul>
+        <p className="text-white/60 mb-6">
+          Agence digitale spécialisée dans le développement web sur-mesure, 
+          création de sites internet, MVP et solutions IA pour faire croître votre business.
+        </p>
+        <div className="flex justify-center gap-4 mb-6">
+          <a href="https://www.linkedin.com/company/boostaiconsulting" target="_blank" rel="noopener noreferrer" className="text-[#3D2F57] hover:text-white transition-colors">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+        <div className="text-white/60">
+          <p>Copyright © 2026 BoostAI Consulting. Tous droits réservés.</p>
+        </div>
+      </div>
+    </footer>
   );
 };
 

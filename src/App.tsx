@@ -19,6 +19,7 @@ import GuideVibeCoding from "./pages/GuideVibeCoding";
 import Realisations from "./pages/Realisations";
 import ProjectDetail from "./pages/ProjectDetail";
 import AgentDetail from "./pages/AgentDetail";
+import NewLanding from "./pages/NewLanding";
 
 
 // Import i18n configuration
@@ -47,7 +48,8 @@ const App = () => {
           <div className="min-h-screen bg-gray-50">
             <Navbar />
             <Routes>
-              <Route path="/" element={<Index />} />
+              <Route path="/" element={<NewLanding />} />
+              <Route path="/hold-lp" element={<Index />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/contact" element={<Contact />} />

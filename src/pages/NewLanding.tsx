@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Play, Check, Search, Facebook, Twitter, Instagram, MapPin, Mail, Quote } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import MetaTags from '@/components/seo/MetaTags';
@@ -7,10 +7,55 @@ import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import { ScrollVelocity } from '@/components/ui/ScrollVelocity';
 import TextType from '@/components/ui/TextType';
 import BoostAIFlowingMenu from '@/components/home/BoostAIFlowingMenu';
+import Loader from '@/components/ui/Loader';
 
 const NewLanding: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Preload hero image - ensure it's fully loaded before showing content
+  useEffect(() => {
+    const preloadImage = () => {
+      const img = new Image();
+      // Force reload to ensure fresh image
+      img.src = '/lp/LP-BC/img/portrait.png?' + new Date().getTime();
+      
+      // Check if image is already cached
+      if (img.complete) {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 300);
+        return;
+      }
+      
+      img.onload = () => {
+        // Ensure image is fully decoded
+        if (img.complete && img.naturalHeight !== 0) {
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 300);
+        }
+      };
+      
+      img.onerror = () => {
+        // Even if image fails, show content after a delay
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
+      };
+    };
+    
+    // Start preloading immediately
+    preloadImage();
+    
+    // Also preload in a link tag for better browser caching
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = '/lp/LP-BC/img/portrait.png';
+    document.head.appendChild(link);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,7 +109,31 @@ const NewLanding: React.FC = () => {
         keywords="agence web, développement web sur-mesure, création site internet, MVP, solutions IA, automatisation, agence digitale"
       />
       <GoogleAnalytics />
-      <div className="min-h-screen text-white" style={{ background: 'radial-gradient(ellipse at top, #3D2F57 0%, #222054 50%, #0a0a0f 100%)' }}>
+      
+      {/* Loader */}
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Loader />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Main Content */}
+      {!isLoading && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="min-h-screen text-white"
+          style={{ 
+            background: 'radial-gradient(ellipse at top, #3D2F57 0%, #222054 50%, #0a0a0f 100%)'
+          }}
+        >
         {/* Navbar */}
         <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled ? 'bg-[#151515]/95 shadow-lg' : 'bg-[#151515]'
@@ -126,14 +195,24 @@ const NewLanding: React.FC = () => {
           {/* Image Background - Desktop: unchanged */}
           <div 
             className="absolute top-0 right-0 h-full w-[730px] bg-cover bg-center bg-no-repeat z-0 opacity-80 hidden md:block"
-            style={{ backgroundImage: 'url(/lp/LP-BC/img/portrait.png)' }}
-          ></div>
-          {/* Image Background - Mobile: centered and adjusted */}
-          <div 
-            className="absolute top-0 left-1/2 -translate-x-1/2 h-full w-full bg-cover bg-no-repeat z-0 opacity-80 md:hidden"
             style={{ 
               backgroundImage: 'url(/lp/LP-BC/img/portrait.png)',
-              backgroundPosition: 'center right'
+              backgroundAttachment: 'fixed',
+              willChange: 'transform'
+            }}
+          ></div>
+          {/* Image Background - Mobile: fixed position to prevent zoom on scroll */}
+          <div 
+            className="fixed top-0 left-0 w-full h-full bg-cover bg-no-repeat z-0 opacity-80 md:hidden"
+            style={{ 
+              backgroundImage: 'url(/lp/LP-BC/img/portrait.png)',
+              backgroundPosition: 'center right',
+              backgroundSize: 'cover',
+              transform: 'translateZ(0)',
+              WebkitTransform: 'translateZ(0)',
+              willChange: 'transform',
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden'
             }}
           ></div>
           {/* Dark overlay - Mobile only */}
@@ -725,7 +804,8 @@ const NewLanding: React.FC = () => {
             </div>
           </div>
         </footer>
-      </div>
+        </motion.div>
+      )}
     </>
   );
 };

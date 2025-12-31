@@ -151,7 +151,7 @@ const NewLanding: React.FC = () => {
                   className="space-y-4 md:space-y-0"
                 >
                   <h3 className="uppercase font-bold bg-gradient-to-r from-[#3D2F57] to-[#5a4a6f] bg-clip-text text-transparent text-sm md:text-lg tracking-[4px] mb-2 md:mb-4">STUDIO TECH & IA</h3>
-                  <h2 className="font-bold text-3xl md:text-6xl lg:text-7xl leading-tight mb-4 md:mb-8 relative text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] md:drop-shadow-none h-[140px] md:h-[180px] flex flex-col justify-start">
+                  <h2 className="font-bold text-3xl md:text-6xl lg:text-7xl leading-tight mb-4 md:mb-8 relative text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] md:drop-shadow-none h-[140px] md:h-[240px] flex flex-col justify-start">
                     <div className="flex-1">
                       <TextType
                         as="span"
@@ -166,7 +166,7 @@ const NewLanding: React.FC = () => {
                     </div>
                     <span className="absolute bottom-[-15px] md:bottom-[-25px] left-0 w-[30%] md:w-[15%] h-[3px] bg-gradient-to-r from-[#3D2F57] to-[#222054] rounded-full"></span>
                   </h2>
-                  <p className="text-white text-sm md:text-base mt-6 md:mt-8 mb-6 md:mb-8 leading-relaxed max-w-lg mx-0">
+                  <p className="text-white text-sm md:text-base mt-6 md:mt-16 mb-6 md:mb-8 leading-relaxed max-w-lg mx-0">
                     Développement sur-mesure & solutions intelligentes. Nous concevons des MVP, outils digitaux et solutions IA pour accélérer la croissance de votre business.
                   </p>
                   <div className="flex items-center justify-start md:justify-start mt-4 md:mt-5">

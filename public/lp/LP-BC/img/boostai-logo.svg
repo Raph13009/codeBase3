@@ -1,0 +1,64 @@
+<svg width="300" height="120" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="boostaiGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3D2F57;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5a4a6f;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Boost Text -->
+  <text 
+    x="60" 
+    y="70" 
+    font-family="Arial, sans-serif" 
+    font-size="72" 
+    font-weight="bold" 
+    text-anchor="middle" 
+    fill="url(#boostaiGradient)"
+  >
+    Boost
+  </text>
+  
+  <!-- A tourné à 180 degrés -->
+  <g transform="translate(180, 70) rotate(180)">
+    <text 
+      x="0" 
+      y="0" 
+      font-family="Arial, sans-serif" 
+      font-size="72" 
+      font-weight="bold" 
+      text-anchor="middle" 
+      fill="url(#boostaiGradient)"
+    >
+      A
+    </text>
+  </g>
+  
+  <!-- I Text -->
+  <text 
+    x="220" 
+    y="70" 
+    font-family="Arial, sans-serif" 
+    font-size="72" 
+    font-weight="bold" 
+    text-anchor="middle" 
+    fill="url(#boostaiGradient)"
+  >
+    I
+  </text>
+  
+  <!-- Consulting Text -->
+  <text 
+    x="150" 
+    y="100" 
+    font-family="Arial, sans-serif" 
+    font-size="8" 
+    font-weight="normal" 
+    text-anchor="middle" 
+    fill="#ffffff" 
+    opacity="0.8"
+    letter-spacing="4"
+  >
+    CONSULTING
+  </text>
+</svg>

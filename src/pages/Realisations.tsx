@@ -12,12 +12,69 @@ import AgentsShowcase from "@/components/AgentsShowcase";
 const projectsData = {
   web: [
     {
+      id: 8,
+      title: "KOACHER B2B",
+      image: "/realisation/koacher/koacher-b2b-1.webp",
+      tags: ["Webflow", "B2B", "CMS", "Landing Page", "Responsive"],
+      description: "Site web B2B pour KOACHER, conçu pour présenter l'offre, rassurer les prospects et générer des prises de contact qualifiées.",
+      fullTitle: "KOACHER B2B – Site web de présentation commerciale",
+      stack: ["Webflow", "CMS Webflow", "Design system", "SEO on-page", "Responsive design"],
+      features: [
+        "Page d'accueil orientée conversion avec proposition de valeur claire",
+        "Sections dédiées aux offres, bénéfices métier et cas d'usage",
+        "Architecture de contenu pensée pour un parcours prospect B2B",
+        "Composants visuels réutilisables pour accélérer les évolutions",
+        "Mise en page responsive optimisée desktop, tablette et mobile",
+        "Intégration de formulaires de contact pour la génération de leads",
+        "Optimisation SEO on-page (titres, structure, lisibilité)",
+        "Temps de chargement amélioré grâce à des visuels compressés"
+      ],
+      summary: "KOACHER B2B est une vitrine commerciale moderne construite avec Webflow pour soutenir l'acquisition de leads. Le site met en avant les services, clarifie le positionnement de la marque et propose un parcours fluide pour transformer les visiteurs en prospects qualifiés.",
+      images: [
+        "/realisation/koacher/koacher-b2b-1.webp",
+        "/realisation/koacher/koacher-b2b-2.webp",
+        "/realisation/koacher/koacher-b2b-3.webp",
+        "/realisation/koacher/koacher-b2b-4.webp",
+        "/realisation/koacher/koacher-b2b-5.webp",
+        "/realisation/koacher/koacher-b2b-6.webp",
+        "/realisation/koacher/koacher-b2b-7.webp"
+      ]
+    },
+    {
+      id: 9,
+      title: "MYTABLE – Plateforme de réservation de chef à domicile",
+      image: "/realisation/mytable/mytable-2.webp",
+      tags: ["TypeScript", "Supabase", "PostgreSQL", "Realtime", "Resend"],
+      description: "Plateforme complète où les clients réservent un chef à domicile, gèrent leurs demandes et communiquent en temps réel.",
+      fullTitle: "MYTABLE – Plateforme full-stack de booking et gestion de missions",
+      stack: ["TypeScript", "Supabase (Auth + Realtime + DB)", "PostgreSQL", "Resend", "APIs tierces"],
+      features: [
+        "Parcours de réservation complet pour booker un chef à domicile",
+        "Système de gestion des réservations avec statut de mission",
+        "Messagerie temps réel intégrée via Supabase Realtime",
+        "Gestion du menu, du nombre de couverts et du pricing dynamique",
+        "Espace chef pour accepter ou refuser les missions reçues",
+        "Notifications transactionnelles et communication email via Resend",
+        "Synchronisation back-office des données clients, missions et paiements",
+        "Architecture modulaire full TypeScript pensée pour évoluer rapidement"
+      ],
+      summary: "MYTABLE est une grosse plateforme B2C/B2B développée à 100% en TypeScript avec Supabase/PostgreSQL. Elle couvre tout le cycle métier: acquisition de clients, réservation de chefs, coordination en temps réel, gestion des missions et communication automatisée. Une base technique robuste qui tourne en production et supporte des flux opérationnels complets.",
+      images: [
+        "/realisation/mytable/mytable-1.webp",
+        "/realisation/mytable/mytable-2.webp",
+        "/realisation/mytable/mytable-3.webp",
+        "/realisation/mytable/mytable-4.webp",
+        "/realisation/mytable/mytable-5.webp",
+        "/realisation/mytable/mytable-6.webp"
+      ]
+    },
+    {
       id: 6,
-      title: "Kivaiakids – Plateforme éducative",
+      title: "KIVAIAKIDS – Plateforme éducative",
       image: "/realisation/kivaiakids1.png",
       tags: ["Next.js", "Supabase", "CMS", "Upload", "Multi-média"],
       description: "Plateforme complète d'apprentissage des langues pour enfants avec interface professeur dédiée et système de gestion de contenu.",
-      fullTitle: "Kivaiakids – Plateforme éducative multilingue pour enfants",
+      fullTitle: "KIVAIAKIDS – Plateforme éducative multilingue pour enfants",
       stack: ["Next.js", "Supabase (auth + base de données)", "TailwindCSS", "Upload de fichiers", "Système de cours"],
       features: [
         "Interface professeur complète avec éditeur de cours intégré",
@@ -29,7 +86,7 @@ const projectsData = {
         "Gestion des utilisateurs (professeurs et élèves)",
         "Design responsive optimisé pour tablettes et mobiles"
       ],
-      summary: "Kivaiakids révolutionne l'apprentissage des langues pour les enfants avec une plateforme complète qui donne aux professeurs tous les outils nécessaires pour créer des cours engageants. L'interface professeur permet de gérer facilement le contenu, tandis que les enfants bénéficient d'une expérience d'apprentissage moderne et interactive.",
+      summary: "KIVAIAKIDS révolutionne l'apprentissage des langues pour les enfants avec une plateforme complète qui donne aux professeurs tous les outils nécessaires pour créer des cours engageants. L'interface professeur permet de gérer facilement le contenu, tandis que les enfants bénéficient d'une expérience d'apprentissage moderne et interactive.",
       images: [
         "/realisation/kivaiakids1.png",
         "/realisation/kivaiakids2.png",
@@ -41,11 +98,11 @@ const projectsData = {
     },
     {
       id: 1,
-      title: "Avenirea",
+      title: "AVENIREA",
       image: "/realisation/avenireaCover.png",
       tags: ["Next.js", "Supabase", "Stripe", "GPT-4"],
       description: "MVP d'un test d'orientation post-bac avec logique conditionnelle, IA, et paiement intégré.",
-      fullTitle: "Avenirea – Plateforme d'orientation post-bac automatisée",
+      fullTitle: "AVENIREA – Plateforme d'orientation post-bac automatisée",
       stack: ["Next.js", "Supabase (auth + base de données)", "Stripe", "GPT-4", "TailwindCSS"],
       features: [
         "Test RIASEC interactif, entièrement dynamique",
@@ -66,11 +123,11 @@ const projectsData = {
     },
     {
       id: 2,
-      title: "MusicLinks – Plateforme",
+      title: "MUSICLINKS – Plateforme",
       image: "/realisation/musiclinkscover.png",
       tags: ["Next.js", "Supabase", "Realtime Messaging", "Mobile-first", "Marketplace"],
       description: "Marketplace mobile-first où artistes et prestataires peuvent créer un compte, se faire repérer, liker des profils et échanger directement via messagerie.",
-      fullTitle: "MusicLinks – Plateforme de mise en relation pour artistes et prestataires",
+      fullTitle: "MUSICLINKS – Plateforme de mise en relation pour artistes et prestataires",
       stack: ["Next.js", "Supabase (auth, base de données, messaging)", "TailwindCSS", "Realtime messaging", "Auth multi-rôle"],
       features: [
         "Inscription & création de compte utilisateur",
@@ -80,7 +137,7 @@ const projectsData = {
         "Messagerie directe intégrée (type chat), connectée à Supabase",
         "Interface de profil : bio, photos, disponibilité, etc."
       ],
-      summary: "MusicLinks est une plateforme complète de mise en relation dans le monde de la musique. Pensée pour mobile, elle permet à des utilisateurs de se découvrir, liker des profils, et discuter en direct. Le tout repose sur une architecture full stack légère et rapide, avec une vraie logique produit, un design épuré, et une expérience fluide dès la version 1.",
+      summary: "MUSICLINKS est une plateforme complète de mise en relation dans le monde de la musique. Pensée pour mobile, elle permet à des utilisateurs de se découvrir, liker des profils, et discuter en direct. Le tout repose sur une architecture full stack légère et rapide, avec une vraie logique produit, un design épuré, et une expérience fluide dès la version 1.",
       images: [
         "/realisation/musiclinksreal.png",
         "/realisation/musiclinksreal2.png",
@@ -91,11 +148,11 @@ const projectsData = {
     },
     {
       id: 3,
-      title: "GetLazo – Marketplace de Loyalty Tests",
+      title: "GETLAZO – Marketplace de Loyalty Tests",
       image: "/realisation/lazocover.png",
       tags: ["Marketplace", "React", "MySQL", "Stripe", "Backend Custom"],
       description: "Plateforme complète pour orchestrer, vendre et gérer des tests de fidélité automatisés.",
-      fullTitle: "GetLazo – Marketplace de Loyalty Tests",
+      fullTitle: "GETLAZO – Marketplace de Loyalty Tests",
       stack: ["React.js (Next.js)", "Node.js + Express", "PostgreSQL", "Stripe", "EmailJS + Intercom", "Admin Panel"],
       features: [
         "Chat asynchrone entre clients & testeurs (modération intégrée)",
@@ -118,11 +175,11 @@ const projectsData = {
     },
     {
       id: 7,
-      title: "Fast Consulting – Automatisation de démarches administratives",
+      title: "FAST CONSULTING – Automatisation de démarches administratives",
       image: "/realisation/fast-consulting.png",
       tags: ["Next.js", "Supabase", "Stripe", "Email automation", "Vercel"],
       description: "Application web permettant d'automatiser les démarches administratives avec questionnaire intelligent, paiement sécurisé et notifications email.",
-      fullTitle: "Fast Consulting – Plateforme d'automatisation des démarches administratives",
+      fullTitle: "FAST CONSULTING – Plateforme d'automatisation des démarches administratives",
       stack: ["Next.js 14 (App Router)", "Supabase (auth + base de données)", "Stripe (paiement)", "Hostinger (email SMTP)", "Vercel (déploiement)", "TailwindCSS"],
       features: [
         "Formulaire dynamique multi-étapes avec validation en temps réel",
@@ -136,18 +193,18 @@ const projectsData = {
         "Système de suivi des demandes pour les clients",
         "Gestion des pièces justificatives et documents administratifs"
       ],
-      summary: "Fast Consulting révolutionne la gestion des démarches administratives en automatisant entièrement le processus : du questionnaire client au paiement, jusqu'à la notification de l'entreprise. Architecture moderne avec Next.js 14, base de données temps réel Supabase, paiements sécurisés Stripe, et emails transactionnels via Hostinger. Une solution complète déployée sur Vercel pour des performances optimales.",
+      summary: "FAST CONSULTING révolutionne la gestion des démarches administratives en automatisant entièrement le processus : du questionnaire client au paiement, jusqu'à la notification de l'entreprise. Architecture moderne avec Next.js 14, base de données temps réel Supabase, paiements sécurisés Stripe, et emails transactionnels via Hostinger. Une solution complète déployée sur Vercel pour des performances optimales.",
       images: [
         "/realisation/fast-consulting.png"
       ]
     },
     {
       id: 4,
-      title: "MusicLinks Landing Page",
+      title: "MUSICLINKS Landing Page",
       image: "/realisation/musicklinkslanding.png",
       tags: ["Next.js", "Supabase", "Auth", "Video player", "SQL client training"],
       description: "Landing page d'inscription avec création de compte automatisée, vidéo intégrée, et base connectée pour une plateforme musicale professionnelle.",
-      fullTitle: "MusicLinks – Landing page d'inscription connectée à Supabase",
+      fullTitle: "MUSICLINKS – Landing page d'inscription connectée à Supabase",
       stack: ["Next.js", "Supabase (auth + DB)", "Player vidéo intégré", "TailwindCSS"],
       features: [
         "Page responsive avec vidéo intégrée pour présenter le projet",
@@ -155,7 +212,7 @@ const projectsData = {
         "Création automatique de comptes utilisateurs dans la base",
         "Stockage structuré des leads / inscrits",
         "Interface pensée pour être autonome côté client",
-        "Formation de l'équipe MusicLinks : explication du fonctionnement de la base, création de tutoriels simples (SQL, dashboard), accompagnement sur les requêtes pour exploitation quotidienne"
+        "Formation de l'équipe MUSICLINKS : explication du fonctionnement de la base, création de tutoriels simples (SQL, dashboard), accompagnement sur les requêtes pour exploitation quotidienne"
       ],
       summary: "Un projet simple mais complet, livré avec logique de back-end connectée. Le client peut suivre les préinscriptions, gérer ses utilisateurs, et continuer à faire évoluer la plateforme en toute autonomie grâce à la documentation fournie.",
       images: [
@@ -165,11 +222,11 @@ const projectsData = {
     },
     {
       id: 5,
-      title: "Blue Garden – Site vitrine associatif",
+      title: "BLUE GARDEN – Site vitrine associatif",
       image: "/realisation/blue-garden-cover.png",
       tags: ["React", "Responsive", "Formulaire de contact", "CMS-less"],
       description: "Site vitrine simple et élégant pour une association, avec page contact et section événements.",
-      fullTitle: "Blue Garden – Site vitrine associatif en React",
+      fullTitle: "BLUE GARDEN – Site vitrine associatif en React",
       stack: ["React", "Vite", "TailwindCSS", "EmailJS (contact)"],
       features: [
         "Design responsive et épuré",
@@ -177,7 +234,7 @@ const projectsData = {
         "Section Événements: ajout/modification simple sans base de données",
         "Pages statiques performantes (SEO-ready)"
       ],
-      summary: "Un site vitrine moderne et rapide pour l'association Blue Garden, pensé pour être maintenu sans back-end lourd, avec un système simple pour publier des événements.",
+      summary: "Un site vitrine moderne et rapide pour l'association BLUE GARDEN, pensé pour être maintenu sans back-end lourd, avec un système simple pour publier des événements.",
       images: [
         "/realisation/bluegarden1.png",
         "/realisation/bluegarden2.png",

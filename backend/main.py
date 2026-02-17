@@ -49,18 +49,16 @@ def encode_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode("utf-8")
 
-def convert_pdf_to_pngs(pdf_path: Path, png_dir: Path, dpi: int = 300):
-    png_paths = []
+def convert_first_pdf_page_to_png(pdf_path: Path, png_dir: Path, dpi: int = 170):
     with fitz.open(pdf_path) as doc:
         if len(doc) == 0:
             raise ValueError("PDF is empty")
-        for i, page in enumerate(doc):
-            matrix = fitz.Matrix(dpi / 72, dpi / 72)
-            pix = page.get_pixmap(matrix=matrix)
-            out_path = png_dir / f"page_{i+1}.png"
-            pix.save(str(out_path))
-            png_paths.append(out_path)
-    return png_paths
+        page = doc.load_page(0)
+        matrix = fitz.Matrix(dpi / 72, dpi / 72)
+        pix = page.get_pixmap(matrix=matrix)
+        out_path = png_dir / "page_1.png"
+        pix.save(str(out_path))
+        return out_path
 
 def parse_gpt_response(content):
     try:
@@ -119,11 +117,8 @@ async def Convert_file(file: UploadFile = File(...)):
         with open(pdf_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
 
-        # Convertit le PDF en PNG sans dépendance système externe (Render-friendly)
-        png_paths = convert_pdf_to_pngs(pdf_path, png_dir, dpi=300)
-
-        # On ne traite que la première page pour l'instant
-        image_path = png_paths[0]
+        # On traite uniquement la première page pour limiter CPU/RAM sur Render
+        image_path = convert_first_pdf_page_to_png(pdf_path, png_dir, dpi=170)
         
         # Traitement avec GPT Vision
         response_text = process_image(image_path)

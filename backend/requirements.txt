@@ -4,6 +4,6 @@ python-dotenv
 openai
 pandas
 python-multipart
-pdf2image
+pymupdf
 openpyxl
  

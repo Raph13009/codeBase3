@@ -8,7 +8,7 @@ import os
 import base64
 import json
 import pandas as pd
-from pdf2image import convert_from_path
+import fitz
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -48,6 +48,19 @@ Return a JSON object like:
 def encode_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode("utf-8")
+
+def convert_pdf_to_pngs(pdf_path: Path, png_dir: Path, dpi: int = 300):
+    png_paths = []
+    with fitz.open(pdf_path) as doc:
+        if len(doc) == 0:
+            raise ValueError("PDF is empty")
+        for i, page in enumerate(doc):
+            matrix = fitz.Matrix(dpi / 72, dpi / 72)
+            pix = page.get_pixmap(matrix=matrix)
+            out_path = png_dir / f"page_{i+1}.png"
+            pix.save(str(out_path))
+            png_paths.append(out_path)
+    return png_paths
 
 def parse_gpt_response(content):
     try:
@@ -106,13 +119,8 @@ async def Convert_file(file: UploadFile = File(...)):
         with open(pdf_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
 
-        # Convertit le PDF en PNG (une page à la fois)
-        images = convert_from_path(str(pdf_path), dpi=300)
-        png_paths = []
-        for i, img in enumerate(images):
-            out_path = png_dir / f"page_{i+1}.png"
-            img.save(out_path, "PNG")
-            png_paths.append(out_path)
+        # Convertit le PDF en PNG sans dépendance système externe (Render-friendly)
+        png_paths = convert_pdf_to_pngs(pdf_path, png_dir, dpi=300)
 
         # On ne traite que la première page pour l'instant
         image_path = png_paths[0]

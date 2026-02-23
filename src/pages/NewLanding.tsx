@@ -228,15 +228,15 @@ const NewLanding: React.FC = () => {
                   <p className="text-white text-sm md:text-base mt-6 md:mt-16 mb-6 md:mb-16 leading-relaxed max-w-lg mx-0">
                     Développement sur-mesure & solutions intelligentes. Nous concevons des MVP, outils digitaux et solutions IA pour accélérer la croissance de votre business.
                   </p>
-                  <div className="flex items-center justify-start md:justify-start mt-4 md:mt-12">
+                  <NavLink to="/realisations" className="flex items-center justify-start md:justify-start mt-4 md:mt-12 hover:opacity-90 transition-opacity">
                     <div className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center me-3 md:me-4" style={{ background: 'radial-gradient(circle, #3D2F57 0%, #222054 100%)' }}>
                       <Play className="w-4 h-4 md:w-5 md:h-5 text-white" />
                     </div>
                     <div className="flex flex-col">
-                      <p className="text-white border-b border-[#3D2F57]/50 font-bold text-xs md:text-sm">À PROPOS</p>
+                      <p className="text-white border-b border-[#3D2F57]/50 font-bold text-xs md:text-sm">RÉALISATIONS</p>
                       <p className="text-[#3D2F57] text-[10px] md:text-xs mt-0">BoostAI Consulting</p>
                     </div>
-                  </div>
+                  </NavLink>
                 </motion.div>
               </div>
             </div>

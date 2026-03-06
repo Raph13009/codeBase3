@@ -1,86 +1,155 @@
-import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Upload, FileSpreadsheet, Loader2, Zap, Shield, Lock, ArrowRight, CheckCircle } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Upload, FileSpreadsheet, Loader2, Shield, Lock, CheckCircle, FileUp, ChevronDown } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MetaTags from "@/components/seo/MetaTags";
 
 const WORKER_URL = "https://pdf-to-csv.raphaellevy027.workers.dev";
 
-const CodigBanner = () => (
-  <div className="w-full flex justify-center mt-8 mb-8">
-    <div className="flex items-center bg-white rounded-xl shadow-md px-6 py-4 max-w-2xl w-full">
-      <a href="https://www.codig-sa.com/" target="_blank" rel="noopener noreferrer" className="flex-shrink-0 mr-4">
-        <img src="/CodigLogo.png" alt="Codig Logo" className="h-16 w-16 rounded bg-white object-contain border border-gray-200" />
-      </a>
-      <div className="flex-1">
-        <div className="font-semibold text-lg sm:text-xl text-gray-800">Fonctionnalité OCR personnalisée pour Codig</div>
-        <div className="text-gray-500 text-sm sm:text-base mt-1">Ce Convertisseur a été conçu spécialement pour Codig.<br />
-          Vous voulez un flux OCR personnalisé pour votre entreprise ?{' '}
-          <a href="/contact" className="text-blue-600 underline hover:text-blue-800">Parlons-en</a>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+const FAQ_DATA = [
+  {
+    question: "Est-ce vraiment gratuit ?",
+    answer: "Oui, totalement gratuit. Aucun compte, aucun abonnement, aucun frais caché.",
+  },
+  {
+    question: "Faut-il créer un compte ?",
+    answer: "Non. Uploadez votre PDF et téléchargez directement votre fichier Excel, sans inscription.",
+  },
+  {
+    question: "Comment l'IA extrait-elle les tableaux ?",
+    answer: "Nous utilisons une IA vision avancée (OCR) qui détecte et structure automatiquement les tableaux de n'importe quel PDF, y compris les documents scannés.",
+  },
+  {
+    question: "Quels types de PDF fonctionnent le mieux ?",
+    answer: "Certificats qualité, rapports de laboratoire, tableaux financiers, factures et tout PDF contenant des données structurées.",
+  },
+  {
+    question: "Mes données sont-elles confidentielles ?",
+    answer: "Votre fichier est traité instantanément puis supprimé. Nous ne stockons jamais vos documents.",
+  },
+  {
+    question: "Quel est le format du fichier de sortie ?",
+    answer: "Vous recevez un fichier .csv qui s'ouvre directement dans Excel, Google Sheets ou tout tableur.",
+  },
+];
 
-const BenefitCard = ({ icon: Icon, title, description }: { icon: any, title: string, description: string }) => (
-  <motion.div
-    className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-6 backdrop-blur-sm hover:scale-105 hover:shadow-lg transition-all duration-300"
-    whileHover={{ y: -5 }}
-  >
-    <div className="flex items-center mb-4">
-      <div className="p-3 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-lg">
-        <Icon className="h-6 w-6 text-purple-400" />
-      </div>
-      <h3 className="ml-3 text-lg font-semibold text-white">{title}</h3>
-    </div>
-    <p className="text-gray-300 text-sm leading-relaxed">{description}</p>
-  </motion.div>
-);
+type ProgressStep = 1 | 2 | 3;
+type LayoutOption = "vertical" | "horizontal";
 
-const FAQItem = ({ question, answer }: { question: string, answer: string }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+/** Mini spreadsheet: 3 columns × 5 rows, Excel-style (headers A B C, row numbers) */
+function SpreadsheetPreviewPortrait({ selected }: { selected?: boolean }) {
+  const cols = ["A", "B", "C"];
+  const rows = 5;
+  const cellW = 20;
+  const cellH = 14;
+  const headerH = 16;
+  const rowNumW = 14;
+  const border = "1px solid #d1d5db";
   return (
-    <div className="border-b border-slate-700/50 last:border-b-0">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full text-left py-4 flex items-center justify-between hover:bg-slate-700/20 transition-colors duration-200 rounded-lg px-2"
-        aria-expanded={isOpen}
-        aria-controls={`faq-answer-${question.replace(/\s+/g, '-').toLowerCase()}`}
-      >
-        <h3 className="text-lg font-semibold text-white pr-4">{question}</h3>
-        <div className={`transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
-          <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </div>
-      </button>
-      <motion.div
-        id={`faq-answer-${question.replace(/\s+/g, '-').toLowerCase()}`}
-        initial={false}
-        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
-        transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className="overflow-hidden"
-      >
-        <div className="pb-4 px-2">
-          <p className="text-gray-300 text-sm leading-relaxed">{answer}</p>
-        </div>
-      </motion.div>
+    <div className={`inline-block rounded overflow-hidden bg-white shadow-sm ${selected ? "border-4 border-[#217346]" : "border border-gray-300"}`} style={{ fontSize: "9px" }}>
+      <table className="border-collapse" style={{ tableLayout: "fixed" }}>
+        <thead>
+          <tr>
+            <th style={{ width: rowNumW, height: headerH, border, background: "#f3f4f6", color: "#6b7280", fontWeight: 600 }} />
+            {cols.map((c) => (
+              <th key={c} style={{ width: cellW, height: headerH, border, background: "#f3f4f6", color: "#374151", fontWeight: 600 }}>{c}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from({ length: rows }, (_, i) => (
+            <tr key={i}>
+              <td style={{ width: rowNumW, height: cellH, border, background: "#f9fafb", color: "#6b7280", textAlign: "center" }}>{i + 1}</td>
+              {cols.map((_, j) => (
+                <td key={j} style={{ width: cellW, height: cellH, border, background: "#fff" }} />
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
+}
+
+/** Mini spreadsheet: 6 columns × 2 rows, Excel-style */
+function SpreadsheetPreviewLandscape({ selected }: { selected?: boolean }) {
+  const cols = ["A", "B", "C", "D", "E", "F"];
+  const rows = 2;
+  const cellW = 18;
+  const cellH = 18;
+  const headerH = 16;
+  const rowNumW = 14;
+  const border = "1px solid #d1d5db";
+  return (
+    <div className={`inline-block rounded overflow-hidden bg-white shadow-sm ${selected ? "border-4 border-[#217346]" : "border border-gray-300"}`} style={{ fontSize: "9px" }}>
+      <table className="border-collapse" style={{ tableLayout: "fixed" }}>
+        <thead>
+          <tr>
+            <th style={{ width: rowNumW, height: headerH, border, background: "#f3f4f6", color: "#6b7280", fontWeight: 600 }} />
+            {cols.map((c) => (
+              <th key={c} style={{ width: cellW, height: headerH, border, background: "#f3f4f6", color: "#374151", fontWeight: 600 }}>{c}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from({ length: rows }, (_, i) => (
+            <tr key={i}>
+              <td style={{ width: rowNumW, height: cellH, border, background: "#f9fafb", color: "#6b7280", textAlign: "center" }}>{i + 1}</td>
+              {cols.map((_, j) => (
+                <td key={j} style={{ width: cellW, height: cellH, border, background: "#fff" }} />
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+const PROGRESS_LABELS: Record<ProgressStep, string> = {
+  1: "Envoi du fichier…",
+  2: "L'IA extrait les tableaux…",
+  3: "Téléchargement prêt ✓",
 };
+
+/** Parse CSV string and return first 5 rows as string[][]. Handles comma and semicolon. */
+function parseCSVFirst5(csv: string): string[][] {
+  const lines = csv.split(/\r?\n/).filter((line) => line.trim());
+  const rows: string[][] = [];
+  for (let i = 0; i < Math.min(5, lines.length); i++) {
+    const line = lines[i];
+    const sep = line.includes(";") && !line.includes(",") ? ";" : ",";
+    const cells = line.split(sep).map((c) => c.replace(/^"|"$/g, "").trim());
+    rows.push(cells);
+  }
+  return rows;
+}
 
 const Convert = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [layout, setLayout] = useState<LayoutOption>("vertical");
   const [isConverting, setIsConverting] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
+  const [progressStep, setProgressStep] = useState<ProgressStep>(1);
   const [showWakeMsg, setShowWakeMsg] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [previewData, setPreviewData] = useState<string[][] | null>(null);
+  const [conversionTimeMs, setConversionTimeMs] = useState<number | null>(null);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const toolSectionRef = useRef<HTMLDivElement>(null);
   const wakeTimeout = useRef<NodeJS.Timeout | null>(null);
+  const step2Timeout = useRef<NodeJS.Timeout | null>(null);
+  const successTriggered = useRef(false);
+
+  useEffect(() => {
+    return () => {
+      if (wakeTimeout.current) clearTimeout(wakeTimeout.current);
+      if (step2Timeout.current) clearTimeout(step2Timeout.current);
+    };
+  }, []);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -100,7 +169,7 @@ const Convert = () => {
       setFile(droppedFile);
       setError(null);
     } else {
-      setError("Veuillez télécharger un fichier PDF");
+      setError("Veuillez déposer un fichier PDF.");
     }
   };
 
@@ -110,24 +179,30 @@ const Convert = () => {
       setFile(selectedFile);
       setError(null);
     } else {
-      setError("Veuillez télécharger un fichier PDF");
+      setError("Veuillez sélectionner un fichier PDF.");
     }
   };
 
   const handleConvert = async () => {
     if (!file) return;
 
+    const t0 = performance.now();
     setIsConverting(true);
     setIsScanning(true);
     setError(null);
+    setPreviewData(null);
+    setConversionTimeMs(null);
     setShowWakeMsg(false);
+    setProgressStep(1);
+    successTriggered.current = false;
 
-    // Affiche le message "Réveil du serveur..." après 8s si la réponse n'est pas arrivée
     wakeTimeout.current = setTimeout(() => setShowWakeMsg(true), 8000);
+    step2Timeout.current = setTimeout(() => setProgressStep(2), 1500);
 
     try {
       const formData = new FormData();
       formData.append("file", file);
+      formData.append("layout", layout);
 
       const response = await fetch(WORKER_URL, {
         method: "POST",
@@ -136,17 +211,28 @@ const Convert = () => {
 
       if (!response.ok) {
         if (response.status === 404) {
-          throw new Error("Le service de conversion est temporairement indisponible. Veuillez réessayer plus tard.");
+          throw new Error("Le service de conversion est temporairement indisponible. Réessayez plus tard.");
         }
         if (response.status === 0 || response.status === 500) {
-          throw new Error("Le serveur de conversion est en cours de démarrage. Veuillez patienter quelques secondes et réessayer.");
+          throw new Error("Le serveur démarre. Patientez quelques secondes et réessayez.");
         }
         const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.error || "La conversion a échoué");
       }
 
-      // Worker returns CSV: Content-Type text/csv, Content-Disposition attachment; filename="certificate.csv"
+      const elapsed = Math.round(performance.now() - t0);
+      setProgressStep(3);
+      setConversionTimeMs(elapsed);
+      successTriggered.current = true;
+
       const blob = await response.blob();
+      blob.text().then((text) => {
+        try {
+          setPreviewData(parseCSVFirst5(text));
+        } catch {
+          setPreviewData(null);
+        }
+      });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -156,455 +242,412 @@ const Convert = () => {
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
 
+      setTimeout(() => {
+        setIsScanning(false);
+        setIsConverting(false);
+        setFile(null);
+        setShowWakeMsg(false);
+        setProgressStep(1);
+        if (wakeTimeout.current) clearTimeout(wakeTimeout.current);
+        if (step2Timeout.current) clearTimeout(step2Timeout.current);
+      }, 1500);
     } catch (err) {
-      console.error('Conversion error:', err);
-      if (err instanceof Error && err.message.includes('Failed to fetch')) {
-        setError("Le service de conversion est temporairement indisponible. Veuillez réessayer dans quelques minutes.");
+      console.error("Conversion error:", err);
+      if (err instanceof Error && err.message.includes("Failed to fetch")) {
+        setError("Le service est temporairement indisponible. Réessayez dans quelques minutes.");
       } else {
-        setError(err instanceof Error ? err.message : "Une erreur s'est produite lors de la conversion");
+        setError(err instanceof Error ? err.message : "Une erreur s'est produite lors de la conversion.");
       }
-    } finally {
       setIsScanning(false);
       setIsConverting(false);
       setFile(null);
       setShowWakeMsg(false);
+      setProgressStep(1);
       if (wakeTimeout.current) clearTimeout(wakeTimeout.current);
+      if (step2Timeout.current) clearTimeout(step2Timeout.current);
     }
   };
 
   return (
     <>
       <MetaTags
-        title="Convertir PDF en Excel Gratuitement | OCR IA avancé - BoostAI"
-        description="Convertissez vos PDF en Excel gratuitement grâce à notre OCR basé sur l'IA. Conversion rapide, précise et sécurisée en ligne, sans inscription."
-        keywords="convertir PDF Excel, OCR PDF Excel, IA OCR gratuit, PDF to Excel AI"
+        title="Convertir PDF en Excel avec l'IA – Gratuit, Sans Inscription | BoostAI"
+        description="Convertissez n'importe quel PDF en Excel instantanément grâce à l'IA. Sans inscription, sans logiciel. Uploadez votre PDF et téléchargez un tableau Excel structuré."
+        keywords="convertir pdf en excel, convertir pdf en excel gratuit, convertir pdf en excel sans inscription, pdf en excel en ligne, ocr pdf vers excel, pdf to excel ia, convertisseur pdf excel gratuit"
         image="/assets/Logo.png"
       />
-      
-      {/* Structured Data JSON-LD */}
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "Convertisseur PDF vers Excel - OCR IA BoostAI",
-            "operatingSystem": "Web",
-            "applicationCategory": "Utility",
-            "description": "Convertissez vos PDF en fichiers Excel éditables gratuitement grâce à notre OCR basé sur l'intelligence artificielle. Conversion rapide, précise et sécurisée.",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "EUR"
-            }
-          })
+            "@type": "FAQPage",
+            mainEntity: FAQ_DATA.map((item) => ({
+              "@type": "Question",
+              name: item.question,
+              acceptedAnswer: { "@type": "Answer", text: item.answer },
+            })),
+          }),
         }}
       />
 
-      <div className="min-h-screen relative overflow-x-hidden bg-[#0B0D14]">
+      <div
+        className="min-h-screen text-white font-sans antialiased"
+        style={{ background: "radial-gradient(ellipse at top, #3D2F57 0%, #222054 40%, #0a0a0f 100%)" }}
+      >
         <Header />
-        
+
         <main className="relative z-10">
-          {/* Hero Section */}
-          <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%239C92AC&quot; fill-opacity=&quot;0.03&quot;%3E%3Ccircle cx=&quot;30&quot; cy=&quot;30&quot; r=&quot;2&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
-            
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              <div className="max-w-3xl mx-auto">
-                <motion.div 
-                  className="text-center mb-12"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                >
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.1 }}
-                    className="mb-6"
-                  >
-                    <span className="inline-block bg-gradient-to-r from-purple-500/10 to-blue-600/10 border border-purple-500/20 text-purple-400 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
-                      🔄 Convertisseur Gratuit
-                    </span>
-                  </motion.div>
-                  
-                  <motion.h1 
-                    className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-100 to-purple-400"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                  >
-                    Convertisseur PDF vers Excel
-                    <span className="block text-gradient bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
-                      Gratuit (OCR IA)
-                    </span>
-                  </motion.h1>
-                  
-                  <motion.p 
-                    className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
-                  >
-                    Transformez vos PDF en fichiers Excel éditables en ligne grâce à notre <span className="text-purple-400 font-semibold">OCR intelligent basé sur l'IA</span>
-                  </motion.p>
-                </motion.div>
-
-                <CodigBanner />
-                
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                >
-                  <div
-                    className={`relative border-2 border-dashed rounded-lg p-12 text-center ${
-                      isDragging ? "border-purple-500 bg-purple-500/10" : "border-gray-600 bg-gray-900/30"
-                    } transition-colors duration-200 backdrop-blur-sm`}
-                    onDragOver={handleDragOver}
-                    onDragLeave={handleDragLeave}
-                    onDrop={handleDrop}
-                  >
-                    <input
-                      type="file"
-                      ref={fileInputRef}
-                      onChange={handleFileInput}
-                      accept=".pdf"
-                      className="hidden"
-                      aria-label="Sélectionner un fichier PDF"
-                    />
-
-                    <div className="space-y-4">
-                      <Upload className="mx-auto h-12 w-12 text-gray-400" />
-                      <div className="text-gray-300">
-                        {file ? (
-                          <div className="flex items-center justify-center space-x-2">
-                            <FileSpreadsheet className="h-5 w-5 text-purple-400" />
-                            <span>{file.name}</span>
-                          </div>
-                        ) : (
-                          <>
-                            <p className="text-lg font-medium">Glissez-déposez votre fichier PDF ici</p>
-                            <p className="text-sm">ou</p>
-                            <button
-                              onClick={() => fileInputRef.current?.click()}
-                              className="mt-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-md hover:from-purple-700 hover:to-blue-700 transition-all"
-                              aria-label="Parcourir les fichiers pour sélectionner un PDF"
-                            >
-                              Parcourir les fichiers
-                            </button>
-                          </>
-                        )}
-                      </div>
-                    </div>
-
-                    {error && (
-                      <div className="mt-4 text-red-400 text-sm">
-                        {error}
-                      </div>
-                    )}
-
-                    {file && (
-                      <motion.button
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="mt-6 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-md hover:from-purple-700 hover:to-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
-                        onClick={handleConvert}
-                        disabled={isConverting}
-                        aria-label="Convertir le fichier PDF en Excel"
-                      >
-                        {isConverting ? (
-                          <>
-                            <Loader2 className="h-5 w-5 animate-spin" />
-                            <span>Conversion en cours...</span>
-                          </>
-                        ) : (
-                          <>
-                            <FileSpreadsheet className="h-5 w-5" />
-                            <span>Convertir en Excel</span>
-                          </>
-                        )}
-                      </motion.button>
-                    )}
-                  </div>
-                </motion.div>
-              </div>
+          {/* 1. HERO */}
+          <section className="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 sm:pb-16">
+            <div className="max-w-3xl mx-auto text-center">
+              <motion.h1
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-5"
+                style={{ fontFamily: "'Darker Grotesque', sans-serif" }}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                Convertir un PDF en Excel avec l'IA
+              </motion.h1>
+              <motion.p
+                className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.08 }}
+              >
+                Déposez votre PDF — notre IA lit les tableaux et génère un fichier Excel structuré. Sans inscription. Sans logiciel. En quelques secondes.
+              </motion.p>
             </div>
           </section>
 
-          {/* Benefits Section */}
-          <section className="py-16 bg-gradient-to-br from-slate-800 to-slate-900">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-6xl mx-auto">
-                <motion.div
-                  className="text-center mb-12"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                >
-                  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-                    Pourquoi choisir notre <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">convertisseur OCR IA</span> ?
-                  </h2>
-                </motion.div>
+          {/* 2. BLOC OUTIL */}
+          <section ref={toolSectionRef} className="container mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+            <div className="max-w-xl mx-auto">
+              <motion.div
+                className={`rounded-xl border-2 border-dashed p-8 sm:p-10 text-center transition-colors ${
+                  isDragging
+                    ? "border-[#5a4a6f] bg-[#3D2F57]/20"
+                    : "border-white/20 bg-[#151515]/60 backdrop-blur-sm"
+                }`}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4 }}
+              >
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileInput}
+                  accept=".pdf"
+                  className="hidden"
+                  aria-label="Sélectionner un PDF"
+                />
+                <Upload className="mx-auto h-11 w-11 text-white/50 mb-4" />
+                {file ? (
+                  <>
+                    <p className="text-white font-medium truncate max-w-[280px] mx-auto mb-0.5">{file.name}</p>
+                    <p className="text-white/50 text-sm mb-5">
+                      Fichiers PDF uniquement · Traitement instantané
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-white font-medium mb-1">
+                      Glissez votre PDF ici ou cliquez pour parcourir
+                    </p>
+                    <p className="text-white/50 text-sm mb-5">
+                      Fichiers PDF uniquement · Traitement instantané
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="rounded-lg px-4 py-2 bg-white/10 text-white border border-white/20 hover:bg-white/15 transition-colors text-sm"
+                      aria-label="Parcourir les fichiers"
+                    >
+                      Parcourir
+                    </button>
+                  </>
+                )}
+                {error && (
+                  <p className="mt-3 text-sm text-red-400" role="alert">
+                    {error}
+                  </p>
+                )}
+              </motion.div>
 
-                <div className="grid md:grid-cols-3 gap-6">
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.1 }}
-                    viewport={{ once: true }}
+              {/* Layout selector - centered, balanced */}
+              <div className="mt-8 mx-auto max-w-[520px] text-center">
+                <h3 className="text-white/70 text-sm font-medium mb-6">Choisir la disposition de sortie</h3>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12">
+                  <button
+                    type="button"
+                    onClick={() => setLayout("vertical")}
+                    className="w-full sm:flex-1 sm:min-w-0 max-w-[240px] sm:max-w-none flex flex-col items-center justify-center cursor-pointer rounded-lg transition-colors hover:bg-white/5 py-4 px-3"
+                    aria-pressed={layout === "vertical"}
+                    aria-label="Portrait (vertical)"
                   >
-                    <BenefitCard
-                      icon={Zap}
-                      title="Conversion rapide et gratuite"
-                      description="Transformez vos PDF en Excel en quelques secondes, sans coût et sans inscription. Notre outil est accessible 24h/24 et 7j/7."
-                    />
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    viewport={{ once: true }}
+                    <div className="flex flex-col items-center justify-center">
+                      <img src="/excel-logo.png" alt="" className="h-8 w-8 shrink-0 object-contain" aria-hidden />
+                      <div className="mt-3">
+                        <SpreadsheetPreviewPortrait selected={layout === "vertical"} />
+                      </div>
+                      <span className="text-sm font-medium text-white mt-2.5 block">Portrait</span>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLayout("horizontal")}
+                    className="w-full sm:flex-1 sm:min-w-0 max-w-[240px] sm:max-w-none flex flex-col items-center justify-center cursor-pointer rounded-lg transition-colors hover:bg-white/5 py-4 px-3"
+                    aria-pressed={layout === "horizontal"}
+                    aria-label="Paysage (horizontal)"
                   >
-                    <BenefitCard
-                      icon={CheckCircle}
-                      title="Précision grâce à l'IA"
-                      description="Notre technologie OCR basée sur l'intelligence artificielle garantit une extraction précise des données, même sur des documents complexes."
-                    />
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
-                    viewport={{ once: true }}
-                  >
-                    <BenefitCard
-                      icon={Shield}
-                      title="Sécurité et confidentialité"
-                      description="Vos fichiers sont traités de manière sécurisée et supprimés automatiquement après conversion. Aucune donnée n'est stockée."
-                    />
-                  </motion.div>
+                    <div className="flex flex-col items-center justify-center">
+                      <img src="/excel-logo.png" alt="" className="h-8 w-8 shrink-0 object-contain" aria-hidden />
+                      <div className="mt-3">
+                        <SpreadsheetPreviewLandscape selected={layout === "horizontal"} />
+                      </div>
+                      <span className="text-sm font-medium text-white mt-2.5 block">Paysage</span>
+                    </div>
+                  </button>
                 </div>
               </div>
+
+              {file && (
+                <button
+                  type="button"
+                  onClick={handleConvert}
+                  disabled={isConverting}
+                  className="mt-6 w-full rounded-lg px-6 py-3 bg-[#3D2F57] text-white font-semibold hover:bg-[#5a4a6f] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors border border-[#5a4a6f]/50"
+                  aria-label="Convertir en Excel"
+                >
+                  {isConverting ? (
+                    <>
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      <span>Conversion…</span>
+                    </>
+                  ) : (
+                    <>
+                      <FileSpreadsheet className="h-5 w-5" />
+                      <span>Convertir en Excel</span>
+                    </>
+                  )}
+                </button>
+              )}
+              {/* Preview + conversion time */}
+              {(previewData !== null || conversionTimeMs !== null) && (
+                <motion.div
+                  className="mt-6 rounded-xl border border-white/10 bg-[#151515]/60 backdrop-blur-sm overflow-hidden"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {conversionTimeMs !== null && (
+                    <p className="px-4 py-2 text-white/60 text-xs border-b border-white/10">
+                      Conversion en {(conversionTimeMs / 1000).toFixed(1)} s
+                    </p>
+                  )}
+                  {previewData !== null && previewData.length > 0 && (
+                    <div className="overflow-x-auto p-4">
+                      <table className="w-full text-left text-sm border-collapse">
+                        <tbody>
+                          {previewData.map((row, i) => (
+                            <tr key={i} className="border-b border-white/10 last:border-0">
+                              {row.map((cell, j) => (
+                                <td key={j} className="py-1.5 px-2 text-white/90 whitespace-nowrap">
+                                  {cell}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      <p className="text-white/50 text-xs mt-2">5 premières lignes · Fichier téléchargé</p>
+                    </div>
+                  )}
+                </motion.div>
+              )}
             </div>
           </section>
 
-          {/* How it works Section */}
-          <section className="py-16 bg-gradient-to-br from-slate-900 to-slate-800">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-4xl mx-auto">
-                <motion.div
-                  className="text-center mb-12"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                >
-                  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-                    Comment ça marche ?
-                  </h2>
-                  <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Notre processus de conversion en 3 étapes simples
-                  </p>
-                </motion.div>
-
-                <div className="grid md:grid-cols-3 gap-8 mb-12">
+          {/* 3. COMMENT ÇA MARCHE */}
+          <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+            <div className="max-w-4xl mx-auto">
+              <h2
+                className="text-2xl sm:text-3xl font-bold text-white mb-10 sm:mb-12 text-center"
+                style={{ fontFamily: "'Darker Grotesque', sans-serif" }}
+              >
+                Comment ça marche ?
+              </h2>
+              <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
+                {[
+                  {
+                    num: "1",
+                    title: "Uploadez votre PDF",
+                    desc: "Certificats, rapports, factures, tableaux — tout type de PDF",
+                  },
+                  {
+                    num: "2",
+                    title: "L'IA analyse et extrait",
+                    desc: "Notre IA détecte automatiquement les tableaux via OCR et les structure intelligemment",
+                  },
+                  {
+                    num: "3",
+                    title: "Téléchargez votre fichier",
+                    desc: "Un fichier Excel propre et prêt à l'emploi en quelques secondes",
+                  },
+                ].map((step, i) => (
                   <motion.div
-                    className="text-center"
-                    initial={{ opacity: 0, y: 30 }}
+                    key={step.num}
+                    className="rounded-xl bg-[#151515]/70 border border-white/10 p-6 text-center"
+                    initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.1 }}
+                    transition={{ duration: 0.4, delay: i * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-white font-bold text-xl">1</span>
+                    <div className="w-10 h-10 rounded-full bg-[#3D2F57]/80 text-white flex items-center justify-center font-bold text-lg mx-auto mb-4">
+                      {step.num}
                     </div>
-                    <h3 className="text-xl font-semibold text-white mb-3">Téléchargez votre PDF</h3>
-                    <p className="text-gray-300">Glissez-déposez ou sélectionnez votre fichier PDF à convertir</p>
+                    <h3 className="text-lg font-semibold text-white mb-2">{step.title}</h3>
+                    <p className="text-sm text-white/70">{step.desc}</p>
                   </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
 
+          {/* 4. AVANTAGES */}
+          <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+            <div className="max-w-4xl mx-auto">
+              <h2
+                className="text-2xl sm:text-3xl font-bold text-white mb-10 sm:mb-12 text-center"
+                style={{ fontFamily: "'Darker Grotesque', sans-serif" }}
+              >
+                Pourquoi utiliser notre convertisseur ?
+              </h2>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+                {[
+                  { icon: CheckCircle, title: "Sans inscription", desc: "Aucun compte requis" },
+                  { icon: FileUp, title: "IA + OCR", desc: "Lit même les PDF scannés" },
+                  { icon: Shield, title: "Tous types de PDF", desc: "Certificats, rapports, factures" },
+                  { icon: Lock, title: "100% gratuit", desc: "Aucun frais caché" },
+                ].map((item, i) => (
                   <motion.div
-                    className="text-center"
-                    initial={{ opacity: 0, y: 30 }}
+                    key={item.title}
+                    className="rounded-xl bg-[#151515]/70 border border-white/10 p-5"
+                    initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
+                    transition={{ duration: 0.4, delay: i * 0.06 }}
                     viewport={{ once: true }}
                   >
-                    <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-white font-bold text-xl">2</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-white mb-3">IA analyse le contenu</h3>
-                    <p className="text-gray-300">Notre OCR IA extrait et structure automatiquement les données</p>
+                    <item.icon className="h-5 w-5 text-[#5a4a6f] mb-2" />
+                    <h3 className="font-semibold text-white mb-1">{item.title}</h3>
+                    <p className="text-sm text-white/70">{item.desc}</p>
                   </motion.div>
-
-                  <motion.div
-                    className="text-center"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-white font-bold text-xl">3</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-white mb-3">Téléchargez votre Excel</h3>
-                    <p className="text-gray-300">Récupérez votre fichier Excel prêt à utiliser</p>
-                  </motion.div>
-                </div>
+                ))}
               </div>
             </div>
           </section>
 
-          {/* SEO Content Section */}
-          <section className="py-16 bg-gradient-to-br from-slate-800 to-slate-900">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-3xl mx-auto">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                >
-                  <h2 className="text-2xl font-bold mb-4 text-white">Convertir un PDF en Excel gratuitement avec l'IA OCR</h2>
-                  <p className="mb-4 text-gray-200">
-                    Vous cherchez à <strong>transformer un PDF en fichier Excel éditable</strong> rapidement et sans perte de données ? 
-                    Notre <strong>outil OCR basé sur l'intelligence artificielle</strong> vous permet de convertir vos documents PDF 
-                    en feuilles Excel précises, tout en conservant la mise en page et les tableaux. Contrairement aux convertisseurs classiques, 
-                    notre solution détecte automatiquement les structures complexes grâce à une technologie IA avancée.
-                  </p>
-                  <p className="mb-4 text-gray-200">
-                    L'utilisation est simple : téléversez votre fichier, laissez notre système l'analyser, et téléchargez un Excel prêt à l'emploi. 
-                    Cette plateforme est 100% en ligne, gratuite, et ne nécessite aucune inscription. Idéal pour les entreprises, étudiants, 
-                    comptables ou toute personne manipulant régulièrement des données PDF.
-                  </p>
-                  <p className="mb-4 text-gray-200">
-                    En plus de la conversion classique, notre OCR peut reconnaître les PDF scannés, les images intégrées, et même corriger 
-                    certaines erreurs de lecture grâce à un algorithme d'apprentissage automatique. Vos fichiers restent sécurisés, 
-                    car aucune donnée n'est conservée après la conversion.
-                  </p>
-                  <p className="text-gray-200">
-                    Essayez dès maintenant notre <strong>convertisseur PDF vers Excel gratuit</strong> et gagnez du temps 
-                    dans votre gestion de documents.
-                  </p>
-                </motion.div>
+          {/* 5. FAQ */}
+          <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+            <div className="max-w-2xl mx-auto">
+              <h2
+                className="text-2xl sm:text-3xl font-bold text-white mb-8 sm:mb-10 text-center"
+                style={{ fontFamily: "'Darker Grotesque', sans-serif" }}
+              >
+                Questions fréquentes
+              </h2>
+              <div className="rounded-xl border border-white/10 overflow-hidden bg-[#151515]/70">
+                {FAQ_DATA.map((item, i) => (
+                  <FAQItem
+                    key={i}
+                    question={item.question}
+                    answer={item.answer}
+                    open={openFaqIndex === i}
+                    onToggle={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
+                  />
+                ))}
               </div>
             </div>
           </section>
 
-          {/* FAQ Section */}
-          <section className="py-16 bg-gradient-to-br from-slate-900 to-slate-800">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-3xl mx-auto">
-                <motion.div
-                  className="text-center mb-12"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                >
-                  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-                    Questions fréquentes
-                  </h2>
-                  <p className="text-xl text-gray-300">
-                    Tout ce que vous devez savoir sur notre convertisseur PDF vers Excel
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  className="bg-slate-800/30 backdrop-blur-sm rounded-xl p-8 border border-slate-700/50"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  viewport={{ once: true }}
-                >
-                  <FAQItem
-                    question="Est-ce que ce convertisseur PDF vers Excel est vraiment gratuit ?"
-                    answer="Oui, notre outil est totalement gratuit et sans inscription. Vous pouvez convertir autant de fichiers PDF que vous le souhaitez."
-                  />
-                  <FAQItem
-                    question="Comment fonctionne l'OCR basé sur l'IA ?"
-                    answer="L'OCR (reconnaissance optique de caractères) analyse chaque élément de votre PDF et reconstruit un fichier Excel en détectant automatiquement les tableaux, textes et chiffres. Notre modèle IA améliore la précision et la mise en page."
-                  />
-                  <FAQItem
-                    question="Mes données sont-elles sécurisées ?"
-                    answer="Oui, tous les fichiers sont traités en toute sécurité et ne sont pas stockés après la conversion. Vos informations restent confidentielles."
-                  />
-                  <FAQItem
-                    question="Est-ce que ça marche avec les PDF scannés ?"
-                    answer="Oui, notre OCR IA est capable de lire les PDF scannés et d'en extraire les données pour créer un Excel éditable."
-                  />
-                </motion.div>
-              </div>
-            </div>
-          </section>
-
-          {/* CTA Section */}
-          <section className="py-16 bg-gradient-to-br from-purple-900/20 to-blue-900/20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-3xl mx-auto text-center">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                >
-                  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-                    Besoin d'aide ou d'informations supplémentaires ?
-                  </h2>
-                  <p className="text-xl text-gray-300 mb-8">
-                    Découvrez plus d'astuces et de conseils sur notre blog pour optimiser votre utilisation de nos outils.
-                  </p>
-                  <a
-                    href="/blog"
-                    className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-md hover:from-purple-700 hover:to-blue-700 transition-all font-semibold"
-                    aria-label="Accéder au blog pour plus d'astuces"
-                  >
-                    Découvrir notre blog
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </a>
-                </motion.div>
-              </div>
+          {/* 6. CTA FOOTER */}
+          <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14">
+            <div className="max-w-xl mx-auto text-center">
+              <p className="text-white/60 text-sm">
+                Besoin d'automatisation IA pour votre entreprise ?{" "}
+                <a href="/" className="text-[#d7c6ff] hover:text-white transition-colors font-medium">
+                  Découvrir BoostAI Consulting →
+                </a>
+              </p>
             </div>
           </section>
         </main>
 
-        <AnimatePresence>
-          {isScanning && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-            >
-              <div className="relative w-full max-w-xs sm:max-w-md md:max-w-lg bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl flex flex-col items-center justify-center p-8 mx-4">
-                <div className="mb-6">
-                  <motion.div
-                    className="w-20 h-20 rounded-full bg-gradient-to-tr from-purple-400 via-purple-200 to-purple-500 flex items-center justify-center shadow-lg"
-                    animate={{ rotate: 360 }}
-                    transition={{ repeat: Infinity, duration: 1.2, ease: "linear" }}
-                  >
-                    <span className="block w-12 h-12 rounded-full bg-gradient-to-br from-purple-100 to-purple-300 blur-sm opacity-70 animate-pulse" />
-                  </motion.div>
-                </div>
-                <div className="text-xl font-semibold text-white mb-2 text-center">
-                  {showWakeMsg ? "Réveil du serveur, veuillez patienter..." : "Traitement de votre fichier..."}
-                </div>
-                <div className="text-sm text-gray-400 text-center">
-                  Cela peut prendre jusqu'à 30 secondes si le serveur est en veille.
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        
+        {/* Overlay 3 étapes */}
+        {isScanning && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
+          >
+            <div className="rounded-xl bg-[#151515] border border-white/10 p-8 max-w-sm mx-4 text-center shadow-xl">
+              {progressStep === 3 ? (
+                <CheckCircle className="h-12 w-12 text-[#22c55e] mx-auto mb-4" />
+              ) : (
+                <Loader2 className="h-12 w-12 animate-spin text-[#5a4a6f] mx-auto mb-4" />
+              )}
+              <p className="text-white font-semibold">{PROGRESS_LABELS[progressStep]}</p>
+              {progressStep === 3 && conversionTimeMs !== null && (
+                <p className="text-white/50 text-sm mt-1">{(conversionTimeMs / 1000).toFixed(1)} s</p>
+              )}
+              {progressStep !== 3 && (
+                <p className="text-white/50 text-sm mt-1">
+                  {showWakeMsg ? "Le serveur démarre, patientez…" : "Cela peut prendre jusqu'à 30 secondes."}
+                </p>
+              )}
+            </div>
+          </motion.div>
+        )}
+
         <Footer />
       </div>
     </>
   );
 };
 
-export default Convert; 
+function FAQItem({ question, answer, open, onToggle }: { question: string; answer: string; open: boolean; onToggle: () => void }) {
+  const id = question.replace(/\s+/g, "-").toLowerCase();
+
+  return (
+    <div className="border-b border-white/10 last:border-b-0">
+      <button
+        type="button"
+        onClick={onToggle}
+        className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-white/5 transition-colors"
+        aria-expanded={open}
+        aria-controls={id}
+      >
+        <span className="font-medium text-white text-left">{question}</span>
+        <span
+          className={`text-[#5a4a6f] shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+        >
+          <ChevronDown className="h-5 w-5" />
+        </span>
+      </button>
+      <div
+        id={id}
+        className={`overflow-hidden transition-all duration-200 ${open ? "max-h-[300px]" : "max-h-0"}`}
+      >
+        <p className="px-5 pb-4 pt-0 text-white/70 text-sm leading-relaxed">{answer}</p>
+      </div>
+    </div>
+  );
+}
+
+export default Convert;

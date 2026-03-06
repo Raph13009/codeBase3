@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 24" fill="none" stroke="#e2e8f0" stroke-width="1.2" stroke-linecap="square">
+  <!-- 4 columns x 2 rows = wide grid -->
+  <rect x="0.5" y="0.5" width="9" height="11" rx="0.5"/>
+  <rect x="10.5" y="0.5" width="9" height="11" rx="0.5"/>
+  <rect x="20.5" y="0.5" width="9" height="11" rx="0.5"/>
+  <rect x="30.5" y="0.5" width="9" height="11" rx="0.5"/>
+  <rect x="0.5" y="12.5" width="9" height="11" rx="0.5"/>
+  <rect x="10.5" y="12.5" width="9" height="11" rx="0.5"/>
+  <rect x="20.5" y="12.5" width="9" height="11" rx="0.5"/>
+  <rect x="30.5" y="12.5" width="9" height="11" rx="0.5"/>
+</svg>

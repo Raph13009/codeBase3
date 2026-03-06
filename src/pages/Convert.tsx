@@ -132,9 +132,6 @@ const Convert = () => {
       const response = await fetch(`${WORKER_URL}/Convert`, {
         method: "POST",
         body: formData,
-        headers: {
-          'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        },
         mode: 'cors',
       });
 
@@ -149,12 +146,12 @@ const Convert = () => {
         throw new Error(errorData.error || "La conversion a échoué");
       }
 
-      // Télécharger le vrai fichier Excel retourné par le backend
+      // Worker returns CSV: Content-Type text/csv, Content-Disposition attachment; filename="certificate.csv"
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = file.name.replace(/\.pdf$/i, "_Converted.xlsx");
+      a.download = file.name.replace(/\.pdf$/i, "_Converted.csv");
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

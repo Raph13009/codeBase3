@@ -97,6 +97,51 @@ export default {
 
     const csv = generateCSV(parsed); // your real CSV logic
 
+    // ---------- Notion tracking (do not break on failure) ----------
+    try {
+      const layout = formData.get("layout") || "";
+      const fileName = file && typeof file === "object" && "name" in file ? file.name : "";
+      const userAgent = request.headers.get("User-Agent") || "";
+      const ip = request.headers.get("CF-Connecting-IP") || "";
+
+      if (env.NOTION_API_KEY && env.NOTION_DATABASE_ID) {
+        console.log("Notion tracking start");
+        console.log("Database ID:", env.NOTION_DATABASE_ID);
+        console.log("API key present:", !!env.NOTION_API_KEY);
+        console.log("Tracking file:", fileName);
+        console.log("Layout:", layout);
+        console.log("User agent:", userAgent);
+
+        const notionResponse = await fetch("https://api.notion.com/v1/pages", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${env.NOTION_API_KEY}`,
+            "Notion-Version": "2022-06-28",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            parent: { database_id: env.NOTION_DATABASE_ID },
+            properties: {
+              "Name": { title: [{ text: { content: "PDF Conversion" } }] },
+              "Date": { date: { start: new Date().toISOString() } },
+              "File name": { rich_text: [{ text: { content: String(fileName).slice(0, 2000) } }] },
+              "Layout": { rich_text: [{ text: { content: String(layout).slice(0, 2000) } }] },
+              "User agent": { rich_text: [{ text: { content: String(userAgent).slice(0, 2000) } }] },
+              "IP": { rich_text: [{ text: { content: String(ip).slice(0, 2000) } }] },
+            },
+          }),
+        });
+
+        console.log("Notion response status:", notionResponse.status);
+        if (notionResponse.status !== 200 && notionResponse.status !== 201) {
+          const body = await notionResponse.text();
+          console.log("Notion response body:", body);
+        }
+      }
+    } catch (err) {
+      console.error("Notion tracking failed:", err);
+    }
+
     // ---------- 12. Log when worker finishes successfully ----------
     console.log("[Worker] Finished successfully");
 

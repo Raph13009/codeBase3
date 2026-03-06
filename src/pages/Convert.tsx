@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Upload, FileSpreadsheet, Loader2, Shield, Lock, CheckCircle, FileUp, ChevronDown } from "lucide-react";
+import { Upload, FileSpreadsheet, Loader2, Shield, Lock, CheckCircle, FileUp, ChevronDown, Download } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MetaTags from "@/components/seo/MetaTags";
@@ -143,6 +143,7 @@ const Convert = () => {
   const wakeTimeout = useRef<NodeJS.Timeout | null>(null);
   const step2Timeout = useRef<NodeJS.Timeout | null>(null);
   const successTriggered = useRef(false);
+  const lastDownloadRef = useRef<{ blob: Blob; filename: string } | null>(null);
 
   useEffect(() => {
     return () => {
@@ -230,6 +231,8 @@ const Convert = () => {
       successTriggered.current = true;
 
       const blob = await response.blob();
+      const filename = file.name.replace(/\.pdf$/i, "_Converted.csv");
+      lastDownloadRef.current = { blob, filename };
       blob.text().then((text) => {
         try {
           setPreviewData(parseCSVFirst5(text));
@@ -240,7 +243,7 @@ const Convert = () => {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = file.name.replace(/\.pdf$/i, "_Converted.csv");
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -379,9 +382,31 @@ const Convert = () => {
                       </div>
                     )}
                     <p className="text-white/50 text-xs mb-4">5 premières lignes · Fichier téléchargé</p>
+                    {lastDownloadRef.current && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const { blob, filename } = lastDownloadRef.current!;
+                          const url = window.URL.createObjectURL(blob);
+                          const a = document.createElement("a");
+                          a.href = url;
+                          a.download = filename;
+                          document.body.appendChild(a);
+                          a.click();
+                          document.body.removeChild(a);
+                          window.URL.revokeObjectURL(url);
+                        }}
+                        className="w-full max-w-[260px] mx-auto rounded-lg px-6 py-3 bg-[#217346] text-white font-semibold hover:bg-[#1a5c38] flex items-center justify-center gap-2 transition-colors mb-4"
+                        aria-label="Télécharger le fichier CSV"
+                      >
+                        <Download className="h-5 w-5" />
+                        Télécharger
+                      </button>
+                    )}
                     <button
                       type="button"
                       onClick={() => {
+                        lastDownloadRef.current = null;
                         setPreviewData(null);
                         setConversionTimeMs(null);
                       }}

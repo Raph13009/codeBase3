@@ -34,7 +34,14 @@ try {
   const ip = request.headers.get("CF-Connecting-IP") || "";
 
   if (env.NOTION_API_KEY && env.NOTION_DATABASE_ID) {
-    await fetch("https://api.notion.com/v1/pages", {
+    console.log("Notion tracking start");
+    console.log("Database ID:", env.NOTION_DATABASE_ID);
+    console.log("API key present:", !!env.NOTION_API_KEY);
+    console.log("Tracking file:", fileName);
+    console.log("Layout:", layout);
+    console.log("User agent:", userAgent);
+
+    const response = await fetch("https://api.notion.com/v1/pages", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${env.NOTION_API_KEY}`,
@@ -65,9 +72,15 @@ try {
         },
       }),
     });
+
+    console.log("Notion response status:", response.status);
+    if (response.status !== 200 && response.status !== 201) {
+      const body = await response.text();
+      console.log("Notion response body:", body);
+    }
   }
-} catch (e) {
-  console.error("[Worker] Notion log failed:", e);
+} catch (err) {
+  console.error("Notion tracking failed:", err);
 }
 ```
 

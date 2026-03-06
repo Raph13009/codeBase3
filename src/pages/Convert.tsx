@@ -327,13 +327,15 @@ const Convert = () => {
             <div className="max-w-xl mx-auto">
               <motion.div
                 className={`rounded-xl border-2 border-dashed p-8 sm:p-10 text-center transition-colors ${
-                  isDragging
-                    ? "border-[#5a4a6f] bg-[#3D2F57]/20"
-                    : "border-white/20 bg-[#151515]/60 backdrop-blur-sm"
+                  previewData !== null || conversionTimeMs !== null
+                    ? "border-white/20 bg-[#151515]/60 backdrop-blur-sm"
+                    : isDragging
+                      ? "border-[#5a4a6f] bg-[#3D2F57]/20"
+                      : "border-white/20 bg-[#151515]/60 backdrop-blur-sm"
                 }`}
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
+                onDragOver={previewData === null && conversionTimeMs === null ? handleDragOver : undefined}
+                onDragLeave={previewData === null && conversionTimeMs === null ? handleDragLeave : undefined}
+                onDrop={previewData === null && conversionTimeMs === null ? handleDrop : undefined}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -347,16 +349,72 @@ const Convert = () => {
                   className="hidden"
                   aria-label="Sélectionner un PDF"
                 />
-                <Upload className="mx-auto h-11 w-11 text-white/50 mb-4" />
-                {file ? (
+                {previewData !== null || conversionTimeMs !== null ? (
                   <>
-                    <p className="text-white font-medium truncate max-w-[280px] mx-auto mb-0.5">{file.name}</p>
-                    <p className="text-white/50 text-sm mb-5">
-                      Fichiers PDF uniquement · Traitement instantané
-                    </p>
+                    <CheckCircle className="mx-auto h-10 w-10 text-[#22c55e] mb-4" />
+                    {conversionTimeMs !== null && (
+                      <p className="text-white/70 text-sm mb-4">
+                        Conversion en {(conversionTimeMs / 1000).toFixed(1)} s
+                      </p>
+                    )}
+                    {previewData !== null && previewData.length > 0 && (
+                      <div className="overflow-x-auto rounded-lg border border-white/10 bg-[#0a0a0a]/60 mb-5 max-h-[200px]">
+                        <table className="w-full text-left text-sm border-collapse">
+                          <tbody>
+                            {previewData.map((row, i) => (
+                              <tr key={i} className="border-b border-white/10 last:border-0">
+                                {row.map((cell, j) => (
+                                  <td key={j} className="py-1.5 px-2 text-white/90 whitespace-nowrap">
+                                    {cell}
+                                  </td>
+                                ))}
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+                    <p className="text-white/50 text-xs mb-4">5 premières lignes · Fichier téléchargé</p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setPreviewData(null);
+                        setConversionTimeMs(null);
+                      }}
+                      className="rounded-lg px-4 py-2 text-white/80 hover:text-white border border-white/20 hover:bg-white/10 transition-colors text-sm"
+                      aria-label="Supprimer définitivement mes données"
+                    >
+                      Supprimer définitivement mes données
+                    </button>
+                  </>
+                ) : file ? (
+                  <>
+                    <FileSpreadsheet className="mx-auto h-11 w-11 text-[#5a4a6f] mb-3" />
+                    <p className="text-white font-medium truncate max-w-[280px] mx-auto mb-1">{file.name}</p>
+                    <p className="text-white/50 text-xs mb-5">Fichiers PDF uniquement · Traitement instantané</p>
+                    <button
+                      type="button"
+                      onClick={handleConvert}
+                      disabled={isConverting}
+                      className="w-full max-w-[260px] mx-auto rounded-lg px-6 py-3 bg-[#3D2F57] text-white font-semibold hover:bg-[#5a4a6f] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors border border-[#5a4a6f]/50"
+                      aria-label="Convertir en Excel"
+                    >
+                      {isConverting ? (
+                        <>
+                          <Loader2 className="h-5 w-5 animate-spin" />
+                          <span>Conversion…</span>
+                        </>
+                      ) : (
+                        <>
+                          <FileSpreadsheet className="h-5 w-5" />
+                          <span>Convertir en Excel</span>
+                        </>
+                      )}
+                    </button>
                   </>
                 ) : (
                   <>
+                    <Upload className="mx-auto h-11 w-11 text-white/50 mb-4" />
                     <p className="text-white font-medium mb-1">
                       Glissez votre PDF ici ou cliquez pour parcourir
                     </p>
@@ -416,61 +474,6 @@ const Convert = () => {
                   </button>
                 </div>
               </div>
-
-              {file && (
-                <button
-                  type="button"
-                  onClick={handleConvert}
-                  disabled={isConverting}
-                  className="mt-6 w-full rounded-lg px-6 py-3 bg-[#3D2F57] text-white font-semibold hover:bg-[#5a4a6f] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors border border-[#5a4a6f]/50"
-                  aria-label="Convertir en Excel"
-                >
-                  {isConverting ? (
-                    <>
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                      <span>Conversion…</span>
-                    </>
-                  ) : (
-                    <>
-                      <FileSpreadsheet className="h-5 w-5" />
-                      <span>Convertir en Excel</span>
-                    </>
-                  )}
-                </button>
-              )}
-              {/* Preview + conversion time */}
-              {(previewData !== null || conversionTimeMs !== null) && (
-                <motion.div
-                  className="mt-6 rounded-xl border border-white/10 bg-[#151515]/60 backdrop-blur-sm overflow-hidden"
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {conversionTimeMs !== null && (
-                    <p className="px-4 py-2 text-white/60 text-xs border-b border-white/10">
-                      Conversion en {(conversionTimeMs / 1000).toFixed(1)} s
-                    </p>
-                  )}
-                  {previewData !== null && previewData.length > 0 && (
-                    <div className="overflow-x-auto p-4">
-                      <table className="w-full text-left text-sm border-collapse">
-                        <tbody>
-                          {previewData.map((row, i) => (
-                            <tr key={i} className="border-b border-white/10 last:border-0">
-                              {row.map((cell, j) => (
-                                <td key={j} className="py-1.5 px-2 text-white/90 whitespace-nowrap">
-                                  {cell}
-                                </td>
-                              ))}
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                      <p className="text-white/50 text-xs mt-2">5 premières lignes · Fichier téléchargé</p>
-                    </div>
-                  )}
-                </motion.div>
-              )}
             </div>
           </section>
 

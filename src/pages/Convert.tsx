@@ -129,10 +129,9 @@ const Convert = () => {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch(`${WORKER_URL}/Convert`, {
+      const response = await fetch(WORKER_URL, {
         method: "POST",
         body: formData,
-        mode: 'cors',
       });
 
       if (!response.ok) {

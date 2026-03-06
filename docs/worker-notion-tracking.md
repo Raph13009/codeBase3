@@ -90,3 +90,9 @@ Si le Worker ne garde pas `formData` jusqu’à la fin, il faut soit le garder e
 - En cas d’erreur Notion (réseau, 4xx/5xx, JSON), l’erreur est **ignorée** (try/catch) et la conversion CSV est quand même renvoyée.
 - Aucun autre changement n’est nécessaire dans la logique du Worker.
 - Les champs `rich_text` sont tronqués à 2000 caractères pour respecter la limite Notion.
+
+## Dépannage (erreur 500 après ajout)
+
+- Vérifier que **NOTION_API_KEY** et **NOTION_DATABASE_ID** sont bien définis dans les Variables du Worker (Settings → Variables).
+- S'assurer que **formData** est encore disponible à l'endroit du bloc Notion (même variable qu'au début du handler).
+- Si le Worker renvoie 500 **sans** avoir ajouté le code Notion, l'erreur vient d'ailleurs (OpenAI, parsing, etc.) : vérifier les logs du Worker dans le dashboard Cloudflare (Logs).

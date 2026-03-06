@@ -213,11 +213,15 @@ const Convert = () => {
         if (response.status === 404) {
           throw new Error("Le service de conversion est temporairement indisponible. Réessayez plus tard.");
         }
-        if (response.status === 0 || response.status === 500) {
-          throw new Error("Le serveur démarre. Patientez quelques secondes et réessayez.");
-        }
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || "La conversion a échoué");
+        const serverMessage = errorData.error || errorData.message;
+        if (response.status === 500 && serverMessage) {
+          throw new Error(serverMessage);
+        }
+        if (response.status === 500 || response.status === 0) {
+          throw new Error("Une erreur s'est produite côté serveur. Réessayez dans quelques instants.");
+        }
+        throw new Error(serverMessage || "La conversion a échoué");
       }
 
       const elapsed = Math.round(performance.now() - t0);

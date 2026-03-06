@@ -5,6 +5,8 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MetaTags from "@/components/seo/MetaTags";
 
+const WORKER_URL = "https://pdf-to-csv.raphaellevy027.workers.dev";
+
 const CodigBanner = () => (
   <div className="w-full flex justify-center mt-8 mb-8">
     <div className="flex items-center bg-white rounded-xl shadow-md px-6 py-4 max-w-2xl w-full">
@@ -127,7 +129,7 @@ const Convert = () => {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch("https://boostai-backend.onrender.com/Convert", {
+      const response = await fetch(`${WORKER_URL}/Convert`, {
         method: "POST",
         body: formData,
         headers: {

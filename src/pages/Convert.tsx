@@ -249,7 +249,7 @@ const Convert = () => {
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
 
-      fetch(`${WORKER_URL}/test-notion`).catch(() => {});
+      fetch("/api/log-conversion", { method: "POST" }).catch(() => {});
 
       setTimeout(() => {
         setIsScanning(false);

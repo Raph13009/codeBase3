@@ -30,6 +30,35 @@ export default function StaggeredMenu({ isOpen, onClose }: StaggeredMenuProps) {
 
   const offscreen = POSITION === "left" ? -100 : 100;
 
+  useEffect(() => {
+    if (isVisible) {
+      const scrollY = window.scrollY;
+      document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.position = "fixed";
+      document.documentElement.style.top = `-${scrollY}px`;
+      document.documentElement.style.left = "0";
+      document.documentElement.style.right = "0";
+      document.body.style.overflow = "hidden";
+    } else {
+      const scrollY = document.documentElement.style.top ? Math.abs(parseInt(document.documentElement.style.top, 10)) : 0;
+      document.documentElement.style.overflow = "";
+      document.documentElement.style.position = "";
+      document.documentElement.style.top = "";
+      document.documentElement.style.left = "";
+      document.documentElement.style.right = "";
+      document.body.style.overflow = "";
+      if (scrollY) window.scrollTo(0, scrollY);
+    }
+    return () => {
+      document.documentElement.style.overflow = "";
+      document.documentElement.style.position = "";
+      document.documentElement.style.top = "";
+      document.documentElement.style.left = "";
+      document.documentElement.style.right = "";
+      document.body.style.overflow = "";
+    };
+  }, [isVisible]);
+
   useLayoutEffect(() => {
     if (!isVisible) return;
     const ctx = gsap.context(() => {

@@ -249,7 +249,11 @@ const Convert = () => {
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
 
-      fetch("/api/log-conversion", { method: "POST" }).catch(() => {});
+      fetch("/api/log-conversion", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fileName: file.name, layout }),
+      }).catch(() => {});
 
       setTimeout(() => {
         setIsScanning(false);

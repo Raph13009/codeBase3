@@ -249,6 +249,8 @@ const Convert = () => {
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
 
+      fetch(`${WORKER_URL}/test-notion`).catch(() => {});
+
       setTimeout(() => {
         setIsScanning(false);
         setIsConverting(false);

@@ -4,6 +4,7 @@ import { Monitor, Brain } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import GrainientBackground from "@/components/GrainientBackground";
 import MetaTags from "@/components/seo/MetaTags";
 import BlurText from "@/components/ui/BlurText";
 import GooeyNav from "@/components/ui/GooeyNav";
@@ -294,20 +295,26 @@ const Realisations = () => {
         image="/assets/Logo.png"
       />
       
-      <div className={`min-h-screen relative overflow-x-hidden transition-colors duration-500 ${
-        activeTab === 'web' 
-          ? 'bg-gradient-to-br from-[#1F111F] to-[#413C41]' 
-          : 'bg-gradient-to-br from-[#111F1F] to-[#17413C]'
-      }`}>
+      <GrainientBackground className="min-h-screen overflow-x-hidden">
+        {/* Overlay de teinte selon le toggle : web = violet, agents = teal */}
+        <div
+          className="absolute inset-0 z-[2] pointer-events-none transition-opacity duration-500"
+          aria-hidden
+          style={{
+            background: activeTab === 'web'
+              ? 'radial-gradient(ellipse at 50% 30%, rgba(61,47,87,0.25) 0%, transparent 60%)'
+              : 'radial-gradient(ellipse at 50% 30%, rgba(23,65,60,0.3) 0%, transparent 60%)',
+          }}
+        />
         <Header />
         
         <main className="relative z-10">
           {/* Hero Section */}
-          <section className="py-20">
+          <section className="pt-28 pb-20 sm:pt-32">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center max-w-3xl mx-auto mb-12">
                 <motion.span 
-                  className="inline-block bg-gradient-to-r from-purple-600 to-indigo-500 text-white text-xs font-semibold px-4 py-1 rounded-full mb-16"
+                  className="inline-block bg-gradient-to-r from-purple-600 to-indigo-500 text-white text-xs font-semibold px-4 py-1 rounded-full mb-3"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
@@ -326,28 +333,28 @@ const Realisations = () => {
 
               {/* Toggle Section */}
               <motion.div 
-                className="flex justify-center mb-12"
+                className="flex justify-center mb-6 lg:mb-12"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <div className="relative flex items-center justify-center gap-2 p-1 bg-[#161B2E] rounded-full border border-[#2A2F45] w-fit mx-auto">
+                <div className="relative flex items-center justify-center gap-1 sm:gap-2 p-0.5 sm:p-1 bg-white/5 rounded-full border border-white/10 w-fit mx-auto">
                   <button
                     onClick={() => setActiveTab('web')}
-                    className={`px-5 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
+                    className={`px-3 py-1.5 sm:px-5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 ${
                       activeTab === 'web'
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-500 text-white shadow'
-                        : 'text-gray-400 hover:text-white'
+                        ? 'bg-[#3D2F57] text-white shadow'
+                        : 'text-white/60 hover:text-white'
                     }`}
                   >
                     🧩 Produits Web
                   </button>
                   <button
                     onClick={() => setActiveTab('agents')}
-                    className={`px-5 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
+                    className={`px-3 py-1.5 sm:px-5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 ${
                       activeTab === 'agents'
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-500 text-white shadow'
-                        : 'text-gray-400 hover:text-white'
+                        ? 'bg-[#17413C] text-white shadow'
+                        : 'text-white/60 hover:text-white'
                     }`}
                   >
                     🤖 Agents & Automatisations
@@ -358,7 +365,7 @@ const Realisations = () => {
           </section>
 
           {/* Projects Grid */}
-          <section className="py-16">
+          <section className="pt-8 pb-16 lg:py-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-7xl mx-auto">
                 {/* Web Projects */}
@@ -455,7 +462,7 @@ const Realisations = () => {
         </main>
         
         <Footer />
-      </div>
+      </GrainientBackground>
     </>
   );
 };

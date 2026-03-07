@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="py-12 relative" style={{ background: 'radial-gradient(ellipse at top, #222054 0%, #0a0a0f 100%)' }}>
+    <footer className="py-12 relative bg-[#151515] border-t border-white/5">
       <div className="container mx-auto px-5 text-center">
         <div className="mb-6">
           <h1 className="mb-0 font-bold text-4xl md:text-5xl text-center" style={{ fontFamily: "'Darker Grotesque', sans-serif", color: '#ffffff' }}>
@@ -16,7 +16,6 @@ const Footer: React.FC = () => {
           <li><NavLink to="/Convert" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">Convertir</NavLink></li>
           <li><NavLink to="/guide" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">Tuto gratuit</NavLink></li>
           <li><NavLink to="/about" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">À propos</NavLink></li>
-          <li><NavLink to="/blog" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">Blog</NavLink></li>
           <li><NavLink to="/contact" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">Contact</NavLink></li>
         </ul>
         <p className="text-white/60 mb-6">

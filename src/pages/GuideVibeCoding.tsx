@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import GrainientSection from '@/components/GrainientSection';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import MetaTags from '@/components/seo/MetaTags';
 import TextType from '@/components/ui/TextType';
@@ -141,15 +142,12 @@ const GuideVibeCoding: React.FC = () => {
       />
       <GoogleAnalytics />
       
-      <div className="relative" style={{ backgroundColor: '#121417' }}>
-        <Header />
-        
+      <div className="text-white">
         <main className="relative z-10">
           {/* Hero Section */}
-          <section className="py-20 bg-slate-900 relative overflow-hidden">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%239C92AC&quot; fill-opacity=&quot;0.03&quot;%3E%3Ccircle cx=&quot;30&quot; cy=&quot;30&quot; r=&quot;2&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
-            
+          <GrainientSection variant="a">
+          <Header />
+          <section className="py-20 relative overflow-hidden">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 
@@ -340,9 +338,11 @@ const GuideVibeCoding: React.FC = () => {
               </div>
             </div>
           </section>
+          </GrainientSection>
 
           {/* Pourquoi télécharger ce guide ? */}
-          <section className="py-20 bg-slate-800">
+          <GrainientSection variant="b">
+          <section className="py-20">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -402,9 +402,11 @@ const GuideVibeCoding: React.FC = () => {
               </div>
             </div>
           </section>
+          </GrainientSection>
 
           {/* Ce que tu vas apprendre */}
-          <section className="py-20 bg-slate-900">
+          <GrainientSection variant="a">
+          <section className="py-20">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -444,9 +446,11 @@ const GuideVibeCoding: React.FC = () => {
               </div>
             </div>
           </section>
+          </GrainientSection>
 
           {/* Qui est derrière ce guide ? */}
-          <section className="py-20 bg-slate-900">
+          <GrainientSection variant="b">
+          <section className="py-20">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -489,6 +493,7 @@ const GuideVibeCoding: React.FC = () => {
               </div>
             </div>
           </section>
+          </GrainientSection>
         </main>
         
         <Footer />

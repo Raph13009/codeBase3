@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Menu, X, Search } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import PillNav from '@/components/PillNav';
+import StaggeredMenu from '@/components/layout/StaggeredMenu';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,18 +37,7 @@ const Header: React.FC = () => {
             </h1>
           </NavLink>
           
-          <div className="hidden lg:flex items-center gap-6">
-            <NavLink to="/" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Accueil</NavLink>
-            <NavLink to="/realisations" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Réalisations</NavLink>
-            <NavLink to="/Convert" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Convertir</NavLink>
-            <NavLink to="/guide" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Tuto gratuit</NavLink>
-            <NavLink to="/about" className="font-bold text-white hover:text-[#3D2F57] transition-colors">À propos</NavLink>
-            <NavLink to="/blog" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Blog</NavLink>
-            <NavLink to="/contact" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Contact</NavLink>
-            <NavLink to="#" className="text-[#3D2F57] hover:text-white transition-colors">
-              <Search className="w-5 h-5" />
-            </NavLink>
-          </div>
+          <PillNav />
 
           <button 
             onClick={toggleMobileMenu}
@@ -57,26 +48,7 @@ const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 pt-20" style={{ background: 'radial-gradient(circle at center, #3D2F57 0%, #222054 100%)' }}>
-          <div className="flex flex-col gap-4 px-5">
-            <NavLink to="/" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Accueil</NavLink>
-            <NavLink to="/realisations" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Réalisations</NavLink>
-            <NavLink to="/Convert" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Convertir</NavLink>
-            <NavLink to="/guide" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Tuto gratuit</NavLink>
-            <NavLink to="/about" className="text-white text-lg py-2" onClick={toggleMobileMenu}>À propos</NavLink>
-            <NavLink to="/blog" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Blog</NavLink>
-            <NavLink to="/contact" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Contact</NavLink>
-          </div>
-          <button 
-            onClick={toggleMobileMenu}
-            className="absolute top-4 right-4 text-[#3D2F57] p-2"
-          >
-            <X className="w-6 h-6" />
-          </button>
-        </div>
-      )}
+      <StaggeredMenu isOpen={isMobileMenuOpen} onClose={toggleMobileMenu} />
     </nav>
   );
 };

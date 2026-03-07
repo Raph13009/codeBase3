@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Play, Check, Search, Facebook, Twitter, Instagram, MapPin, Mail, Quote } from 'lucide-react';
+import { Menu, Play, Check, Facebook, Twitter, Instagram, MapPin, Mail, Quote } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import MetaTags from '@/components/seo/MetaTags';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
@@ -8,6 +8,9 @@ import { ScrollVelocity } from '@/components/ui/ScrollVelocity';
 import TextType from '@/components/ui/TextType';
 import BoostAIFlowingMenu from '@/components/home/BoostAIFlowingMenu';
 import CinematicIntro from '@/components/ui/CinematicIntro';
+import GrainientSection from '@/components/GrainientSection';
+import PillNav from '@/components/PillNav';
+import StaggeredMenu from '@/components/layout/StaggeredMenu';
 
 const NewLanding: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -108,15 +111,12 @@ const NewLanding: React.FC = () => {
       )}
 
       {/* Main Content - Always mounted (no reflow), pointer-events disabled during intro */}
-      <div style={{ pointerEvents: isLoading ? 'none' : 'auto' }}>
+      <div style={{ pointerEvents: isLoading ? 'none' : 'auto' }} className="text-white">
         <motion.div
           initial={{ opacity: isLoading ? 0 : 1 }}
           animate={{ opacity: 1 }}
           transition={{ duration: isLoading ? 0 : 0.5 }}
-          className="min-h-screen text-white"
-          style={{ 
-            background: 'radial-gradient(ellipse at top, #3D2F57 0%, #222054 50%, #0a0a0f 100%)'
-          }}
+          className="relative z-10"
         >
         {/* Navbar */}
         <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -130,18 +130,7 @@ const NewLanding: React.FC = () => {
                 </h1>
               </NavLink>
               
-          <div className="hidden lg:flex items-center gap-6">
-            <NavLink to="/" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Accueil</NavLink>
-            <NavLink to="/realisations" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Réalisations</NavLink>
-            <NavLink to="/Convert" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Convertir</NavLink>
-            <NavLink to="/guide" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Tuto gratuit</NavLink>
-            <NavLink to="/about" className="font-bold text-white hover:text-[#3D2F57] transition-colors">À propos</NavLink>
-            <NavLink to="/blog" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Blog</NavLink>
-            <NavLink to="/contact" className="font-bold text-white hover:text-[#3D2F57] transition-colors">Contact</NavLink>
-            <NavLink to="#" className="text-[#3D2F57] hover:text-white transition-colors">
-              <Search className="w-5 h-5" />
-            </NavLink>
-          </div>
+          <PillNav onLinkClick={toggleMobileMenu} />
 
               <button 
                 onClick={toggleMobileMenu}
@@ -152,29 +141,11 @@ const NewLanding: React.FC = () => {
             </div>
           </div>
 
-          {/* Mobile Menu */}
-          {isMobileMenuOpen && (
-            <div className="lg:hidden fixed inset-0 z-50 pt-20" style={{ background: 'radial-gradient(circle at center, #3D2F57 0%, #222054 100%)' }}>
-              <div className="flex flex-col gap-4 px-5">
-                <NavLink to="/" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Accueil</NavLink>
-                <NavLink to="/realisations" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Réalisations</NavLink>
-                <NavLink to="/Convert" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Convertir</NavLink>
-                <NavLink to="/guide" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Tuto gratuit</NavLink>
-                <NavLink to="/about" className="text-white text-lg py-2" onClick={toggleMobileMenu}>À propos</NavLink>
-                <NavLink to="/blog" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Blog</NavLink>
-                <NavLink to="/contact" className="text-white text-lg py-2" onClick={toggleMobileMenu}>Contact</NavLink>
-              </div>
-              <button 
-                onClick={toggleMobileMenu}
-                className="absolute top-4 right-4 text-[#3D2F57] p-2"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-          )}
+          <StaggeredMenu isOpen={isMobileMenuOpen} onClose={toggleMobileMenu} />
         </nav>
 
         {/* Hero Section */}
+        <GrainientSection variant="a" className="min-h-screen">
         <header id="home" className="relative flex items-center py-5 min-h-screen pt-32 overflow-hidden">
           {/* Image Background - Desktop: unchanged */}
           <div 
@@ -242,9 +213,11 @@ const NewLanding: React.FC = () => {
             </div>
           </div>
         </header>
+        </GrainientSection>
 
         {/* Scroll Velocity */}
-        <div className="relative overflow-hidden" style={{ background: 'radial-gradient(ellipse at center, rgba(34, 32, 84, 0.6) 0%, rgba(10, 10, 15, 0.95) 100%)' }}>
+        <GrainientSection variant="b">
+        <div className="relative overflow-hidden py-8">
           <ScrollVelocity
             texts={[
               <>
@@ -263,11 +236,12 @@ const NewLanding: React.FC = () => {
             parallaxStyle={{ marginTop: '-20px', marginBottom: '-20px' }}
           />
         </div>
+        </GrainientSection>
 
         {/* Services Section */}
-        <section id="services" className="py-20 min-h-screen flex items-center relative" style={{ background: 'radial-gradient(ellipse at bottom, #222054 0%, #0a0a0f 70%)' }}>
-          <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 20% 30%, rgba(61, 47, 87, 0.15) 0%, transparent 50%)' }}></div>
-          <div className="container mx-auto px-5 relative z-10">
+        <GrainientSection variant="a">
+        <section id="services" className="py-20 min-h-screen flex items-center relative">
+          <div className="container mx-auto px-5">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h3 className="uppercase font-bold bg-gradient-to-r from-[#3D2F57] to-[#5a4a6f] bg-clip-text text-transparent text-lg tracking-[4px] mb-2">NOS SERVICES</h3>
@@ -306,11 +280,12 @@ const NewLanding: React.FC = () => {
             </div>
           </div>
         </section>
+        </GrainientSection>
 
         {/* About Section */}
-        <section id="about" className="py-20 text-white relative" style={{ background: 'radial-gradient(ellipse at top, #3D2F57 0%, #222054 50%, #0a0a0f 100%)' }}>
-          <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 80% 20%, rgba(61, 47, 87, 0.2) 0%, transparent 60%)' }}></div>
-          <div className="container mx-auto px-5 relative z-10">
+        <GrainientSection variant="b">
+        <section id="about" className="py-20 text-white relative">
+          <div className="container mx-auto px-5">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="text-end">
                 <img src="/lp/LP-BC/img/Untitled-1.png" alt="About us" className="img-fluid" />
@@ -363,16 +338,13 @@ const NewLanding: React.FC = () => {
             </div>
           </div>
         </section>
+        </GrainientSection>
 
         {/* Statistics Section */}
-        <section 
-          className="py-20 text-white text-center relative"
-          style={{
-            background: `radial-gradient(ellipse at top left, rgba(61, 47, 87, 0.4) 0%, rgba(34, 32, 84, 0.6) 50%, rgba(10, 10, 15, 0.9) 100%), url(/lp/LP-BC/img/1.jpg) no-repeat right center`,
-            backgroundSize: 'cover'
-          }}
-        >
-          <div className="container mx-auto px-5">
+        <GrainientSection variant="a">
+        <section className="py-20 text-white text-center relative">
+          <div className="absolute inset-0 z-0 opacity-30" style={{ backgroundImage: 'url(/lp/LP-BC/img/1.jpg)', backgroundSize: 'cover', backgroundPosition: 'right center' }} aria-hidden />
+          <div className="container mx-auto px-5 relative z-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 justify-center">
               {stats.map((stat, index) => (
                 <motion.div
@@ -401,9 +373,11 @@ const NewLanding: React.FC = () => {
             </div>
           </div>
         </section>
+        </GrainientSection>
 
         {/* Project Section */}
-        <section className="py-20 relative" style={{ background: 'radial-gradient(ellipse at center, #222054 0%, #0a0a0f 100%)' }}>
+        <GrainientSection variant="b">
+        <section className="py-20 relative">
           <div className="container mx-auto px-5">
             <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
               <div>
@@ -438,16 +412,13 @@ const NewLanding: React.FC = () => {
             </div>
           </div>
         </section>
+        </GrainientSection>
 
         {/* Promote Section */}
-        <section 
-          className="py-20 flex justify-center items-center min-h-[230px] relative"
-          style={{
-            background: `radial-gradient(ellipse at top left, rgba(61, 47, 87, 0.4) 0%, rgba(34, 32, 84, 0.6) 50%, rgba(10, 10, 15, 0.9) 100%), url(/lp/LP-BC/img/side-view-portrait-of-a-woman-with-make-up.jpg) no-repeat center`,
-            backgroundSize: 'cover'
-          }}
-        >
-          <div className="container mx-auto px-5">
+        <GrainientSection variant="a">
+        <section className="py-20 flex justify-center items-center min-h-[230px] relative">
+          <div className="absolute inset-0 z-0 opacity-25" style={{ backgroundImage: 'url(/lp/LP-BC/img/side-view-portrait-of-a-woman-with-make-up.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }} aria-hidden />
+          <div className="container mx-auto px-5 relative z-10">
             <div className="grid grid-cols-5 gap-3 justify-center">
               {promoLogos.map((logo, index) => (
                 <div key={index} className="text-center">
@@ -465,9 +436,11 @@ const NewLanding: React.FC = () => {
             </div>
           </div>
         </section>
+        </GrainientSection>
 
         {/* Why Choose Us */}
-        <section id="choose-us" className="py-20 relative" style={{ background: 'radial-gradient(ellipse at top, #3D2F57 0%, #222054 50%, #0a0a0f 100%)' }}>
+        <GrainientSection variant="b">
+        <section id="choose-us" className="py-20 relative">
           <div className="container mx-auto px-5">
             <div className="grid md:grid-cols-2 gap-12 items-center mb-8">
               <div>
@@ -557,17 +530,12 @@ const NewLanding: React.FC = () => {
             </motion.div>
           </div>
         </section>
+        </GrainientSection>
 
         {/* Team Section */}
-        <section 
-          id="team" 
-          className="py-20 relative"
-          style={{
-            background: `url(/lp/LP-BC/img/Bg-1.jpg) no-repeat center center`,
-            backgroundSize: 'cover'
-          }}
-        >
-          <div className="absolute inset-0" style={{ background: 'rgba(61, 47, 87, 0.4)' }}></div>
+        <GrainientSection variant="a">
+        <section id="team" className="py-20 relative">
+          <div className="absolute inset-0 z-0 opacity-40" style={{ backgroundImage: 'url(/lp/LP-BC/img/Bg-1.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }} aria-hidden />
           <div className="container mx-auto px-5 relative z-10">
             <div className="text-center mb-12">
               <h3 className="uppercase font-bold text-lg mb-4">Notre Équipe</h3>
@@ -606,15 +574,11 @@ const NewLanding: React.FC = () => {
             </div>
           </div>
         </section>
+        </GrainientSection>
 
         {/* Testimonial Section */}
-        <section 
-          id="testimonial"
-          className="py-20 min-h-screen flex items-center justify-center relative"
-          style={{
-            background: 'radial-gradient(ellipse at center, #222054 0%, #0a0a0f 100%)'
-          }}
-        >
+        <GrainientSection variant="b">
+        <section id="testimonial" className="py-20 min-h-screen flex items-center justify-center relative">
           {/* Image de fond détourée */}
           <div 
             className="absolute inset-0 flex items-center justify-center"
@@ -657,15 +621,11 @@ const NewLanding: React.FC = () => {
             </div>
           </div>
         </section>
+        </GrainientSection>
 
         {/* Contact Section */}
-        <section 
-          id="contact" 
-          className="py-20 relative"
-          style={{
-            background: '#0b0b0b'
-          }}
-        >
+        <GrainientSection variant="a">
+        <section id="contact" className="py-20 relative">
           {/* Image de fond avec filtre violet */}
           <div 
             className="absolute inset-0 z-0"
@@ -750,9 +710,10 @@ const NewLanding: React.FC = () => {
           </div>
           </div>
         </section>
+        </GrainientSection>
 
         {/* Footer */}
-        <footer className="py-12 relative" style={{ background: 'radial-gradient(ellipse at top, #222054 0%, #0a0a0f 100%)' }}>
+        <footer className="py-12 relative bg-[#151515] border-t border-white/5">
           <div className="container mx-auto px-5 text-center">
             <div className="mb-6">
               <h1 className="mb-0 font-bold text-4xl md:text-5xl text-center" style={{ fontFamily: "'Darker Grotesque', sans-serif", color: '#ffffff' }}>
@@ -765,7 +726,6 @@ const NewLanding: React.FC = () => {
               <li><NavLink to="/Convert" className="hover:text-[#3D2F57] transition-colors">Convertir</NavLink></li>
               <li><NavLink to="/guide" className="hover:text-[#3D2F57] transition-colors">Tuto gratuit</NavLink></li>
               <li><NavLink to="/about" className="hover:text-[#3D2F57] transition-colors">À propos</NavLink></li>
-              <li><NavLink to="/blog" className="hover:text-[#3D2F57] transition-colors">Blog</NavLink></li>
               <li><NavLink to="/contact" className="hover:text-[#3D2F57] transition-colors">Contact</NavLink></li>
             </ul>
             <p className="text-white/60 mb-6">
@@ -784,7 +744,7 @@ const NewLanding: React.FC = () => {
             </div>
           </div>
         </footer>
-        </motion.div>
+          </motion.div>
       </div>
     </>
   );

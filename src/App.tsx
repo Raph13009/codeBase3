@@ -8,8 +8,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import Index from "./pages/Index";
 
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/layout/Navbar";
@@ -50,8 +48,6 @@ const App = () => {
             <Routes>
               <Route path="/" element={<NewLanding />} />
               <Route path="/hold-lp" element={<Index />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/realisations" element={<Realisations />} />
               <Route path="/project/:projectId" element={<ProjectDetail />} />

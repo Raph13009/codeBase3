@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import GrainientBackground from '@/components/GrainientBackground';
 import Stepper, { Step } from '@/components/ui/Stepper';
 import MetaTags from '@/components/seo/MetaTags';
 import { motion } from 'framer-motion';
@@ -51,15 +52,12 @@ const Contact: React.FC = () => {
         description="Contactez nos experts IA pour une consultation gratuite. Transformez votre entreprise avec des solutions IA sur-mesure. Réponse garantie sous 24h."
         keywords="contact IA, consultation gratuite, transformation digitale, chatbots, optimisation SEO, création contenu, développement web, BoostAI Consulting"
       />
-      <div className="min-h-screen relative overflow-x-hidden bg-[#0B0D14]">
+      <GrainientBackground>
         <Header />
         
         <main className="relative z-10">
           {/* Hero Section avec Stepper */}
-          <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%239C92AC&quot; fill-opacity=&quot;0.03&quot;%3E%3Ccircle cx=&quot;30&quot; cy=&quot;30&quot; r=&quot;2&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
-            
+          <section className="py-20 relative overflow-hidden">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               {/* Titre SEO et vendeur */}
               <motion.div 
@@ -257,7 +255,7 @@ const Contact: React.FC = () => {
         </main>
         
         <Footer />
-      </div>
+      </GrainientBackground>
     </>
   );
 };

@@ -3,6 +3,9 @@
   "style": "default",
   "rsc": false,
   "tsx": true,
+  "registries": {
+    "@react-bits": "https://reactbits.dev/r/{name}.json"
+  },
   "tailwind": {
     "config": "tailwind.config.ts",
     "css": "src/index.css",

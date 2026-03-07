@@ -4,6 +4,9 @@ import { Upload, FileSpreadsheet, Loader2, Shield, Lock, CheckCircle, FileUp, Ch
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MetaTags from "@/components/seo/MetaTags";
+import GrainientBackground from "@/components/GrainientBackground";
+import SplitText from "@/components/SplitText";
+import GradientText from "@/components/GradientText";
 
 const WORKER_URL = "https://pdf-to-csv.raphaellevy027.workers.dev";
 
@@ -305,33 +308,38 @@ const Convert = () => {
         }}
       />
 
-      <div
-        className="min-h-screen text-white font-sans antialiased"
-        style={{ background: "radial-gradient(ellipse at top, #3D2F57 0%, #222054 40%, #0a0a0f 100%)" }}
-      >
+      <GrainientBackground className="text-white font-sans antialiased">
         <Header />
 
         <main className="relative z-10">
           {/* 1. HERO */}
           <section className="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 sm:pb-16">
             <div className="max-w-3xl mx-auto text-center">
-              <motion.h1
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-5"
-                style={{ fontFamily: "'Darker Grotesque', sans-serif" }}
+              <SplitText
+                text="Convertir un PDF en Excel avec l'IA"
+                tag="h1"
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-5 block"
+                splitType="chars"
+                delay={30}
+                duration={1}
+                from={{ opacity: 0, y: 24 }}
+                to={{ opacity: 1, y: 0 }}
+              />
+              <motion.div
+                className="max-w-2xl mx-auto"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
               >
-                Convertir un PDF en Excel avec l'IA
-              </motion.h1>
-              <motion.p
-                className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.08 }}
-              >
-                Déposez votre PDF — notre IA lit les tableaux et génère un fichier Excel structuré. Sans inscription. Sans logiciel. En quelques secondes.
-              </motion.p>
+                <GradientText
+                  className="text-lg sm:text-xl block"
+                  colors={["#c4b5fd", "#e9d5ff", "#a78bfa"]}
+                  animationSpeed={10}
+                  yoyo
+                >
+                  Notre IA lit automatiquement les tableaux dans vos PDF et génère un fichier Excel structuré en quelques secondes.
+                </GradientText>
+              </motion.div>
             </div>
           </section>
 
@@ -591,6 +599,83 @@ const Convert = () => {
             </div>
           </section>
 
+          {/* 4b. B2B Lead gen – Automatisation PDF → Excel */}
+          <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+            <div className="max-w-[900px] mx-auto">
+              <div className="relative rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#1a1625]/95 via-[#151515]/95 to-[#0d0d0d]/95 border border-white/[0.08] p-8 sm:p-12 lg:p-14 text-center shadow-2xl shadow-black/20 backdrop-blur-sm">
+                {/* Ligne animée au-dessus du titre */}
+                <div className="flex items-center justify-center gap-2 sm:gap-3 mb-8">
+                  <span className="text-[10px] sm:text-xs font-medium tracking-widest uppercase text-white/50">PDF</span>
+                  <span className="w-6 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                  <span className="text-[10px] sm:text-xs font-medium tracking-widest uppercase text-white/60">Excel</span>
+                  <span className="w-6 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                  <span className="text-[10px] sm:text-xs font-medium tracking-widest uppercase text-white/50">Base de données</span>
+                </div>
+
+                <h2
+                  className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6 sm:mb-8 tracking-tight"
+                  style={{ fontFamily: "'Darker Grotesque', sans-serif" }}
+                >
+                  Automatisez le traitement PDF → Excel pour votre entreprise
+                </h2>
+                <p className="text-white/75 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed mb-4">
+                  Nous construisons des chaînes d&apos;automatisation sur mesure qui convertissent de gros volumes de PDF (certificats, rapports, factures) en données Excel structurées.
+                </p>
+                <p className="text-white/55 text-sm mb-12 sm:mb-14">
+                  Idéal pour les entreprises qui traitent des centaines de documents chaque mois.
+                </p>
+
+                {/* 3 points horizontaux */}
+                <div className="grid sm:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-14 text-left">
+                  <div className="rounded-xl bg-white/[0.04] border border-white/[0.06] p-5 sm:p-6">
+                    <p className="font-semibold text-white text-sm sm:text-base mb-1.5">Traitement PDF en masse</p>
+                    <p className="text-white/60 text-xs sm:text-sm leading-relaxed">Convertissez des centaines de PDF en tableaux Excel structurés automatiquement.</p>
+                  </div>
+                  <div className="rounded-xl bg-white/[0.04] border border-white/[0.06] p-5 sm:p-6">
+                    <p className="font-semibold text-white text-sm sm:text-base mb-1.5">Documents scannés acceptés</p>
+                    <p className="text-white/60 text-xs sm:text-sm leading-relaxed">OCR et extraction structurée pour tout type de document.</p>
+                  </div>
+                  <div className="rounded-xl bg-white/[0.04] border border-white/[0.06] p-5 sm:p-6">
+                    <p className="font-semibold text-white text-sm sm:text-base mb-1.5">Intégré à votre process</p>
+                    <p className="text-white/60 text-xs sm:text-sm leading-relaxed">Nous déployons l&apos;automatisation directement dans votre process interne.</p>
+                  </div>
+                </div>
+
+                {/* Social proof */}
+                <p className="text-white/40 text-xs uppercase tracking-widest mb-4">Ils nous font confiance</p>
+                <div className="flex justify-center items-center mb-10 sm:mb-12 min-h-[2.5rem]">
+                  <img
+                    src="/codig-logo.png"
+                    alt="CoDIG SAS"
+                    className="h-8 sm:h-10 w-auto object-contain opacity-60 grayscale hover:opacity-80 hover:grayscale-0 transition-all duration-300"
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                      const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                      if (fallback) fallback.style.display = "block";
+                    }}
+                  />
+                  <span className="text-white/50 text-sm font-medium hidden">
+                    CoDIG SAS
+                  </span>
+                </div>
+
+                {/* CTA + glow */}
+                <div className="relative inline-block">
+                  <div className="absolute -inset-1 rounded-xl bg-[#5a4a6f]/30 blur-lg opacity-60" aria-hidden />
+                  <a
+                    href="mailto:contact@boostaiconsulting.com?subject=Demande%20automatisation%20PDF%20Excel%20%2F%20volumes&body=Bonjour%2C%0A%0AJe%20souhaite%20discuter%20d%27une%20solution%20d%27automatisation%20PDF%20vers%20Excel%20pour%20mon%20entreprise%20%3A%0A-%20volumes%20importants%0A-%20usage%20interne%20ou%20int%C3%A9gration%0A%0AMerci%20de%20me%20recontacter."
+                    className="relative inline-flex items-center justify-center rounded-xl bg-[#3D2F57] hover:bg-[#5a4a6f] text-white font-semibold px-8 py-4 text-sm sm:text-base transition-all duration-200 border border-[#5a4a6f]/50"
+                  >
+                    Nous contacter pour mettre en place cette solution
+                  </a>
+                </div>
+                <p className="text-white/45 text-xs mt-5">
+                  Setup sur mesure · Mise en place rapide · Sans engagement
+                </p>
+              </div>
+            </div>
+          </section>
+
           {/* 5. FAQ */}
           <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
             <div className="max-w-2xl mx-auto">
@@ -654,7 +739,7 @@ const Convert = () => {
         )}
 
         <Footer />
-      </div>
+      </GrainientBackground>
     </>
   );
 };

@@ -724,7 +724,6 @@ const NewLanding: React.FC = () => {
               <li><NavLink to="/" className="hover:text-[#3D2F57] transition-colors">Accueil</NavLink></li>
               <li><NavLink to="/realisations" className="hover:text-[#3D2F57] transition-colors">Réalisations</NavLink></li>
               <li><NavLink to="/Convert" className="hover:text-[#3D2F57] transition-colors">Convertir</NavLink></li>
-              <li><NavLink to="/guide" className="hover:text-[#3D2F57] transition-colors">Tuto gratuit</NavLink></li>
               <li><NavLink to="/about" className="hover:text-[#3D2F57] transition-colors">À propos</NavLink></li>
               <li><NavLink to="/contact" className="hover:text-[#3D2F57] transition-colors">Contact</NavLink></li>
             </ul>

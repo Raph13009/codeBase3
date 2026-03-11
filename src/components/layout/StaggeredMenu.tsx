@@ -6,7 +6,6 @@ const MENU_LINKS = [
   { to: "/", label: "Accueil" },
   { to: "/realisations", label: "Réalisations" },
   { to: "/Convert", label: "Convertir" },
-  { to: "/guide", label: "Tuto gratuit" },
   { to: "/about", label: "À propos" },
   { to: "/contact", label: "Contact" },
 ];

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { gsap } from "gsap";
 
@@ -6,7 +6,6 @@ const links = [
   { to: "/", label: "Accueil" },
   { to: "/realisations", label: "Réalisations" },
   { to: "/Convert", label: "Convertir" },
-  { to: "/guide", label: "Tuto gratuit" },
   { to: "/about", label: "À propos" },
   { to: "/contact", label: "Contact" },
 ];
@@ -24,10 +23,36 @@ interface PillNavProps {
 
 export default function PillNav({ onLinkClick, extra }: PillNavProps) {
   const location = useLocation();
+  const locationPathRef = useRef(location.pathname);
+  locationPathRef.current = location.pathname;
   const circleRefs = useRef<(HTMLDivElement | null)[]>([]);
   const tlRefs = useRef<gsap.core.Timeline[]>([]);
   const activeTweenRefs = useRef<gsap.core.Tween[]>([]);
   const navRef = useRef<HTMLDivElement>(null);
+
+  const applyActiveState = useCallback(() => {
+    const pathname = locationPathRef.current;
+    links.forEach((item, i) => {
+      const isActive =
+        pathname === item.to || (item.to !== "/" && pathname.startsWith(item.to));
+      const circle = circleRefs.current[i];
+      const pill = circle?.parentElement as HTMLElement | null;
+      if (!circle || !pill) return;
+      activeTweenRefs.current[i]?.kill();
+      const label = pill.querySelector(".pill-label") as HTMLElement | null;
+      const white = pill.querySelector(".pill-label-hover") as HTMLElement | null;
+      const h = pill.getBoundingClientRect().height;
+      if (isActive) {
+        gsap.set(circle, { scale: 1, xPercent: -50 });
+        if (label) gsap.set(label, { y: 0 });
+        if (white) gsap.set(white, { y: h + 12, opacity: 0 });
+      } else {
+        gsap.set(circle, { scale: 0, xPercent: -50 });
+        if (label) gsap.set(label, { y: 0 });
+        if (white) gsap.set(white, { y: h + 12, opacity: 0 });
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const layout = () => {
@@ -78,30 +103,20 @@ export default function PillNav({ onLinkClick, extra }: PillNavProps) {
     };
 
     layout();
-    const onResize = () => layout();
+    const onResize = () => {
+      layout();
+      requestAnimationFrame(() => applyActiveState());
+    };
     window.addEventListener("resize", onResize);
     if (document.fonts?.ready) document.fonts.ready.then(layout).catch(() => {});
 
     return () => window.removeEventListener("resize", onResize);
-  }, []);
+  }, [applyActiveState]);
 
-  // Sync active pill highlight when route changes
+  // Sync active pill: show circle only, keep default label visible (React Bits: active ≠ hover, no label animation)
   useEffect(() => {
-    links.forEach((item, i) => {
-      const isActive =
-        location.pathname === item.to ||
-        (item.to !== "/" && location.pathname.startsWith(item.to));
-      const tl = tlRefs.current[i];
-      const circle = circleRefs.current[i];
-      if (!tl || !circle) return;
-      activeTweenRefs.current[i]?.kill();
-      if (isActive) {
-        tl.tweenTo(tl.duration(), { duration: 0.35, ease, overwrite: "auto" });
-      } else {
-        tl.tweenTo(0, { duration: 0.2, ease, overwrite: "auto" });
-      }
-    });
-  }, [location.pathname]);
+    applyActiveState();
+  }, [location.pathname, applyActiveState]);
 
   const handleEnter = (i: number) => {
     const tl = tlRefs.current[i];

@@ -14,7 +14,6 @@ const Footer: React.FC = () => {
           <li><NavLink to="/" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">Accueil</NavLink></li>
           <li><NavLink to="/realisations" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">Réalisations</NavLink></li>
           <li><NavLink to="/Convert" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">Convertir</NavLink></li>
-          <li><NavLink to="/guide" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">Tuto gratuit</NavLink></li>
           <li><NavLink to="/about" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">À propos</NavLink></li>
           <li><NavLink to="/contact" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">Contact</NavLink></li>
         </ul>

@@ -13,7 +13,6 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/layout/Navbar";
 import Convert from "./pages/Convert";
 import About from "./pages/About";
-import GuideVibeCoding from "./pages/GuideVibeCoding";
 import Realisations from "./pages/Realisations";
 import ProjectDetail from "./pages/ProjectDetail";
 import AgentDetail from "./pages/AgentDetail";
@@ -53,7 +52,6 @@ const App = () => {
               <Route path="/project/:projectId" element={<ProjectDetail />} />
               <Route path="/Convert" element={<Convert />} />
               <Route path="/about" element={<About />} />
-              <Route path="/guide" element={<GuideVibeCoding />} />
               <Route path="/agent/:id" element={<AgentDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

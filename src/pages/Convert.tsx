@@ -24,13 +24,21 @@ function sanitizeFilename(name: string) {
 async function uploadPdfBestEffort(file: File, layout: string) {
   if (!UPLOADS_ENABLED) return;
   try {
+    const supabaseUrlRaw = String(import.meta.env.VITE_SUPABASE_URL || "");
+    let supabaseOrigin = "";
+    try {
+      supabaseOrigin = supabaseUrlRaw ? new URL(supabaseUrlRaw).origin : "";
+    } catch {
+      supabaseOrigin = supabaseUrlRaw;
+    }
+
     console.info("[convert][upload] enabled", {
       bucket: STORAGE_BUCKET,
       fileName: file.name,
       size: file.size,
       type: file.type,
       layout,
-      supabaseUrl: String(import.meta.env.VITE_SUPABASE_URL || "").replace(/^(https?:\\/\\/[^/]+).*$/, "$1"),
+      supabaseUrl: supabaseOrigin,
     });
 
     // Quick diagnostics: verify bucket exists / accessible

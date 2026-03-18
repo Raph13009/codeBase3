@@ -24,11 +24,33 @@ function sanitizeFilename(name: string) {
 async function uploadPdfBestEffort(file: File, layout: string) {
   if (!UPLOADS_ENABLED) return;
   try {
+    console.info("[convert][upload] enabled", {
+      bucket: STORAGE_BUCKET,
+      fileName: file.name,
+      size: file.size,
+      type: file.type,
+      layout,
+      supabaseUrl: String(import.meta.env.VITE_SUPABASE_URL || "").replace(/^(https?:\\/\\/[^/]+).*$/, "$1"),
+    });
+
+    // Quick diagnostics: verify bucket exists / accessible
+    try {
+      const { data: bucketInfo, error: bucketError } = await supabase.storage.getBucket(STORAGE_BUCKET);
+      if (bucketError) {
+        console.warn("[convert][upload] getBucket error", bucketError);
+      } else {
+        console.info("[convert][upload] getBucket ok", bucketInfo);
+      }
+    } catch (e) {
+      console.warn("[convert][upload] getBucket threw", e);
+    }
+
     const day = new Date().toISOString().slice(0, 10);
     const id = crypto.randomUUID();
     const safeName = sanitizeFilename(file.name || "document.pdf");
     const path = `convert/${day}/${id}-${safeName}`;
 
+    console.info("[convert][upload] uploading", { path });
     const { error: uploadError } = await supabase.storage
       .from(STORAGE_BUCKET)
       .upload(path, file, {
@@ -37,7 +59,28 @@ async function uploadPdfBestEffort(file: File, layout: string) {
       });
 
     if (uploadError) {
+      console.warn("[convert][upload] upload error", uploadError);
       // optional log table; ignore if it doesn't exist / fails
+      try {
+        await supabase.from("convert_uploads").insert([
+          {
+            original_filename: file.name,
+            mime_type: file.type || "application/pdf",
+            size_bytes: file.size,
+            storage_bucket: STORAGE_BUCKET,
+            storage_path: path,
+            upload_status: "error",
+            error_message: uploadError.message,
+          },
+        ]);
+      } catch (e) {
+        console.warn("[convert][upload] insert log failed (ignored)", e);
+      }
+      return;
+    }
+
+    console.info("[convert][upload] upload ok", { path });
+    try {
       await supabase.from("convert_uploads").insert([
         {
           original_filename: file.name,
@@ -45,23 +88,12 @@ async function uploadPdfBestEffort(file: File, layout: string) {
           size_bytes: file.size,
           storage_bucket: STORAGE_BUCKET,
           storage_path: path,
-          upload_status: "error",
-          error_message: uploadError.message,
+          upload_status: "uploaded",
         },
       ]);
-      return;
+    } catch (e) {
+      console.warn("[convert][upload] insert log failed (ignored)", e);
     }
-
-    await supabase.from("convert_uploads").insert([
-      {
-        original_filename: file.name,
-        mime_type: file.type || "application/pdf",
-        size_bytes: file.size,
-        storage_bucket: STORAGE_BUCKET,
-        storage_path: path,
-        upload_status: "uploaded",
-      },
-    ]);
   } catch (e) {
     // best-effort only: never block conversion
     console.warn("Supabase upload skipped/failed:", e);

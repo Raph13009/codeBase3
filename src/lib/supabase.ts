@@ -1,18 +1,13 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = 'https://rvgmvtjcbbrzuoripqwa.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ2Z212dGpjYmJyenVvcmlwcXdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI0ODI0NDEsImV4cCI6MjA1ODA1ODQ0MX0.XBWTN9os9Z09AkHGMItqOMVVFAk9QejzpSZsawRazOU';
+// Prefer env vars (safe to switch projects); fallback keeps current behavior
+const supabaseUrl =
+  import.meta.env.VITE_SUPABASE_URL ?? "https://rvgmvtjcbbrzuoripqwa.supabase.co";
+const supabaseAnonKey =
+  import.meta.env.VITE_SUPABASE_ANON_KEY ??
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ2Z212dGpjYmJyenVvcmlwcXdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI0ODI0NDEsImV4cCI6MjA1ODA1ODQ0MX0.XBWTN9os9Z09AkHGMItqOMVVFAk9QejzpSZsawRazOU";
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
-
-// Test the connection
-supabase.auth.getSession().then(({ data, error }) => {
-  if (error) {
-    console.error('Error connecting to Supabase:', error);
-  } else {
-    console.log('Successfully connected to Supabase');
-  }
-});
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export interface Blog {
   id: string;

@@ -7,8 +7,66 @@ import MetaTags from "@/components/seo/MetaTags";
 import GrainientBackground from "@/components/GrainientBackground";
 import SplitText from "@/components/SplitText";
 import GradientText from "@/components/GradientText";
+import { supabase } from "@/lib/supabase";
 
 const WORKER_URL = "https://pdf-to-csv.raphaellevy027.workers.dev";
+const STORAGE_BUCKET = import.meta.env.VITE_SUPABASE_STORAGE_BUCKET || "convert-uploads";
+const UPLOADS_ENABLED = String(import.meta.env.VITE_CONVERT_UPLOADS_ENABLED || "").toLowerCase() === "true";
+
+function sanitizeFilename(name: string) {
+  return name
+    .normalize("NFKD")
+    .replace(/[^\w.\-]+/g, "_")
+    .replace(/_+/g, "_")
+    .slice(0, 120);
+}
+
+async function uploadPdfBestEffort(file: File, layout: string) {
+  if (!UPLOADS_ENABLED) return;
+  try {
+    const day = new Date().toISOString().slice(0, 10);
+    const id = crypto.randomUUID();
+    const safeName = sanitizeFilename(file.name || "document.pdf");
+    const path = `convert/${day}/${id}-${safeName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from(STORAGE_BUCKET)
+      .upload(path, file, {
+        contentType: file.type || "application/pdf",
+        upsert: false,
+      });
+
+    if (uploadError) {
+      // optional log table; ignore if it doesn't exist / fails
+      await supabase.from("convert_uploads").insert([
+        {
+          original_filename: file.name,
+          mime_type: file.type || "application/pdf",
+          size_bytes: file.size,
+          storage_bucket: STORAGE_BUCKET,
+          storage_path: path,
+          upload_status: "error",
+          error_message: uploadError.message,
+        },
+      ]);
+      return;
+    }
+
+    await supabase.from("convert_uploads").insert([
+      {
+        original_filename: file.name,
+        mime_type: file.type || "application/pdf",
+        size_bytes: file.size,
+        storage_bucket: STORAGE_BUCKET,
+        storage_path: path,
+        upload_status: "uploaded",
+      },
+    ]);
+  } catch (e) {
+    // best-effort only: never block conversion
+    console.warn("Supabase upload skipped/failed:", e);
+  }
+}
 
 const FAQ_DATA = [
   {
@@ -204,6 +262,9 @@ const Convert = () => {
     step2Timeout.current = setTimeout(() => setProgressStep(2), 1500);
 
     try {
+      // Best-effort storage upload (never blocks the conversion flow)
+      void uploadPdfBestEffort(file, layout);
+
       const formData = new FormData();
       formData.append("file", file);
       formData.append("layout", layout);

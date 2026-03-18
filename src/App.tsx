@@ -17,6 +17,7 @@ import Realisations from "./pages/Realisations";
 import ProjectDetail from "./pages/ProjectDetail";
 import AgentDetail from "./pages/AgentDetail";
 import NewLanding from "./pages/NewLanding";
+import Admin from "./pages/Admin";
 
 
 // Import i18n configuration
@@ -52,6 +53,7 @@ const App = () => {
               <Route path="/project/:projectId" element={<ProjectDetail />} />
               <Route path="/Convert" element={<Convert />} />
               <Route path="/about" element={<About />} />
+              <Route path="/admin" element={<Admin />} />
               <Route path="/agent/:id" element={<AgentDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

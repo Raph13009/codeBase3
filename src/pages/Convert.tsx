@@ -41,18 +41,6 @@ async function uploadPdfBestEffort(file: File, layout: string) {
       supabaseUrl: supabaseOrigin,
     });
 
-    // Quick diagnostics: verify bucket exists / accessible
-    try {
-      const { data: bucketInfo, error: bucketError } = await supabase.storage.getBucket(STORAGE_BUCKET);
-      if (bucketError) {
-        console.warn("[convert][upload] getBucket error", bucketError);
-      } else {
-        console.info("[convert][upload] getBucket ok", bucketInfo);
-      }
-    } catch (e) {
-      console.warn("[convert][upload] getBucket threw", e);
-    }
-
     const day = new Date().toISOString().slice(0, 10);
     const id = crypto.randomUUID();
     const safeName = sanitizeFilename(file.name || "document.pdf");
@@ -104,7 +92,7 @@ async function uploadPdfBestEffort(file: File, layout: string) {
     }
   } catch (e) {
     // best-effort only: never block conversion
-    console.warn("Supabase upload skipped/failed:", e);
+    console.warn("[convert][upload] threw:", e);
   }
 }
 

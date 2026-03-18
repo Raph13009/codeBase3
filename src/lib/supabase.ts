@@ -1,11 +1,27 @@
 import { createClient } from "@supabase/supabase-js";
 
-// Prefer env vars (safe to switch projects); fallback keeps current behavior
-const supabaseUrl =
-  import.meta.env.VITE_SUPABASE_URL ?? "https://rvgmvtjcbbrzuoripqwa.supabase.co";
-const supabaseAnonKey =
-  import.meta.env.VITE_SUPABASE_ANON_KEY ??
+// Prefer env vars (safe to switch projects); fallback keeps current behavior.
+// Also: validate env URL to avoid cryptic ERR_NAME_NOT_RESOLVED errors.
+const FALLBACK_URL = "https://rvgmvtjcbbrzuoripqwa.supabase.co";
+const FALLBACK_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ2Z212dGpjYmJyenVvcmlwcXdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI0ODI0NDEsImV4cCI6MjA1ODA1ODQ0MX0.XBWTN9os9Z09AkHGMItqOMVVFAk9QejzpSZsawRazOU";
+
+const envUrlRaw = String(import.meta.env.VITE_SUPABASE_URL ?? "").trim();
+const envKeyRaw = String(import.meta.env.VITE_SUPABASE_ANON_KEY ?? "").trim();
+
+let supabaseUrl = FALLBACK_URL;
+if (envUrlRaw) {
+  try {
+    const u = new URL(envUrlRaw);
+    supabaseUrl = u.origin;
+  } catch (e) {
+    console.error("[supabase] Invalid VITE_SUPABASE_URL, using fallback", { envUrlRaw, e });
+  }
+}
+
+const supabaseAnonKey = envKeyRaw || FALLBACK_ANON_KEY;
+
+export const SUPABASE_URL_USED = supabaseUrl;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 

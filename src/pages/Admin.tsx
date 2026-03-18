@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabase, SUPABASE_URL_USED } from "@/lib/supabase";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -171,9 +171,14 @@ export default function Admin() {
         description: "Bienvenue sur l’admin.",
       });
     } catch (e) {
+      const isNetwork = e instanceof TypeError && String(e.message).toLowerCase().includes("fetch");
       toast({
         title: "Connexion impossible",
-        description: e instanceof Error ? e.message : "Erreur inconnue",
+        description: isNetwork
+          ? `Erreur réseau vers Supabase (${SUPABASE_URL_USED}). Vérifie VITE_SUPABASE_URL (DNS) et relance le build.`
+          : e instanceof Error
+            ? e.message
+            : "Erreur inconnue",
         variant: "destructive",
       });
     } finally {

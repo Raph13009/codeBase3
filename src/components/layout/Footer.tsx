@@ -16,6 +16,7 @@ const Footer: React.FC = () => {
           <li><NavLink to="/Convert" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">Convertir</NavLink></li>
           <li><NavLink to="/about" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">À propos</NavLink></li>
           <li><NavLink to="/contact" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">Contact</NavLink></li>
+          <li><NavLink to="/ocr-terms" className="font-medium text-white/90 hover:text-[#d7c6ff] transition-colors">Conditions OCR</NavLink></li>
         </ul>
         <p className="text-white/60 mb-6">
           Agence digitale spécialisée dans le développement web sur-mesure, 

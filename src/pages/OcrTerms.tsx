@@ -2,22 +2,27 @@ import React, { useEffect } from "react";
 import Header from "@/components/layout/Header";
 import MetaTags from "@/components/seo/MetaTags";
 import { NavLink } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const OcrTerms: React.FC = () => {
+  const isMobile = useIsMobile();
+
   useEffect(() => {
     document.documentElement.lang = "fr";
     window.scrollTo(0, 0);
 
     const prevHtml = document.documentElement.style.overflow;
     const prevBody = document.body.style.overflow;
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
+    if (!isMobile) {
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+    }
 
     return () => {
       document.documentElement.style.overflow = prevHtml;
       document.body.style.overflow = prevBody;
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <>
@@ -27,11 +32,11 @@ const OcrTerms: React.FC = () => {
         keywords="OCR, confidentialité, conditions d'utilisation, protection des données, BoostAI Consulting"
       />
 
-      <div className="min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(90,74,111,0.28),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(61,47,87,0.24),transparent_28%),linear-gradient(180deg,#09090d_0%,#111118_100%)]">
+      <div className="min-h-screen overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(90,74,111,0.28),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(61,47,87,0.24),transparent_28%),linear-gradient(180deg,#09090d_0%,#111118_100%)]">
         <Header />
 
-        <main className="relative z-10 flex h-[calc(100vh-96px)] items-center px-5 pb-6 pt-28 md:px-10 md:pb-10 md:pt-32">
-          <section className="mx-auto grid h-full w-full max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <main className="relative z-10 flex min-h-[calc(100vh-96px)] items-start px-5 pb-10 pt-28 md:h-[calc(100vh-96px)] md:min-h-0 md:items-center md:px-10 md:pb-10 md:pt-32">
+          <section className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 md:h-full md:grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div className="flex max-w-3xl flex-col justify-center">
               <div className="text-xs uppercase tracking-[0.24em] text-white">Conditions OCR</div>
               <h1 className="mt-4 text-4xl font-semibold leading-tight text-white md:text-6xl">

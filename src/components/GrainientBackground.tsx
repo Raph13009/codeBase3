@@ -29,7 +29,9 @@ export default function GrainientBackground({ children, className = "" }: Graini
         style={{ background: GRAINIENT_OVERLAY }}
         aria-hidden
       />
-      {children}
+      <div className="relative z-10">
+        {children}
+      </div>
     </div>
   );
 }

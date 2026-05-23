@@ -210,6 +210,38 @@ const projectsData = {
       "/realisation/koacher/koacher-b2b-7.webp"
     ]
   },
+  "10": {
+    id: "10",
+    title: "OENOBOOST – Application éducative vin",
+    fullTitle: "OENOBOOST – Application éducative sur le monde du vin",
+    image: "/realisation/oenoboost/main2.png",
+    tags: ["TypeScript", "Supabase", "Mapbox", "Stripe", "Resend", "Éducatif"],
+    description: "Application web éducative autour du vin : carte interactive des vignobles français (Mapbox), modules d'apprentissage, outil de dégustation guidée et quiz gamifiés avec abonnement premium.",
+    stack: ["TypeScript", "Supabase (Auth + DB)", "Mapbox API", "Stripe (abonnements)", "Resend (emails)", "i18n FR/EN"],
+    features: [
+      "Carte interactive des vignobles français via l'API Mapbox avec navigation régions et AOP",
+      "Modules d'apprentissage complets : Vignoble, Cépages, Sols, Vinification, Dictionnaire",
+      "Outil de dégustation guidée pas-à-pas avec sélection visuelle des couleurs de robe",
+      "Système de quiz multi-niveaux : débutant, intermédiaire, expert et question du jour",
+      "Profil utilisateur avec système de progression XP et niveaux gamifiés",
+      "Système d'abonnement premium géré via Stripe avec contrôle des accès",
+      "Notifications et emails transactionnels via Resend",
+      "Application bilingue FR/EN avec switch de langue intégré",
+      "Interface mobile-first avec design élégant aux tons beige et bordeaux"
+    ],
+    summary: "OenoBoost est une plateforme e-learning complète dédiée au monde du vin, développée en TypeScript avec Supabase. Elle intègre une carte interactive des appellations françaises via Mapbox, des modules pédagogiques (vignoble, cépages, vinification, dictionnaire), un outil de dégustation visuelle, des quiz gamifiés et un système d'abonnement premium via Stripe. Un projet ambitieux, bilingue, mobile-first et monétisé dès le lancement.",
+    images: [
+      "/realisation/oenoboost/main.png",
+      "/realisation/oenoboost/oenoboost-map-france.png",
+      "/realisation/oenoboost/oenoboost-map-region.png",
+      "/realisation/oenoboost/oenoboost-map-bordeaux.png",
+      "/realisation/oenoboost/oenoboost-map-rhone.png",
+      "/realisation/oenoboost/oenoboost-vinification.png",
+      "/realisation/oenoboost/oenoboost-degustation.png",
+      "/realisation/oenoboost/oenoboost-profil.png",
+      "/realisation/oenoboost/oenoboost-menu.png"
+    ]
+  },
   "9": {
     id: "9",
     title: "MYTABLE – Plateforme de réservation de chef à domicile",

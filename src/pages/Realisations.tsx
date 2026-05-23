@@ -104,7 +104,7 @@ const projectsData = {
     {
       id: 6,
       title: "KIVAIAKIDS – Plateforme éducative",
-      image: "/realisation/kivaiakids1.png",
+      image: "/realisation/kivaiakidsMain.png",
       tags: ["Next.js", "Supabase", "CMS", "Upload", "Multi-média"],
       description: "Plateforme complète d'apprentissage des langues pour enfants avec interface professeur dédiée et système de gestion de contenu.",
       fullTitle: "KIVAIAKIDS – Plateforme éducative multilingue pour enfants",
@@ -256,7 +256,7 @@ const projectsData = {
     {
       id: 5,
       title: "BLUE GARDEN – Site vitrine associatif",
-      image: "/realisation/blue-garden-cover.png",
+      image: "/realisation/BlueGardenMain.png",
       tags: ["React", "Responsive", "Formulaire de contact", "CMS-less"],
       description: "Site vitrine simple et élégant pour une association, avec page contact et section événements.",
       fullTitle: "BLUE GARDEN – Site vitrine associatif en React",

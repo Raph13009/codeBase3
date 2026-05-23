@@ -15,7 +15,7 @@ const projectsData = {
     {
       id: 10,
       title: "OENOBOOST – Application éducative vin",
-      image: "/realisation/oenoboost/main2.png",
+      image: "/realisation/oenoboost/main2.webp",
       tags: ["TypeScript", "Supabase", "Mapbox", "Stripe", "Resend", "Éducatif"],
       description: "Application web éducative autour du vin : carte interactive des vignobles français (Mapbox), modules d'apprentissage, outil de dégustation guidée et quiz gamifiés avec abonnement premium.",
       fullTitle: "OENOBOOST – Application éducative sur le monde du vin",
@@ -33,15 +33,15 @@ const projectsData = {
       ],
       summary: "OenoBoost est une plateforme e-learning complète dédiée au monde du vin, développée en TypeScript avec Supabase. Elle intègre une carte interactive des appellations françaises via Mapbox, des modules pédagogiques (vignoble, cépages, vinification, dictionnaire), un outil de dégustation visuelle, des quiz gamifiés et un système d'abonnement premium via Stripe. Un projet ambitieux, bilingue, mobile-first et monétisé dès le lancement.",
       images: [
-        "/realisation/oenoboost/main.png",
-        "/realisation/oenoboost/oenoboost-map-france.png",
-        "/realisation/oenoboost/oenoboost-map-region.png",
-        "/realisation/oenoboost/oenoboost-map-bordeaux.png",
-        "/realisation/oenoboost/oenoboost-map-rhone.png",
-        "/realisation/oenoboost/oenoboost-vinification.png",
-        "/realisation/oenoboost/oenoboost-degustation.png",
-        "/realisation/oenoboost/oenoboost-profil.png",
-        "/realisation/oenoboost/oenoboost-menu.png"
+        "/realisation/oenoboost/main.webp",
+        "/realisation/oenoboost/oenoboost-map-france.webp",
+        "/realisation/oenoboost/oenoboost-map-region.webp",
+        "/realisation/oenoboost/oenoboost-map-bordeaux.webp",
+        "/realisation/oenoboost/oenoboost-map-rhone.webp",
+        "/realisation/oenoboost/oenoboost-vinification.webp",
+        "/realisation/oenoboost/oenoboost-degustation.webp",
+        "/realisation/oenoboost/oenoboost-profil.webp",
+        "/realisation/oenoboost/oenoboost-menu.webp"
       ]
     },
     {
@@ -104,7 +104,7 @@ const projectsData = {
     {
       id: 6,
       title: "KIVAIAKIDS – Plateforme éducative",
-      image: "/realisation/kivaiakidsMain.png",
+      image: "/realisation/kivaiakidsMain.webp",
       tags: ["Next.js", "Supabase", "CMS", "Upload", "Multi-média"],
       description: "Plateforme complète d'apprentissage des langues pour enfants avec interface professeur dédiée et système de gestion de contenu.",
       fullTitle: "KIVAIAKIDS – Plateforme éducative multilingue pour enfants",
@@ -121,18 +121,18 @@ const projectsData = {
       ],
       summary: "KIVAIAKIDS révolutionne l'apprentissage des langues pour les enfants avec une plateforme complète qui donne aux professeurs tous les outils nécessaires pour créer des cours engageants. L'interface professeur permet de gérer facilement le contenu, tandis que les enfants bénéficient d'une expérience d'apprentissage moderne et interactive.",
       images: [
-        "/realisation/kivaiakids1.png",
-        "/realisation/kivaiakids2.png",
-        "/realisation/kivaiakids3.png",
-        "/realisation/kivaiakids4.png",
-        "/realisation/kivaiakids5.png",
-        "/realisation/kivaiakids6.png"
+        "/realisation/kivaiakids1.webp",
+        "/realisation/kivaiakids2.webp",
+        "/realisation/kivaiakids3.webp",
+        "/realisation/kivaiakids4.webp",
+        "/realisation/kivaiakids5.webp",
+        "/realisation/kivaiakids6.webp"
       ]
     },
     {
       id: 1,
       title: "AVENIREA",
-      image: "/realisation/avenireaCover.png",
+      image: "/realisation/AvenireaMain.webp",
       tags: ["Next.js", "Supabase", "Stripe", "GPT-4"],
       description: "MVP d'un test d'orientation post-bac avec logique conditionnelle, IA, et paiement intégré.",
       fullTitle: "AVENIREA – Plateforme d'orientation post-bac automatisée",
@@ -147,11 +147,11 @@ const projectsData = {
       ],
       summary: "Un MVP complet livré en 4 jours. Tout est automatisé : scoring du test, rendu IA, blocage du résultat, gestion des paiements. Ce projet prouve notre capacité à livrer rapidement une logique métier complexe avec une vraie monétisation.",
       images: [
-        "/realisation/avenirea1.png",
-        "/realisation/avenirea2.png",
-        "/realisation/avenirea3.png",
-        "/realisation/avenirea4.png",
-        "/realisation/avenireamobile.png"
+        "/realisation/avenirea1.webp",
+        "/realisation/avenirea2.webp",
+        "/realisation/avenirea3.webp",
+        "/realisation/avenirea4.webp",
+        "/realisation/avenireamobile.webp"
       ]
     },
     {
@@ -256,7 +256,7 @@ const projectsData = {
     {
       id: 5,
       title: "BLUE GARDEN – Site vitrine associatif",
-      image: "/realisation/BlueGardenMain.png",
+      image: "/realisation/BlueGardenMain.webp",
       tags: ["React", "Responsive", "Formulaire de contact", "CMS-less"],
       description: "Site vitrine simple et élégant pour une association, avec page contact et section événements.",
       fullTitle: "BLUE GARDEN – Site vitrine associatif en React",
@@ -269,9 +269,9 @@ const projectsData = {
       ],
       summary: "Un site vitrine moderne et rapide pour l'association BLUE GARDEN, pensé pour être maintenu sans back-end lourd, avec un système simple pour publier des événements.",
       images: [
-        "/realisation/bluegarden1.png",
-        "/realisation/bluegarden2.png",
-        "/realisation/bluegarden3.png"
+        "/realisation/bluegarden1.webp",
+        "/realisation/bluegarden2.webp",
+        "/realisation/bluegarden3.webp"
       ]
     }
   ],

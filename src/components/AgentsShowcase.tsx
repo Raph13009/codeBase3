@@ -78,13 +78,13 @@ const springValues = {
 const getStatusColor = (status) => {
   switch (status) {
     case 'En Production':
-      return 'bg-green-500/20 text-green-400 border-green-500/30';
+      return 'bg-[#E9E8E4] text-[#1B1B1B] border-[#D9D7D0]';
     case 'En Développement':
-      return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
+      return 'bg-white text-[#8C8880] border-[#D9D7D0]';
     case 'En Test':
-      return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
+      return 'bg-[#FFFDF8] text-[#8C8880] border-[#D9D7D0]';
     default:
-      return 'bg-slate-500/20 text-slate-400 border-slate-500/30';
+      return 'bg-[#E9E8E4] text-[#8C8880] border-[#D9D7D0]';
   }
 };
 
@@ -165,21 +165,19 @@ const AgentsShowcase = () => {
                   scale,
                 }}
               >
-                <div className="bg-slate-600/30 backdrop-blur-md border border-slate-500/40 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 h-full flex flex-col group-hover:border-slate-400/60 group-hover:bg-slate-600/50 group-hover:shadow-purple-500/40">
+                <div className="bg-white border border-[#D9D7D0]/60 rounded-[32px] p-6 shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col">
                   {/* Icon Container */}
                   <div className="mb-6">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#4B49D1] to-[#26256B] p-0.5 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/25">
-                      <div className="w-full h-full rounded-full bg-slate-800 flex items-center justify-center">
-                        <agent.icon className="w-6 h-6 text-purple-400" />
-                      </div>
+                    <div className="w-12 h-12 rounded-full bg-[#E9E8E4] border border-[#D9D7D0] flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                      <agent.icon className="w-6 h-6 text-[#1B1B1B]" />
                     </div>
                   </div>
 
                   {/* Status */}
                   <div className="mb-4">
-                    <Badge 
-                      variant="secondary" 
-                      className={`text-xs px-3 py-1.5 rounded-full font-medium ${getStatusColor(agent.status)}`}
+                    <Badge
+                      variant="secondary"
+                      className={`text-xs px-3 py-1.5 rounded-full font-medium border ${getStatusColor(agent.status)}`}
                     >
                       {agent.status}
                     </Badge>
@@ -187,11 +185,14 @@ const AgentsShowcase = () => {
 
                   {/* Content */}
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-white mb-3 line-clamp-2 group-hover:text-purple-200 transition-colors">
+                    <h3
+                      className="text-lg font-semibold text-[#1B1B1B] mb-3 line-clamp-2 tracking-tight"
+                      style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                    >
                       {agent.name}
                     </h3>
-                    
-                    <p className="text-slate-300 text-sm mb-4 line-clamp-2 group-hover:text-slate-200 transition-colors">
+
+                    <p className="text-[#8C8880] text-sm mb-4 line-clamp-2">
                       {agent.description}
                     </p>
 
@@ -199,10 +200,10 @@ const AgentsShowcase = () => {
                     <div className="mb-4">
                       <div className="flex flex-wrap gap-2">
                         {agent.capabilities.slice(0, 3).map((capability, idx) => (
-                          <Badge 
-                            key={idx} 
-                            variant="outline" 
-                            className="text-xs bg-slate-700/50 border-slate-600/50 text-slate-300 group-hover:border-purple-500/50 group-hover:bg-purple-500/10 transition-all duration-300"
+                          <Badge
+                            key={idx}
+                            variant="outline"
+                            className="text-xs bg-[#E9E8E4] border-[#D9D7D0] text-[#8C8880]"
                           >
                             {capability}
                           </Badge>
@@ -211,15 +212,15 @@ const AgentsShowcase = () => {
                     </div>
 
                     {/* Built With */}
-                    <p className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors mb-6">
+                    <p className="text-xs text-[#8C8880] mb-6">
                       {agent.builtWith}
                     </p>
                   </div>
 
                   {/* CTA Buttons */}
                   <div className="mt-auto">
-                    <Button 
-                      className="w-full bg-gradient-to-r from-[#4B49D1] to-[#26256B] hover:from-[#3a39b0] hover:to-[#1e1d5a] text-white rounded-xl shadow-lg shadow-purple-500/25 group-hover:shadow-xl group-hover:shadow-purple-500/30 transition-all duration-300"
+                    <Button
+                      className="w-full bg-[#1B1B1B] hover:opacity-90 text-[#FAF9F5] rounded-full transition-all duration-300"
                       size="sm"
                       onClick={() => navigate(`/agent/${agent.id}`)}
                     >

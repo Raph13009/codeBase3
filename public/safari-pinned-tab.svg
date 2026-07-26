@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="700" height="700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
-  <rect width="700" height="700" fill="#0A6ABF" rx="70"/>
-  <text x="350" y="500" font-family="Georgia, serif" font-size="400" font-weight="bold" fill="white" text-anchor="middle">BC</text>
-  <line x1="180" y1="570" x2="520" y2="570" stroke="white" stroke-width="15"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <circle cx="8" cy="8" r="7.2" fill="#000"/>
+  <text x="8" y="8.3" text-anchor="middle" dominant-baseline="central" font-family="Helvetica,Arial,sans-serif" font-weight="700" font-size="9" fill="#fff">B</text>
 </svg>

@@ -17,6 +17,7 @@ import Realisations from "./pages/Realisations";
 import ProjectDetail from "./pages/ProjectDetail";
 import AgentDetail from "./pages/AgentDetail";
 import NewLanding from "./pages/NewLanding";
+import LumioLanding from "./pages/LumioLanding";
 import Admin from "./pages/Admin";
 import OcrTerms from "./pages/OcrTerms";
 
@@ -44,11 +45,12 @@ const App = () => {
           <Toaster />
           <Sonner />
 
-          <div className="min-h-screen bg-gray-50">
+          <div className="min-h-screen bg-[#FAF9F5]">
             <Navbar />
             <Routes>
-              <Route path="/" element={<NewLanding />} />
+              <Route path="/" element={<LumioLanding />} />
               <Route path="/hold-lp" element={<Index />} />
+              <Route path="/old-landing" element={<NewLanding />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/realisations" element={<Realisations />} />
               <Route path="/project/:projectId" element={<ProjectDetail />} />

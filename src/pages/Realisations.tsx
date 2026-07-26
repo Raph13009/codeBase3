@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Monitor, Brain } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import GrainientBackground from "@/components/GrainientBackground";
 import MetaTags from "@/components/seo/MetaTags";
-import BlurText from "@/components/ui/BlurText";
-import GooeyNav from "@/components/ui/GooeyNav";
 import AgentsShowcase from "@/components/AgentsShowcase";
 
 const projectsData = {
@@ -324,37 +320,28 @@ const Realisations = () => {
         title="Nos Réalisations | BoostAI Consulting - Projets Web & IA"
         description="Découvrez nos réalisations en développement web et intelligence artificielle. Sites vitrines, outils IA, automatisations et projets innovants."
         keywords="réalisations, projets web, intelligence artificielle, développement, automatisation, BoostAI"
-        image="/assets/Logo.png"
+        image="/android-chrome-512x512.png"
       />
-      
-      <GrainientBackground className="min-h-screen overflow-x-hidden">
-        {/* Overlay de teinte selon le toggle : web = violet, agents = teal */}
-        <div
-          className="absolute inset-0 z-[2] pointer-events-none transition-opacity duration-500"
-          aria-hidden
-          style={{
-            background: activeTab === 'web'
-              ? 'radial-gradient(ellipse at 50% 30%, rgba(61,47,87,0.25) 0%, transparent 60%)'
-              : 'radial-gradient(ellipse at 50% 30%, rgba(23,65,60,0.3) 0%, transparent 60%)',
-          }}
-        />
+
+      <div className="lumio-page min-h-screen overflow-x-hidden bg-[#FAF9F5] text-[#1B1B1B]">
         <Header />
-        
-        <main className="relative z-10">
+
+        <main className="relative z-10 pt-36">
           {/* Hero Section */}
-          <section className="pt-28 pb-20 sm:pt-32">
+          <section className="pb-12 sm:pb-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center max-w-3xl mx-auto mb-12">
-                <motion.span 
-                  className="inline-block bg-gradient-to-r from-purple-600 to-indigo-500 text-white text-xs font-semibold px-4 py-1 rounded-full mb-3"
+                <motion.span
+                  className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#8C8880] mb-4"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
                 >
-                  🚀 Nos Réalisations
+                  Nos Réalisations
                 </motion.span>
-                <motion.h1 
-                  className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-16 text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-100 to-purple-400"
+                <motion.h1
+                  className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1B1B1B]"
+                  style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
@@ -364,32 +351,32 @@ const Realisations = () => {
               </div>
 
               {/* Toggle Section */}
-              <motion.div 
+              <motion.div
                 className="flex justify-center mb-6 lg:mb-12"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <div className="relative flex items-center justify-center gap-1 sm:gap-2 p-0.5 sm:p-1 bg-white/5 rounded-full border border-white/10 w-fit mx-auto">
+                <div className="relative flex items-center justify-center gap-1 sm:gap-2 p-1 bg-white rounded-full border border-[#D9D7D0] shadow-sm w-fit mx-auto">
                   <button
                     onClick={() => setActiveTab('web')}
                     className={`px-3 py-1.5 sm:px-5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 ${
                       activeTab === 'web'
-                        ? 'bg-[#3D2F57] text-white shadow'
-                        : 'text-white/60 hover:text-white'
+                        ? 'bg-[#1B1B1B] text-[#FAF9F5] shadow-sm'
+                        : 'text-[#8C8880] hover:text-[#1B1B1B]'
                     }`}
                   >
-                    🧩 Produits Web
+                    Produits Web
                   </button>
                   <button
                     onClick={() => setActiveTab('agents')}
                     className={`px-3 py-1.5 sm:px-5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 ${
                       activeTab === 'agents'
-                        ? 'bg-[#17413C] text-white shadow'
-                        : 'text-white/60 hover:text-white'
+                        ? 'bg-[#1B1B1B] text-[#FAF9F5] shadow-sm'
+                        : 'text-[#8C8880] hover:text-[#1B1B1B]'
                     }`}
                   >
-                    🤖 Agents & Automatisations
+                    Agents & Automatisations
                   </button>
                 </div>
               </motion.div>
@@ -397,7 +384,7 @@ const Realisations = () => {
           </section>
 
           {/* Projects Grid */}
-          <section className="pt-8 pb-16 lg:py-16">
+          <section className="pt-4 pb-16 lg:pb-20">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-7xl mx-auto">
                 {/* Web Projects */}
@@ -418,25 +405,33 @@ const Realisations = () => {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.5, delay: index * 0.1 }}
                         >
-                          <div 
-                            className="flex flex-col rounded-2xl overflow-hidden shadow-md hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+                          <div
+                            className="flex flex-col rounded-[32px] overflow-hidden bg-white border border-[#D9D7D0]/60 shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300 cursor-pointer"
                             onClick={() => navigate(`/project/${project.id}`)}
                           >
-                            <img 
-                              src={project.image} 
+                            <img
+                              src={project.image}
                               alt={project.title}
-                              className="w-full h-48 object-cover" 
+                              className="w-full h-48 object-cover"
                             />
-                            <div className="p-4 flex flex-col justify-center">
-                              <h3 className="text-white text-xl font-semibold mb-2">{project.title}</h3>
-                              <div className="flex gap-2 flex-wrap text-sm text-purple-400 mb-3">
+                            <div className="p-6 flex flex-col justify-center">
+                              <h3
+                                className="text-[#1B1B1B] text-xl font-semibold mb-3 tracking-tight"
+                                style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                              >
+                                {project.title}
+                              </h3>
+                              <div className="flex gap-2 flex-wrap text-sm mb-3">
                                 {project.tags.map((tag, tagIndex) => (
-                                  <span key={tagIndex} className="bg-purple-900/30 px-2 py-1 rounded-full">
+                                  <span
+                                    key={tagIndex}
+                                    className="bg-[#E9E8E4] text-[#8C8880] px-2.5 py-1 rounded-full text-xs"
+                                  >
                                     {tag}
                                   </span>
                                 ))}
                               </div>
-                              <p className="text-gray-400 text-sm">
+                              <p className="text-[#8C8880] text-sm leading-relaxed">
                                 {project.description}
                               </p>
                             </div>
@@ -466,7 +461,7 @@ const Realisations = () => {
           </section>
 
           {/* CTA Section */}
-          <section className="py-16 bg-gradient-to-br from-purple-900/20 to-blue-900/20">
+          <section className="py-16 border-t border-[#D9D7D0]/40">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-3xl mx-auto text-center">
                 <motion.div
@@ -475,15 +470,18 @@ const Realisations = () => {
                   transition={{ duration: 0.8 }}
                   viewport={{ once: true }}
                 >
-                  <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+                  <h2
+                    className="text-3xl sm:text-4xl font-bold text-[#1B1B1B] mb-6 tracking-tight"
+                    style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                  >
                     Votre projet nous intéresse ?
                   </h2>
-                  <p className="text-xl text-gray-300 mb-8">
+                  <p className="text-xl text-[#8C8880] mb-8">
                     Discutons de votre projet et transformons vos idées en réalité avec nos solutions sur-mesure.
                   </p>
                   <a
                     href="/contact"
-                    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all font-semibold text-lg"
+                    className="inline-flex items-center px-8 py-4 bg-[#1B1B1B] text-[#FAF9F5] rounded-full hover:opacity-90 transition-all font-semibold text-lg"
                   >
                     Parlons de votre projet
                   </a>
@@ -492,9 +490,9 @@ const Realisations = () => {
             </div>
           </section>
         </main>
-        
+
         <Footer />
-      </GrainientBackground>
+      </div>
     </>
   );
 };

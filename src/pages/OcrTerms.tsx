@@ -1,21 +1,22 @@
-import React, { useEffect } from "react";
-import Header from "@/components/layout/Header";
-import MetaTags from "@/components/seo/MetaTags";
-import { NavLink } from "react-router-dom";
-import { useIsMobile } from "@/hooks/use-mobile";
+import React, { useEffect } from 'react';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import MetaTags from '@/components/seo/MetaTags';
+import { Link } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const OcrTerms: React.FC = () => {
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    document.documentElement.lang = "fr";
+    document.documentElement.lang = 'fr';
     window.scrollTo(0, 0);
 
     const prevHtml = document.documentElement.style.overflow;
     const prevBody = document.body.style.overflow;
     if (!isMobile) {
-      document.documentElement.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
     }
 
     return () => {
@@ -32,57 +33,63 @@ const OcrTerms: React.FC = () => {
         keywords="OCR, confidentialité, conditions d'utilisation, protection des données, BoostAI Consulting"
       />
 
-      <div className="min-h-screen overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(90,74,111,0.28),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(61,47,87,0.24),transparent_28%),linear-gradient(180deg,#09090d_0%,#111118_100%)]">
+      <div className="lumio-page min-h-screen bg-[#FAF9F5] text-[#1B1B1B]">
         <Header />
 
-        <main className="relative z-10 flex min-h-[calc(100vh-96px)] items-start px-5 pb-10 pt-28 md:h-[calc(100vh-96px)] md:min-h-0 md:items-center md:px-10 md:pb-10 md:pt-32">
-          <section className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 md:h-full md:grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <main className="relative z-10 flex min-h-[calc(100vh-96px)] items-start px-5 pb-10 pt-36 md:px-10">
+          <section className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div className="flex max-w-3xl flex-col justify-center">
-              <div className="text-xs uppercase tracking-[0.24em] text-white">Conditions OCR</div>
-              <h1 className="mt-4 text-4xl font-semibold leading-tight text-white md:text-6xl">
+              <div className="text-xs uppercase tracking-[0.24em] text-[#8C8880]">Conditions OCR</div>
+              <h1
+                className="mt-4 text-4xl font-bold leading-tight tracking-tight md:text-6xl"
+                style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+              >
                 Traitement et confidentialité des données OCR
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white">
-                Transparence sur la conservation temporaire des informations extraites par l'outil, avec un cadre strictement
-                interne, confidentiel et orienté vers l'amélioration du service.
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#8C8880]">
+                Transparence sur la conservation temporaire des informations extraites par l&apos;outil,
+                avec un cadre strictement interne, confidentiel et orienté vers l&apos;amélioration du
+                service.
               </p>
               <div className="mt-8">
-                <NavLink
+                <Link
                   to="/Convert"
-                  className="inline-flex items-center rounded-full border border-white/15 bg-white/6 px-5 py-2.5 text-sm text-white transition hover:bg-white/10"
+                  className="inline-flex items-center rounded-full border border-[#1B1B1B]/20 bg-white px-5 py-2.5 text-sm text-[#1B1B1B] transition hover:bg-black hover:text-[#FAF9F5]"
                 >
-                  Retour à l'outil OCR
-                </NavLink>
+                  Retour à l&apos;outil OCR
+                </Link>
               </div>
             </div>
 
-            <div className="grid gap-5 text-[15px] leading-7 text-white md:text-base md:leading-8">
+            <div className="grid gap-5 rounded-[32px] border border-[#D9D7D0]/40 bg-white p-8 text-[15px] leading-7 text-[#8C8880] shadow-sm md:text-base md:leading-8">
               <div>
-                Dans le cadre de l'utilisation de notre outil OCR, certains documents transmis ainsi que les informations qui en
-                sont extraites peuvent être conservés pour une durée limitée et strictement proportionnée à des finalités
-                techniques d'analyse, de contrôle qualité et d'amélioration continue du service.
+                Dans le cadre de l&apos;utilisation de notre outil OCR, certains documents transmis ainsi
+                que les informations qui en sont extraites peuvent être conservés pour une durée limitée
+                et strictement proportionnée à des finalités techniques d&apos;analyse, de contrôle
+                qualité et d&apos;amélioration continue du service.
               </div>
-
               <div>
-                Ces données sont utilisées exclusivement par BoostAI Consulting afin d'améliorer la précision des traitements, la
-                fiabilité des extractions et la performance globale de l'outil. Elles ne sont en aucun cas cédées, revendues,
-                louées ou communiquées à des tiers à des fins commerciales.
+                Ces données sont utilisées exclusivement par BoostAI Consulting afin d&apos;améliorer la
+                précision des traitements, la fiabilité des extractions et la performance globale de
+                l&apos;outil. Elles ne sont en aucun cas cédées, revendues, louées ou communiquées à des
+                tiers à des fins commerciales.
               </div>
-
               <div>
-                L'accès à ces informations est limité aux seules personnes habilitées lorsque cela est nécessaire pour la
-                maintenance, la sécurité ou l'optimisation du service. Nous appliquons une logique de minimisation des données et
-                veillons à ne conserver que les éléments utiles pendant la durée nécessaire.
+                L&apos;accès à ces informations est limité aux seules personnes habilitées lorsque cela
+                est nécessaire pour la maintenance, la sécurité ou l&apos;optimisation du service. Nous
+                appliquons une logique de minimisation des données et veillons à ne conserver que les
+                éléments utiles pendant la durée nécessaire.
               </div>
-
               <div>
-                En utilisant l'outil, vous reconnaissez cette possibilité de conservation temporaire dans un cadre exclusivement
-                interne, avec un engagement explicite de confidentialité, de non-partage et de non-commercialisation des données
-                auprès de tiers.
+                En utilisant l&apos;outil, vous reconnaissez cette possibilité de conservation temporaire
+                dans un cadre exclusivement interne, avec un engagement explicite de confidentialité, de
+                non-partage et de non-commercialisation des données auprès de tiers.
               </div>
             </div>
           </section>
         </main>
+
+        <Footer />
       </div>
     </>
   );

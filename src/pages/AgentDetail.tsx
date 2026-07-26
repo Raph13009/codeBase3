@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ExternalLink, Github, X } from "lucide-react";
+import { ArrowLeft, X } from "lucide-react";
 import { useParams, useNavigate } from "react-router-dom";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import MetaTags from "@/components/seo/MetaTags";
 import RotatingText from "@/components/ui/RotatingText";
 
@@ -100,34 +102,25 @@ const AgentDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  
-  // Debug logs
-  console.log('=== DEBUG AGENT DETAIL ===');
-  console.log('id:', id);
-  console.log('id type:', typeof id);
-  console.log('agentsData keys:', Object.keys(agentsData));
-  console.log('agentsData:', agentsData);
-  
+
   const agent = agentsData[id as keyof typeof agentsData];
-  
-  console.log('found agent:', agent);
-  console.log('=== END DEBUG ===');
-  
+
   if (!agent) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#111F1F] to-[#17413C]">
-        <div className="container mx-auto px-4 py-20 text-center">
-          <h1 className="text-2xl text-white">Agent non trouvé</h1>
-          <p className="text-gray-400 mb-4">id: {id}</p>
-          <p className="text-gray-400 mb-4">Type: {typeof id}</p>
-          <p className="text-gray-400 mb-4">Clés disponibles: {Object.keys(agentsData).join(', ')}</p>
-          <button 
+      <div className="lumio-page min-h-screen bg-[#FAF9F5] text-[#1B1B1B]">
+        <Header />
+        <div className="container mx-auto px-4 pt-36 pb-20 text-center">
+          <h1 className="text-2xl text-[#1B1B1B]" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
+            Agent non trouvé
+          </h1>
+          <button
             onClick={() => navigate('/realisations#agents')}
-            className="mt-4 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+            className="mt-4 px-6 py-2 bg-[#1B1B1B] text-[#FAF9F5] rounded-full hover:opacity-90 transition-opacity"
           >
             Retour aux réalisations
           </button>
         </div>
+        <Footer />
       </div>
     );
   }
@@ -138,15 +131,16 @@ const AgentDetail = () => {
         title={`${agent.fullTitle} | BoostAI Consulting`}
         description={agent.description}
         keywords={`${agent.tags.join(', ')}, agent IA, automatisation, BoostAI`}
-        image={(agent as any).image || "/assets/Logo.png"}
+        image={(agent as any).image || "/android-chrome-512x512.png"}
       />
-      
-      <div className="min-h-screen bg-gradient-to-br from-[#111F1F] to-[#17413C]">
-        
+
+      <div className="lumio-page min-h-screen bg-[#FAF9F5] text-[#1B1B1B]">
+        <Header />
+
         {/* Back Button - Fixed Position */}
         <motion.button
           onClick={() => navigate('/realisations#agents')}
-          className="fixed top-24 left-6 z-50 flex items-center gap-2 bg-slate-800/80 backdrop-blur-sm text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg border border-slate-700/50 hover:bg-slate-700/80 hover:border-slate-600/50 shadow-lg"
+          className="fixed top-28 left-6 z-50 flex items-center gap-2 bg-white text-[#1B1B1B] hover:bg-[#E9E8E4] transition-all duration-300 px-4 py-2 rounded-full border border-[#D9D7D0] shadow-sm"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
@@ -155,10 +149,10 @@ const AgentDetail = () => {
           Retour
         </motion.button>
 
-        <main className="relative z-10">
+        <main className="relative z-10 pt-36">
 
           {/* Hero Section */}
-          <section className="py-16">
+          <section className="pb-16">
             <div className="container mx-auto px-4">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -168,34 +162,35 @@ const AgentDetail = () => {
               >
                 {/* Agent Header */}
                 <div className="text-center mb-16">
-                  <motion.h1 
-                    className="text-4xl sm:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-100 to-purple-400 mb-8"
+                  <motion.h1
+                    className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1B1B1B] mb-8 tracking-tight leading-tight"
+                    style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                   >
                     {agent.fullTitle}
                   </motion.h1>
-                  
-                  <motion.p 
-                    className="text-xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed"
+
+                  <motion.p
+                    className="text-xl text-[#8C8880] mb-8 max-w-4xl mx-auto leading-relaxed"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
                   >
                     {agent.description}
                   </motion.p>
-                  
-                  <motion.div 
+
+                  <motion.div
                     className="flex flex-wrap justify-center gap-3 mb-12"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                   >
                     {agent.tags.map((tag, index) => (
-                      <span 
+                      <span
                         key={index}
-                        className="bg-purple-900/40 text-purple-300 px-4 py-2 rounded-full text-sm font-medium border border-purple-700/30"
+                        className="bg-[#E9E8E4] text-[#8C8880] px-4 py-2 rounded-full text-sm font-medium border border-[#D9D7D0]/50"
                       >
                         {tag}
                       </span>
@@ -211,13 +206,12 @@ const AgentDetail = () => {
                     transition={{ duration: 0.8, delay: 0.5 }}
                     className="mb-16"
                   >
-                    <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-                      <img 
-                        src={(agent as any).image} 
+                    <div className="relative overflow-hidden rounded-[32px] border border-[#D9D7D0]/40 shadow-sm">
+                      <img
+                        src={(agent as any).image}
                         alt={agent.fullTitle}
                         className="w-full h-96 md:h-[500px] object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                     </div>
                   </motion.div>
                 )}
@@ -229,9 +223,14 @@ const AgentDetail = () => {
                   transition={{ duration: 0.8, delay: 0.6 }}
                   className="mb-16"
                 >
-                  <div className="bg-slate-800/30 border border-slate-700/30 rounded-2xl p-8">
-                    <h2 className="text-2xl font-bold text-white mb-6 text-center">Aperçu de l'Agent</h2>
-                    <p className="text-gray-300 text-lg leading-relaxed text-center max-w-4xl mx-auto">
+                  <div className="bg-white border border-[#D9D7D0]/50 rounded-[32px] p-8 shadow-sm">
+                    <h2
+                      className="text-2xl font-bold text-[#1B1B1B] mb-6 text-center tracking-tight"
+                      style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                    >
+                      Aperçu de l'Agent
+                    </h2>
+                    <p className="text-[#8C8880] text-lg leading-relaxed text-center max-w-4xl mx-auto">
                       {agent.summary}
                     </p>
                   </div>
@@ -244,11 +243,16 @@ const AgentDetail = () => {
                   transition={{ duration: 0.8, delay: 0.7 }}
                   className="mb-16"
                 >
-                  <h2 className="text-3xl font-bold text-white mb-8 text-center">Technologies Utilisées</h2>
+                  <h2
+                    className="text-3xl font-bold text-[#1B1B1B] mb-8 text-center tracking-tight"
+                    style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                  >
+                    Technologies Utilisées
+                  </h2>
                   <div className="flex justify-center">
                     <RotatingText
                       texts={agent.stack}
-                      mainClassName="px-6 py-4 bg-gradient-to-r from-purple-600 to-blue-600 border border-purple-500/50 rounded-xl text-white font-bold text-2xl overflow-hidden shadow-lg"
+                      mainClassName="px-6 py-4 bg-[#1B1B1B] border border-[#1B1B1B] rounded-full text-[#FAF9F5] font-bold text-2xl overflow-hidden shadow-sm"
                       staggerFrom={"last"}
                       initial={{ y: "100%" }}
                       animate={{ y: 0 }}
@@ -269,18 +273,23 @@ const AgentDetail = () => {
                   transition={{ duration: 0.8, delay: 0.8 }}
                   className="mb-16"
                 >
-                  <h2 className="text-3xl font-bold text-white mb-8 text-center">Fonctionnalités Clés</h2>
+                  <h2
+                    className="text-3xl font-bold text-[#1B1B1B] mb-8 text-center tracking-tight"
+                    style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                  >
+                    Fonctionnalités Clés
+                  </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {agent.features.map((feature, index) => (
                       <motion.div
                         key={index}
-                        className="flex items-start gap-4 bg-slate-800/30 border border-slate-700/30 rounded-xl p-6"
+                        className="flex items-start gap-4 bg-[#FFFDF8] border border-[#D9D7D0]/50 rounded-[24px] p-6"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
                       >
-                        <div className="w-3 h-3 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-300 text-lg leading-relaxed">{feature}</span>
+                        <div className="w-2.5 h-2.5 bg-[#1B1B1B] rounded-full mt-2.5 flex-shrink-0"></div>
+                        <span className="text-[#8C8880] text-lg leading-relaxed">{feature}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -294,23 +303,28 @@ const AgentDetail = () => {
                     transition={{ duration: 0.8, delay: 0.9 }}
                     className="mb-16"
                   >
-                    <h2 className="text-3xl font-bold text-white mb-8 text-center">Galerie de l'Agent</h2>
+                    <h2
+                      className="text-3xl font-bold text-[#1B1B1B] mb-8 text-center tracking-tight"
+                      style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                    >
+                      Galerie de l'Agent
+                    </h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                       {(agent as any).images.map((image: string, index: number) => (
                         <motion.div
                           key={index}
-                          className="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg"
-                          whileHover={{ scale: 1.05 }}
+                          className="relative group cursor-pointer overflow-hidden rounded-[24px] border border-[#D9D7D0]/40 shadow-sm"
+                          whileHover={{ scale: 1.03 }}
                           transition={{ duration: 0.2 }}
                           onClick={() => setSelectedImage(image)}
                         >
-                          <img 
-                            src={image} 
+                          <img
+                            src={image}
                             alt={`${agent.title} - Image ${index + 1}`}
-                            className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                            className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                           />
-                          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <span className="text-white text-lg font-medium">Voir l'image</span>
+                          <div className="absolute inset-0 bg-[#1B1B1B]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span className="text-[#FAF9F5] text-lg font-medium">Voir l'image</span>
                           </div>
                         </motion.div>
                       ))}
@@ -325,14 +339,19 @@ const AgentDetail = () => {
                   transition={{ duration: 0.8, delay: 1.0 }}
                   className="text-center"
                 >
-                  <div className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 border border-purple-700/30 rounded-2xl p-8">
-                    <h2 className="text-2xl font-bold text-white mb-4">Intéressé par cet agent IA ?</h2>
-                    <p className="text-gray-300 mb-6">
+                  <div className="bg-white border border-[#D9D7D0]/50 rounded-[32px] p-8 shadow-sm">
+                    <h2
+                      className="text-2xl font-bold text-[#1B1B1B] mb-4 tracking-tight"
+                      style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+                    >
+                      Intéressé par cet agent IA ?
+                    </h2>
+                    <p className="text-[#8C8880] mb-6">
                       Nous pouvons créer des agents similaires pour automatiser vos processus.
                     </p>
-                    <button 
+                    <button
                       onClick={() => navigate('/contact')}
-                      className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-300"
+                      className="bg-[#1B1B1B] text-[#FAF9F5] px-8 py-3 rounded-full font-medium hover:opacity-90 transition-all duration-300"
                     >
                       Discutons de votre projet
                     </button>
@@ -342,6 +361,8 @@ const AgentDetail = () => {
             </div>
           </section>
         </main>
+
+        <Footer />
       </div>
 
       {/* Image Modal */}

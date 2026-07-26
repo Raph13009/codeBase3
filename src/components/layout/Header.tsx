@@ -1,55 +1,100 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import PillNav from '@/components/PillNav';
-import StaggeredMenu from '@/components/layout/StaggeredMenu';
+import LumioStyles from '@/components/layout/LumioStyles';
+import BoostAIMark from '@/components/brand/BoostAIMark';
+
+const links = [
+  { to: '/', label: 'Accueil' },
+  { to: '/realisations', label: 'Réalisations' },
+  { to: '/Convert', label: 'Convertir' },
+  { to: '/about', label: 'À propos' },
+  { to: '/contact', label: 'Contact' },
+];
 
 const Header: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const close = () => {
+    setOpen(false);
+    document.body.style.overflow = 'auto';
+  };
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    if (!isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
+  const toggle = () => {
+    setOpen((v) => {
+      document.body.style.overflow = !v ? 'hidden' : 'auto';
+      return !v;
+    });
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-[#151515]/95 shadow-lg' : 'bg-[#151515]'
-    }`}>
-      <div className="container mx-auto px-5">
-        <div className="flex items-center justify-between h-20">
-          <NavLink to="/" className="text-center">
-            <h1 className="mb-0 font-bold text-4xl md:text-5xl" style={{ fontFamily: "'Darker Grotesque', sans-serif", color: '#ffffff' }}>
-              BoostAI Consulting<span className="ml-3 md:ml-4" style={{ color: '#5a4a6f', textShadow: '0 0 15px rgba(90, 74, 111, 1), 0 0 30px rgba(90, 74, 111, 0.8), 0 0 45px rgba(90, 74, 111, 0.6)', filter: 'drop-shadow(0 0 8px rgba(90, 74, 111, 0.9))' }}>.</span>
-            </h1>
-          </NavLink>
-          
-          <PillNav />
-
-          <button 
-            onClick={toggleMobileMenu}
-            className="lg:hidden text-[#3D2F57] text-2xl"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
+    <>
+      <LumioStyles />
+      <header className="fixed top-6 left-0 right-0 z-50 flex items-center justify-center px-4 w-full pointer-events-none">
+        <div className="pointer-events-auto w-full md:w-auto max-w-[calc(100vw-2rem)] flex items-center justify-between md:justify-start md:gap-5 bg-black backdrop-blur-xl rounded-full px-2 py-2 shadow-xl border border-white/10 h-14">
+          <div className="flex items-center gap-5 pl-1 md:pl-0">
+            <BoostAIMark size={34} variant="onDark" to="/" />
+            <nav className="hidden md:flex items-center gap-5">
+              {links.map((l) => (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  className={`text-[12px] font-semibold uppercase tracking-[0.05em] whitespace-nowrap transition-colors duration-300 ${
+                    pathname === l.to
+                      ? 'text-[#FAF9F5]'
+                      : 'text-[#FAF9F5]/80 hover:text-[#FAF9F5]'
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+          <div className="flex items-center gap-2 pr-1">
+            <Link
+              to="/contact"
+              onClick={close}
+              className="hidden sm:flex md:ml-1 rounded-full hover:bg-[#FAF9F5] hover:text-black transition-all duration-300 items-center px-4 text-[10px] h-8 font-semibold uppercase tracking-wider bg-white/10 text-[#FAF9F5] whitespace-nowrap"
+            >
+              Nous contacter
+            </Link>
+            <button
+              type="button"
+              onClick={toggle}
+              className="md:hidden w-9 h-9 rounded-full flex items-center justify-center text-[#FAF9F5]"
+              aria-label="Menu"
+            >
+              {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
-      <StaggeredMenu isOpen={isMobileMenuOpen} onClose={toggleMobileMenu} />
-    </nav>
+      {open && (
+        <div className="fixed inset-0 z-40 bg-[#FAF9F5] pt-28 px-8 md:hidden">
+          <nav className="flex flex-col gap-6">
+            {links.map((l) => (
+              <Link
+                key={l.to}
+                to={l.to}
+                onClick={close}
+                className="text-2xl font-semibold tracking-tight text-[#1B1B1B]"
+              >
+                {l.label}
+              </Link>
+            ))}
+            <Link
+              to="/contact"
+              onClick={close}
+              className="mt-4 inline-flex items-center justify-center rounded-full bg-black text-[#FAF9F5] px-6 h-12 text-sm font-semibold uppercase tracking-wider"
+            >
+              Nous contacter
+            </Link>
+          </nav>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -83,7 +83,7 @@ const ComparisonTable: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-[#4B49D1]/10 via-[#8B5CF6]/10 to-[#4B49D1]/10 rounded-2xl blur-xl"></div>
           
           <img 
-            src="/images/boostai-logo.png" 
+            src="/brand/boostai-logo-192.webp" 
             alt="BoostAI" 
             className="relative w-10 h-10 sm:w-12 sm:h-12 object-contain"
           />

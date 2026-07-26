@@ -13,7 +13,7 @@ interface MetaTagsProps {
 const MetaTags: React.FC<MetaTagsProps> = ({
   title = "BoostAI Consulting – Agence web sur-mesure & automatisations IA",
   description = "Agence digitale spécialisée dans le développement web, création de sites internet modernes, MVP sur-mesure et automatisations IA pour faire croître votre business.",
-  image = "https://www.boostaiconsulting.com/images/og-image-boostai.png",
+  image = "https://www.boostaiconsulting.com/android-chrome-512x512.png",
   type = "website",
   keywords = "agence web, développement web sur-mesure, agence digitale, création site internet, agence code, audit site web, refonte de site, accompagnement digital, agence SEO, choisir agence web, meilleure agence web, devis agence web, MVP, automatisations IA, intelligence artificielle"
 }) => {

@@ -131,8 +131,8 @@ const CustomToolAnimation: React.FC = () => {
               transition={{ delay: 1, duration: 0.6, type: "spring", stiffness: 200 }}
               className="mt-8"
             >
-              <div className="bg-black border border-white/20 rounded-2xl px-6 py-4 shadow-2xl">
-                <img src="/assets/Logo2.png" alt="BoostAI Consulting" className="h-10 w-auto" />
+              <div className="bg-black border border-white/20 rounded-2xl px-6 py-4 shadow-2xl flex items-center justify-center">
+                <img src="/brand/boostai-logo-192.webp" alt="BoostAI Consulting" className="h-10 w-10" />
               </div>
             </motion.div>
           </motion.div>

@@ -6,57 +6,58 @@ import Footer from '@/components/layout/Footer';
 import { motion } from 'framer-motion';
 
 const NotFound: React.FC = () => {
-  const { t, i18n } = useTranslation();
-  
+  const { t } = useTranslation();
+
   useEffect(() => {
-    // Update document metadata
     document.title = t('notFoundTitle') + ' | BoostAI Consulting';
-    document.documentElement.lang = 'en';
+    document.documentElement.lang = 'fr';
   }, [t]);
-  
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="lumio-page flex flex-col min-h-screen bg-[#FAF9F5] text-[#1B1B1B]">
       <Header />
-      
-      <main className="flex-grow pt-24 pb-20 flex items-center">
+
+      <main className="flex-grow pt-36 pb-20 flex items-center">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-2xl mx-auto text-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.45 }}
             >
-              <div className="relative mx-auto w-48 h-48 mb-8">
-                <span className="absolute font-display font-bold text-8xl text-primary/20 top-0 left-0 right-0 text-center">
-                  404
-                </span>
-                <span className="absolute font-display font-bold text-7xl text-primary top-4 left-0 right-0 text-center">
-                  404
-                </span>
+              <div
+                className="font-bold text-8xl md:text-9xl tracking-tighter mb-6 text-[#1B1B1B]/15"
+                style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+              >
+                404
               </div>
             </motion.div>
-            
+
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.1 }}
             >
-              <h1 className="font-display text-3xl md:text-4xl font-bold mb-4">
+              <h1
+                className="text-3xl md:text-4xl font-bold mb-4 tracking-tight"
+                style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
+              >
                 {t('notFoundTitle')}
               </h1>
-              
-              <p className="text-muted-foreground text-lg mb-8">
-                {t('notFoundText')}
-              </p>
-              
-              <Link to="/" className="button-primary">
+
+              <p className="text-[#8C8880] text-lg mb-10">{t('notFoundText')}</p>
+
+              <Link
+                to="/"
+                className="inline-flex items-center rounded-full bg-black text-[#FAF9F5] px-6 h-11 text-[11px] font-semibold uppercase tracking-wider hover:opacity-90 transition-opacity"
+              >
                 {t('backToHome')}
               </Link>
             </motion.div>
           </div>
         </div>
       </main>
-      
+
       <Footer />
     </div>
   );

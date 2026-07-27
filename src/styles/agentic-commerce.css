@@ -1,0 +1,97 @@
+/* Scoped Agentic Commerce tokens — do not touch global shadcn variables */
+
+.agentic-commerce {
+  --ac-primary: #ff5e3a;
+  --ac-primary-container: #ff8a65;
+  --ac-on-primary: #ffffff;
+  --ac-secondary: #556500;
+  --ac-secondary-container: #d6ed7a;
+  --ac-on-secondary-container: #5a6c00;
+  --ac-tertiary: #326578;
+  --ac-background: #ffffff;
+  --ac-on-background: #0a0a0a;
+  --ac-on-surface: #0a0a0a;
+  --ac-muted: #555555;
+  --ac-surface: #ffffff;
+  --ac-surface-low: #f9f3e8;
+  --ac-surface-container: #f3ede2;
+  --ac-surface-high: #ede8dd;
+  --ac-outline: #89726b;
+  --ac-glass: rgba(255, 255, 255, 0.42);
+  --ac-glass-border: rgba(255, 255, 255, 0.6);
+  --ac-shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.05);
+  --ac-gradient-hero: linear-gradient(
+    180deg,
+    rgba(56, 189, 248, 0.22) 0%,
+    rgba(192, 132, 252, 0.12) 42%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  --ac-gradient-cta: linear-gradient(
+    135deg,
+    rgba(56, 189, 248, 0.28) 0%,
+    rgba(192, 132, 252, 0.22) 50%,
+    rgba(255, 94, 58, 0.12) 100%
+  );
+
+  background: var(--ac-background);
+  color: var(--ac-on-background);
+  font-family: var(--font-display), "Plus Jakarta Sans", system-ui, sans-serif;
+  scroll-behavior: smooth;
+}
+
+.agentic-commerce ::selection {
+  background: color-mix(in srgb, var(--ac-primary-container) 70%, white);
+  color: #752305;
+}
+
+.agentic-commerce .ac-glass {
+  background: var(--ac-glass);
+  border: 1px solid var(--ac-glass-border);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--ac-shadow-soft);
+}
+
+.agentic-commerce .ac-hero-gradient {
+  background: var(--ac-gradient-hero);
+}
+
+.agentic-commerce .ac-cta-gradient {
+  background: var(--ac-gradient-cta);
+}
+
+.agentic-commerce .ac-text-balance {
+  text-wrap: balance;
+}
+
+.agentic-commerce .ac-animate-rise,
+.agentic-commerce .ac-animate-rise-delay,
+.agentic-commerce .ac-animate-rise-delay-2 {
+  animation: ac-rise 0.7s ease-out both;
+}
+
+.agentic-commerce .ac-animate-rise-delay {
+  animation-delay: 0.12s;
+}
+
+.agentic-commerce .ac-animate-rise-delay-2 {
+  animation-delay: 0.24s;
+}
+
+@keyframes ac-rise {
+  from {
+    opacity: 1;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agentic-commerce .ac-animate-rise,
+  .agentic-commerce .ac-animate-rise-delay,
+  .agentic-commerce .ac-animate-rise-delay-2 {
+    animation: none;
+  }
+}

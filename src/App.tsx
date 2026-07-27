@@ -20,6 +20,7 @@ import NewLanding from "./pages/NewLanding";
 import LumioLanding from "./pages/LumioLanding";
 import Admin from "./pages/Admin";
 import OcrTerms from "./pages/OcrTerms";
+import AgenticCommerce from "./pages/AgenticCommerce";
 
 
 // Import i18n configuration
@@ -60,6 +61,7 @@ const App = () => {
               <Route path="/admin/home" element={<Admin />} />
               <Route path="/ocr-terms" element={<OcrTerms />} />
               <Route path="/agent/:id" element={<AgentDetail />} />
+              <Route path="/:locale/agentic-commerce" element={<AgenticCommerce />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

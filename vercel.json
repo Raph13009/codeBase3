@@ -1,6 +1,15 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
+    {
+      "source": "/en/agentic-commerce",
+      "destination": "/en/agentic-commerce/index.html"
+    },
+    {
+      "source": "/fr/agentic-commerce",
+      "destination": "/fr/agentic-commerce/index.html"
+    },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

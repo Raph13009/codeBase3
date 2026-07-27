@@ -199,7 +199,17 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				/* Agentic Commerce scoped palette (`.agentic-commerce` CSS vars) */
+				'ac-primary': 'var(--ac-primary)',
+				'ac-on-primary': 'var(--ac-on-primary)',
+				'ac-on-surface': 'var(--ac-on-surface)',
+				'ac-muted': 'var(--ac-muted)',
+				'ac-surface': 'var(--ac-surface)',
+				'ac-surface-low': 'var(--ac-surface-low)',
+				'ac-surface-container': 'var(--ac-surface-container)',
+				'ac-secondary-container': 'var(--ac-secondary-container)',
+				'ac-on-secondary-container': 'var(--ac-on-secondary-container)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

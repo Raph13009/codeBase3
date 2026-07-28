@@ -137,10 +137,10 @@ const LumioLanding: React.FC = () => {
 </div>
 </section>
 {/* 3. Floating Visual Collage (CRITICAL REBUILD) */}
-<section className="min-h-[1400px] w-full max-w-[1728px] mx-auto relative overflow-hidden bg-page-bg py-xl">
+<section className="min-h-[1000px] md:min-h-[1400px] w-full max-w-[1728px] mx-auto relative overflow-hidden bg-page-bg py-xl">
 {/* Central Anchor */}
-<div className="absolute inset-0 flex justify-center items-center opacity-100 text-muted pointer-events-none mt-20">
-<h2 className="font-display text-[120px] font-bold text-text tracking-tighter leading-[0.9] text-center">Studio<br/>Tech &amp; IA</h2>
+<div className="absolute inset-0 flex justify-center items-center opacity-100 text-muted pointer-events-none mt-10 md:mt-20 px-4">
+<h2 className="font-display text-[56px] sm:text-[80px] md:text-[120px] font-bold text-text tracking-tighter leading-[0.9] text-center">Studio<br/>Tech &amp; IA</h2>
 </div>
 {/* 1. Top-left: Image with Glass UI Overlay */}
 <div className="absolute rounded-[32px] overflow-hidden bg-white/10 backdrop-blur-2xl backdrop-saturate-150 border border-white/40 shadow-2xl" style={{left: '10%', top: '12%', width: '340px', height: '260px', zIndex: '5'}}>

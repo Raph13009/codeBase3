@@ -98,6 +98,28 @@ const LumioLanding: React.FC = () => {
   animation: lumio-scroll 30s linear infinite;
 }
 .lumio-root .marquee-container { overflow: hidden; width: 100%; }
+/* Studio Tech & IA: keep Stitch absolute layout on desktop; scale canvas on mobile */
+.lumio-collage-inner {
+  position: absolute;
+  inset: 0;
+}
+@media (max-width: 767px) {
+  .lumio-collage {
+    min-height: 0 !important;
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+    height: calc(48px + (1400px * ((100vw - 16px) / 1280)));
+  }
+  .lumio-collage-inner {
+    inset: auto;
+    width: 1280px;
+    height: 1400px;
+    left: 50%;
+    top: 24px;
+    transform: translateX(-50%) scale(calc((100vw - 16px) / 1280));
+    transform-origin: top center;
+  }
+}
 ` }} />
       <div className="lumio-root text-text font-body-lg antialiased selection:bg-black selection:text-white bg-page-bg">
 
@@ -136,11 +158,12 @@ const LumioLanding: React.FC = () => {
 </div>
 </div>
 </section>
-{/* 3. Floating Visual Collage (CRITICAL REBUILD) */}
-<section className="min-h-[1000px] md:min-h-[1400px] w-full max-w-[1728px] mx-auto relative overflow-hidden bg-page-bg py-xl">
+{/* 3. Floating Visual Collage — identical to Stitch; scaled on mobile only */}
+<section className="lumio-collage min-h-[1400px] w-full max-w-[1728px] mx-auto relative overflow-hidden bg-page-bg py-xl">
+<div className="lumio-collage-inner">
 {/* Central Anchor */}
-<div className="absolute inset-0 flex justify-center items-center opacity-100 text-muted pointer-events-none mt-10 md:mt-20 px-4">
-<h2 className="font-display text-[56px] sm:text-[80px] md:text-[120px] font-bold text-text tracking-tighter leading-[0.9] text-center">Studio<br/>Tech &amp; IA</h2>
+<div className="absolute inset-0 flex justify-center items-center opacity-100 text-muted pointer-events-none mt-20">
+<h2 className="font-display text-[120px] font-bold text-text tracking-tighter leading-[0.9] text-center">Studio<br/>Tech &amp; IA</h2>
 </div>
 {/* 1. Top-left: Image with Glass UI Overlay */}
 <div className="absolute rounded-[32px] overflow-hidden bg-white/10 backdrop-blur-2xl backdrop-saturate-150 border border-white/40 shadow-2xl" style={{left: '10%', top: '12%', width: '340px', height: '260px', zIndex: '5'}}>
@@ -208,6 +231,7 @@ const LumioLanding: React.FC = () => {
 <div className="flex flex-col pr-4">
 <span className="font-label text-[11px] text-text font-bold">Raphaël</span>
 <span className="font-body-md text-[13px] text-text/80 leading-tight">Projet livré !</span>
+</div>
 </div>
 </div>
 </section>

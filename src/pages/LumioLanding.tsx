@@ -136,72 +136,72 @@ const LumioLanding: React.FC = () => {
 </div>
 </div>
 </section>
-{/* 3. Floating Visual Collage — desktop = Stitch absolute; mobile = same cards, readable stack */}
-<section className="w-full max-w-[1728px] mx-auto relative overflow-hidden bg-page-bg py-12 md:py-xl md:min-h-[1400px]">
-{/* Mobile collage */}
-<div className="md:hidden px-4">
-<h2 className="font-display text-[48px] font-bold text-text tracking-tighter leading-[0.9] text-center mb-8">Studio<br/>Tech &amp; IA</h2>
-<div className="relative grid grid-cols-2 gap-3">
-<div className="relative rounded-[24px] overflow-hidden aspect-[4/3] shadow-xl border border-white/40">
+{/* 3. Floating Visual Collage — mobile = Stitch Mobile Edition; desktop = Stitch desktop */}
+<section className="w-full max-w-[1728px] mx-auto relative overflow-hidden bg-page-bg py-12 md:py-xl min-h-[700px] md:min-h-[1400px]">
+{/* Mobile collage — exact Stitch Mobile Edition positions/sizes */}
+<div className="md:hidden absolute inset-0">
+<div className="absolute inset-0 flex justify-center items-center opacity-100 text-muted pointer-events-none mt-10">
+<h2 className="font-display text-[48px] font-bold text-text tracking-tighter leading-[0.9] text-center">Studio<br/>Tech &amp; IA</h2>
+</div>
+<div className="absolute rounded-[20px] overflow-hidden bg-white/10 backdrop-blur-2xl backdrop-saturate-150 border border-white/40 shadow-2xl" style={{left: '-10%', top: '5%', width: '180px', height: '140px', zIndex: 5}}>
 <img className="w-full h-full object-cover" src="/lp/LP-BC/img/G7.jpg" alt=""/>
-<div className="absolute bottom-3 left-3 right-3 bg-white/30 backdrop-blur-xl border border-white/40 rounded-2xl p-3 shadow-lg">
-<div className="flex justify-between items-center mb-1.5">
-<span className="font-label text-[9px] text-text font-bold uppercase tracking-wider">En cours</span>
-<span className="font-label text-[9px] text-text font-bold">78%</span>
+<div className="absolute bottom-2 left-2 right-2 bg-white/30 backdrop-blur-xl border border-white/40 rounded-xl p-2 shadow-lg">
+<div className="flex justify-between items-center mb-1">
+<span className="font-label text-[8px] text-text font-bold uppercase tracking-wider">En cours</span>
+<span className="font-label text-[8px] text-text font-bold">78%</span>
 </div>
-<div className="w-full bg-black/10 rounded-full h-1.5">
-<div className="bg-black w-[78%] h-1.5 rounded-full"></div>
-</div>
-</div>
-</div>
-<div className="relative rounded-[24px] overflow-hidden shadow-xl border border-white/40 row-span-2 min-h-[240px]">
-<img className="absolute inset-0 w-full h-full object-cover" src="/lp/LP-BC/img/G2.jpg" alt=""/>
-<div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/40 backdrop-blur-md border border-white/50 flex items-center justify-center shadow-sm">
-<span className="material-symbols-outlined text-text text-sm">auto_awesome</span>
-</div>
-</div>
-<div className="rounded-[24px] overflow-hidden bg-white/20 backdrop-blur-3xl border border-white/50 shadow-lg flex flex-col p-4">
-<div className="flex items-center justify-between mb-3">
-<span className="font-label text-xs font-semibold text-text">Auto-Sync</span>
-<div className="w-10 h-6 bg-black rounded-full relative shadow-inner">
-<div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
-</div>
-</div>
-<div className="flex items-center gap-3">
-<div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#FF416C] to-[#FF4B2B] flex items-center justify-center shadow-md shrink-0">
-<span className="material-symbols-outlined text-white text-sm">sync</span>
-</div>
-<div className="flex flex-col min-w-0">
-<span className="font-label text-[11px] font-bold text-text">BoostAI Cloud</span>
-<span className="font-body-md text-[12px] text-muted leading-tight">Connecté</span>
+<div className="w-full bg-black/10 rounded-full h-1">
+<div className="bg-black w-[78%] h-1 rounded-full"></div>
 </div>
 </div>
 </div>
-<div className="relative rounded-[24px] overflow-hidden aspect-[4/3] shadow-xl border border-white/40 col-span-2">
+<div className="absolute rounded-[20px] overflow-hidden bg-white/10 backdrop-blur-2xl backdrop-saturate-150 border border-white/40 shadow-2xl" style={{right: '-5%', top: '12%', width: '140px', height: '180px', zIndex: 5}}>
+<img className="w-full h-full object-cover" src="/lp/LP-BC/img/G2.jpg" alt=""/>
+<div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-white/40 backdrop-blur-md border border-white/50 flex items-center justify-center shadow-sm">
+<span className="material-symbols-outlined text-text text-[10px]">auto_awesome</span>
+</div>
+</div>
+<div className="absolute rounded-[16px] overflow-hidden bg-white/20 backdrop-blur-3xl backdrop-saturate-[1.8] border border-white/50 shadow-[0_12px_40px_rgba(0,0,0,0.08)] flex flex-col p-3" style={{left: '-5%', top: '40%', width: '160px', zIndex: 15}}>
+<div className="flex items-center justify-between mb-2">
+<span className="font-label text-[10px] font-semibold text-text">Auto-Sync</span>
+<div className="w-8 h-4 bg-black rounded-full relative shadow-inner">
+<div className="absolute right-1 top-0.5 w-3 h-3 bg-white rounded-full shadow-sm"></div>
+</div>
+</div>
+<div className="flex items-center gap-2">
+<div className="w-6 h-6 rounded-full bg-gradient-to-tr from-[#FF416C] to-[#FF4B2B] flex items-center justify-center shadow-md">
+<span className="material-symbols-outlined text-white text-[10px]">sync</span>
+</div>
+<div className="flex flex-col">
+<span className="font-label text-[9px] font-bold text-text">BoostAI Cloud</span>
+<span className="font-body-md text-[10px] text-muted leading-tight">Connecté</span>
+</div>
+</div>
+</div>
+<div className="absolute rounded-[20px] overflow-hidden bg-white/10 backdrop-blur-2xl backdrop-saturate-150 border border-white/40 shadow-2xl" style={{right: '-10%', top: '45%', width: '180px', height: '120px', zIndex: 5}}>
 <img className="w-full h-full object-cover" src="/lp/LP-BC/img/G3.jpg" alt=""/>
-<div className="absolute top-3 left-3 bg-white/40 backdrop-blur-xl px-3 py-1.5 rounded-full border border-white/50 shadow-sm flex items-center gap-2">
-<div className="w-2 h-2 rounded-full bg-green-500"></div>
-<span className="font-label text-[9px] font-bold text-text uppercase tracking-wider">Guidelines</span>
+<div className="absolute top-2 left-2 bg-white/40 backdrop-blur-xl px-2 py-1 rounded-full border border-white/50 shadow-sm flex items-center gap-1">
+<div className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]"></div>
+<span className="font-label text-[8px] font-bold text-text uppercase tracking-wider">Guidelines</span>
 </div>
 </div>
-<div className="relative rounded-[24px] overflow-hidden aspect-[4/3] shadow-xl border border-white/40">
+<div className="absolute rounded-[20px] overflow-hidden bg-white/10 backdrop-blur-2xl backdrop-saturate-150 border border-white/40 shadow-2xl" style={{left: '-5%', top: '65%', width: '190px', height: '140px', zIndex: 5}}>
 <img className="w-full h-full object-cover" src="/lp/LP-BC/img/G6.jpg" alt=""/>
-<div className="absolute bottom-3 left-3 bg-white/40 backdrop-blur-xl px-3 py-1.5 rounded-full border border-white/50 shadow-sm flex items-center gap-1.5">
-<span className="material-symbols-outlined text-text text-sm">record_voice_over</span>
-<span className="font-label text-[9px] font-bold text-text uppercase tracking-wider">Brand Voice</span>
+<div className="absolute bottom-2 left-2 bg-white/40 backdrop-blur-xl px-2 py-1 rounded-full border border-white/50 shadow-sm flex items-center gap-1">
+<span className="material-symbols-outlined text-text text-[10px]">record_voice_over</span>
+<span className="font-label text-[8px] font-bold text-text uppercase tracking-wider">Brand Voice</span>
 </div>
 </div>
-<div className="relative rounded-[24px] overflow-hidden aspect-[4/3] shadow-xl border border-white/40">
-<img className="w-full h-full object-cover" src="/lp/LP-BC/img/G10.jpg" alt=""/>
+<div className="absolute rounded-[20px] overflow-hidden bg-white/10 backdrop-blur-2xl backdrop-saturate-150 border border-white/40 shadow-2xl" style={{right: '-5%', top: '75%', width: '170px', height: '110px', zIndex: 5}}>
+<img className="w-full h-full object-cover opacity-90" src="/lp/LP-BC/img/G10.jpg" alt=""/>
 </div>
-</div>
-<div className="mt-4 mx-auto w-max bg-white/30 backdrop-blur-3xl rounded-[24px] flex items-center gap-3 p-3 shadow-lg border border-white/50">
-<div className="w-10 h-10 rounded-full bg-soft-card overflow-hidden shadow-sm border border-white/60">
+<div className="absolute bg-white/30 backdrop-blur-3xl backdrop-saturate-[2] rounded-[16px] flex items-center gap-2 p-2 shadow-[0_12px_40px_rgba(0,0,0,0.1)] border border-white/50 z-20" style={{left: '10%', top: '85%', width: 'max-content', zIndex: 20}}>
+<div className="w-6 h-6 rounded-full bg-soft-card overflow-hidden shadow-sm border border-white/60">
 <img className="w-full h-full object-cover scale-[1.85] origin-center" style={{objectPosition: '50% 18%'}} src="/lp/LP-BC/img/portrait.png" alt=""/>
 </div>
 <div className="flex flex-col pr-2">
-<span className="font-label text-[11px] text-text font-bold">Raphaël</span>
-<span className="font-body-md text-[13px] text-text/80 leading-tight">Projet livré !</span>
+<span className="font-label text-[9px] text-text font-bold">Raphaël</span>
+<span className="font-body-md text-[10px] text-text/80 leading-tight">Projet livré !</span>
 </div>
 </div>
 </div>

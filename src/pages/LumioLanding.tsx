@@ -140,7 +140,7 @@ const LumioLanding: React.FC = () => {
 <section className="w-full max-w-[1728px] mx-auto relative overflow-hidden bg-page-bg py-12 md:py-xl min-h-[700px] md:min-h-[1400px]">
 {/* Mobile collage — exact Stitch Mobile Edition positions/sizes */}
 <div className="md:hidden absolute inset-0">
-<div className="absolute inset-0 flex justify-center items-center opacity-100 text-muted pointer-events-none mt-10">
+<div className="absolute inset-0 flex justify-center items-center opacity-100 text-muted pointer-events-none mt-10 z-30">
 <h2 className="font-display text-[48px] font-bold text-text tracking-tighter leading-[0.9] text-center">Studio<br/>Tech &amp; IA</h2>
 </div>
 <div className="absolute rounded-[20px] overflow-hidden bg-white/10 backdrop-blur-2xl backdrop-saturate-150 border border-white/40 shadow-2xl" style={{left: '-10%', top: '5%', width: '180px', height: '140px', zIndex: 5}}>
@@ -208,7 +208,7 @@ const LumioLanding: React.FC = () => {
 {/* Desktop collage — unchanged Stitch layout */}
 <div className="hidden md:block absolute inset-0">
 {/* Central Anchor */}
-<div className="absolute inset-0 flex justify-center items-center opacity-100 text-muted pointer-events-none mt-20">
+<div className="absolute inset-0 flex justify-center items-center opacity-100 text-muted pointer-events-none mt-20 z-30">
 <h2 className="font-display text-[120px] font-bold text-text tracking-tighter leading-[0.9] text-center">Studio<br/>Tech &amp; IA</h2>
 </div>
 {/* 1. Top-left: Image with Glass UI Overlay */}

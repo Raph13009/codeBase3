@@ -8,7 +8,7 @@ const links = [
   { to: '/', label: 'Accueil' },
   { to: '/realisations', label: 'Réalisations' },
   { to: '/Convert', label: 'Convertir' },
-  { to: '/fr/agentic-commerce', label: 'Commerce Agentique' },
+  { to: '/fr/agentic-commerce', label: 'Commerce IA' },
   { to: '/about', label: 'À propos' },
   { to: '/contact', label: 'Contact' },
 ];

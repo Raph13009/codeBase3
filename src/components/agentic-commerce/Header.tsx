@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import type { Locale } from "@/lib/agentic-commerce/i18n/config";
 import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
 import BoostAIMark from "@/components/brand/BoostAIMark";
@@ -56,10 +57,11 @@ export function AgenticHeader({ locale, dict }: Props) {
         <div className="flex items-center gap-2 sm:gap-3">
           <Link
             to="/"
-            className="hidden rounded-full px-3 py-1.5 text-sm font-semibold text-ac-muted transition-colors hover:text-ac-primary lg:inline"
+            className="flex items-center gap-1.5 rounded-full border border-ac-muted/20 bg-white/30 px-3 py-1.5 text-sm font-semibold text-ac-on-surface shadow-sm transition-all hover:border-ac-primary/30 hover:bg-white/50 hover:text-ac-primary"
             onClick={() => trackAgenticEvent("nav_home", { locale })}
           >
-            {dict.nav.homeLabel}
+            <ArrowLeft className="h-4 w-4" />
+            <span className="hidden sm:inline">{dict.nav.homeLabel}</span>
           </Link>
           <Link
             to={dict.nav.switchHref}

@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
               Studio tech &amp; IA pour PME et startups. Sites, MVP et agents livrés vite, pensés pour convertir.
             </p>
             <a
-              href="https://www.linkedin.com/company/boostaiconsulting"
+              href="https://www.linkedin.com/company/106565801/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn BoostAI Consulting"

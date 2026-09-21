@@ -10,7 +10,6 @@ const links = [
   { to: '/Convert', label: 'Convertir' },
   { to: '/fr/agentic-commerce', label: 'Commerce IA' },
   { to: '/about', label: 'À propos' },
-  { to: '/contact', label: 'Contact' },
 ];
 
 const Header: React.FC = () => {

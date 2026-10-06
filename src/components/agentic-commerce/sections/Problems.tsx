@@ -1,41 +1,114 @@
+import { useEffect, useState, type CSSProperties } from "react";
 import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
+import { Reveal } from "@/components/agentic-commerce/Reveal";
 
-const accents = [
-  "from-sky-200/50 to-violet-100/40",
-  "from-orange-100/60 to-rose-100/40",
-  "from-lime-100/70 to-emerald-50/50",
-  "from-cyan-100/50 to-sky-50/60",
-];
+const AUTOPLAY_MS = 5000;
+const icons = ["inventory_2", "shopping_bag", "verified_user", "gavel"];
 
 export function Problems({ dict }: { dict: Dictionary }) {
-  return (
-    <section id="capabilities" className="scroll-mt-28 px-6 py-24 md:px-8 md:py-28">
-      <div className="mx-auto max-w-6xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-ac-on-surface sm:text-4xl">
-            {dict.problems.title}
-          </h2>
-          <p className="mt-4 text-lg text-ac-muted">{dict.problems.subtitle}</p>
-        </div>
+  const items = dict.problems.items;
+  const [active, setActive] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2">
-          {dict.problems.items.map((item, index) => (
-            <article
-              key={item.title}
-              className={`ac-glass overflow-hidden rounded-[1.25rem] bg-gradient-to-br ${accents[index]} p-8`}
+  useEffect(() => {
+    if (!autoplay) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setTimeout(() => {
+      setActive((current) => (current + 1) % items.length);
+    }, AUTOPLAY_MS);
+    return () => window.clearTimeout(id);
+  }, [active, autoplay, items.length]);
+
+  const current = items[active];
+
+  return (
+    <section
+      id="capabilities"
+      className="mx-auto max-w-[1728px] scroll-mt-28 px-4 py-24 sm:px-10 md:py-32"
+    >
+      <div className="mx-auto grid max-w-[1240px] items-center gap-14 lg:grid-cols-2 lg:gap-[100px]">
+        <Reveal className="order-2 lg:order-1">
+          <div className="flex aspect-[4/3] items-center justify-center rounded-[32px] bg-gradient-to-br from-[#f4f3ef] to-[#e9e8e4] p-6 md:rounded-[40px] md:p-12">
+            <div
+              key={active}
+              className="ac-card-in w-full max-w-md rounded-2xl border border-[#d9d7d0]/20 bg-[var(--ac-card)] p-6 shadow-xl"
             >
-              <span className="text-xs font-bold uppercase tracking-[0.14em] text-ac-muted">
-                {String(index + 1).padStart(2, "0")} / 04
-              </span>
-              <h3 className="mt-4 text-xl font-bold tracking-tight text-ac-on-surface">
-                {item.title}
-              </h3>
-              <p className="mt-3 text-base leading-relaxed text-ac-muted">
-                {item.description}
-              </p>
-            </article>
-          ))}
-        </div>
+              <div className="mb-5 flex items-center justify-between">
+                <span className="text-sm font-bold text-ac-on-surface">{current.title}</span>
+                <span
+                  className="material-symbols-outlined text-ac-muted"
+                style={{ fontSize: 20 }}
+                  aria-hidden="true"
+                >
+                  {icons[active]}
+                </span>
+              </div>
+              <ul className="space-y-1">
+                {current.points.map((point, index) => (
+                  <li
+                    key={point}
+                    className="ac-row-in flex items-center gap-3 rounded-xl p-3 text-[15px] font-medium text-ac-on-surface"
+                    style={{ "--i": index } as CSSProperties}
+                  >
+                    <span
+                      className="material-symbols-outlined text-green-600"
+                style={{ fontSize: 18 }}
+                      aria-hidden="true"
+                    >
+                      check_circle
+                    </span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={1} className="order-1 max-w-lg lg:order-2">
+          <h2 className="ac-h2 text-ac-on-surface">{dict.problems.title}</h2>
+          <p className="mt-4 text-[17px] leading-relaxed text-ac-muted">
+            {dict.problems.subtitle}
+          </p>
+
+          <div className="mt-12 border-l-[3px] border-[var(--ac-line)]" role="tablist">
+            {items.map((item, index) => {
+              const isActive = index === active;
+              return (
+                <button
+                  key={item.title}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => {
+                    setAutoplay(false);
+                    setActive(index);
+                  }}
+                  className={`relative block w-full py-4 pl-8 text-left transition-opacity duration-300 ${
+                    isActive ? "opacity-100" : "opacity-45 hover:opacity-100"
+                  }`}
+                >
+                  {isActive ? (
+                    <span
+                      key={`${active}-${autoplay}`}
+                      className={`absolute -left-[3px] top-0 h-full w-[3px] bg-[#1b1b1b] ${
+                        autoplay ? "ac-progress" : ""
+                      }`}
+                      style={{ "--ac-duration": `${AUTOPLAY_MS}ms` } as CSSProperties}
+                      aria-hidden="true"
+                    />
+                  ) : null}
+                  <span className="block text-xl font-bold tracking-tight text-ac-on-surface">
+                    {item.title}
+                  </span>
+                  <span className="mt-2 block text-[15px] leading-relaxed text-ac-muted">
+                    {item.description}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

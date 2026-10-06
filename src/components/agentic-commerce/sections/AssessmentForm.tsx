@@ -4,6 +4,7 @@ import type { Locale } from "@/lib/agentic-commerce/i18n/config";
 import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
 import { trackAgenticEvent } from "@/lib/agentic-commerce/analytics";
 import { agenticSiteConfig } from "@/lib/agentic-commerce/site";
+import { Reveal } from "@/components/agentic-commerce/Reveal";
 
 type Props = {
   locale: Locale;
@@ -147,26 +148,36 @@ export function AssessmentForm({ locale, dict }: Props) {
   }
 
   return (
-    <section id="assess" className="scroll-mt-28 px-6 py-24 md:px-8 md:py-28">
-      <div className="ac-cta-gradient mx-auto max-w-3xl rounded-[2rem] border border-white/50 p-6 shadow-[0_8px_32px_rgba(0,0,0,0.04)] md:p-10">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-ac-on-surface sm:text-4xl">
-            {dict.form.title}
-          </h2>
-          <p className="mt-4 text-base text-ac-muted md:text-lg">
+    <section
+      id="assess"
+      className="mx-auto max-w-[1728px] scroll-mt-28 px-4 py-24 sm:px-10 md:py-32"
+    >
+      <Reveal className="mx-auto grid max-w-[1240px] gap-10 rounded-[32px] bg-ac-surface-low p-4 sm:p-8 md:rounded-[40px] lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:p-12">
+        <div className="px-2 pt-4 sm:px-0 lg:pt-6">
+          <h2 className="ac-h2 text-ac-on-surface">{dict.form.title}</h2>
+          <p className="mt-4 text-[17px] leading-relaxed text-ac-muted">
             {dict.form.subtitle}
           </p>
+          <p className="mt-8 text-sm text-ac-muted">{dict.hero.reassurance}</p>
+          <a
+            href={`mailto:${agenticSiteConfig.email}`}
+            className="mt-2 inline-block text-sm font-semibold text-ac-on-surface underline-offset-4 hover:underline"
+          >
+            {agenticSiteConfig.email}
+          </a>
         </div>
+
+        <div className="rounded-3xl border border-[#d9d7d0]/30 bg-[var(--ac-card)] p-5 shadow-xl sm:p-8">
 
         {status === "success" ? (
           <p
-            className="mt-10 rounded-2xl bg-white/70 px-6 py-8 text-center text-lg font-medium text-ac-on-surface"
+            className="flex min-h-[200px] items-center justify-center px-4 text-center text-lg font-medium text-ac-on-surface"
             role="status"
           >
             {dict.form.success}
           </p>
         ) : (
-          <form className="mt-10 grid gap-4" onSubmit={onSubmit} noValidate>
+          <form className="grid gap-4" onSubmit={onSubmit} noValidate>
             {/* Web3Forms recommended honeypot — must stay unchecked/hidden */}
             <input
               type="checkbox"
@@ -231,29 +242,37 @@ export function AssessmentForm({ locale, dict }: Props) {
               />
             </div>
 
-            <label
-              htmlFor="ac-field-exploring"
-              className="grid gap-2 text-sm font-medium text-ac-on-surface"
-            >
-              {dict.form.fields.exploring}
-              <select
-                id="ac-field-exploring"
-                name="exploring"
-                required
-                className="rounded-xl border border-black/10 bg-white/80 px-4 py-3 text-base font-normal outline-none ring-ac-primary focus:ring-2"
-                value={values.exploring}
-                onChange={(e) => setField("exploring", e.target.value)}
-              >
-                <option value="" disabled>
-                  —
-                </option>
-                {dict.form.exploringOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <fieldset className="grid gap-2">
+              <legend className="mb-2 text-[13px] font-semibold text-ac-on-surface">
+                {dict.form.fields.exploring}
+              </legend>
+              <div className="flex flex-wrap gap-2">
+                {dict.form.exploringOptions.map((option) => {
+                  const selected = values.exploring === option.value;
+                  return (
+                    <label
+                      key={option.value}
+                      className={`cursor-pointer rounded-full border px-4 py-2 text-[13px] font-medium transition-colors duration-200 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[#1b1b1b] has-[:focus-visible]:ring-offset-2 ${
+                        selected
+                          ? "border-[#1b1b1b] bg-[#1b1b1b] text-[#faf9f5]"
+                          : "border-[var(--ac-line)] bg-white text-ac-on-surface hover:border-[#1b1b1b]"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="exploring"
+                        value={option.value}
+                        required
+                        checked={selected}
+                        onChange={(e) => setField("exploring", e.target.value)}
+                        className="sr-only"
+                      />
+                      {option.label}
+                    </label>
+                  );
+                })}
+              </div>
+            </fieldset>
 
             <Field
               label={`${dict.form.fields.volume} (${dict.form.fields.volumeOptional})`}
@@ -264,14 +283,14 @@ export function AssessmentForm({ locale, dict }: Props) {
 
             <label
               htmlFor="ac-field-message"
-              className="grid gap-2 text-sm font-medium text-ac-on-surface"
+              className="grid gap-2 text-[13px] font-semibold text-ac-on-surface"
             >
               {dict.form.fields.message}
               <textarea
                 id="ac-field-message"
                 name="message"
                 rows={4}
-                className="rounded-xl border border-black/10 bg-white/80 px-4 py-3 text-base font-normal outline-none ring-ac-primary focus:ring-2"
+                className="ac-input font-normal"
                 value={values.message}
                 onChange={(e) => setField("message", e.target.value)}
               />
@@ -284,7 +303,7 @@ export function AssessmentForm({ locale, dict }: Props) {
                 required
                 checked={values.consent}
                 onChange={(e) => setField("consent", e.target.checked)}
-                className="mt-1 h-4 w-4 rounded border-black/20 text-ac-primary focus:ring-ac-primary"
+                className="mt-0.5 h-4 w-4 rounded border-black/20 accent-[#1b1b1b]"
               />
               <span>{dict.form.fields.consent}</span>
             </label>
@@ -293,7 +312,7 @@ export function AssessmentForm({ locale, dict }: Props) {
               {dict.form.privacyNotice}{" "}
               <Link
                 to="/ocr-terms"
-                className="font-semibold text-ac-primary underline-offset-2 hover:underline"
+                className="font-semibold text-ac-on-surface underline underline-offset-2"
               >
                 {dict.form.privacyLinkLabel}
               </Link>
@@ -310,13 +329,14 @@ export function AssessmentForm({ locale, dict }: Props) {
               type="submit"
               disabled={status === "loading"}
               aria-busy={status === "loading"}
-              className="mt-2 inline-flex items-center justify-center rounded-full bg-ac-primary px-7 py-3.5 text-sm font-bold text-ac-on-primary transition hover:brightness-105 disabled:opacity-60"
+              className="ac-pill ac-pill-dark mt-2 w-full disabled:opacity-60 sm:w-auto sm:justify-self-start"
             >
               {status === "loading" ? dict.form.submitting : dict.form.submit}
             </button>
           </form>
         )}
-      </div>
+        </div>
+      </Reveal>
     </section>
   );
 }
@@ -342,7 +362,7 @@ function Field({
 }) {
   const id = `ac-field-${name}`;
   return (
-    <label htmlFor={id} className="grid gap-2 text-sm font-medium text-ac-on-surface">
+    <label htmlFor={id} className="grid gap-2 text-[13px] font-semibold text-ac-on-surface">
       {label}
       <input
         id={id}
@@ -353,7 +373,7 @@ function Field({
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="rounded-xl border border-black/10 bg-white/80 px-4 py-3 text-base font-normal outline-none ring-ac-primary focus:ring-2"
+        className="ac-input font-normal"
       />
     </label>
   );

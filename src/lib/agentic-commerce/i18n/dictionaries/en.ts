@@ -18,13 +18,23 @@ export type Dictionary = {
     ctaPrimary: string;
     ctaSecondary: string;
     reassurance: string;
-    flow: { assistants: string; gateway: string; systems: string };
+  };
+  demo: {
+    human: string;
+    agent: string;
+    humanStatus: string;
+    agentStatus: string;
+    product: string;
+    price: string;
+    stock: string;
+    addToCart: string;
+    fields: { label: string; value: string }[];
   };
   market: { title: string; p1: string; p2: string };
   problems: {
     title: string;
     subtitle: string;
-    items: { title: string; description: string }[];
+    items: { title: string; description: string; points: string[] }[];
   };
   pilot: {
     title: string;
@@ -92,100 +102,105 @@ export const en: Dictionary = {
   },
   hero: {
     brand: "Agentic Commerce by BoostAI Consulting",
-    eyebrow: "Agentic commerce for European retailers & marketplaces",
-    h1: "Make your commerce ready for AI agents",
+    eyebrow: "AI commerce · Retailers & marketplaces in Europe",
+    h1: "Make your catalogue shoppable by AI agents",
     subtitle:
-      "We help retailers and marketplaces connect their product data, checkout, payments and order systems to AI shopping channels — across UCP, ACP and emerging commerce protocols.",
-    ctaPrimary: "Request a readiness assessment",
-    ctaSecondary: "Explore the pilot program",
-    reassurance: "Built for European commerce, payments and compliance.",
-    flow: {
-      assistants: "AI assistants",
-      gateway: "Commerce gateway",
-      systems: "Catalogue, checkout, payment, orders",
-    },
+      "We connect your catalogue, checkout and payments to AI shopping assistants — via UCP, ACP and the protocols to come.",
+    ctaPrimary: "Request an assessment",
+    ctaSecondary: "See the pilot program",
+    reassurance: "Built for European payments and regulation.",
+  },
+  demo: {
+    human: "Customer view",
+    agent: "AI agent view",
+    humanStatus: "Designed for the human eye",
+    agentStatus: "Readable by agents",
+    product: "Classic Watch 38 mm",
+    price: "€129",
+    stock: "In stock",
+    addToCart: "Add to cart",
+    fields: [
+      { label: "Availability", value: "In stock · 14 units" },
+      { label: "Price", value: "129.00 EUR incl. VAT" },
+      { label: "Delivery", value: "48 h · France, EU" },
+      { label: "Checkout", value: "UCP compatible" },
+      { label: "Payment", value: "SCA · explicit consent" },
+    ],
   },
   market: {
     title: "Your next customer may be an AI agent",
-    p1: "Product discovery is moving from search results to AI-generated recommendations. The next step is already emerging: assistants that compare products, build carts and complete purchases directly for their users.",
-    p2: "Most commerce systems were built for human-operated websites — not for autonomous agents.",
+    p1: "Shoppers are starting to ask assistants to compare, build a basket and buy for them.",
+    p2: "Same product, two readers. An agent doesn't see your page — it reads your data.",
   },
   problems: {
-    title: "What we help you solve",
-    subtitle:
-      "Four foundations to make your commerce stack readable and operable by AI shopping agents.",
+    title: "Four building blocks to become AI-shoppable",
+    subtitle: "What we make readable and operable for AI shopping agents.",
     items: [
       {
         title: "AI-ready product data",
-        description:
-          "Structure product, pricing, availability and delivery data for AI discovery.",
+        description: "Catalogue, prices, stock and delivery structured for agents.",
+        points: ["Title & attributes", "Price & currency", "Real-time stock", "Delivery options"],
       },
       {
         title: "Agent-compatible checkout",
-        description:
-          "Expose secure cart and checkout capabilities through commerce protocols.",
+        description: "Basket and checkout exposed securely through commerce protocols.",
+        points: ["Basket created by the agent", "Address & delivery", "Order confirmation"],
       },
       {
-        title: "Payments and consent",
-        description:
-          "Connect existing payment infrastructure while preserving authentication and user consent.",
+        title: "Payments & consent",
+        description: "Your payment stack connected, with authentication and consent preserved.",
+        points: ["Explicit user consent", "Strong authentication (SCA)", "Your existing PSPs"],
       },
       {
         title: "European compliance",
-        description:
-          "Prepare for GDPR, SCA, consumer protection and marketplace requirements.",
+        description: "GDPR, SCA, consumer protection and marketplace rules built in.",
+        points: ["GDPR", "SCA", "Consumer protection", "Marketplace obligations"],
       },
     ],
   },
   pilot: {
-    title: "Become a founding pilot partner",
-    subtitle:
-      "A focused program to assess readiness, connect a limited channel, and define a production roadmap.",
+    title: "Founding pilot program",
+    subtitle: "Three steps to go from audit to a first live AI channel.",
     steps: [
       {
         title: "Readiness assessment",
-        description:
-          "Analysis of your catalogue, APIs, checkout, payments and order systems.",
+        description: "Catalogue, APIs, checkout, payments and orders reviewed.",
       },
       {
         title: "Pilot integration",
-        description:
-          "Connection of a limited channel, protocol or shopping journey.",
+        description: "One channel, protocol or journey connected.",
       },
       {
-        title: "Measurement and roadmap",
-        description:
-          "Tests, monitoring and a roadmap toward broader production rollout.",
+        title: "Measure & roadmap",
+        description: "Tests, monitoring and a plan for wider rollout.",
       },
     ],
   },
   audience: {
-    title: "Built for complex commerce environments",
+    title: "Built for complex commerce",
     items: [
       "Marketplaces",
       "Multi-country retailers",
-      "Adobe Commerce and custom commerce platforms",
+      "Adobe Commerce & custom platforms",
       "B2B distributors",
-      "Travel and booking platforms",
-      "Businesses operating multiple PSPs or sellers",
+      "Travel & booking",
+      "Multi-PSP or multi-vendor",
     ],
   },
   whyNow: {
     title: "Why now",
     items: [
       {
-        title: "AI discovery channels",
-        description: "AI assistants are becoming product-discovery channels.",
+        title: "AI is the new shop window",
+        description: "Assistants are becoming a product discovery channel.",
       },
       {
-        title: "Standardized interfaces",
-        description:
-          "UCP and ACP are creating standardized commerce interfaces — reducing one-off agent-to-merchant integrations.",
+        title: "Standards are here",
+        description: "UCP and ACP avoid one integration per agent and per merchant.",
       },
       {
-        title: "European constraints",
-        description:
-          "European businesses face specific payment and compliance constraints that generic agent flows often ignore.",
+        title: "Europe has its own rules",
+        description: "Payment and compliance constraints that generic agent flows ignore.",
       },
     ],
   },

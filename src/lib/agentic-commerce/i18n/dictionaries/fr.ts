@@ -20,101 +20,105 @@ export const fr: Dictionary = {
   },
   hero: {
     brand: "Agentic Commerce by BoostAI Consulting",
-    eyebrow: "Commerce agentique pour retailers et marketplaces en Europe",
-    h1: "Rendez votre commerce compatible avec les agents IA",
+    eyebrow: "Commerce IA · Retailers & marketplaces en Europe",
+    h1: "Rendez votre catalogue achetable par les agents IA",
     subtitle:
-      "Nous aidons les retailers et marketplaces à connecter leurs catalogues, checkouts, paiements et systèmes de commande aux nouveaux canaux d’achat IA — via UCP, ACP et les futurs protocoles.",
+      "Nous connectons votre catalogue, votre checkout et vos paiements aux assistants d’achat IA — via UCP, ACP et les protocoles à venir.",
     ctaPrimary: "Demander une évaluation",
-    ctaSecondary: "Découvrir le programme pilote",
-    reassurance:
-      "Pensé pour le commerce, le paiement et la réglementation européenne.",
-    flow: {
-      assistants: "Assistants IA",
-      gateway: "Passerelle commerce",
-      systems: "Catalogue, checkout, paiement, commandes",
-    },
+    ctaSecondary: "Voir le programme pilote",
+    reassurance: "Pensé pour le paiement et la réglementation européenne.",
+  },
+  demo: {
+    human: "Vue client",
+    agent: "Vue agent IA",
+    humanStatus: "Conçu pour l’œil humain",
+    agentStatus: "Lisible par les agents",
+    product: "Montre Classic 38 mm",
+    price: "129 €",
+    stock: "En stock",
+    addToCart: "Ajouter au panier",
+    fields: [
+      { label: "Disponibilité", value: "En stock · 14 unités" },
+      { label: "Prix", value: "129,00 EUR TTC" },
+      { label: "Livraison", value: "48 h · France, UE" },
+      { label: "Checkout", value: "Compatible UCP" },
+      { label: "Paiement", value: "SCA · consentement explicite" },
+    ],
   },
   market: {
-    title: "Votre prochain client pourrait être un agent IA",
-    p1: "La découverte produit se déplace progressivement des moteurs de recherche vers les recommandations générées par l’IA. L’étape suivante apparaît déjà : des assistants capables de comparer des offres, créer des paniers et réaliser des achats pour leurs utilisateurs.",
-    p2: "La majorité des infrastructures e-commerce ont été conçues pour des sites utilisés par des humains, pas pour des agents autonomes.",
+    title: "Votre prochain client sera peut-être un agent IA",
+    p1: "Les acheteurs commencent à demander à leur assistant de comparer, composer un panier et acheter à leur place.",
+    p2: "Même produit, deux lecteurs. Un agent ne voit pas votre page : il lit vos données.",
   },
   problems: {
-    title: "Les problèmes que nous traitons",
-    subtitle:
-      "Quatre fondations pour rendre votre stack commerce lisible et opérable par les agents d’achat IA.",
+    title: "Quatre chantiers pour devenir achetable par l’IA",
+    subtitle: "Ce que nous rendons lisible et opérable par les agents d’achat.",
     items: [
       {
         title: "Données produit prêtes pour l’IA",
-        description:
-          "Structurez catalogue, prix, disponibilité et livraison pour la découverte par les agents.",
+        description: "Catalogue, prix, stock et livraison structurés pour les agents.",
+        points: ["Titre & attributs", "Prix & devise", "Stock en temps réel", "Options de livraison"],
       },
       {
         title: "Checkout compatible agents",
-        description:
-          "Exposez panier et checkout sécurisés via les protocoles de commerce.",
+        description: "Panier et checkout exposés de façon sécurisée via les protocoles.",
+        points: ["Panier créé par l’agent", "Adresse & livraison", "Confirmation de commande"],
       },
       {
-        title: "Paiements et consentement",
-        description:
-          "Connectez votre infrastructure de paiement tout en préservant authentification et consentement utilisateur.",
+        title: "Paiements & consentement",
+        description: "Votre paiement connecté, authentification et consentement préservés.",
+        points: ["Consentement explicite", "Authentification forte (SCA)", "Vos PSP actuels"],
       },
       {
         title: "Conformité européenne",
-        description:
-          "Anticipez RGPD, SCA, protection des consommateurs et exigences marketplace.",
+        description: "RGPD, SCA, protection du consommateur et règles marketplace intégrés.",
+        points: ["RGPD", "SCA", "Protection du consommateur", "Obligations marketplace"],
       },
     ],
   },
   pilot: {
-    title: "Devenez partenaire pilote fondateur",
-    subtitle:
-      "Un programme ciblé pour évaluer la maturité, connecter un canal limité et définir une feuille de route de production.",
+    title: "Programme pilote fondateur",
+    subtitle: "Trois étapes pour passer de l’audit à un premier canal IA en ligne.",
     steps: [
       {
         title: "Évaluation de maturité",
-        description:
-          "Analyse du catalogue, des APIs, du checkout, du paiement et des commandes.",
+        description: "Catalogue, APIs, checkout, paiement et commandes passés en revue.",
       },
       {
         title: "Intégration pilote",
-        description: "Connexion d’un canal, protocole ou parcours limité.",
+        description: "Un canal, un protocole ou un parcours connecté.",
       },
       {
-        title: "Mesure et feuille de route",
-        description:
-          "Tests, monitoring et feuille de route vers une mise en production plus large.",
+        title: "Mesure & feuille de route",
+        description: "Tests, monitoring et plan de déploiement plus large.",
       },
     ],
   },
   audience: {
-    title: "Conçu pour des environnements commerce complexes",
+    title: "Conçu pour le commerce complexe",
     items: [
       "Marketplaces",
       "Retailers multi-pays",
-      "Adobe Commerce et plateformes sur mesure",
+      "Adobe Commerce & sur-mesure",
       "Distributeurs B2B",
-      "Plateformes travel et booking",
-      "Entreprises multi-PSP ou multi-vendeurs",
+      "Travel & booking",
+      "Multi-PSP ou multi-vendeurs",
     ],
   },
   whyNow: {
     title: "Pourquoi maintenant",
     items: [
       {
-        title: "Canaux de découverte IA",
-        description:
-          "Les assistants IA deviennent des canaux de découverte produit.",
+        title: "L’IA devient une vitrine",
+        description: "Les assistants deviennent un canal de découverte produit.",
       },
       {
-        title: "Interfaces standardisées",
-        description:
-          "UCP et ACP créent des interfaces commerce standardisées — pour éviter une intégration spécifique entre chaque agent et chaque marchand.",
+        title: "Les standards arrivent",
+        description: "UCP et ACP évitent une intégration par agent et par marchand.",
       },
       {
-        title: "Contraintes européennes",
-        description:
-          "Les entreprises européennes font face à des contraintes de paiement et de conformité que les parcours agents génériques ignorent souvent.",
+        title: "L’Europe a ses règles",
+        description: "Des contraintes de paiement et de conformité que les parcours génériques ignorent.",
       },
     ],
   },

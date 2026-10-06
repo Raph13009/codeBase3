@@ -1,44 +1,66 @@
 import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
 import { trackAgenticEvent } from "@/lib/agentic-commerce/analytics";
+import { Reveal } from "@/components/agentic-commerce/Reveal";
 
 export function Pilot({ dict }: { dict: Dictionary }) {
+  const steps = dict.pilot.steps;
+
   return (
-    <section id="pilot" className="scroll-mt-28 bg-ac-surface-low px-6 py-24 md:px-8 md:py-28">
-      <div className="mx-auto max-w-6xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-ac-on-surface sm:text-4xl">
-            {dict.pilot.title}
-          </h2>
-          <p className="mt-4 text-lg text-ac-muted">{dict.pilot.subtitle}</p>
-        </div>
+    <section
+      id="pilot"
+      className="mx-auto max-w-[1728px] scroll-mt-28 px-4 py-24 sm:px-10 md:py-32"
+    >
+      <Reveal className="mx-auto max-w-2xl text-center">
+        <h2 className="ac-h2 text-ac-on-surface">{dict.pilot.title}</h2>
+        <p className="mt-4 text-[17px] leading-relaxed text-ac-muted">
+          {dict.pilot.subtitle}
+        </p>
+      </Reveal>
 
-        <ol className="mt-14 grid gap-6 md:grid-cols-3">
-          {dict.pilot.steps.map((step, index) => (
-            <li key={step.title} className="ac-glass rounded-[1.25rem] p-8">
-              <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-full bg-ac-secondary-container text-sm font-bold text-ac-on-secondary-container">
+      <ol className="mx-auto mt-14 grid max-w-[1240px] gap-4 md:grid-cols-3 md:gap-6">
+        {steps.map((step, index) => {
+          const isLast = index === steps.length - 1;
+          return (
+            <Reveal
+              as="li"
+              key={step.title}
+              delay={index}
+              className={`flex min-h-[260px] flex-col justify-between rounded-[32px] p-8 ${
+                isLast
+                  ? "bg-[#1b1b1b] text-[#faf9f5]"
+                  : "border border-[#d9d7d0]/40 bg-white text-ac-on-surface"
+              }`}
+            >
+              <span
+                className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold ${
+                  isLast ? "bg-white/10 text-[#faf9f5]" : "bg-ac-surface-low text-ac-on-surface"
+                }`}
+              >
                 {index + 1}
+              </span>
+              <div>
+                <h3 className="text-xl font-bold tracking-tight">{step.title}</h3>
+                <p
+                  className={`mt-2 text-[15px] leading-relaxed ${
+                    isLast ? "text-white/60" : "text-ac-muted"
+                  }`}
+                >
+                  {step.description}
+                </p>
               </div>
-              <h3 className="text-xl font-bold tracking-tight text-ac-on-surface">
-                {step.title}
-              </h3>
-              <p className="mt-3 text-base leading-relaxed text-ac-muted">
-                {step.description}
-              </p>
-            </li>
-          ))}
-        </ol>
+            </Reveal>
+          );
+        })}
+      </ol>
 
-        <div className="mt-10 text-center">
-          <a
-            href="#assess"
-            className="inline-flex rounded-full bg-ac-primary px-7 py-3.5 text-sm font-bold text-ac-on-primary transition hover:brightness-105"
-            onClick={() =>
-              trackAgenticEvent("cta_primary", { location: "pilot" })
-            }
-          >
-            {dict.hero.ctaPrimary}
-          </a>
-        </div>
+      <div className="mt-12 text-center">
+        <a
+          href="#assess"
+          className="ac-pill ac-pill-dark"
+          onClick={() => trackAgenticEvent("cta_primary", { location: "pilot" })}
+        >
+          {dict.hero.ctaPrimary}
+        </a>
       </div>
     </section>
   );

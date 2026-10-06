@@ -1,178 +1,112 @@
-import type { CSSProperties } from "react";
 import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
 import { trackAgenticEvent } from "@/lib/agentic-commerce/analytics";
-import { ArrowIcon } from "@/components/agentic-commerce/motion";
 
 type Props = {
   dict: Dictionary;
 };
 
-const ACCENT_WORDS = 2;
-
 export function Hero({ dict }: Props) {
   const { hero } = dict;
-  const words = hero.h1.split(" ");
-  const accentStart = words.length - ACCENT_WORDS;
 
   return (
-    <section className="ac-grain relative overflow-hidden px-6 pb-20 pt-32 md:px-8 md:pb-28 md:pt-44">
-      <div className="ac-hero-gradient absolute inset-0 -z-20" aria-hidden="true" />
-      <div className="ac-grid-bg absolute inset-0 -z-10" aria-hidden="true" />
+    <section className="relative overflow-hidden px-6 pb-20 pt-36 md:px-8 md:pb-28 md:pt-44">
+      <div className="ac-hero-gradient absolute inset-0 -z-10" aria-hidden="true" />
       <div
-        className="pointer-events-none absolute -left-24 top-24 -z-10 h-72 w-72 rounded-full bg-sky-300/25 blur-3xl"
+        className="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full bg-sky-300/25 blur-3xl"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -right-16 top-40 -z-10 h-80 w-80 rounded-full bg-violet-300/20 blur-3xl"
+        className="pointer-events-none absolute -right-16 top-40 h-80 w-80 rounded-full bg-violet-300/20 blur-3xl"
         aria-hidden="true"
       />
 
       <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
-        <p className="ac-animate-rise ac-mono mb-6 hidden text-ac-muted sm:block">
+        <p className="ac-animate-rise mb-5 text-sm font-bold uppercase tracking-[0.14em] text-ac-primary">
           {hero.brand}
         </p>
-        <div className="ac-animate-rise ac-glass mb-8 inline-flex items-center gap-2.5 rounded-full px-4 py-2">
-          <span
-            className="ac-pulse-dot h-1.5 w-1.5 shrink-0 rounded-full bg-ac-primary text-ac-primary"
-            aria-hidden="true"
-          />
-          <span className="text-[13px] font-medium text-ac-on-surface sm:text-sm">
+        <div className="ac-animate-rise ac-glass mb-8 inline-flex items-center rounded-full px-4 py-2">
+          <span className="text-sm font-medium text-ac-on-surface">
             {hero.eyebrow}
           </span>
         </div>
 
-        <h1 className="ac-text-balance text-[2.6rem] font-extrabold leading-[1.02] tracking-[-0.045em] text-ac-on-surface sm:text-6xl md:text-[84px] md:leading-[0.98]">
-          {words.map((word, i) => (
-            <span key={`${word}-${i}`}>
-              <span
-                className={`ac-word ${
-                  i >= accentStart
-                    ? "ac-serif pr-[0.04em] text-[1.12em] leading-none text-ac-primary"
-                    : ""
-                }`}
-                style={{ "--i": i } as CSSProperties}
-              >
-                {word}
-              </span>
-              {i < words.length - 1 ? " " : null}
-            </span>
-          ))}
+        <h1 className="ac-animate-rise-delay ac-text-balance text-4xl font-extrabold tracking-[-0.04em] text-ac-on-surface sm:text-5xl md:text-[64px] md:leading-[1.08]">
+          {hero.h1}
         </h1>
 
-        <p className="ac-animate-rise-delay mt-7 max-w-2xl text-pretty text-lg leading-relaxed text-ac-muted md:text-xl">
+        <p className="ac-animate-rise-delay mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-ac-muted md:text-xl">
           {hero.subtitle}
         </p>
 
-        <div className="ac-animate-rise-delay-2 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
+        <div className="ac-animate-rise-delay-2 mt-10 flex flex-col items-center gap-3 sm:flex-row">
           <a
             href="#assess"
-            className="ac-btn bg-ac-on-surface py-2 pl-6 pr-2 text-sm font-semibold text-white hover:bg-ac-primary"
+            className="inline-flex items-center justify-center rounded-full bg-ac-primary px-7 py-3.5 text-sm font-bold text-ac-on-primary shadow-sm transition hover:brightness-105 active:scale-[0.98]"
             onClick={() =>
               trackAgenticEvent("cta_primary", { location: "hero" })
             }
           >
             {hero.ctaPrimary}
-            <span className="ac-btn-arrow flex h-9 w-9 items-center justify-center rounded-full bg-white/15">
-              <ArrowIcon />
-            </span>
           </a>
           <a
             href="#pilot"
-            className="group inline-flex items-center gap-2 text-sm font-semibold text-ac-on-surface"
+            className="inline-flex items-center justify-center rounded-full border border-white/60 bg-white/45 px-7 py-3.5 text-sm font-semibold text-ac-on-surface backdrop-blur-md transition hover:bg-white/70 active:scale-[0.98]"
             onClick={() =>
               trackAgenticEvent("cta_secondary", { location: "hero" })
             }
           >
-            <span className="bg-gradient-to-r from-current to-current bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-0.5 transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_1px]">
-              {hero.ctaSecondary}
-            </span>
-            <span className="text-ac-primary" aria-hidden="true">
-              ↓
-            </span>
+            {hero.ctaSecondary}
           </a>
         </div>
 
-        <p className="ac-mono mt-8 text-ac-muted/80">{hero.reassurance}</p>
+        <p className="mt-5 text-sm text-ac-muted">{hero.reassurance}</p>
 
-        <div className="ac-animate-rise-delay-2 mt-14 w-full max-w-3xl md:mt-16">
-          <FlowConsole dict={dict} />
+        <div className="ac-animate-rise-delay-2 mt-14 w-full max-w-3xl">
+          <div className="ac-glass grid gap-3 rounded-3xl p-4 sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:items-center sm:gap-2 sm:p-5">
+            <FlowNode label={hero.flow.assistants} />
+            <Arrow />
+            <FlowNode label={hero.flow.gateway} highlight />
+            <Arrow />
+            <FlowNode label={hero.flow.systems} />
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function FlowConsole({ dict }: Props) {
-  const { flow } = dict.hero;
-
-  return (
-    <div className="rounded-[1.75rem] bg-[var(--ac-ink)] p-2 text-left shadow-[0_30px_80px_-30px_rgba(11,11,12,0.5)]">
-      <div className="flex items-center justify-between px-4 py-3">
-        <div className="ac-mono flex items-center gap-2.5 text-white/60">
-          <span
-            className="ac-pulse-dot h-1.5 w-1.5 rounded-full bg-ac-primary text-ac-primary"
-            aria-hidden="true"
-          />
-          {dict.labels.flow}
-        </div>
-        <div className="ac-mono hidden text-white/30 sm:block">UCP · ACP</div>
-      </div>
-
-      <div className="grid items-center gap-0 rounded-[1.35rem] bg-[var(--ac-ink-soft)] p-4 sm:grid-cols-[1fr_64px_1.1fr_64px_1fr] sm:p-5">
-        <FlowNode index="01" label={flow.assistants} />
-        <Rail />
-        <FlowNode index="02" label={flow.gateway} highlight />
-        <Rail />
-        <FlowNode index="03" label={flow.systems} />
-      </div>
-    </div>
-  );
-}
-
 function FlowNode({
-  index,
   label,
   highlight = false,
 }: {
-  index: string;
   label: string;
   highlight?: boolean;
 }) {
   return (
     <div
-      className={`rounded-2xl px-4 py-4 ${
+      className={`rounded-2xl px-4 py-4 text-center text-sm font-semibold leading-snug ${
         highlight
-          ? "bg-ac-primary text-white shadow-[0_0_40px_-8px_rgba(255,94,58,0.6)]"
-          : "border border-white/10 text-white"
+          ? "bg-ac-primary text-ac-on-primary shadow-sm"
+          : "bg-white/55 text-ac-on-surface"
       }`}
     >
-      <div className={`ac-mono ${highlight ? "text-white/70" : "text-white/40"}`}>
-        {index}
-      </div>
-      <div className="mt-2 text-sm font-semibold leading-snug">{label}</div>
+      {label}
     </div>
   );
 }
 
-function Rail() {
+function Arrow() {
   return (
-    <>
-      <div
-        className="ac-rail ac-rail-v mx-auto h-10 w-px sm:hidden"
-        style={{ "--len": "40px" } as CSSProperties}
-        aria-hidden="true"
-      >
-        <span className="ac-packet" />
-        <span className="ac-packet" style={{ "--delay": "1.2s" } as CSSProperties} />
-      </div>
-      <div
-        className="ac-rail mx-2 hidden h-px sm:block"
-        style={{ "--len": "48px" } as CSSProperties}
-        aria-hidden="true"
-      >
-        <span className="ac-packet" />
-        <span className="ac-packet" style={{ "--delay": "1.2s" } as CSSProperties} />
-      </div>
-    </>
+    <div className="hidden justify-center text-ac-muted sm:flex" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path
+          d="M4 10h12M12 6l4 4-4 4"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
   );
 }

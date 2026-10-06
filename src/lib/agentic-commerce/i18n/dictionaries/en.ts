@@ -20,7 +20,6 @@ export type Dictionary = {
     reassurance: string;
     flow: { assistants: string; gateway: string; systems: string };
   };
-  labels: { market: string; whyNow: string; assess: string; flow: string };
   market: { title: string; p1: string; p2: string };
   problems: {
     title: string;
@@ -105,12 +104,6 @@ export const en: Dictionary = {
       gateway: "Commerce gateway",
       systems: "Catalogue, checkout, payment, orders",
     },
-  },
-  labels: {
-    market: "The shift",
-    whyNow: "Timing",
-    assess: "Assessment",
-    flow: "Live agent request",
   },
   market: {
     title: "Your next customer may be an AI agent",

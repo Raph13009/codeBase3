@@ -3,6 +3,7 @@ import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Hero } from "@/components/agentic-commerce/sections/Hero";
+import { AgentLens } from "@/components/agentic-commerce/sections/AgentLens";
 import { MarketShift } from "@/components/agentic-commerce/sections/MarketShift";
 import { Problems } from "@/components/agentic-commerce/sections/Problems";
 import { Pilot } from "@/components/agentic-commerce/sections/Pilot";
@@ -22,6 +23,7 @@ export function AgenticLandingPage({ locale, dict }: Props) {
       <Header />
       <main>
         <Hero locale={locale} dict={dict} />
+        <AgentLens dict={dict} />
         <MarketShift dict={dict} />
         <Problems dict={dict} />
         <Pilot dict={dict} />

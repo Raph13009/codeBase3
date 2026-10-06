@@ -18,17 +18,31 @@ export type Dictionary = {
     ctaPrimary: string;
     ctaSecondary: string;
     reassurance: string;
+    chips: {
+      productName: string;
+      productPrice: string;
+      stock: string;
+      agentName: string;
+      agentAction: string;
+      paymentLabel: string;
+      paymentDetail: string;
+      order: string;
+    };
   };
-  demo: {
-    human: string;
-    agent: string;
-    humanStatus: string;
-    agentStatus: string;
-    product: string;
-    price: string;
-    stock: string;
-    addToCart: string;
-    fields: { label: string; value: string }[];
+  lens: {
+    title: string;
+    hint: string;
+    hintTouch: string;
+    reveal: string;
+    hide: string;
+    label: string;
+    inStock: string;
+    detected: string;
+    products: {
+      name: string;
+      price: string;
+      fields: { key: string; value: string }[];
+    }[];
   };
   market: { title: string; p1: string; p2: string };
   problems: {
@@ -109,22 +123,67 @@ export const en: Dictionary = {
     ctaPrimary: "Request an assessment",
     ctaSecondary: "See the pilot program",
     reassurance: "Built for European payments and regulation.",
+    chips: {
+      productName: "Hydra Serum 30 ml",
+      productPrice: "€49",
+      stock: "Stock in sync",
+      agentName: "AI assistant",
+      agentAction: "Basket created · 2 items",
+      paymentLabel: "Payment",
+      paymentDetail: "Strong authentication",
+      order: "Order confirmed",
+    },
   },
-  demo: {
-    human: "Customer view",
-    agent: "AI agent view",
-    humanStatus: "Designed for the human eye",
-    agentStatus: "Readable by agents",
-    product: "Classic Watch 38 mm",
-    price: "€129",
-    stock: "In stock",
-    addToCart: "Add to cart",
-    fields: [
-      { label: "Availability", value: "In stock · 14 units" },
-      { label: "Price", value: "129.00 EUR incl. VAT" },
-      { label: "Delivery", value: "48 h · France, EU" },
-      { label: "Checkout", value: "UCP compatible" },
-      { label: "Payment", value: "SCA · explicit consent" },
+  lens: {
+    title: "What an AI agent sees",
+    hint: "Hover the catalogue",
+    hintTouch: "Tap the catalogue",
+    reveal: "See it all as an agent",
+    hide: "Back to customer view",
+    label: "AI agent view",
+    inStock: "In stock",
+    detected: "product",
+    products: [
+      {
+        name: "Hydra Serum 30 ml",
+        price: "€49",
+        fields: [
+          { key: "price", value: "49.00 EUR" },
+          { key: "stock", value: "14 units" },
+          { key: "delivery", value: "48 h · EU" },
+          { key: "checkout", value: "UCP" },
+        ],
+      },
+      {
+        name: "Air Earbuds",
+        price: "€129",
+        fields: [
+          { key: "price", value: "129.00 EUR" },
+          { key: "stock", value: "32 units" },
+          { key: "delivery", value: "24 h · FR" },
+          { key: "checkout", value: "ACP" },
+        ],
+      },
+      {
+        name: "Rose Quartz Roller",
+        price: "€39",
+        fields: [
+          { key: "price", value: "39.00 EUR" },
+          { key: "stock", value: "8 units" },
+          { key: "delivery", value: "48 h · EU" },
+          { key: "checkout", value: "UCP" },
+        ],
+      },
+      {
+        name: "Silk Scarf",
+        price: "€89",
+        fields: [
+          { key: "price", value: "89.00 EUR" },
+          { key: "stock", value: "5 units" },
+          { key: "delivery", value: "72 h · EU" },
+          { key: "checkout", value: "UCP" },
+        ],
+      },
     ],
   },
   market: {

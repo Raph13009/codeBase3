@@ -5,6 +5,7 @@ import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
 import { trackAgenticEvent } from "@/lib/agentic-commerce/analytics";
 import { agenticSiteConfig } from "@/lib/agentic-commerce/site";
 import { Reveal } from "@/components/agentic-commerce/Reveal";
+import { Magnetic } from "@/components/agentic-commerce/fx";
 
 type Props = {
   locale: Locale;
@@ -148,195 +149,200 @@ export function AssessmentForm({ locale, dict }: Props) {
   }
 
   return (
-    <section
-      id="assess"
-      className="mx-auto max-w-[1728px] scroll-mt-28 px-4 py-24 sm:px-10 md:py-32"
-    >
-      <Reveal className="mx-auto grid max-w-[1240px] gap-10 rounded-[32px] bg-ac-surface-low p-4 sm:p-8 md:rounded-[40px] lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:p-12">
-        <div className="px-2 pt-4 sm:px-0 lg:pt-6">
-          <h2 className="ac-h2 text-ac-on-surface">{dict.form.title}</h2>
-          <p className="mt-4 text-[17px] leading-relaxed text-ac-muted">
-            {dict.form.subtitle}
-          </p>
-          <p className="mt-8 text-sm text-ac-muted">{dict.hero.reassurance}</p>
-          <a
-            href={`mailto:${agenticSiteConfig.email}`}
-            className="mt-2 inline-block text-sm font-semibold text-ac-on-surface underline-offset-4 hover:underline"
-          >
-            {agenticSiteConfig.email}
-          </a>
-        </div>
-
-        <div className="rounded-3xl border border-[#d9d7d0]/30 bg-[var(--ac-card)] p-5 shadow-xl sm:p-8">
-
-        {status === "success" ? (
-          <p
-            className="flex min-h-[200px] items-center justify-center px-4 text-center text-lg font-medium text-ac-on-surface"
-            role="status"
-          >
-            {dict.form.success}
-          </p>
-        ) : (
-          <form className="grid gap-4" onSubmit={onSubmit} noValidate>
-            {/* Web3Forms recommended honeypot — must stay unchecked/hidden */}
-            <input
-              type="checkbox"
-              name="botcheck"
-              tabIndex={-1}
-              autoComplete="off"
-              className="hidden"
-              style={{ display: "none" }}
-              aria-hidden="true"
-            />
-
-            <Field
-              label={dict.form.fields.email}
-              name="email"
-              type="email"
-              required
-              autoComplete="email"
-              value={values.email}
-              onChange={(v) => setField("email", v)}
-            />
-            <Field
-              label={dict.form.fields.name}
-              name="name"
-              required
-              autoComplete="name"
-              value={values.name}
-              onChange={(v) => setField("name", v)}
-            />
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field
-                label={dict.form.fields.company}
-                name="company"
-                required
-                autoComplete="organization"
-                value={values.company}
-                onChange={(v) => setField("company", v)}
-              />
-              <Field
-                label={dict.form.fields.website}
-                name="website"
-                required
-                autoComplete="url"
-                placeholder="https://"
-                value={values.website}
-                onChange={(v) => setField("website", v)}
-              />
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field
-                label={dict.form.fields.role}
-                name="role"
-                required
-                value={values.role}
-                onChange={(v) => setField("role", v)}
-              />
-              <Field
-                label={dict.form.fields.platform}
-                name="platform"
-                required
-                value={values.platform}
-                onChange={(v) => setField("platform", v)}
-              />
-            </div>
-
-            <fieldset className="grid gap-2">
-              <legend className="mb-2 text-[13px] font-semibold text-ac-on-surface">
-                {dict.form.fields.exploring}
-              </legend>
-              <div className="flex flex-wrap gap-2">
-                {dict.form.exploringOptions.map((option) => {
-                  const selected = values.exploring === option.value;
-                  return (
-                    <label
-                      key={option.value}
-                      className={`cursor-pointer rounded-full border px-4 py-2 text-[13px] font-medium transition-colors duration-200 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[#1b1b1b] has-[:focus-visible]:ring-offset-2 ${
-                        selected
-                          ? "border-[#1b1b1b] bg-[#1b1b1b] text-[#faf9f5]"
-                          : "border-[var(--ac-line)] bg-white text-ac-on-surface hover:border-[#1b1b1b]"
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="exploring"
-                        value={option.value}
-                        required
-                        checked={selected}
-                        onChange={(e) => setField("exploring", e.target.value)}
-                        className="sr-only"
-                      />
-                      {option.label}
-                    </label>
-                  );
-                })}
-              </div>
-            </fieldset>
-
-            <Field
-              label={`${dict.form.fields.volume} (${dict.form.fields.volumeOptional})`}
-              name="volume"
-              value={values.volume}
-              onChange={(v) => setField("volume", v)}
-            />
-
-            <label
-              htmlFor="ac-field-message"
-              className="grid gap-2 text-[13px] font-semibold text-ac-on-surface"
+    <section id="assess" className="scroll-mt-24 px-3 pb-24 pt-12 sm:px-6 md:pb-32 md:pt-16 lg:px-10">
+      <div className="mx-auto grid max-w-[1648px] gap-12 rounded-[32px] bg-[var(--ac-ink)] px-5 py-12 text-[#faf9f5] sm:px-8 md:rounded-[48px] md:px-12 md:py-20 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
+        <Reveal className="flex flex-col justify-between gap-10">
+          <div>
+            <p className="ac-label text-white/40">{dict.nav.assess}</p>
+            <h2 className="mt-5 text-balance text-[clamp(40px,5.4vw,88px)] font-bold leading-[0.92] tracking-[-0.055em]">
+              {dict.form.title}
+            </h2>
+            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-white/55">
+              {dict.form.subtitle}
+            </p>
+          </div>
+          <div className="space-y-2">
+            <p className="text-sm text-white/40">{dict.hero.reassurance}</p>
+            <a
+              href={`mailto:${agenticSiteConfig.email}`}
+              className="inline-block text-[15px] font-semibold text-white underline-offset-4 hover:underline"
             >
-              {dict.form.fields.message}
-              <textarea
-                id="ac-field-message"
-                name="message"
-                rows={4}
-                className="ac-input font-normal"
-                value={values.message}
-                onChange={(e) => setField("message", e.target.value)}
-              />
-            </label>
+              {agenticSiteConfig.email}
+            </a>
+          </div>
+        </Reveal>
 
-            <label className="flex items-start gap-3 text-sm text-ac-on-surface">
+        <Reveal delay={1}>
+          {status === "success" ? (
+            <p
+              className="flex min-h-[320px] items-center justify-center rounded-3xl border border-white/10 bg-white/[0.04] px-6 text-center text-xl font-semibold"
+              role="status"
+            >
+              {dict.form.success}
+            </p>
+          ) : (
+            <form className="grid gap-5" onSubmit={onSubmit} noValidate>
+              {/* Web3Forms recommended honeypot — must stay unchecked/hidden */}
               <input
                 type="checkbox"
-                name="consent"
-                required
-                checked={values.consent}
-                onChange={(e) => setField("consent", e.target.checked)}
-                className="mt-0.5 h-4 w-4 rounded border-black/20 accent-[#1b1b1b]"
+                name="botcheck"
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                style={{ display: "none" }}
+                aria-hidden="true"
               />
-              <span>{dict.form.fields.consent}</span>
-            </label>
 
-            <p className="text-xs leading-relaxed text-ac-muted">
-              {dict.form.privacyNotice}{" "}
-              <Link
-                to="/ocr-terms"
-                className="font-semibold text-ac-on-surface underline underline-offset-2"
+              <Field
+                label={dict.form.fields.email}
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+                value={values.email}
+                onChange={(v) => setField("email", v)}
+              />
+              <Field
+                label={dict.form.fields.name}
+                name="name"
+                required
+                autoComplete="name"
+                value={values.name}
+                onChange={(v) => setField("name", v)}
+              />
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field
+                  label={dict.form.fields.company}
+                  name="company"
+                  required
+                  autoComplete="organization"
+                  value={values.company}
+                  onChange={(v) => setField("company", v)}
+                />
+                <Field
+                  label={dict.form.fields.website}
+                  name="website"
+                  required
+                  autoComplete="url"
+                  placeholder="https://"
+                  value={values.website}
+                  onChange={(v) => setField("website", v)}
+                />
+              </div>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field
+                  label={dict.form.fields.role}
+                  name="role"
+                  required
+                  value={values.role}
+                  onChange={(v) => setField("role", v)}
+                />
+                <Field
+                  label={dict.form.fields.platform}
+                  name="platform"
+                  required
+                  value={values.platform}
+                  onChange={(v) => setField("platform", v)}
+                />
+              </div>
+
+              <fieldset className="grid gap-2">
+                <legend className="mb-2 text-[13px] font-semibold text-white/80">
+                  {dict.form.fields.exploring}
+                </legend>
+                <div className="flex flex-wrap gap-2">
+                  {dict.form.exploringOptions.map((option) => {
+                    const selected = values.exploring === option.value;
+                    return (
+                      <label
+                        key={option.value}
+                        className={`cursor-pointer rounded-full border px-4 py-2 text-[13px] font-medium transition-colors duration-200 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-white has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-[#0b0b0b] ${
+                          selected
+                            ? "border-white bg-white text-[#0b0b0b]"
+                            : "border-white/15 bg-white/[0.04] text-white/80 hover:border-white/50"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="exploring"
+                          value={option.value}
+                          required
+                          checked={selected}
+                          onChange={(e) => setField("exploring", e.target.value)}
+                          className="sr-only"
+                        />
+                        {option.label}
+                      </label>
+                    );
+                  })}
+                </div>
+              </fieldset>
+
+              <Field
+                label={`${dict.form.fields.volume} (${dict.form.fields.volumeOptional})`}
+                name="volume"
+                value={values.volume}
+                onChange={(v) => setField("volume", v)}
+              />
+
+              <label
+                htmlFor="ac-field-message"
+                className="grid gap-2 text-[13px] font-semibold text-white/80"
               >
-                {dict.form.privacyLinkLabel}
-              </Link>
-              .
-            </p>
+                {dict.form.fields.message}
+                <textarea
+                  id="ac-field-message"
+                  name="message"
+                  rows={4}
+                  className="ac-input font-normal"
+                  value={values.message}
+                  onChange={(e) => setField("message", e.target.value)}
+                />
+              </label>
 
-            {errorMessage ? (
-              <p className="text-sm font-medium text-red-700" role="alert">
-                {errorMessage}
+              <label className="flex items-start gap-3 text-sm text-white/70">
+                <input
+                  type="checkbox"
+                  name="consent"
+                  required
+                  checked={values.consent}
+                  onChange={(e) => setField("consent", e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded accent-white"
+                />
+                <span>{dict.form.fields.consent}</span>
+              </label>
+
+              <p className="text-xs leading-relaxed text-white/40">
+                {dict.form.privacyNotice}{" "}
+                <Link
+                  to="/ocr-terms"
+                  className="font-semibold text-white underline underline-offset-2"
+                >
+                  {dict.form.privacyLinkLabel}
+                </Link>
+                .
               </p>
-            ) : null}
 
-            <button
-              type="submit"
-              disabled={status === "loading"}
-              aria-busy={status === "loading"}
-              className="ac-pill ac-pill-dark mt-2 w-full disabled:opacity-60 sm:w-auto sm:justify-self-start"
-            >
-              {status === "loading" ? dict.form.submitting : dict.form.submit}
-            </button>
-          </form>
-        )}
-        </div>
-      </Reveal>
+              {errorMessage ? (
+                <p className="text-sm font-medium text-red-300" role="alert">
+                  {errorMessage}
+                </p>
+              ) : null}
+
+              <Magnetic className="mt-2 w-full sm:w-auto sm:justify-self-start">
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  aria-busy={status === "loading"}
+                  className="ac-pill ac-pill-white w-full disabled:opacity-60 sm:w-auto"
+                >
+                  {status === "loading" ? dict.form.submitting : dict.form.submit}
+                </button>
+              </Magnetic>
+            </form>
+          )}
+        </Reveal>
+      </div>
     </section>
   );
 }
@@ -362,7 +368,7 @@ function Field({
 }) {
   const id = `ac-field-${name}`;
   return (
-    <label htmlFor={id} className="grid gap-2 text-[13px] font-semibold text-ac-on-surface">
+    <label htmlFor={id} className="grid gap-2 text-[13px] font-semibold text-white/80">
       {label}
       <input
         id={id}

@@ -24,6 +24,20 @@ const AgenticCommerce = () => {
     };
   }, [locale, localeValid]);
 
+  useEffect(() => {
+    // Global `overflow-x: hidden` on html/body breaks `position: sticky`
+    // (pinned capabilities stage). `clip` hides overflow without creating a scroll container.
+    const html = document.documentElement;
+    const { body } = document;
+    const prev = [html.style.overflowX, body.style.overflowX];
+    html.style.overflowX = "clip";
+    body.style.overflowX = "clip";
+    return () => {
+      html.style.overflowX = prev[0];
+      body.style.overflowX = prev[1];
+    };
+  }, []);
+
   if (!localeValid) {
     return <Navigate to="/en/agentic-commerce" replace />;
   }

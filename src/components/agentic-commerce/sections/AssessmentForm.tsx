@@ -4,6 +4,12 @@ import type { Locale } from "@/lib/agentic-commerce/i18n/config";
 import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
 import { trackAgenticEvent } from "@/lib/agentic-commerce/analytics";
 import { agenticSiteConfig } from "@/lib/agentic-commerce/site";
+import {
+  Accent,
+  ArrowIcon,
+  Reveal,
+  SectionLabel,
+} from "@/components/agentic-commerce/motion";
 
 type Props = {
   locale: Locale;
@@ -147,26 +153,47 @@ export function AssessmentForm({ locale, dict }: Props) {
   }
 
   return (
-    <section id="assess" className="scroll-mt-28 px-6 py-24 md:px-8 md:py-28">
-      <div className="ac-cta-gradient mx-auto max-w-3xl rounded-[2rem] border border-white/50 p-6 shadow-[0_8px_32px_rgba(0,0,0,0.04)] md:p-10">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-ac-on-surface sm:text-4xl">
-            {dict.form.title}
-          </h2>
-          <p className="mt-4 text-base text-ac-muted md:text-lg">
-            {dict.form.subtitle}
-          </p>
+    <section
+      id="assess"
+      className="scroll-mt-28 bg-ac-surface-low px-4 py-24 sm:px-6 md:px-8 md:py-32"
+    >
+      <Reveal className="mx-auto grid max-w-6xl overflow-hidden rounded-[2rem] bg-white shadow-[0_30px_80px_-40px_rgba(11,11,12,0.35)] md:grid-cols-[0.85fr_1.15fr]">
+        <div className="relative flex flex-col justify-between gap-12 overflow-hidden bg-[var(--ac-ink)] p-8 text-white md:p-12">
+          <div
+            className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-ac-primary/30 blur-3xl"
+            aria-hidden="true"
+          />
+          <div className="relative">
+            <SectionLabel index="06" label={dict.labels.assess} dark />
+            <h2 className="ac-text-balance mt-6 text-4xl font-bold leading-[1.05] tracking-[-0.035em] md:text-5xl">
+              <Accent text={dict.form.title} />
+            </h2>
+            <p className="mt-6 text-base leading-relaxed text-white/60 md:text-lg">
+              {dict.form.subtitle}
+            </p>
+          </div>
+          <div className="relative space-y-2">
+            <p className="ac-mono text-white/40">{dict.hero.reassurance}</p>
+            <a
+              href={`mailto:${agenticSiteConfig.email}`}
+              className="inline-block text-sm font-medium text-white/80 underline-offset-4 transition-colors hover:text-ac-primary hover:underline"
+            >
+              {agenticSiteConfig.email}
+            </a>
+          </div>
         </div>
+
+        <div className="p-6 sm:p-8 md:p-12">
 
         {status === "success" ? (
           <p
-            className="mt-10 rounded-2xl bg-white/70 px-6 py-8 text-center text-lg font-medium text-ac-on-surface"
+            className="flex h-full items-center rounded-2xl bg-ac-surface-low px-6 py-8 text-lg font-medium text-ac-on-surface"
             role="status"
           >
             {dict.form.success}
           </p>
         ) : (
-          <form className="mt-10 grid gap-4" onSubmit={onSubmit} noValidate>
+          <form className="grid gap-6" onSubmit={onSubmit} noValidate>
             {/* Web3Forms recommended honeypot — must stay unchecked/hidden */}
             <input
               type="checkbox"
@@ -195,7 +222,7 @@ export function AssessmentForm({ locale, dict }: Props) {
               value={values.name}
               onChange={(v) => setField("name", v)}
             />
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-6 sm:grid-cols-2">
               <Field
                 label={dict.form.fields.company}
                 name="company"
@@ -214,7 +241,7 @@ export function AssessmentForm({ locale, dict }: Props) {
                 onChange={(v) => setField("website", v)}
               />
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-6 sm:grid-cols-2">
               <Field
                 label={dict.form.fields.role}
                 name="role"
@@ -233,14 +260,14 @@ export function AssessmentForm({ locale, dict }: Props) {
 
             <label
               htmlFor="ac-field-exploring"
-              className="grid gap-2 text-sm font-medium text-ac-on-surface"
+              className="ac-mono grid gap-1 text-ac-muted"
             >
               {dict.form.fields.exploring}
               <select
                 id="ac-field-exploring"
                 name="exploring"
                 required
-                className="rounded-xl border border-black/10 bg-white/80 px-4 py-3 text-base font-normal outline-none ring-ac-primary focus:ring-2"
+                className="ac-input font-display normal-case tracking-normal"
                 value={values.exploring}
                 onChange={(e) => setField("exploring", e.target.value)}
               >
@@ -264,14 +291,14 @@ export function AssessmentForm({ locale, dict }: Props) {
 
             <label
               htmlFor="ac-field-message"
-              className="grid gap-2 text-sm font-medium text-ac-on-surface"
+              className="ac-mono grid gap-1 text-ac-muted"
             >
               {dict.form.fields.message}
               <textarea
                 id="ac-field-message"
                 name="message"
                 rows={4}
-                className="rounded-xl border border-black/10 bg-white/80 px-4 py-3 text-base font-normal outline-none ring-ac-primary focus:ring-2"
+                className="ac-input font-display normal-case tracking-normal"
                 value={values.message}
                 onChange={(e) => setField("message", e.target.value)}
               />
@@ -310,13 +337,17 @@ export function AssessmentForm({ locale, dict }: Props) {
               type="submit"
               disabled={status === "loading"}
               aria-busy={status === "loading"}
-              className="mt-2 inline-flex items-center justify-center rounded-full bg-ac-primary px-7 py-3.5 text-sm font-bold text-ac-on-primary transition hover:brightness-105 disabled:opacity-60"
+              className="ac-btn mt-2 justify-between bg-ac-primary py-2 pl-6 pr-2 text-sm font-semibold text-white hover:bg-ac-on-surface disabled:opacity-60 sm:self-start"
             >
               {status === "loading" ? dict.form.submitting : dict.form.submit}
+              <span className="ac-btn-arrow flex h-9 w-9 items-center justify-center rounded-full bg-white/20">
+                <ArrowIcon />
+              </span>
             </button>
           </form>
         )}
-      </div>
+        </div>
+      </Reveal>
     </section>
   );
 }
@@ -342,7 +373,7 @@ function Field({
 }) {
   const id = `ac-field-${name}`;
   return (
-    <label htmlFor={id} className="grid gap-2 text-sm font-medium text-ac-on-surface">
+    <label htmlFor={id} className="ac-mono grid gap-1 text-ac-muted">
       {label}
       <input
         id={id}
@@ -353,7 +384,7 @@ function Field({
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="rounded-xl border border-black/10 bg-white/80 px-4 py-3 text-base font-normal outline-none ring-ac-primary focus:ring-2"
+        className="ac-input font-display normal-case tracking-normal"
       />
     </label>
   );

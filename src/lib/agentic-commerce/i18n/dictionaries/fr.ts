@@ -34,6 +34,12 @@ export const fr: Dictionary = {
       systems: "Catalogue, checkout, paiement, commandes",
     },
   },
+  labels: {
+    market: "Le basculement",
+    whyNow: "Le moment",
+    assess: "Évaluation",
+    flow: "Requête agent en direct",
+  },
   market: {
     title: "Votre prochain client pourrait être un agent IA",
     p1: "La découverte produit se déplace progressivement des moteurs de recherche vers les recommandations générées par l’IA. L’étape suivante apparaît déjà : des assistants capables de comparer des offres, créer des paniers et réaliser des achats pour leurs utilisateurs.",

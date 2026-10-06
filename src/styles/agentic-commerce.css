@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap");
+
 /* Scoped Agentic Commerce tokens — do not touch global shadcn variables */
 
 .agentic-commerce {
@@ -17,6 +19,10 @@
   --ac-surface-container: #f3ede2;
   --ac-surface-high: #ede8dd;
   --ac-outline: #89726b;
+  --ac-ink: #0b0b0c;
+  --ac-ink-soft: #161618;
+  --ac-hairline: rgba(10, 10, 10, 0.1);
+  --ac-hairline-dark: rgba(255, 255, 255, 0.1);
   --ac-glass: rgba(255, 255, 255, 0.42);
   --ac-glass-border: rgba(255, 255, 255, 0.6);
   --ac-shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.05);
@@ -32,6 +38,10 @@
     rgba(192, 132, 252, 0.22) 50%,
     rgba(255, 94, 58, 0.12) 100%
   );
+  --ac-serif: "Instrument Serif", "Times New Roman", serif;
+  --ac-mono: "JetBrains Mono", ui-monospace, monospace;
+  --ac-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ac-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 
   background: var(--ac-background);
   color: var(--ac-on-background);
@@ -63,10 +73,55 @@
   text-wrap: balance;
 }
 
+/* ---------- Typography accents ---------- */
+
+.agentic-commerce .ac-serif {
+  font-family: var(--ac-serif);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+.agentic-commerce .ac-mono {
+  font-family: var(--ac-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- Textures ---------- */
+
+.agentic-commerce .ac-grain {
+  position: relative;
+  isolation: isolate;
+}
+
+.agentic-commerce .ac-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.agentic-commerce .ac-grid-bg {
+  background-image:
+    linear-gradient(rgba(10, 10, 10, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 10, 10, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 20%, transparent 75%);
+}
+
+/* ---------- Hero entrance (opacity stays 1 for LCP) ---------- */
+
 .agentic-commerce .ac-animate-rise,
 .agentic-commerce .ac-animate-rise-delay,
 .agentic-commerce .ac-animate-rise-delay-2 {
-  animation: ac-rise 0.7s ease-out both;
+  animation: ac-rise 0.9s var(--ac-ease-out) both;
 }
 
 .agentic-commerce .ac-animate-rise-delay {
@@ -88,10 +143,307 @@
   }
 }
 
+/* Word-by-word headline reveal */
+.agentic-commerce .ac-word {
+  display: inline-block;
+  animation: ac-word 1s var(--ac-ease-out) both;
+  animation-delay: calc(var(--i) * 55ms + 80ms);
+}
+
+@keyframes ac-word {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(0.35em);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Scroll reveal ---------- */
+
+.agentic-commerce [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.9s var(--ac-ease-out),
+    transform 0.9s var(--ac-ease-out);
+  transition-delay: calc(var(--d, 0) * 70ms);
+}
+
+.agentic-commerce [data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Buttons ---------- */
+
+.agentic-commerce .ac-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  overflow: hidden;
+  border-radius: 9999px;
+  transition:
+    transform 160ms var(--ac-ease-out),
+    background-color 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease;
+}
+
+.agentic-commerce .ac-btn:active {
+  transform: scale(0.97);
+}
+
+.agentic-commerce .ac-btn-arrow {
+  transition: transform 300ms var(--ac-ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .agentic-commerce .ac-btn:hover .ac-btn-arrow {
+    transform: translateX(3px);
+  }
+}
+
+/* ---------- Hero flow: packets travelling along the rails ---------- */
+
+.agentic-commerce .ac-rail {
+  position: relative;
+}
+
+.agentic-commerce .ac-rail::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--ac-hairline) 0 6px,
+    transparent 6px 12px
+  );
+}
+
+.agentic-commerce .ac-rail-v::before {
+  background: repeating-linear-gradient(
+    180deg,
+    var(--ac-hairline) 0 6px,
+    transparent 6px 12px
+  );
+}
+
+.agentic-commerce .ac-packet {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 6px;
+  width: 6px;
+  margin-top: -3px;
+  border-radius: 9999px;
+  background: var(--ac-primary);
+  box-shadow: 0 0 12px 2px rgba(255, 94, 58, 0.55);
+  animation: ac-packet 2.4s linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.agentic-commerce .ac-rail-v .ac-packet {
+  top: 0;
+  left: 50%;
+  margin-top: 0;
+  margin-left: -3px;
+  animation-name: ac-packet-v;
+}
+
+@keyframes ac-packet {
+  0% {
+    transform: translateX(-8px);
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(var(--len, 64px) + 8px));
+    opacity: 0;
+  }
+}
+
+@keyframes ac-packet-v {
+  0% {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(var(--len, 40px) + 8px));
+    opacity: 0;
+  }
+}
+
+.agentic-commerce .ac-pulse-dot {
+  position: relative;
+}
+
+.agentic-commerce .ac-pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  border: 1px solid currentColor;
+  animation: ac-pulse 2s var(--ac-ease-out) infinite;
+}
+
+@keyframes ac-pulse {
+  from {
+    opacity: 0.8;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+
+/* ---------- Spotlight cards (dark section) ---------- */
+
+.agentic-commerce .ac-spotlight {
+  position: relative;
+  isolation: isolate;
+}
+
+.agentic-commerce .ac-spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 94, 58, 0.16),
+    transparent 60%
+  );
+  transition: opacity 400ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .agentic-commerce .ac-spotlight:hover::before {
+    opacity: 1;
+  }
+}
+
+/* ---------- Marquee ---------- */
+
+.agentic-commerce .ac-marquee {
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+.agentic-commerce .ac-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: ac-marquee 38s linear infinite;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .agentic-commerce .ac-marquee:hover .ac-marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes ac-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- FAQ accordion ---------- */
+
+.agentic-commerce .ac-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 450ms var(--ac-ease-out);
+}
+
+.agentic-commerce .ac-collapse[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+.agentic-commerce .ac-collapse > div {
+  overflow: hidden;
+}
+
+/* ---------- Form fields ---------- */
+
+.agentic-commerce .ac-input {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--ac-hairline);
+  background: transparent;
+  padding: 0.7rem 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ac-on-surface);
+  outline: none;
+  border-radius: 0;
+  transition: border-color 200ms ease;
+}
+
+.agentic-commerce .ac-input:focus {
+  border-bottom-color: var(--ac-primary);
+}
+
+.agentic-commerce .ac-input::placeholder {
+  color: rgba(10, 10, 10, 0.3);
+}
+
+/* ---------- Reduced motion ---------- */
+
 @media (prefers-reduced-motion: reduce) {
   .agentic-commerce .ac-animate-rise,
   .agentic-commerce .ac-animate-rise-delay,
-  .agentic-commerce .ac-animate-rise-delay-2 {
+  .agentic-commerce .ac-animate-rise-delay-2,
+  .agentic-commerce .ac-word {
     animation: none;
+  }
+
+  .agentic-commerce [data-reveal] {
+    transform: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .agentic-commerce .ac-packet,
+  .agentic-commerce .ac-pulse-dot::after,
+  .agentic-commerce .ac-marquee-track {
+    animation: none;
+  }
+
+  .agentic-commerce .ac-collapse {
+    transition: none;
+  }
+
+  .agentic-commerce .ac-marquee {
+    mask-image: none;
+  }
+
+  .agentic-commerce .ac-marquee-track {
+    width: auto;
+    justify-content: center;
+  }
+
+  .agentic-commerce .ac-marquee-track > ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 1rem;
+  }
+
+  .agentic-commerce .ac-marquee-track > ul[aria-hidden="true"] {
+    display: none;
   }
 }

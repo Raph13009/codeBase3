@@ -19,26 +19,27 @@ export function Hero({ locale, dict }: Props) {
   return (
     <section
       ref={ref}
+      data-scene="cream"
       className="relative overflow-hidden pb-20 lg:h-[max(900px,100vh)] lg:pb-0"
     >
       <Collage dict={dict} />
 
       <div className="relative z-10 mx-auto flex max-w-[1728px] flex-col items-center px-4 pt-[128px] text-center sm:px-10 lg:h-full lg:justify-center lg:pt-10">
         <div className="ac-rise mb-7 flex flex-col items-center gap-3 sm:flex-row" style={{ "--i": 0 } as CSSProperties}>
-          <span className="ac-label max-w-[280px] text-ac-muted sm:max-w-none">
+          <span className="ac-label max-w-[280px] text-[var(--fg-muted)] sm:max-w-none">
             {hero.eyebrow}
           </span>
           <Link
             to={dict.nav.switchHref}
             hrefLang={locale === "en" ? "fr" : "en"}
-            className="ac-label rounded-full border border-[var(--ac-line)] px-3 py-1.5 text-ac-on-surface transition-colors duration-200 hover:border-[#1b1b1b]"
+            className="ac-label rounded-full border border-[var(--line)] px-3 py-1.5 text-[var(--fg)] transition-colors duration-200 hover:border-[var(--fg)]"
             onClick={() => trackAgenticEvent("nav_lang", { locale })}
           >
             {dict.nav.switchLabel}
           </Link>
         </div>
 
-        <p className="ac-display text-ac-on-surface" aria-hidden="true">
+        <p className="ac-display text-[var(--fg)]" aria-hidden="true">
           <span className="ac-line-mask">
             <span style={{ "--i": 1 } as CSSProperties}>{line1}</span>
           </span>
@@ -48,13 +49,13 @@ export function Hero({ locale, dict }: Props) {
         </p>
 
         <h1
-          className="ac-rise mt-8 max-w-[560px] text-balance text-[clamp(20px,2vw,27px)] font-semibold leading-[1.2] tracking-[-0.025em] text-ac-on-surface"
+          className="ac-rise mt-8 max-w-[560px] text-balance text-[clamp(20px,2vw,27px)] font-semibold leading-[1.2] tracking-[-0.025em] text-[var(--fg)]"
           style={{ "--i": 4 } as CSSProperties}
         >
           {hero.h1}
         </h1>
         <p
-          className="ac-rise mt-4 max-w-[440px] text-[15px] leading-relaxed text-ac-muted"
+          className="ac-rise mt-4 max-w-[440px] text-[15px] leading-relaxed text-[var(--fg-muted)]"
           style={{ "--i": 5 } as CSSProperties}
         >
           {hero.subtitle}
@@ -67,7 +68,7 @@ export function Hero({ locale, dict }: Props) {
           <Magnetic>
             <a
               href="#assess"
-              className="ac-pill ac-pill-dark"
+              className="ac-pill ac-pill-invert"
               onClick={() => trackAgenticEvent("cta_primary", { location: "hero" })}
             >
               {hero.ctaPrimary}

@@ -138,6 +138,25 @@ export const fr: Dictionary = {
         description: "Tests, monitoring et plan de déploiement plus large.",
       },
     ],
+    previews: {
+      audit: {
+        title: "Audit de maturité",
+        score: "Score",
+        bars: ["Catalogue", "Checkout", "Paiement", "Commandes"],
+      },
+      connect: {
+        title: "Connexion pilote",
+        store: "Votre boutique",
+        agent: "Agent IA",
+        status: "Connecté · UCP",
+        logs: ["Catalogue synchronisé", "Checkout exposé", "Paiement vérifié"],
+      },
+      measure: {
+        title: "Suivi du pilote",
+        metric: "Commandes via agents",
+        roadmap: ["Pilote", "Extension", "Production"],
+      },
+    },
   },
   audience: {
     title: "Conçu pour le commerce complexe",

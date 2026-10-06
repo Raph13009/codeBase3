@@ -1,11 +1,26 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
 import { trackAgenticEvent } from "@/lib/agentic-commerce/analytics";
-import { Reveal } from "@/components/agentic-commerce/Reveal";
+import { Scrub } from "@/components/agentic-commerce/Scrub";
 import { IMG } from "@/components/agentic-commerce/fx";
 
 const IMAGES = [IMG.serum, IMG.earbuds, IMG.roller, IMG.silk];
 const GRID = "grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-4";
+
+/* Where each card starts before the catalogue assembles (echoes the hero collage). */
+const SCATTER = [
+  { x: -60, y: 180, rotate: -9 },
+  { x: -18, y: 90, rotate: 6 },
+  { x: 24, y: 230, rotate: -6 },
+  { x: 64, y: 130, rotate: 9 },
+];
 
 /**
  * Catalogue seen two ways: the customer layer, and an "agent" layer revealed
@@ -19,6 +34,12 @@ export function AgentLens({ dict }: { dict: Dictionary }) {
   const revealRef = useRef(false);
   const [revealAll, setRevealAll] = useState(false);
   const [touch, setTouch] = useState(false);
+
+  // Cards assemble into the grid as the stage scrolls in
+  const { scrollYProgress: assemble } = useScroll({
+    target: stageRef,
+    offset: ["start end", "start 38%"],
+  });
 
   useEffect(() => {
     revealRef.current = revealAll;
@@ -144,21 +165,21 @@ export function AgentLens({ dict }: { dict: Dictionary }) {
   }, []);
 
   return (
-    <section className="px-3 sm:px-6 lg:px-10">
-      <div className="mx-auto max-w-[1648px] rounded-[32px] bg-[var(--ac-ink)] px-4 py-10 text-[#faf9f5] sm:px-8 md:rounded-[48px] md:px-12 md:py-16">
-        <Reveal className="flex flex-col gap-8 px-1 md:flex-row md:items-end md:justify-between">
+    <section data-scene="ink" className="relative px-4 pb-28 pt-20 sm:px-10 md:pb-40 md:pt-28">
+      <div className="mx-auto max-w-[1648px]">
+        <Scrub className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="ac-label flex items-center gap-2 text-white/40">
+            <p className="ac-label flex items-center gap-2 text-[var(--fg-muted)]">
               <span className="h-1.5 w-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
               {lens.label}
             </p>
-            <h2 className="ac-h2 mt-5 max-w-2xl">{lens.title}</h2>
-            <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/50">
+            <h2 className="ac-h2 mt-5 max-w-2xl text-[var(--fg)]">{lens.title}</h2>
+            <p className="mt-5 max-w-md text-[15px] leading-relaxed text-[var(--fg-muted)]">
               {dict.market.p2}
             </p>
           </div>
           <div className="flex flex-col items-start gap-3 md:items-end">
-            <span className="text-[13px] text-white/40">
+            <span className="text-[13px] text-[var(--fg-muted)]">
               {touch ? lens.hintTouch : lens.hint}
             </span>
             <button
@@ -173,40 +194,39 @@ export function AgentLens({ dict }: { dict: Dictionary }) {
               {revealAll ? lens.hide : lens.reveal}
             </button>
           </div>
-        </Reveal>
+        </Scrub>
 
         <div
           ref={stageRef}
-          className="relative mt-10 touch-pan-y select-none md:mt-14 [@media(hover:hover)]:cursor-none"
+          className="relative mt-12 touch-pan-y select-none md:mt-16 [@media(hover:hover)]:cursor-none"
         >
           {/* Customer layer */}
           <div className={GRID}>
             {lens.products.map((product, index) => (
-              <article
-                key={product.name}
-                className="overflow-hidden rounded-[22px] bg-[var(--ac-card)] text-ac-on-surface md:rounded-[28px]"
-              >
-                <img
-                  src={IMAGES[index]}
-                  alt={product.name}
-                  className="aspect-square w-full object-cover"
-                  loading="lazy"
-                  decoding="async"
-                  draggable={false}
-                />
-                <div className="flex h-[112px] flex-col justify-between p-4 md:h-[128px] md:p-5">
-                  <div>
-                    <h3 className="text-[14px] font-bold leading-tight tracking-tight md:text-[16px]">
-                      {product.name}
-                    </h3>
-                    <p className="ac-tabular mt-1 text-[14px]">{product.price}</p>
+              <Assembled key={product.name} index={index} progress={assemble}>
+                <article className="h-full overflow-hidden rounded-[22px] bg-[var(--ac-card)] text-[#1b1b1b] md:rounded-[28px]">
+                  <img
+                    src={IMAGES[index]}
+                    alt={product.name}
+                    className="aspect-square w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    draggable={false}
+                  />
+                  <div className="flex h-[112px] flex-col justify-between p-4 md:h-[128px] md:p-5">
+                    <div>
+                      <h3 className="text-[14px] font-bold leading-tight tracking-tight md:text-[16px]">
+                        {product.name}
+                      </h3>
+                      <p className="ac-tabular mt-1 text-[14px]">{product.price}</p>
+                    </div>
+                    <p className="flex items-center gap-1.5 text-[12px] text-[#8c8880]">
+                      <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
+                      {lens.inStock}
+                    </p>
                   </div>
-                  <p className="flex items-center gap-1.5 text-[12px] text-ac-muted">
-                    <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
-                    {lens.inStock}
-                  </p>
-                </div>
-              </article>
+                </article>
+              </Assembled>
             ))}
           </div>
 
@@ -218,40 +238,39 @@ export function AgentLens({ dict }: { dict: Dictionary }) {
             aria-hidden="true"
           >
             {lens.products.map((product, index) => (
-              <div
-                key={product.name}
-                className="overflow-hidden rounded-[22px] bg-[#151515] ring-1 ring-inset ring-white/15 md:rounded-[28px]"
-              >
-                <div className="relative aspect-square overflow-hidden">
-                  <img
-                    src={IMAGES[index]}
-                    alt=""
-                    className="h-full w-full object-cover brightness-[0.38] contrast-125 grayscale"
-                    loading="lazy"
-                    decoding="async"
-                    draggable={false}
-                  />
-                  <div className="ac-dots absolute inset-0 opacity-70" />
-                  <div className="ac-scan" style={{ "--delay": `${index * 0.5}s` } as CSSProperties} />
-                  <div className="absolute inset-[17%] border border-white/70">
-                    <Corner className="-left-px -top-px border-l-2 border-t-2" />
-                    <Corner className="-right-px -top-px border-r-2 border-t-2" />
-                    <Corner className="-bottom-px -left-px border-b-2 border-l-2" />
-                    <Corner className="-bottom-px -right-px border-b-2 border-r-2" />
-                    <span className="ac-tabular absolute -left-px -top-[21px] bg-white px-1.5 py-[3px] text-[10px] font-bold leading-none text-black">
-                      {lens.detected} · 0.9{8 - index}
-                    </span>
-                  </div>
-                </div>
-                <dl className="ac-tabular flex h-[112px] flex-col justify-center gap-[5px] px-4 text-[11px] md:h-[128px] md:px-5 md:text-[12px]">
-                  {product.fields.map((field) => (
-                    <div key={field.key} className="flex items-baseline justify-between gap-2">
-                      <dt className="text-white/40">{field.key}</dt>
-                      <dd className="truncate font-semibold text-white">{field.value}</dd>
+              <Assembled key={product.name} index={index} progress={assemble}>
+                <div className="h-full overflow-hidden rounded-[22px] bg-[#151515] ring-1 ring-inset ring-white/15 md:rounded-[28px]">
+                  <div className="relative aspect-square overflow-hidden">
+                    <img
+                      src={IMAGES[index]}
+                      alt=""
+                      className="h-full w-full object-cover brightness-[0.38] contrast-125 grayscale"
+                      loading="lazy"
+                      decoding="async"
+                      draggable={false}
+                    />
+                    <div className="ac-dots absolute inset-0 opacity-70" />
+                    <div className="ac-scan" style={{ "--delay": `${index * 0.5}s` } as CSSProperties} />
+                    <div className="absolute inset-[17%] border border-white/70">
+                      <Corner className="-left-px -top-px border-l-2 border-t-2" />
+                      <Corner className="-right-px -top-px border-r-2 border-t-2" />
+                      <Corner className="-bottom-px -left-px border-b-2 border-l-2" />
+                      <Corner className="-bottom-px -right-px border-b-2 border-r-2" />
+                      <span className="ac-tabular absolute -left-px -top-[21px] bg-white px-1.5 py-[3px] text-[10px] font-bold leading-none text-black">
+                        {lens.detected} · 0.9{8 - index}
+                      </span>
                     </div>
-                  ))}
-                </dl>
-              </div>
+                  </div>
+                  <dl className="ac-tabular flex h-[112px] flex-col justify-center gap-[5px] px-4 text-[11px] md:h-[128px] md:px-5 md:text-[12px]">
+                    {product.fields.map((field) => (
+                      <div key={field.key} className="flex items-baseline justify-between gap-2">
+                        <dt className="text-white/40">{field.key}</dt>
+                        <dd className="truncate font-semibold text-white">{field.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </Assembled>
             ))}
           </div>
 
@@ -268,6 +287,30 @@ export function AgentLens({ dict }: { dict: Dictionary }) {
         </div>
       </div>
     </section>
+  );
+}
+
+/** Same scroll-driven transform for a card in both layers, so they stay aligned under the lens. */
+function Assembled({
+  index,
+  progress,
+  children,
+}: {
+  index: number;
+  progress: MotionValue<number>;
+  children: ReactNode;
+}) {
+  const reduceMotion = useReducedMotion();
+  const from = SCATTER[index % SCATTER.length];
+  const x = useTransform(progress, [0, 1], [from.x, 0]);
+  const y = useTransform(progress, [0, 1], [from.y, 0]);
+  const rotate = useTransform(progress, [0, 1], [from.rotate, 0]);
+  const scale = useTransform(progress, [0, 1], [0.86, 1]);
+
+  return (
+    <motion.div style={reduceMotion ? undefined : { x, y, rotate, scale }}>
+      {children}
+    </motion.div>
   );
 }
 

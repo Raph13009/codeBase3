@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { Locale } from "@/lib/agentic-commerce/i18n/config";
 import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
 import Header from "@/components/layout/Header";
@@ -17,11 +18,36 @@ type Props = {
 };
 
 export function AgenticLandingPage({ locale, dict }: Props) {
+  const mainRef = useRef<HTMLElement>(null);
+
+  // The page background/text colours follow the section crossing the middle of the viewport
+  useEffect(() => {
+    const main = mainRef.current;
+    const root = main?.closest<HTMLElement>(".agentic-commerce");
+    if (!main || !root) return;
+    const sections = Array.from(main.querySelectorAll<HTMLElement>("[data-scene]"));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            root.dataset.scene = (entry.target as HTMLElement).dataset.scene;
+          }
+        }
+      },
+      { rootMargin: "-50% 0px -50% 0px" },
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => {
+      observer.disconnect();
+      delete root.dataset.scene;
+    };
+  }, []);
+
   return (
     <>
       {/* Shared site header/footer, same as the homepage */}
       <Header />
-      <main>
+      <main ref={mainRef}>
         <Hero locale={locale} dict={dict} />
         <AgentLens dict={dict} />
         <MarketShift dict={dict} />

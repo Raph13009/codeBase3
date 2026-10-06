@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
-import { Reveal } from "@/components/agentic-commerce/Reveal";
+import { Scrub } from "@/components/agentic-commerce/Scrub";
 
 export function FAQ({ dict }: { dict: Dictionary }) {
   const [open, setOpen] = useState<number | null>(0);
@@ -8,18 +8,19 @@ export function FAQ({ dict }: { dict: Dictionary }) {
   return (
     <section
       id="faq"
-      className="mx-auto max-w-[1728px] scroll-mt-28 px-4 pb-24 pt-8 sm:px-10 md:pb-32"
+      data-scene="cream"
+      className="mx-auto max-w-[1728px] scroll-mt-28 px-4 py-28 sm:px-10 md:py-36"
     >
-      <div className="mx-auto grid max-w-[1240px] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-        <Reveal>
-          <h2 className="ac-h2 text-ac-on-surface lg:sticky lg:top-32">{dict.faq.title}</h2>
-        </Reveal>
+      <div className="mx-auto grid max-w-[1648px] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <Scrub>
+          <h2 className="ac-h2 text-[var(--fg)]">{dict.faq.title}</h2>
+        </Scrub>
 
-        <Reveal delay={1} className="border-t border-[var(--ac-line)]">
+        <Scrub distance={80} className="border-t border-[var(--fg)]">
           {dict.faq.items.map((item, index) => {
             const isOpen = open === index;
             return (
-              <div key={item.question} className="border-b border-[var(--ac-line)]">
+              <div key={item.question} className="border-b border-[var(--line)]">
                 <button
                   type="button"
                   className="group flex w-full items-center justify-between gap-6 py-6 text-left"
@@ -28,7 +29,7 @@ export function FAQ({ dict }: { dict: Dictionary }) {
                   id={`faq-button-${index}`}
                   onClick={() => setOpen(isOpen ? null : index)}
                 >
-                  <span className="text-base font-bold tracking-tight text-ac-on-surface md:text-lg">
+                  <span className="text-base font-bold tracking-tight text-[var(--fg)] md:text-lg">
                     {item.question}
                   </span>
                   <span
@@ -52,7 +53,7 @@ export function FAQ({ dict }: { dict: Dictionary }) {
                   data-open={isOpen}
                 >
                   <div>
-                    <p className="pb-6 pr-12 text-[15px] leading-relaxed text-ac-muted">
+                    <p className="pb-6 pr-12 text-[15px] leading-relaxed text-[var(--fg-muted)]">
                       {item.answer}
                     </p>
                   </div>
@@ -60,7 +61,7 @@ export function FAQ({ dict }: { dict: Dictionary }) {
               </div>
             );
           })}
-        </Reveal>
+        </Scrub>
       </div>
     </section>
   );

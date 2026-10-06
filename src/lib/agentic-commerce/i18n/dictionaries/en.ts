@@ -54,6 +54,11 @@ export type Dictionary = {
     title: string;
     subtitle: string;
     steps: { title: string; description: string }[];
+    previews: {
+      audit: { title: string; score: string; bars: string[] };
+      connect: { title: string; store: string; agent: string; status: string; logs: string[] };
+      measure: { title: string; metric: string; roadmap: string[] };
+    };
   };
   audience: { title: string; items: string[] };
   whyNow: {
@@ -234,6 +239,25 @@ export const en: Dictionary = {
         description: "Tests, monitoring and a plan for wider rollout.",
       },
     ],
+    previews: {
+      audit: {
+        title: "Readiness audit",
+        score: "Score",
+        bars: ["Catalogue", "Checkout", "Payment", "Orders"],
+      },
+      connect: {
+        title: "Pilot connection",
+        store: "Your store",
+        agent: "AI agent",
+        status: "Connected · UCP",
+        logs: ["Catalogue synced", "Checkout exposed", "Payment verified"],
+      },
+      measure: {
+        title: "Pilot tracking",
+        metric: "Orders through agents",
+        roadmap: ["Pilot", "Extension", "Production"],
+      },
+    },
   },
   audience: {
     title: "Built for complex commerce",

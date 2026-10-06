@@ -4,7 +4,7 @@ import type { Locale } from "@/lib/agentic-commerce/i18n/config";
 import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
 import { trackAgenticEvent } from "@/lib/agentic-commerce/analytics";
 import { agenticSiteConfig } from "@/lib/agentic-commerce/site";
-import { Reveal } from "@/components/agentic-commerce/Reveal";
+import { Scrub } from "@/components/agentic-commerce/Scrub";
 import { Magnetic } from "@/components/agentic-commerce/fx";
 
 type Props = {
@@ -149,33 +149,33 @@ export function AssessmentForm({ locale, dict }: Props) {
   }
 
   return (
-    <section id="assess" className="scroll-mt-24 px-3 pb-24 pt-12 sm:px-6 md:pb-32 md:pt-16 lg:px-10">
-      <div className="mx-auto grid max-w-[1648px] gap-12 rounded-[32px] bg-[var(--ac-ink)] px-5 py-12 text-[#faf9f5] sm:px-8 md:rounded-[48px] md:px-12 md:py-20 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
-        <Reveal className="flex flex-col justify-between gap-10">
+    <section id="assess" data-scene="ink" className="scroll-mt-24 px-4 py-28 sm:px-10 md:py-40">
+      <div className="mx-auto grid max-w-[1648px] gap-12 text-[var(--fg)] lg:grid-cols-[1fr_1.05fr] lg:gap-20">
+        <Scrub className="flex flex-col justify-between gap-10">
           <div>
-            <p className="ac-label text-white/40">{dict.nav.assess}</p>
+            <p className="ac-label text-[var(--fg-muted)]">{dict.nav.assess}</p>
             <h2 className="mt-5 text-balance text-[clamp(40px,5.4vw,88px)] font-bold leading-[0.92] tracking-[-0.055em]">
               {dict.form.title}
             </h2>
-            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-white/55">
+            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-[var(--fg-muted)]">
               {dict.form.subtitle}
             </p>
           </div>
           <div className="space-y-2">
-            <p className="text-sm text-white/40">{dict.hero.reassurance}</p>
+            <p className="text-sm text-[var(--fg-muted)]">{dict.hero.reassurance}</p>
             <a
               href={`mailto:${agenticSiteConfig.email}`}
-              className="inline-block text-[15px] font-semibold text-white underline-offset-4 hover:underline"
+              className="inline-block text-[15px] font-semibold text-[var(--fg)] underline-offset-4 hover:underline"
             >
               {agenticSiteConfig.email}
             </a>
           </div>
-        </Reveal>
+        </Scrub>
 
-        <Reveal delay={1}>
+        <Scrub distance={90}>
           {status === "success" ? (
             <p
-              className="flex min-h-[320px] items-center justify-center rounded-3xl border border-white/10 bg-white/[0.04] px-6 text-center text-xl font-semibold"
+              className="flex min-h-[320px] items-center justify-center rounded-3xl border border-[var(--line)] px-6 text-center text-xl font-semibold"
               role="status"
             >
               {dict.form.success}
@@ -247,7 +247,7 @@ export function AssessmentForm({ locale, dict }: Props) {
               </div>
 
               <fieldset className="grid gap-2">
-                <legend className="mb-2 text-[13px] font-semibold text-white/80">
+                <legend className="mb-2 text-[13px] font-semibold text-[var(--fg)]">
                   {dict.form.fields.exploring}
                 </legend>
                 <div className="flex flex-wrap gap-2">
@@ -256,10 +256,10 @@ export function AssessmentForm({ locale, dict }: Props) {
                     return (
                       <label
                         key={option.value}
-                        className={`cursor-pointer rounded-full border px-4 py-2 text-[13px] font-medium transition-colors duration-200 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-white has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-[#0b0b0b] ${
+                        className={`cursor-pointer rounded-full border px-4 py-2 text-[13px] font-medium transition-colors duration-200 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--fg)] has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-[var(--scene-bg)] ${
                           selected
-                            ? "border-white bg-white text-[#0b0b0b]"
-                            : "border-white/15 bg-white/[0.04] text-white/80 hover:border-white/50"
+                            ? "border-[var(--fg)] bg-[var(--fg)] text-[var(--scene-bg)]"
+                            : "border-[color-mix(in_srgb,var(--fg)_18%,transparent)] text-[var(--fg)] hover:border-[var(--fg)]"
                         }`}
                       >
                         <input
@@ -287,7 +287,7 @@ export function AssessmentForm({ locale, dict }: Props) {
 
               <label
                 htmlFor="ac-field-message"
-                className="grid gap-2 text-[13px] font-semibold text-white/80"
+                className="grid gap-2 text-[13px] font-semibold text-[var(--fg)]"
               >
                 {dict.form.fields.message}
                 <textarea
@@ -300,23 +300,23 @@ export function AssessmentForm({ locale, dict }: Props) {
                 />
               </label>
 
-              <label className="flex items-start gap-3 text-sm text-white/70">
+              <label className="flex items-start gap-3 text-sm text-[var(--fg-muted)]">
                 <input
                   type="checkbox"
                   name="consent"
                   required
                   checked={values.consent}
                   onChange={(e) => setField("consent", e.target.checked)}
-                  className="mt-0.5 h-4 w-4 rounded accent-white"
+                  className="mt-0.5 h-4 w-4 rounded accent-[var(--fg)]"
                 />
                 <span>{dict.form.fields.consent}</span>
               </label>
 
-              <p className="text-xs leading-relaxed text-white/40">
+              <p className="text-xs leading-relaxed text-[var(--fg-muted)]">
                 {dict.form.privacyNotice}{" "}
                 <Link
                   to="/ocr-terms"
-                  className="font-semibold text-white underline underline-offset-2"
+                  className="font-semibold text-[var(--fg)] underline underline-offset-2"
                 >
                   {dict.form.privacyLinkLabel}
                 </Link>
@@ -324,7 +324,7 @@ export function AssessmentForm({ locale, dict }: Props) {
               </p>
 
               {errorMessage ? (
-                <p className="text-sm font-medium text-red-300" role="alert">
+                <p className="text-sm font-medium text-red-500" role="alert">
                   {errorMessage}
                 </p>
               ) : null}
@@ -334,14 +334,14 @@ export function AssessmentForm({ locale, dict }: Props) {
                   type="submit"
                   disabled={status === "loading"}
                   aria-busy={status === "loading"}
-                  className="ac-pill ac-pill-white w-full disabled:opacity-60 sm:w-auto"
+                  className="ac-pill ac-pill-invert w-full disabled:opacity-60 sm:w-auto"
                 >
                   {status === "loading" ? dict.form.submitting : dict.form.submit}
                 </button>
               </Magnetic>
             </form>
           )}
-        </Reveal>
+        </Scrub>
       </div>
     </section>
   );
@@ -368,7 +368,7 @@ function Field({
 }) {
   const id = `ac-field-${name}`;
   return (
-    <label htmlFor={id} className="grid gap-2 text-[13px] font-semibold text-white/80">
+    <label htmlFor={id} className="grid gap-2 text-[13px] font-semibold text-[var(--fg)]">
       {label}
       <input
         id={id}

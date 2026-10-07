@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import LumioStyles from '@/components/layout/LumioStyles';
@@ -12,9 +12,40 @@ const links = [
   { to: '/about', label: 'À propos' },
 ];
 
-const Header: React.FC = () => {
+type HeaderProps = {
+  /** Thin scroll-progress line along the bottom of the pill (used by the agentic-commerce page). */
+  showProgress?: boolean;
+};
+
+const Header: React.FC<HeaderProps> = ({ showProgress = false }) => {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
+  const progressRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const bar = progressRef.current;
+    if (!showProgress || !bar) return;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      bar.style.transform = `scaleX(${p.toFixed(4)})`;
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, [showProgress]);
 
   const close = () => {
     setOpen(false);
@@ -32,7 +63,7 @@ const Header: React.FC = () => {
     <>
       <LumioStyles />
       <header className="fixed top-6 left-0 right-0 z-50 flex items-center justify-center px-4 w-full pointer-events-none">
-        <div className="pointer-events-auto w-full md:w-auto max-w-[calc(100vw-2rem)] flex items-center justify-between md:justify-start md:gap-5 bg-black backdrop-blur-xl rounded-full px-2 py-2 shadow-xl border border-white/10 h-14">
+        <div className={`pointer-events-auto w-full md:w-auto max-w-[calc(100vw-2rem)] flex items-center justify-between md:justify-start md:gap-5 bg-black backdrop-blur-xl rounded-full px-2 py-2 shadow-xl border border-white/10 h-14${showProgress ? ' relative overflow-hidden' : ''}`}>
           <div className="flex items-center gap-5 pl-1 md:pl-0">
             <BoostAIMark size={34} variant="onDark" to="/" />
             <nav className="hidden md:flex items-center gap-5">
@@ -68,6 +99,14 @@ const Header: React.FC = () => {
               {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
+          {showProgress && (
+            <span
+              ref={progressRef}
+              aria-hidden="true"
+              className="absolute left-7 right-7 bottom-0 h-0.5 rounded-full origin-left bg-gradient-to-r from-[#FF416C] to-[#E94057]"
+              style={{ transform: 'scaleX(0)' }}
+            />
+          )}
         </div>
       </header>
 

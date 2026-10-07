@@ -43,7 +43,7 @@ const AgenticCommerce = () => {
   }
 
   return (
-    <div className="agentic-commerce min-h-screen">
+    <div className="agentic-commerce js min-h-screen">
       <AgenticCommerceMeta locale={locale} dict={dict} />
       <AgenticLandingPage locale={locale} dict={dict} />
     </div>

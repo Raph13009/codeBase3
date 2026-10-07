@@ -4,8 +4,7 @@ import type { Locale } from "@/lib/agentic-commerce/i18n/config";
 import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
 import { trackAgenticEvent } from "@/lib/agentic-commerce/analytics";
 import { agenticSiteConfig } from "@/lib/agentic-commerce/site";
-import { Scrub } from "@/components/agentic-commerce/Scrub";
-import { Magnetic } from "@/components/agentic-commerce/fx";
+import { Icon } from "@/components/agentic-commerce/shared";
 
 type Props = {
   locale: Locale;
@@ -25,6 +24,9 @@ type FormValues = {
   consent: boolean;
 };
 
+type ErrorKey = keyof Dictionary["form"]["errors"];
+type Errors = Partial<Record<ErrorKey, string>>;
+
 const emptyValues: FormValues = {
   email: "",
   name: "",
@@ -40,18 +42,40 @@ const emptyValues: FormValues = {
 
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 const FORM_NAME = "Agentic Commerce Readiness Assessment";
+const FIELD_ORDER: ErrorKey[] = [
+  "email",
+  "name",
+  "company",
+  "website",
+  "role",
+  "platform",
+  "exploring",
+  "consent",
+];
 
-function isValidEmail(value: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+function validate(values: FormValues, messages: Dictionary["form"]["errors"]): Errors {
+  const errors: Errors = {};
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email.trim())) errors.email = messages.email;
+  if (values.name.trim().length < 2) errors.name = messages.name;
+  if (values.company.trim().length < 2) errors.company = messages.company;
+  if (!/^(https?:\/\/)?[\w-]+(\.[\w-]+)+(\/\S*)?$/i.test(values.website.trim())) {
+    errors.website = messages.website;
+  }
+  if (values.role.trim().length < 2) errors.role = messages.role;
+  if (values.platform.trim().length < 2) errors.platform = messages.platform;
+  if (!values.exploring) errors.exploring = messages.exploring;
+  if (!values.consent) errors.consent = messages.consent;
+  return errors;
 }
 
 export function AssessmentForm({ locale, dict }: Props) {
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
-    "idle",
-  );
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [values, setValues] = useState<FormValues>(emptyValues);
+  const f = dict.form;
+  const formRef = useRef<HTMLFormElement>(null);
   const submittingRef = useRef(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [formError, setFormError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Errors>({});
+  const [values, setValues] = useState<FormValues>(emptyValues);
 
   const accessKey = String(import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? "").trim();
 
@@ -59,34 +83,31 @@ export function AssessmentForm({ locale, dict }: Props) {
     setValues((prev) => ({ ...prev, [key]: value }));
   }
 
-  function validate(): string | null {
-    if (!accessKey) return dict.form.configError;
-    if (!values.email.trim() || !isValidEmail(values.email)) {
-      return dict.form.validationError;
-    }
-    if (
-      values.name.trim().length < 2 ||
-      values.company.trim().length < 2 ||
-      values.website.trim().length < 3 ||
-      values.role.trim().length < 2 ||
-      values.platform.trim().length < 2 ||
-      !values.exploring ||
-      !values.consent
-    ) {
-      return dict.form.validationError;
-    }
-    return null;
+  function focusField(key: ErrorKey) {
+    const form = formRef.current;
+    if (!form) return;
+    const target =
+      key === "exploring"
+        ? form.querySelector<HTMLInputElement>('input[name="exploring"]')
+        : form.querySelector<HTMLElement>(`[name="${key}"]`);
+    target?.focus();
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (submittingRef.current || status === "loading") return;
 
-    setErrorMessage(null);
-    const validationError = validate();
-    if (validationError) {
+    setFormError(null);
+    const nextErrors = validate(values, f.errors);
+    setErrors(nextErrors);
+    const firstInvalid = FIELD_ORDER.find((key) => nextErrors[key]);
+    if (firstInvalid) {
+      focusField(firstInvalid);
+      return;
+    }
+    if (!accessKey) {
       setStatus("error");
-      setErrorMessage(validationError);
+      setFormError(f.configError);
       return;
     }
 
@@ -133,254 +154,192 @@ export function AssessmentForm({ locale, dict }: Props) {
 
       if (!res.ok || json.success !== true) {
         setStatus("error");
-        setErrorMessage(dict.form.error);
+        setFormError(f.error);
         return;
       }
 
       setValues(emptyValues);
+      setErrors({});
       setStatus("success");
       trackAgenticEvent("lead_submitted", { locale });
     } catch {
       setStatus("error");
-      setErrorMessage(dict.form.error);
+      setFormError(f.error);
     } finally {
       submittingRef.current = false;
     }
   }
 
+  const textField = (
+    key: "email" | "name" | "company" | "website" | "role" | "platform",
+    type: string,
+    options: { autoComplete?: string; placeholder?: string } = {},
+  ) => (
+    <div className="field">
+      <label htmlFor={`f-${key}`}>{f.fields[key]}</label>
+      <input
+        id={`f-${key}`}
+        name={key}
+        type={type}
+        required
+        autoComplete={options.autoComplete}
+        placeholder={options.placeholder}
+        value={values[key]}
+        onChange={(e) => setField(key, e.target.value)}
+        aria-invalid={errors[key] ? true : undefined}
+        aria-describedby={errors[key] ? `e-${key}` : undefined}
+      />
+      <span className="err" id={`e-${key}`}>
+        {errors[key]}
+      </span>
+    </div>
+  );
+
   return (
-    <section id="assess" data-scene="ink" className="scroll-mt-24 px-4 py-28 sm:px-10 md:py-40">
-      <div className="mx-auto grid max-w-[1648px] gap-12 text-[var(--fg)] lg:grid-cols-[1fr_1.05fr] lg:gap-20">
-        <Scrub className="flex flex-col justify-between gap-10">
-          <div>
-            <p className="ac-label text-[var(--fg-muted)]">{dict.nav.assess}</p>
-            <h2 className="mt-5 text-balance text-[clamp(40px,5.4vw,88px)] font-bold leading-[0.92] tracking-[-0.055em]">
-              {dict.form.title}
-            </h2>
-            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-[var(--fg-muted)]">
-              {dict.form.subtitle}
-            </p>
+    <section className="eval" id="assess">
+      <div className="wrap">
+        <div className="eval-panel">
+          <div className="eval-copy">
+            <div>
+              <p className="eyebrow">{f.eyebrow}</p>
+              <h2 className="h2">{f.title}</h2>
+            </div>
+            <p className="lead">{f.subtitle}</p>
+            <ul className="gets">
+              {f.gets.map((item) => (
+                <li key={item}>
+                  <Icon name="check" />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="space-y-2">
-            <p className="text-sm text-[var(--fg-muted)]">{dict.hero.reassurance}</p>
-            <a
-              href={`mailto:${agenticSiteConfig.email}`}
-              className="inline-block text-[15px] font-semibold text-[var(--fg)] underline-offset-4 hover:underline"
-            >
-              {agenticSiteConfig.email}
-            </a>
-          </div>
-        </Scrub>
 
-        <Scrub distance={90}>
-          {status === "success" ? (
-            <p
-              className="flex min-h-[320px] items-center justify-center rounded-3xl border border-[var(--line)] px-6 text-center text-xl font-semibold"
-              role="status"
-            >
-              {dict.form.success}
-            </p>
-          ) : (
-            <form className="grid gap-5" onSubmit={onSubmit} noValidate>
-              {/* Web3Forms recommended honeypot — must stay unchecked/hidden */}
-              <input
-                type="checkbox"
-                name="botcheck"
-                tabIndex={-1}
-                autoComplete="off"
-                className="hidden"
-                style={{ display: "none" }}
-                aria-hidden="true"
-              />
-
-              <Field
-                label={dict.form.fields.email}
-                name="email"
-                type="email"
-                required
-                autoComplete="email"
-                value={values.email}
-                onChange={(v) => setField("email", v)}
-              />
-              <Field
-                label={dict.form.fields.name}
-                name="name"
-                required
-                autoComplete="name"
-                value={values.name}
-                onChange={(v) => setField("name", v)}
-              />
-              <div className="grid gap-5 sm:grid-cols-2">
-                <Field
-                  label={dict.form.fields.company}
-                  name="company"
-                  required
-                  autoComplete="organization"
-                  value={values.company}
-                  onChange={(v) => setField("company", v)}
-                />
-                <Field
-                  label={dict.form.fields.website}
-                  name="website"
-                  required
-                  autoComplete="url"
-                  placeholder="https://"
-                  value={values.website}
-                  onChange={(v) => setField("website", v)}
-                />
+          <form className="form" ref={formRef} onSubmit={onSubmit} noValidate>
+            {status === "success" ? (
+              <div className="done-box" role="status">
+                <span className="big">
+                  <Icon name="check" />
+                </span>
+                <p>{f.success}</p>
+                <button
+                  className="btn btn-outline"
+                  type="button"
+                  onClick={() => {
+                    setStatus("idle");
+                    setValues(emptyValues);
+                    requestAnimationFrame(() => focusField("email"));
+                  }}
+                >
+                  {f.again}
+                </button>
               </div>
-              <div className="grid gap-5 sm:grid-cols-2">
-                <Field
-                  label={dict.form.fields.role}
-                  name="role"
-                  required
-                  value={values.role}
-                  onChange={(v) => setField("role", v)}
+            ) : (
+              <>
+                {/* Web3Forms recommended honeypot — must stay unchecked/hidden */}
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  style={{ display: "none" }}
+                  aria-hidden="true"
                 />
-                <Field
-                  label={dict.form.fields.platform}
-                  name="platform"
-                  required
-                  value={values.platform}
-                  onChange={(v) => setField("platform", v)}
-                />
-              </div>
+                {textField("email", "email", { autoComplete: "email" })}
+                {textField("name", "text", { autoComplete: "name" })}
+                {textField("company", "text", { autoComplete: "organization" })}
+                {textField("website", "url", { placeholder: f.placeholders.website })}
+                {textField("role", "text", { autoComplete: "organization-title" })}
+                {textField("platform", "text", { placeholder: f.placeholders.platform })}
 
-              <fieldset className="grid gap-2">
-                <legend className="mb-2 text-[13px] font-semibold text-[var(--fg)]">
-                  {dict.form.fields.exploring}
-                </legend>
-                <div className="flex flex-wrap gap-2">
-                  {dict.form.exploringOptions.map((option) => {
-                    const selected = values.exploring === option.value;
-                    return (
-                      <label
-                        key={option.value}
-                        className={`cursor-pointer rounded-full border px-4 py-2 text-[13px] font-medium transition-colors duration-200 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--fg)] has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-[var(--scene-bg)] ${
-                          selected
-                            ? "border-[var(--fg)] bg-[var(--fg)] text-[var(--scene-bg)]"
-                            : "border-[color-mix(in_srgb,var(--fg)_18%,transparent)] text-[var(--fg)] hover:border-[var(--fg)]"
-                        }`}
-                      >
+                <fieldset className="field full">
+                  <legend>{f.fields.exploring}</legend>
+                  <div className="chips">
+                    {f.exploringOptions.map((option) => (
+                      <label className="chip" key={option.value}>
                         <input
                           type="radio"
                           name="exploring"
                           value={option.value}
-                          required
-                          checked={selected}
+                          checked={values.exploring === option.value}
                           onChange={(e) => setField("exploring", e.target.value)}
-                          className="sr-only"
                         />
-                        {option.label}
+                        <span>{option.label}</span>
                       </label>
-                    );
-                  })}
+                    ))}
+                  </div>
+                  <span className="err" id="e-exploring">
+                    {errors.exploring}
+                  </span>
+                </fieldset>
+
+                <div className="field full">
+                  <label htmlFor="f-volume">
+                    {f.fields.volume} <span className="opt">({f.fields.volumeOptional})</span>
+                  </label>
+                  <input
+                    id="f-volume"
+                    name="volume"
+                    type="text"
+                    inputMode="numeric"
+                    placeholder={f.placeholders.volume}
+                    value={values.volume}
+                    onChange={(e) => setField("volume", e.target.value)}
+                  />
                 </div>
-              </fieldset>
 
-              <Field
-                label={`${dict.form.fields.volume} (${dict.form.fields.volumeOptional})`}
-                name="volume"
-                value={values.volume}
-                onChange={(v) => setField("volume", v)}
-              />
+                <div className="field full">
+                  <label htmlFor="f-message">{f.fields.message}</label>
+                  <textarea
+                    id="f-message"
+                    name="message"
+                    value={values.message}
+                    onChange={(e) => setField("message", e.target.value)}
+                  />
+                </div>
 
-              <label
-                htmlFor="ac-field-message"
-                className="grid gap-2 text-[13px] font-semibold text-[var(--fg)]"
-              >
-                {dict.form.fields.message}
-                <textarea
-                  id="ac-field-message"
-                  name="message"
-                  rows={4}
-                  className="ac-input font-normal"
-                  value={values.message}
-                  onChange={(e) => setField("message", e.target.value)}
-                />
-              </label>
+                <div className="field full">
+                  <label className="consent">
+                    <input
+                      type="checkbox"
+                      name="consent"
+                      required
+                      checked={values.consent}
+                      onChange={(e) => setField("consent", e.target.checked)}
+                      aria-invalid={errors.consent ? true : undefined}
+                      aria-describedby={errors.consent ? "e-consent" : undefined}
+                    />
+                    <span>{f.fields.consent}</span>
+                  </label>
+                  <span className="err" id="e-consent">
+                    {errors.consent}
+                  </span>
+                </div>
 
-              <label className="flex items-start gap-3 text-sm text-[var(--fg-muted)]">
-                <input
-                  type="checkbox"
-                  name="consent"
-                  required
-                  checked={values.consent}
-                  onChange={(e) => setField("consent", e.target.checked)}
-                  className="mt-0.5 h-4 w-4 rounded accent-[var(--fg)]"
-                />
-                <span>{dict.form.fields.consent}</span>
-              </label>
-
-              <p className="text-xs leading-relaxed text-[var(--fg-muted)]">
-                {dict.form.privacyNotice}{" "}
-                <Link
-                  to="/ocr-terms"
-                  className="font-semibold text-[var(--fg)] underline underline-offset-2"
-                >
-                  {dict.form.privacyLinkLabel}
-                </Link>
-                .
-              </p>
-
-              {errorMessage ? (
-                <p className="text-sm font-medium text-red-500" role="alert">
-                  {errorMessage}
-                </p>
-              ) : null}
-
-              <Magnetic className="mt-2 w-full sm:w-auto sm:justify-self-start">
-                <button
-                  type="submit"
-                  disabled={status === "loading"}
-                  aria-busy={status === "loading"}
-                  className="ac-pill ac-pill-invert w-full disabled:opacity-60 sm:w-auto"
-                >
-                  {status === "loading" ? dict.form.submitting : dict.form.submit}
-                </button>
-              </Magnetic>
-            </form>
-          )}
-        </Scrub>
+                <div className="field full form-end">
+                  <p className="form-note">
+                    {f.privacyNotice}{" "}
+                    <Link to="/ocr-terms">{f.privacyLinkLabel}</Link>.
+                  </p>
+                  <button
+                    className="btn btn-solid mag"
+                    type="submit"
+                    disabled={status === "loading"}
+                    aria-busy={status === "loading"}
+                  >
+                    {status === "loading" ? f.submitting : f.submit} <Icon name="arrow" />
+                  </button>
+                  {formError ? (
+                    <p className="err" role="alert">
+                      {formError}
+                    </p>
+                  ) : null}
+                </div>
+              </>
+            )}
+          </form>
+        </div>
       </div>
     </section>
-  );
-}
-
-function Field({
-  label,
-  name,
-  type = "text",
-  required = false,
-  autoComplete,
-  placeholder,
-  value,
-  onChange,
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  required?: boolean;
-  autoComplete?: string;
-  placeholder?: string;
-  value: string;
-  onChange: (value: string) => void;
-}) {
-  const id = `ac-field-${name}`;
-  return (
-    <label htmlFor={id} className="grid gap-2 text-[13px] font-semibold text-[var(--fg)]">
-      {label}
-      <input
-        id={id}
-        name={name}
-        type={type}
-        required={required}
-        autoComplete={autoComplete}
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="ac-input font-normal"
-      />
-    </label>
   );
 }

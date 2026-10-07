@@ -18,56 +18,183 @@ export type Dictionary = {
     ctaPrimary: string;
     ctaSecondary: string;
     reassurance: string;
-    chips: {
+    tag: string;
+    badge: string;
+    /** Visual title: titleBefore + rotating word + titleAfter */
+    titleBefore: string;
+    titleAfter: string;
+    rotating: string[];
+    ctaDemo: string;
+  };
+  console: {
+    label: string;
+    title: string;
+    region: string;
+    pause: string;
+    resume: string;
+    replay: string;
+    chatTitle: string;
+    chatSub: string;
+    gatewayTitle: string;
+    gatewaySub: string;
+    gatewayChecks: string[];
+    systemsTitle: string;
+    systemsSub: string;
+    tiles: string[];
+    pending: string;
+    stepsLabel: string;
+    steps: string[];
+    script: {
+      query: string;
+      searchDetail: string;
+      searchTile: string;
+      searchReply: string;
+      productDetail: string;
+      productTile: string;
       productName: string;
-      productPrice: string;
-      stock: string;
-      agentName: string;
-      agentAction: string;
-      paymentLabel: string;
+      productMeta: string;
+      productStock: string;
+      deliveryDetail: string;
+      deliveryTile: string;
+      deliveryReply: string;
+      basketDetail: string;
+      basketTile: string;
+      basketReply: string;
+      consentLabel: string;
+      consentAmount: string;
+      consentNote: string;
+      confirm: string;
+      authorized: string;
       paymentDetail: string;
-      order: string;
+      paymentTile: string;
+      paymentDoneDetail: string;
+      paymentDoneTile: string;
+      orderDetail: string;
+      orderTile: string;
+      orderReplyStrong: string;
+      orderReply: string;
     };
   };
-  lens: {
-    title: string;
-    hint: string;
-    hintTouch: string;
-    reveal: string;
-    hide: string;
-    label: string;
-    inStock: string;
-    detected: string;
-    products: {
-      name: string;
-      price: string;
-      fields: { key: string; value: string }[];
-    }[];
-  };
+  marquee: { label: string; items: string[] };
   market: { title: string; p1: string; p2: string };
+  manifesto: {
+    eyebrow: string;
+    before: string;
+    middle: string;
+    agents: string;
+    after: string;
+  };
+  whyNow: {
+    title: string;
+    eyebrow: string;
+    heading: string;
+    hint: string;
+    items: { title: string; description: string; fact: string }[];
+    search: {
+      query: string;
+      links: string;
+      answerLabel: string;
+      answer: string;
+      offers: { merchant: string; detail: string }[];
+      legend: [string, string];
+    };
+    protocols: {
+      agents: string;
+      merchants: string;
+      customLabel: string;
+      protocolLabel: string;
+      legend: [string, string];
+    };
+    europe: {
+      generic: string;
+      genericResult: string;
+      boost: string;
+      boostResult: string;
+      checkpoints: string[];
+      legend: string[];
+    };
+  };
+  xray: {
+    eyebrow: string;
+    title: string;
+    lead: string;
+    group: string;
+    today: string;
+    withBoost: string;
+    note: string;
+    meter: string;
+    fix: string;
+    undo: string;
+    tagClient: string;
+    tagAgent: string;
+    range: string;
+    shop: {
+      brand: string;
+      categories: string;
+      crumb: string;
+      title: string;
+      price: string;
+      stock: string;
+      variant: string;
+      cta: string;
+      shipping: string;
+      returns: string;
+      reference: string;
+    };
+    agent: {
+      request: string;
+      fields: string;
+      category: string;
+      variants: string;
+      shippingText: string;
+      badges: { checkout: string; shipping: string; gtin: string; returns: string };
+    };
+  };
   problems: {
     title: string;
     subtitle: string;
-    items: { title: string; description: string; points: string[] }[];
+    eyebrow: string;
+    layer: string;
+    items: { title: string; description: string }[];
+    slabs: {
+      data: string;
+      checkout: string;
+      payment: string;
+      compliance: string;
+      dataTags: string[];
+      consent: string[];
+      complianceTags: string[];
+    };
+    ready: string;
+  };
+  architecture: {
+    eyebrow: string;
+    title: string;
+    lead: string;
+    channelsTitle: string;
+    channels: string[];
+    systemsTitle: string;
+    systems: string[];
+    gatewayTitle: string;
+    gatewaySub: string;
+    gatewayChecks: string[];
+    claims: { title: string; text: string }[];
   };
   pilot: {
     title: string;
     subtitle: string;
+    eyebrow: string;
     steps: { title: string; description: string }[];
-    previews: {
-      audit: { title: string; score: string; bars: string[] };
-      connect: { title: string; store: string; agent: string; status: string; logs: string[] };
-      measure: { title: string; metric: string; roadmap: string[] };
-    };
+    cardTitle: string;
+    cardText: string;
+    cardCta: string;
   };
-  audience: { title: string; items: string[] };
-  whyNow: {
-    title: string;
-    items: { title: string; description: string }[];
-  };
+  audience: { title: string; eyebrow: string; items: string[] };
   form: {
     title: string;
     subtitle: string;
+    eyebrow: string;
+    gets: string[];
     fields: {
       email: string;
       name: string;
@@ -81,17 +208,34 @@ export type Dictionary = {
       message: string;
       consent: string;
     };
+    placeholders: { website: string; platform: string; volume: string };
+    errors: {
+      email: string;
+      name: string;
+      company: string;
+      website: string;
+      role: string;
+      platform: string;
+      exploring: string;
+      consent: string;
+    };
     exploringOptions: { value: string; label: string }[];
     submit: string;
     submitting: string;
     success: string;
+    again: string;
     error: string;
     validationError: string;
     configError: string;
     privacyNotice: string;
     privacyLinkLabel: string;
   };
-  faq: { title: string; items: { question: string; answer: string }[] };
+  faq: {
+    title: string;
+    eyebrow: string;
+    items: { question: string; answer: string }[];
+  };
+  cta: { title: string; demo: string; assess: string };
   footer: {
     tagline: string;
     contact: string;
@@ -121,176 +265,302 @@ export const en: Dictionary = {
   },
   hero: {
     brand: "Agentic Commerce by BoostAI Consulting",
-    eyebrow: "AI commerce · Retailers & marketplaces in Europe",
-    h1: "Make your catalogue shoppable by AI agents",
+    eyebrow: "Agentic commerce for European retailers & marketplaces",
+    h1: "Make your commerce shoppable by AI agents.",
     subtitle:
-      "We connect your catalogue, checkout and payments to AI shopping assistants — via UCP, ACP and the protocols to come.",
+      "We connect catalogues, checkouts, payments and orders to the new AI shopping channels, via UCP, ACP and the protocols on their way. For retailers and marketplaces in Europe.",
     ctaPrimary: "Request an assessment",
-    ctaSecondary: "See the pilot program",
+    ctaSecondary: "Explore the pilot program",
     reassurance: "Built for European payments and regulation.",
-    chips: {
-      productName: "Hydra Serum 30 ml",
-      productPrice: "€49",
-      stock: "Stock in sync",
-      agentName: "AI assistant",
-      agentAction: "Basket created · 2 items",
-      paymentLabel: "Payment",
-      paymentDetail: "Strong authentication",
-      order: "Order confirmed",
+    tag: "AI commerce",
+    badge: "Founding pilot program open",
+    titleBefore: "Make your commerce",
+    titleAfter: "by AI agents.",
+    rotating: ["shoppable", "comparable", "readable", "payable"],
+    ctaDemo: "Watch the demo",
+  },
+  console: {
+    label: "Simulation",
+    title: "A shopping agent places an order with a merchant equipped by BoostAI",
+    region: "Demo: a shopping agent places an order",
+    pause: "Pause the demo",
+    resume: "Resume the demo",
+    replay: "Replay the demo",
+    chatTitle: "AI assistant",
+    chatSub: "Customer side",
+    gatewayTitle: "BoostAI gateway",
+    gatewaySub: "Live agent requests",
+    gatewayChecks: ["Authentication", "Consent", "Monitoring"],
+    systemsTitle: "Your systems",
+    systemsSub: "Maison Tympan, fictional merchant",
+    tiles: ["Catalogue", "Checkout", "Payment", "Orders"],
+    pending: "Waiting",
+    stepsLabel: "Demo steps",
+    steps: ["Search", "Product page", "Delivery", "Basket", "Payment", "Order"],
+    script: {
+      query:
+        "Find me noise-cancelling headphones for the train, max €150, delivered to Lyon before Friday.",
+      searchDetail: 'q="noise-cancelling headphones" · price ≤ €150',
+      searchTile: "3 products found",
+      searchReply: "3 offers match. Checking the best one.",
+      productDetail: "structured product page · in stock",
+      productTile: "In stock · €119.00",
+      productName: "Noise-cancelling wireless headphones",
+      productMeta: "Maison Tympan · €119.00",
+      productStock: "In stock",
+      deliveryDetail: "69002 · before Friday",
+      deliveryTile: "Thursday · €4.90",
+      deliveryReply: "Delivery possible Thursday in Lyon, €4.90.",
+      basketDetail: "1 item · €123.90 incl. VAT",
+      basketTile: "Session open",
+      basketReply: "Basket ready: €123.90 incl. VAT. I need your approval to pay.",
+      consentLabel: "Payment approval",
+      consentAmount: "€123.90 to Maison Tympan",
+      consentNote: "Strong authentication required",
+      confirm: "Confirm",
+      authorized: "Payment authorized",
+      paymentDetail: "€123.90 · strong authentication",
+      paymentTile: "Strong authentication",
+      paymentDoneDetail: "consent verified",
+      paymentDoneTile: "Authorized",
+      orderDetail: "MT-20418 · Thursday delivery",
+      orderTile: "Created · MT-20418",
+      orderReplyStrong: "Order MT-20418 confirmed.",
+      orderReply: "Delivery on Thursday.",
     },
   },
-  lens: {
-    title: "What an AI agent sees",
-    hint: "Hover the catalogue",
-    hintTouch: "Tap the catalogue",
-    reveal: "See it all as an agent",
-    hide: "Back to customer view",
-    label: "AI agent view",
-    inStock: "In stock",
-    detected: "product",
-    products: [
-      {
-        name: "Hydra Serum 30 ml",
-        price: "€49",
-        fields: [
-          { key: "price", value: "49.00 EUR" },
-          { key: "stock", value: "14 units" },
-          { key: "delivery", value: "48 h · EU" },
-          { key: "checkout", value: "UCP" },
-        ],
-      },
-      {
-        name: "Air Earbuds",
-        price: "€129",
-        fields: [
-          { key: "price", value: "129.00 EUR" },
-          { key: "stock", value: "32 units" },
-          { key: "delivery", value: "24 h · FR" },
-          { key: "checkout", value: "ACP" },
-        ],
-      },
-      {
-        name: "Rose Quartz Roller",
-        price: "€39",
-        fields: [
-          { key: "price", value: "39.00 EUR" },
-          { key: "stock", value: "8 units" },
-          { key: "delivery", value: "48 h · EU" },
-          { key: "checkout", value: "UCP" },
-        ],
-      },
-      {
-        name: "Silk Scarf",
-        price: "€89",
-        fields: [
-          { key: "price", value: "89.00 EUR" },
-          { key: "stock", value: "5 units" },
-          { key: "delivery", value: "72 h · EU" },
-          { key: "checkout", value: "UCP" },
-        ],
-      },
+  marquee: {
+    label: "What we make readable for agents",
+    items: [
+      "Catalogue",
+      "Price",
+      "Stock",
+      "Delivery",
+      "Basket",
+      "Checkout",
+      "Payment",
+      "Consent",
+      "Order",
+      "Returns",
     ],
   },
   market: {
-    title: "Your next customer may be an AI agent",
-    p1: "Shoppers are starting to ask assistants to compare, build a basket and buy for them.",
-    p2: "Same product, two readers. An agent doesn't see your page — it reads your data.",
+    title: "Product discovery is leaving the search bar",
+    p1: "AI assistants compare offers, build the basket and buy for their users.",
+    p2: "Most e-commerce stacks were built for humans who click, not for agents that call APIs.",
+  },
+  manifesto: {
+    eyebrow: "The shift",
+    before: "Product discovery is leaving the search bar. AI assistants",
+    middle:
+      "compare offers, build the basket and buy for their users. Most e-commerce stacks were built for humans who click, not for",
+    agents: "agents",
+    after: "that call APIs.",
+  },
+  whyNow: {
+    title: "Why now",
+    eyebrow: "Why now",
+    heading: "The market is moving on three fronts.",
+    hint: "Click a card to open it.",
+    items: [
+      {
+        title: "AI discovery channels",
+        description:
+          "AI assistants are becoming product discovery channels. Your customer no longer compares ten links: they read the shortlist their assistant puts in front of them.",
+        fact: "Agents only keep the offers whose data they understand.",
+      },
+      {
+        title: "Standardized interfaces",
+        description:
+          "UCP and ACP create standardized commerce interfaces, so there's no need for a custom integration between every agent and every merchant.",
+        fact: "3 agents × 4 merchants = **12** integrations. With a shared protocol: **3 + 4**.",
+      },
+      {
+        title: "European constraints",
+        description:
+          "European businesses face payment and compliance constraints that generic agent journeys often ignore.",
+        fact: "GDPR, strong authentication, consumer protection, marketplace obligations.",
+      },
+    ],
+    search: {
+      query: "noise-cancelling headphones",
+      links: "Search engine · 10 links to open",
+      answerLabel: "AI assistant",
+      answer: "The same headphones from 3 merchants, delivered before Friday",
+      offers: [
+        { merchant: "Sonora", detail: "Black · €115" },
+        { merchant: "Maison Tympan", detail: "Sand · €119" },
+        { merchant: "Ondine", detail: "Midnight blue · €124" },
+      ],
+      legend: ["Search", "AI assistant"],
+    },
+    protocols: {
+      agents: "Agents",
+      merchants: "Merchants",
+      customLabel: "custom integrations",
+      protocolLabel: "connections through a protocol",
+      legend: ["No protocol", "UCP · ACP"],
+    },
+    europe: {
+      generic: "Generic agent journey",
+      genericResult: "Blocked at strong authentication",
+      boost: "BoostAI journey",
+      boostResult: "Payment authorized, order created",
+      checkpoints: ["GDPR", "SCA", "Consumer", "Marketplace"],
+      legend: ["GDPR", "SCA", "Consumer protection", "Marketplace"],
+    },
+  },
+  xray: {
+    eyebrow: "Agent reading",
+    title: "Your customer sees a product page. Their agent reads data.",
+    lead: "Drag the slider across the page. An agent doesn't look at your layout, it queries fields. When a field is missing, it can't close the sale.",
+    group: "Product page state",
+    today: "Today",
+    withBoost: "With BoostAI",
+    note: "Compare the same page before and after our work.",
+    meter: "fields an agent can use",
+    fix: "Fix the 4 fields",
+    undo: "See the current state",
+    tagClient: "Customer view",
+    tagAgent: "Agent view",
+    range: "Compare the customer view and the agent view",
+    shop: {
+      brand: "Maison Tympan",
+      categories: "Headphones · Earbuds · Speakers",
+      crumb: "Home › Headphones › Wireless",
+      title: "Noise-cancelling wireless headphones",
+      price: "€119.00",
+      stock: "In stock",
+      variant: "Colour: Sand",
+      cta: "Add to cart",
+      shipping: "Free fast delivery over €150",
+      returns: "Returns: see our T&Cs",
+      reference: "Ref. CQ-119",
+    },
+    agent: {
+      request: "Agent request",
+      fields: "application/json · 10 fields",
+      category: "audio/headphones",
+      variants: '["sand", "black", "midnight-blue"]',
+      shippingText: "Fast delivery…",
+      badges: {
+        checkout: "Can't buy",
+        shipping: "Free text",
+        gtin: "Missing",
+        returns: "In the T&Cs",
+      },
+    },
   },
   problems: {
-    title: "Four building blocks to become AI-shoppable",
-    subtitle: "What we make readable and operable for AI shopping agents.",
+    title: "Four foundations for agent-ready commerce.",
+    subtitle:
+      "Four building blocks that make your commerce stack readable and operable for AI shopping agents.",
+    eyebrow: "What we work on",
+    layer: "Layer",
     items: [
       {
         title: "AI-ready product data",
-        description: "Catalogue, prices, stock and delivery structured for agents.",
-        points: ["Title & attributes", "Price & currency", "Real-time stock", "Delivery options"],
+        description:
+          "Structure catalogue, pricing, availability and delivery data so agents can discover your offers.",
       },
       {
         title: "Agent-compatible checkout",
-        description: "Basket and checkout exposed securely through commerce protocols.",
-        points: ["Basket created by the agent", "Address & delivery", "Order confirmation"],
+        description: "Expose secure cart and checkout flows through commerce protocols.",
       },
       {
-        title: "Payments & consent",
-        description: "Your payment stack connected, with authentication and consent preserved.",
-        points: ["Explicit user consent", "Strong authentication (SCA)", "Your existing PSPs"],
+        title: "Payments and consent",
+        description:
+          "Connect your payment infrastructure while preserving authentication and user consent.",
       },
       {
         title: "European compliance",
-        description: "GDPR, SCA, consumer protection and marketplace rules built in.",
-        points: ["GDPR", "SCA", "Consumer protection", "Marketplace obligations"],
+        description:
+          "Plan for GDPR, SCA, consumer protection and marketplace requirements.",
+      },
+    ],
+    slabs: {
+      data: "Product data",
+      checkout: "Checkout",
+      payment: "Payment",
+      compliance: "EU compliance",
+      dataTags: ["price", "stock", "delivery", "GTIN"],
+      consent: ["SCA ✓", "Consent ✓"],
+      complianceTags: ["GDPR", "SCA", "Consumer", "Marketplace"],
+    },
+    ready: "Agent-ready",
+  },
+  architecture: {
+    eyebrow: "Architecture",
+    title: "A gateway between AI agents and your stack.",
+    lead: "UCP and ACP standardize exchanges between agents and merchants. We build the layer that translates them to your systems, with authentication, consent and monitoring.",
+    channelsTitle: "AI channels",
+    channels: ["Conversational assistant", "Shopping agent", "AI answer engine"],
+    systemsTitle: "Your systems",
+    systems: ["Catalogue · PIM", "Checkout", "PSP", "Orders · OMS"],
+    gatewayTitle: "BoostAI gateway",
+    gatewaySub: "One entry point per protocol",
+    gatewayChecks: ["Authentication", "Payment consent", "Tests and monitoring"],
+    claims: [
+      {
+        title: "Your platform stays the reference.",
+        text: "The gateway plugs into your existing infrastructure. Your e-commerce platform and PSPs remain the systems of record.",
+      },
+      {
+        title: "One integration per protocol.",
+        text: "A single entry point per protocol, instead of one integration per agent and per store.",
+      },
+      {
+        title: "The customer stays in control.",
+        text: "Agent journeys preserve strong authentication and the customer's explicit approval before every payment.",
       },
     ],
   },
   pilot: {
-    title: "Founding pilot program",
-    subtitle: "Three steps to go from audit to a first live AI channel.",
+    title: "Become a founding pilot partner.",
+    subtitle:
+      "A focused program to assess readiness, connect a limited channel and define a production roadmap.",
+    eyebrow: "Pilot program",
     steps: [
       {
         title: "Readiness assessment",
-        description: "Catalogue, APIs, checkout, payments and orders reviewed.",
+        description: "Review of catalogue, APIs, checkout, payments and order systems.",
       },
       {
         title: "Pilot integration",
-        description: "One channel, protocol or journey connected.",
+        description: "Connect one channel, protocol or limited journey.",
       },
       {
-        title: "Measure & roadmap",
-        description: "Tests, monitoring and a plan for wider rollout.",
+        title: "Measurement and roadmap",
+        description: "Testing, monitoring and a roadmap toward wider production rollout.",
       },
     ],
-    previews: {
-      audit: {
-        title: "Readiness audit",
-        score: "Score",
-        bars: ["Catalogue", "Checkout", "Payment", "Orders"],
-      },
-      connect: {
-        title: "Pilot connection",
-        store: "Your store",
-        agent: "AI agent",
-        status: "Connected · UCP",
-        logs: ["Catalogue synced", "Checkout exposed", "Payment verified"],
-      },
-      measure: {
-        title: "Pilot tracking",
-        metric: "Orders through agents",
-        roadmap: ["Pilot", "Extension", "Production"],
-      },
-    },
+    cardTitle: "One channel, one protocol, one limited journey.",
+    cardText:
+      "We connect it, measure it in real conditions, then write the production roadmap with you.",
+    cardCta: "Apply to the pilot",
   },
   audience: {
-    title: "Built for complex commerce",
+    title: "Built for complex commerce environments.",
+    eyebrow: "Who it's for",
     items: [
       "Marketplaces",
       "Multi-country retailers",
-      "Adobe Commerce & custom platforms",
+      "Adobe Commerce and custom platforms",
       "B2B distributors",
-      "Travel & booking",
-      "Multi-PSP or multi-vendor",
-    ],
-  },
-  whyNow: {
-    title: "Why now",
-    items: [
-      {
-        title: "AI is the new shop window",
-        description: "Assistants are becoming a product discovery channel.",
-      },
-      {
-        title: "Standards are here",
-        description: "UCP and ACP avoid one integration per agent and per merchant.",
-      },
-      {
-        title: "Europe has its own rules",
-        description: "Payment and compliance constraints that generic agent flows ignore.",
-      },
+      "Travel and booking platforms",
+      "Multi-PSP or multi-vendor businesses",
     ],
   },
   form: {
-    title: "Assess your agentic commerce readiness",
+    title: "Assess your agentic commerce readiness.",
     subtitle:
       "Tell us about your commerce setup. We’ll review it and get back to you within two business days.",
+    eyebrow: "Assessment",
+    gets: [
+      "Catalogue, APIs, checkout, payments and orders reviewed",
+      "The protocols that fit your stack: UCP, ACP or partners",
+      "Answer within two business days",
+    ],
     fields: {
       email: "Work email",
       name: "First and last name",
@@ -300,10 +570,25 @@ export const en: Dictionary = {
       platform: "Commerce platform",
       exploring: "What are you exploring?",
       volume: "Estimated monthly order volume",
-      volumeOptional: "Optional",
+      volumeOptional: "optional",
       message: "Message",
       consent:
         "I agree to be contacted by BoostAI Consulting about this readiness assessment.",
+    },
+    placeholders: {
+      website: "https://",
+      platform: "Adobe Commerce, custom…",
+      volume: "e.g. 5,000",
+    },
+    errors: {
+      email: "Enter a valid work email, for example name@company.com.",
+      name: "Enter your first and last name.",
+      company: "Enter your company name.",
+      website: "Enter the website address, for example https://company.com.",
+      role: "Enter your role.",
+      platform: "Enter your commerce platform, or “custom”.",
+      exploring: "Choose what you'd like to explore.",
+      consent: "Tick this box so we can get back to you.",
     },
     exploringOptions: [
       { value: "ai-product-discovery", label: "AI product discovery" },
@@ -313,10 +598,11 @@ export const en: Dictionary = {
       { value: "marketplace", label: "Marketplace integration" },
       { value: "general", label: "General readiness assessment" },
     ],
-    submit: "Submit assessment request",
+    submit: "Send the request",
     submitting: "Sending…",
     success:
-      "Thanks — we’ll review your commerce setup and get back to you within two business days.",
+      "Thanks, we’ll review your commerce setup and get back to you within two business days.",
+    again: "Send another request",
     error: "Something went wrong. Please try again or email us directly.",
     validationError: "Please complete all required fields with valid information.",
     configError:
@@ -326,17 +612,18 @@ export const en: Dictionary = {
     privacyLinkLabel: "privacy & OCR terms",
   },
   faq: {
-    title: "Frequently asked questions",
+    title: "Frequently asked questions.",
+    eyebrow: "FAQ",
     items: [
       {
         question: "What is agentic commerce?",
         answer:
-          "Agentic commerce is the emerging model where AI assistants discover products, compare offers, build carts and complete purchases on behalf of users — using structured commerce interfaces rather than browsing websites like humans.",
+          "Agentic commerce is the emerging model where AI assistants discover products, compare offers, build carts and complete purchases on behalf of users, using structured commerce interfaces rather than browsing websites like humans.",
       },
       {
         question: "What is the Universal Commerce Protocol?",
         answer:
-          "The Universal Commerce Protocol (UCP) aims to standardize how AI agents interact with merchants for product discovery, checkout and related commerce actions — so every agent does not need a custom integration with every store.",
+          "The Universal Commerce Protocol (UCP) aims to standardize how AI agents interact with merchants for product discovery, checkout and related commerce actions, so every agent does not need a custom integration with every store.",
       },
       {
         question: "What is the difference between UCP and ACP?",
@@ -346,11 +633,10 @@ export const en: Dictionary = {
       {
         question: "Can AI agents purchase directly from an online store?",
         answer:
-          "Yes — when the store exposes agent-compatible capabilities for catalogue, cart, checkout, payment consent and order confirmation. Without those interfaces, agents are limited to linking users back to a human-operated website.",
+          "Yes, when the store exposes agent-compatible capabilities for catalogue, cart, checkout, payment consent and order confirmation. Without those interfaces, agents are limited to linking users back to a human-operated website.",
       },
       {
-        question:
-          "Does UCP replace an ecommerce platform or payment provider?",
+        question: "Does UCP replace an ecommerce platform or payment provider?",
         answer:
           "No. UCP-style protocols sit as interfaces between AI channels and your existing commerce, checkout and payment infrastructure. Your platform and PSPs remain the systems of record.",
       },
@@ -365,6 +651,11 @@ export const en: Dictionary = {
           "European deployments typically need to account for GDPR, Strong Customer Authentication (SCA), consumer protection rules, and marketplace obligations when multiple sellers or PSPs are involved. Agent flows must preserve authentication and user consent.",
       },
     ],
+  },
+  cta: {
+    title: "Ready to sell to AI agents",
+    demo: "Watch the demo again",
+    assess: "Request an assessment",
   },
   footer: {
     tagline:

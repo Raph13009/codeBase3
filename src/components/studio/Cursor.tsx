@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { prefersReducedMotion } from "@/components/studio/motion";
 
 /**
@@ -6,6 +7,7 @@ import { prefersReducedMotion } from "@/components/studio/motion";
  * swap the ring for a pill badge; links and buttons grow the ring.
  */
 export function Cursor() {
+  const { pathname } = useLocation();
   const wrapRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
@@ -95,6 +97,12 @@ export function Cursor() {
       root.classList.remove("has-cursor");
     };
   }, []);
+
+  // The element under the pointer is gone after a page change: drop its badge
+  useEffect(() => {
+    if (wrapRef.current) wrapRef.current.dataset.state = "";
+    if (badgeRef.current) badgeRef.current.dataset.on = "false";
+  }, [pathname]);
 
   return (
     <>

@@ -116,6 +116,11 @@
   will-change: transform;
 }
 
+.studio .mask-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 /* Section label: "02  Projets livrés" */
 .studio .st-label {
   display: flex;
@@ -427,7 +432,7 @@ html.has-cursor .studio textarea {
 .studio .st-cursor {
   position: fixed;
   inset: 0;
-  z-index: 90;
+  z-index: 250;
   pointer-events: none;
   mix-blend-mode: difference;
 }
@@ -483,7 +488,7 @@ html.has-cursor .studio textarea {
 }
 
 .studio .st-cursor-badge {
-  z-index: 91;
+  z-index: 251;
   display: flex;
   align-items: center;
   gap: 8px;

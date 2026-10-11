@@ -1,498 +1,294 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
 import MetaTags from "@/components/seo/MetaTags";
-import AgentsShowcase from "@/components/AgentsShowcase";
+import { gsap, Icon, MOTION_OK, ScrollTrigger, StLink, useGSAP } from "@/components/studio/motion";
+import { PageHero } from "@/components/studio/PageHero";
+import { CtaBlock } from "@/components/studio/CtaBlock";
+import { AGENT_CASES, CASES, WEB_CASES, typeLabel, type Case } from "@/components/studio/work";
 
-const projectsData = {
-  web: [
-    {
-      id: 10,
-      title: "OENOBOOST – Application éducative vin",
-      image: "/realisation/oenoboost/main2.webp",
-      tags: ["TypeScript", "Supabase", "Mapbox", "Stripe", "Resend", "Éducatif"],
-      description: "Application web éducative autour du vin : carte interactive des vignobles français (Mapbox), modules d'apprentissage, outil de dégustation guidée et quiz gamifiés avec abonnement premium.",
-      fullTitle: "OENOBOOST – Application éducative sur le monde du vin",
-      stack: ["TypeScript", "Supabase (Auth + DB)", "Mapbox API", "Stripe (abonnements)", "Resend (emails)", "i18n FR/EN"],
-      features: [
-        "Carte interactive des vignobles français via l'API Mapbox avec navigation régions et AOP",
-        "Modules d'apprentissage complets : Vignoble, Cépages, Sols, Vinification, Dictionnaire",
-        "Outil de dégustation guidée pas-à-pas avec sélection visuelle des couleurs de robe",
-        "Système de quiz multi-niveaux : débutant, intermédiaire, expert et question du jour",
-        "Profil utilisateur avec système de progression XP et niveaux gamifiés",
-        "Système d'abonnement premium géré via Stripe avec contrôle des accès",
-        "Notifications et emails transactionnels via Resend",
-        "Application bilingue FR/EN avec switch de langue intégré",
-        "Interface mobile-first avec design élégant aux tons beige et bordeaux"
-      ],
-      summary: "OenoBoost est une plateforme e-learning complète dédiée au monde du vin, développée en TypeScript avec Supabase. Elle intègre une carte interactive des appellations françaises via Mapbox, des modules pédagogiques (vignoble, cépages, vinification, dictionnaire), un outil de dégustation visuelle, des quiz gamifiés et un système d'abonnement premium via Stripe. Un projet ambitieux, bilingue, mobile-first et monétisé dès le lancement.",
-      images: [
-        "/realisation/oenoboost/main.webp",
-        "/realisation/oenoboost/oenoboost-map-france.webp",
-        "/realisation/oenoboost/oenoboost-map-region.webp",
-        "/realisation/oenoboost/oenoboost-map-bordeaux.webp",
-        "/realisation/oenoboost/oenoboost-map-rhone.webp",
-        "/realisation/oenoboost/oenoboost-vinification.webp",
-        "/realisation/oenoboost/oenoboost-degustation.webp",
-        "/realisation/oenoboost/oenoboost-profil.webp",
-        "/realisation/oenoboost/oenoboost-menu.webp"
-      ]
-    },
-    {
-      id: 8,
-      title: "KOACHER B2B",
-      image: "/realisation/koacher/koacher-b2b-1.webp",
-      tags: ["Webflow", "B2B", "CMS", "Landing Page", "Responsive"],
-      description: "Site web B2B pour KOACHER, conçu pour présenter l'offre, rassurer les prospects et générer des prises de contact qualifiées.",
-      fullTitle: "KOACHER B2B – Site web de présentation commerciale",
-      stack: ["Webflow", "CMS Webflow", "Design system", "SEO on-page", "Responsive design"],
-      features: [
-        "Page d'accueil orientée conversion avec proposition de valeur claire",
-        "Sections dédiées aux offres, bénéfices métier et cas d'usage",
-        "Architecture de contenu pensée pour un parcours prospect B2B",
-        "Composants visuels réutilisables pour accélérer les évolutions",
-        "Mise en page responsive optimisée desktop, tablette et mobile",
-        "Intégration de formulaires de contact pour la génération de leads",
-        "Optimisation SEO on-page (titres, structure, lisibilité)",
-        "Temps de chargement amélioré grâce à des visuels compressés"
-      ],
-      summary: "KOACHER B2B est une vitrine commerciale moderne construite avec Webflow pour soutenir l'acquisition de leads. Le site met en avant les services, clarifie le positionnement de la marque et propose un parcours fluide pour transformer les visiteurs en prospects qualifiés.",
-      images: [
-        "/realisation/koacher/koacher-b2b-1.webp",
-        "/realisation/koacher/koacher-b2b-2.webp",
-        "/realisation/koacher/koacher-b2b-3.webp",
-        "/realisation/koacher/koacher-b2b-4.webp",
-        "/realisation/koacher/koacher-b2b-5.webp",
-        "/realisation/koacher/koacher-b2b-6.webp",
-        "/realisation/koacher/koacher-b2b-7.webp"
-      ]
-    },
-    {
-      id: 9,
-      title: "MYTABLE – Plateforme de réservation de chef à domicile",
-      image: "/realisation/mytable/mytable-2.webp",
-      tags: ["TypeScript", "Supabase", "PostgreSQL", "Realtime", "Resend"],
-      description: "Plateforme complète où les clients réservent un chef à domicile, gèrent leurs demandes et communiquent en temps réel.",
-      fullTitle: "MYTABLE – Plateforme full-stack de booking et gestion de missions",
-      stack: ["TypeScript", "Supabase (Auth + Realtime + DB)", "PostgreSQL", "Resend", "APIs tierces"],
-      features: [
-        "Parcours de réservation complet pour booker un chef à domicile",
-        "Système de gestion des réservations avec statut de mission",
-        "Messagerie temps réel intégrée via Supabase Realtime",
-        "Gestion du menu, du nombre de couverts et du pricing dynamique",
-        "Espace chef pour accepter ou refuser les missions reçues",
-        "Notifications transactionnelles et communication email via Resend",
-        "Synchronisation back-office des données clients, missions et paiements",
-        "Architecture modulaire full TypeScript pensée pour évoluer rapidement"
-      ],
-      summary: "MYTABLE est une grosse plateforme B2C/B2B développée à 100% en TypeScript avec Supabase/PostgreSQL. Elle couvre tout le cycle métier: acquisition de clients, réservation de chefs, coordination en temps réel, gestion des missions et communication automatisée. Une base technique robuste qui tourne en production et supporte des flux opérationnels complets.",
-      images: [
-        "/realisation/mytable/mytable-1.webp",
-        "/realisation/mytable/mytable-2.webp",
-        "/realisation/mytable/mytable-3.webp",
-        "/realisation/mytable/mytable-4.webp",
-        "/realisation/mytable/mytable-5.webp",
-        "/realisation/mytable/mytable-6.webp"
-      ]
-    },
-    {
-      id: 6,
-      title: "KIVAIAKIDS – Plateforme éducative",
-      image: "/realisation/kivaiakidsMain.webp",
-      tags: ["Next.js", "Supabase", "CMS", "Upload", "Multi-média"],
-      description: "Plateforme complète d'apprentissage des langues pour enfants avec interface professeur dédiée et système de gestion de contenu.",
-      fullTitle: "KIVAIAKIDS – Plateforme éducative multilingue pour enfants",
-      stack: ["Next.js", "Supabase (auth + base de données)", "TailwindCSS", "Upload de fichiers", "Système de cours"],
-      features: [
-        "Interface professeur complète avec éditeur de cours intégré",
-        "Système de création de cours avec éditeur de texte avancé (type Word)",
-        "Upload et gestion de livres, audios et documents multimédias",
-        "Organisation des cours par niveaux et catégories",
-        "Interface élève intuitive et gamifiée",
-        "Système de progression et de suivi des apprentissages",
-        "Gestion des utilisateurs (professeurs et élèves)",
-        "Design responsive optimisé pour tablettes et mobiles"
-      ],
-      summary: "KIVAIAKIDS révolutionne l'apprentissage des langues pour les enfants avec une plateforme complète qui donne aux professeurs tous les outils nécessaires pour créer des cours engageants. L'interface professeur permet de gérer facilement le contenu, tandis que les enfants bénéficient d'une expérience d'apprentissage moderne et interactive.",
-      images: [
-        "/realisation/kivaiakids1.webp",
-        "/realisation/kivaiakids2.webp",
-        "/realisation/kivaiakids3.webp",
-        "/realisation/kivaiakids4.webp",
-        "/realisation/kivaiakids5.webp",
-        "/realisation/kivaiakids6.webp"
-      ]
-    },
-    {
-      id: 1,
-      title: "AVENIREA",
-      image: "/realisation/AvenireaMain.webp",
-      tags: ["Next.js", "Supabase", "Stripe", "GPT-4"],
-      description: "MVP d'un test d'orientation post-bac avec logique conditionnelle, IA, et paiement intégré.",
-      fullTitle: "AVENIREA – Plateforme d'orientation post-bac automatisée",
-      stack: ["Next.js", "Supabase (auth + base de données)", "Stripe", "GPT-4", "TailwindCSS"],
-      features: [
-        "Test RIASEC interactif, entièrement dynamique",
-        "Logique conditionnelle complexe (les questions et résultats s'adaptent en fonction des réponses)",
-        "Système de scoring automatique",
-        "Résumé IA personnalisé, généré automatiquement par GPT-4",
-        "Blocage du résultat avec un système de paiement intégré (Stripe)",
-        "Interface responsive (desktop + mobile), design rapide et clean"
-      ],
-      summary: "Un MVP complet livré en 4 jours. Tout est automatisé : scoring du test, rendu IA, blocage du résultat, gestion des paiements. Ce projet prouve notre capacité à livrer rapidement une logique métier complexe avec une vraie monétisation.",
-      images: [
-        "/realisation/avenirea1.webp",
-        "/realisation/avenirea2.webp",
-        "/realisation/avenirea3.webp",
-        "/realisation/avenirea4.webp",
-        "/realisation/avenireamobile.webp"
-      ]
-    },
-    {
-      id: 2,
-      title: "MUSICLINKS – Plateforme",
-      image: "/realisation/musiclinkscover.png",
-      tags: ["Next.js", "Supabase", "Realtime Messaging", "Mobile-first", "Marketplace"],
-      description: "Marketplace mobile-first où artistes et prestataires peuvent créer un compte, se faire repérer, liker des profils et échanger directement via messagerie.",
-      fullTitle: "MUSICLINKS – Plateforme de mise en relation pour artistes et prestataires",
-      stack: ["Next.js", "Supabase (auth, base de données, messaging)", "TailwindCSS", "Realtime messaging", "Auth multi-rôle"],
-      features: [
-        "Inscription & création de compte utilisateur",
-        "Deux types de profils : Artistes visibles dans un catalogue spécifique, Prestataires dans un autre catalogue",
-        "Interface pensée mobile-first, fluide et rapide",
-        "Système de like entre utilisateurs pour repérage ou coup de cœur",
-        "Messagerie directe intégrée (type chat), connectée à Supabase",
-        "Interface de profil : bio, photos, disponibilité, etc."
-      ],
-      summary: "MUSICLINKS est une plateforme complète de mise en relation dans le monde de la musique. Pensée pour mobile, elle permet à des utilisateurs de se découvrir, liker des profils, et discuter en direct. Le tout repose sur une architecture full stack légère et rapide, avec une vraie logique produit, un design épuré, et une expérience fluide dès la version 1.",
-      images: [
-        "/realisation/musiclinksreal.png",
-        "/realisation/musiclinksreal2.png",
-        "/realisation/musiclinksreal3.png",
-        "/realisation/musiclinksreal4.png",
-        "/realisation/musiclinksreal5.png"
-      ]
-    },
-    {
-      id: 3,
-      title: "GETLAZO – Marketplace de Loyalty Tests",
-      image: "/realisation/lazocover.png",
-      tags: ["Marketplace", "React", "MySQL", "Stripe", "Backend Custom"],
-      description: "Plateforme complète pour orchestrer, vendre et gérer des tests de fidélité automatisés.",
-      fullTitle: "GETLAZO – Marketplace de Loyalty Tests",
-      stack: ["React.js (Next.js)", "Node.js + Express", "PostgreSQL", "Stripe", "EmailJS + Intercom", "Admin Panel"],
-      features: [
-        "Chat asynchrone entre clients & testeurs (modération intégrée)",
-        "Catalogue dynamique avec filtres (sexe, prix, dispo…)",
-        "Système d'attribution intelligent selon critères clients",
-        "Workflow complet de mission : création → validation → feedback",
-        "Dashboard interne : Suivi des commandes, performances testeurs, stats mensuelles",
-        "Paiement sécurisé avec Stripe + logique conditionnelle de release (test validé ou non)",
-        "Gestion fine des permissions & statuts (admin, checker, client)",
-        "Système de support automatisé avec Intercom"
-      ],
-      summary: "Plus de 1 000 tests réalisés en 6 mois. Process 100% automatisé après onboarding client. Temps moyen de livraison : < 12h. ROI immédiat : plateforme monétisée dès le 1er mois.",
-      images: [
-        "/realisation/lazo1.png",
-        "/realisation/lazo2.png",
-        "/realisation/lazo3.png",
-        "/realisation/lazo4.png",
-        "/realisation/lazo5.png"
-      ]
-    },
-    {
-      id: 7,
-      title: "FAST CONSULTING – Automatisation de démarches administratives",
-      image: "/realisation/fast-consulting.png",
-      tags: ["Next.js", "Supabase", "Stripe", "Email automation", "Vercel"],
-      description: "Application web permettant d'automatiser les démarches administratives avec questionnaire intelligent, paiement sécurisé et notifications email.",
-      fullTitle: "FAST CONSULTING – Plateforme d'automatisation des démarches administratives",
-      stack: ["Next.js 14 (App Router)", "Supabase (auth + base de données)", "Stripe (paiement)", "Hostinger (email SMTP)", "Vercel (déploiement)", "TailwindCSS"],
-      features: [
-        "Formulaire dynamique multi-étapes avec validation en temps réel",
-        "Système de questionnaire intelligent adaptatif selon le type de démarche",
-        "Intégration Stripe pour paiement sécurisé avec confirmation instantanée",
-        "Envoi automatique d'emails récapitulatifs via Hostinger SMTP",
-        "Notification email entreprise avec toutes les réponses du questionnaire formatées",
-        "Dashboard de gestion des demandes avec statuts en temps réel",
-        "Stockage sécurisé des données dans Supabase avec politique de confidentialité RGPD",
-        "Interface responsive optimisée mobile et desktop",
-        "Système de suivi des demandes pour les clients",
-        "Gestion des pièces justificatives et documents administratifs"
-      ],
-      summary: "FAST CONSULTING révolutionne la gestion des démarches administratives en automatisant entièrement le processus : du questionnaire client au paiement, jusqu'à la notification de l'entreprise. Architecture moderne avec Next.js 14, base de données temps réel Supabase, paiements sécurisés Stripe, et emails transactionnels via Hostinger. Une solution complète déployée sur Vercel pour des performances optimales.",
-      images: [
-        "/realisation/fast-consulting.png"
-      ]
-    },
-    {
-      id: 4,
-      title: "MUSICLINKS Landing Page",
-      image: "/realisation/musicklinkslanding.png",
-      tags: ["Next.js", "Supabase", "Auth", "Video player", "SQL client training"],
-      description: "Landing page d'inscription avec création de compte automatisée, vidéo intégrée, et base connectée pour une plateforme musicale professionnelle.",
-      fullTitle: "MUSICLINKS – Landing page d'inscription connectée à Supabase",
-      stack: ["Next.js", "Supabase (auth + DB)", "Player vidéo intégré", "TailwindCSS"],
-      features: [
-        "Page responsive avec vidéo intégrée pour présenter le projet",
-        "Formulaire de préinscription connecté à Supabase",
-        "Création automatique de comptes utilisateurs dans la base",
-        "Stockage structuré des leads / inscrits",
-        "Interface pensée pour être autonome côté client",
-        "Formation de l'équipe MUSICLINKS : explication du fonctionnement de la base, création de tutoriels simples (SQL, dashboard), accompagnement sur les requêtes pour exploitation quotidienne"
-      ],
-      summary: "Un projet simple mais complet, livré avec logique de back-end connectée. Le client peut suivre les préinscriptions, gérer ses utilisateurs, et continuer à faire évoluer la plateforme en toute autonomie grâce à la documentation fournie.",
-      images: [
-        "/realisation/musicklinkslanding.png",
-        "/realisation/musiclinkslanding2.png"
-      ]
-    },
-    {
-      id: 5,
-      title: "BLUE GARDEN – Site vitrine associatif",
-      image: "/realisation/BlueGardenMain.webp",
-      tags: ["React", "Responsive", "Formulaire de contact", "CMS-less"],
-      description: "Site vitrine simple et élégant pour une association, avec page contact et section événements.",
-      fullTitle: "BLUE GARDEN – Site vitrine associatif en React",
-      stack: ["React", "Vite", "TailwindCSS", "EmailJS (contact)"],
-      features: [
-        "Design responsive et épuré",
-        "Formulaire de contact avec envoi d'e-mail",
-        "Section Événements: ajout/modification simple sans base de données",
-        "Pages statiques performantes (SEO-ready)"
-      ],
-      summary: "Un site vitrine moderne et rapide pour l'association BLUE GARDEN, pensé pour être maintenu sans back-end lourd, avec un système simple pour publier des événements.",
-      images: [
-        "/realisation/bluegarden1.webp",
-        "/realisation/bluegarden2.webp",
-        "/realisation/bluegarden3.webp"
-      ]
-    }
-  ],
-  ia: [
-    {
-      id: 1,
-      title: "Factur-X Generator",
-      image: "/images/raphWorking.jpeg",
-      tags: ["Node.js", "PDF", "XML"],
-      description: "Système automatisé de génération de factures au format Factur-X avec intégration comptable."
-    },
-    {
-      id: 2,
-      title: "Bot Trading Crypto",
-      image: "/images/raphWorking.jpeg",
-      tags: ["Python", "KuCoin API", "Trading"],
-      description: "Bot de trading automatisé pour les cryptomonnaies avec stratégies personnalisables."
-    },
-    {
-      id: 3,
-      title: "Support IA Assistant",
-      image: "/images/raphWorking.jpeg",
-      tags: ["GPT-4", "Zendesk", "NLP"],
-      description: "Assistant intelligent qui répond automatiquement aux questions fréquentes et route les cas complexes."
-    },
-    {
-      id: 4,
-      title: "Veille IA Notion",
-      image: "/images/raphWorking.jpeg",
-      tags: ["Python", "OpenAI", "Notion API"],
-      description: "Bot automatisé qui analyse les tendances du web et génère un rapport hebdomadaire dans Notion."
-    }
-  ]
-};
+type Filter = "tout" | "web" | "agents";
+type View = "grille" | "liste";
 
-const Realisations = () => {
-  const [activeTab, setActiveTab] = useState<'web' | 'agents'>('web');
-  const navigate = useNavigate();
+const FILTERS: { id: Filter; label: string; items: Case[] }[] = [
+  { id: "tout", label: "Tout", items: CASES },
+  { id: "web", label: "Produits web", items: WEB_CASES },
+  { id: "agents", label: "Agents IA", items: AGENT_CASES },
+];
 
-  // Detect hash and set active tab accordingly
+const pad = (n: number) => String(n).padStart(2, "0");
+const caseColors = (c: Case) => ({ "--bg": c.bg, "--fg": c.fg }) as CSSProperties;
+
+/** Screenshot (or name poster) inside a project-coloured panel. */
+function CasePanel({ item, eager = false }: { item: Case; eager?: boolean }) {
+  return (
+    <div className="st-wpanel" data-layout={item.layout}>
+      {item.card ? (
+        <div className="st-wpanel-shot">
+          <img
+            src={item.card}
+            alt={`Aperçu de ${item.name}`}
+            loading={eager ? "eager" : "lazy"}
+            decoding="async"
+            style={item.cardPos ? { objectPosition: item.cardPos } : undefined}
+          />
+        </div>
+      ) : null}
+      {item.layout === "tall" || item.layout === "poster" ? (
+        <span className="st-wpanel-name" aria-hidden="true">
+          {item.name}
+        </span>
+      ) : null}
+      {item.layout === "poster" ? (
+        <span className="st-wpanel-tags" aria-hidden="true">
+          {item.stackShort}
+        </span>
+      ) : null}
+    </div>
+  );
+}
+
+/** Two staggered columns of large cards; the right column floats with the scroll. */
+function WorkGrid({ items }: { items: Case[] }) {
+  const rootRef = useRef<HTMLUListElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add(MOTION_OK, () => {
+        gsap.utils.toArray<HTMLElement>(".st-wcard").forEach((card) => {
+          const panel = card.querySelector<HTMLElement>(".st-wpanel");
+          const img = card.querySelector<HTMLElement>(".st-wpanel-shot img");
+          const scrub = { trigger: card, start: "top 96%", end: "top 45%", scrub: true };
+          if (panel) {
+            gsap.fromTo(
+              panel,
+              { clipPath: "inset(16% 9% 0% 9% round 10px)" },
+              { clipPath: "inset(0% 0% 0% 0% round 4px)", ease: "none", scrollTrigger: scrub },
+            );
+          }
+          if (img) gsap.fromTo(img, { scale: 1.28 }, { scale: 1.06, ease: "none", scrollTrigger: scrub });
+        });
+      });
+      mm.add(`${MOTION_OK} and (min-width: 961px)`, () => {
+        gsap.fromTo(
+          ".st-wcard:nth-child(even)",
+          { y: 150 },
+          {
+            y: -40,
+            ease: "none",
+            scrollTrigger: { trigger: rootRef.current, start: "top bottom", end: "bottom top", scrub: true },
+          },
+        );
+      });
+    },
+    { scope: rootRef },
+  );
+
+  return (
+    <ul className="st-wgrid" ref={rootRef}>
+      {items.map((item, i) => (
+        <li className="st-wcard" key={`${item.type}-${item.id}`} style={caseColors(item)}>
+          <StLink href={item.href} cursor={item.type === "agent" ? "Voir l'agent" : "Voir le projet"}>
+            <CasePanel item={item} eager={i < 2} />
+            <div className="st-wcard-meta">
+              <span className="n">{pad(i + 1)}</span>
+              <h3>{item.name}</h3>
+              <span className="k">{typeLabel(item.type)}</span>
+              <p>
+                {item.category} · {item.stackShort}
+              </p>
+            </div>
+          </StLink>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** Index rows; on desktop a preview card follows the pointer over the list. */
+function WorkList({ items }: { items: Case[] }) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState<number | null>(null);
+  const target = useRef({ x: 0, y: 0, on: false });
+
+  // Rows rise and their rules draw in as they enter
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add(MOTION_OK, () => {
+        gsap.utils.toArray<HTMLElement>(".st-wrow").forEach((row) => {
+          const scrub = { trigger: row, start: "top 98%", end: "top 70%", scrub: true };
+          gsap.fromTo(row.querySelector(".st-wrow-rule"), { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: scrub });
+          gsap.fromTo(row.querySelector(".t"), { yPercent: 70, opacity: 0 }, { yPercent: 0, opacity: 1, ease: "none", scrollTrigger: scrub });
+        });
+      });
+    },
+    { scope: rootRef },
+  );
+
+  // Pointer-following preview (fine pointers only)
   useEffect(() => {
-    if (window.location.hash === '#agents') {
-      setActiveTab('agents');
-    }
+    const preview = previewRef.current;
+    if (!preview || !window.matchMedia("(pointer: fine)").matches) return;
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight / 2;
+    let px = x;
+    let raf = 0;
+    const loop = () => {
+      const t = target.current;
+      const dx = t.x - x;
+      x += dx * 0.14;
+      y += (t.y - y) * 0.14;
+      const tilt = Math.max(-9, Math.min(9, (x - px) * 0.5));
+      px = x;
+      // Sits to the right of the pointer so the hovered name stays readable
+      preview.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) translate(40px, -62%) rotate(${tilt.toFixed(2)}deg)`;
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(raf);
   }, []);
+
+  const onMove = (e: ReactPointerEvent) => {
+    if (e.pointerType !== "mouse") return;
+    target.current.x = e.clientX;
+    target.current.y = e.clientY;
+  };
+
+  return (
+    <div className="st-wlist" ref={rootRef} onPointerMove={onMove} onPointerLeave={() => setActive(null)}>
+      <div className="st-wlist-head" aria-hidden="true">
+        <span>N°</span>
+        <span>Projet</span>
+        <span>Catégorie</span>
+        <span>Stack</span>
+      </div>
+      <ul data-hovering={active !== null}>
+        {items.map((item, i) => (
+          <li
+            className="st-wrow"
+            key={`${item.type}-${item.id}`}
+            data-active={active === i}
+            onPointerEnter={() => setActive(i)}
+          >
+            <StLink href={item.href} cursor="Voir">
+              <span className="n">{pad(i + 1)}</span>
+              <span className="t">{item.name}</span>
+              <span className="c">{item.category}</span>
+              <span className="s">{item.stackShort}</span>
+              <Icon name="arrow-up-right" />
+            </StLink>
+            <span className="st-wrow-rule" aria-hidden="true" />
+          </li>
+        ))}
+      </ul>
+      <div className="st-wpreview" ref={previewRef} data-on={active !== null} aria-hidden="true">
+        {items.map((item, i) => (
+          <div className="st-wpreview-item" key={`${item.type}-${item.id}`} data-on={active === i} style={caseColors(item)}>
+            <CasePanel item={item} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** /realisations: every project and agent, filterable, as a grid or an index list. */
+const Realisations = () => {
+  const [params, setParams] = useSearchParams();
+  const { hash } = useLocation();
+  const filter: Filter = params.get("filtre") === "agents" ? "agents" : params.get("filtre") === "web" ? "web" : "tout";
+  const view: View = params.get("vue") === "liste" ? "liste" : "grille";
+  const current = FILTERS.find((f) => f.id === filter) ?? FILTERS[0];
+  const bodyRef = useRef<HTMLDivElement>(null);
+  const firstRender = useRef(true);
+
+  // Old links pointed to /realisations#agents
+  useEffect(() => {
+    if (hash === "#agents") setParams({ filtre: "agents" }, { replace: true });
+  }, [hash, setParams]);
+
+  const update = (next: { filtre?: Filter; vue?: View }) => {
+    const f = next.filtre ?? filter;
+    const v = next.vue ?? view;
+    const p: Record<string, string> = {};
+    if (f !== "tout") p.filtre = f;
+    if (v !== "grille") p.vue = v;
+    setParams(p, { replace: true, preventScrollReset: true });
+  };
+
+  // New selection: items come in, every trigger below re-measures
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    const body = bodyRef.current;
+    if (body && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.fromTo(
+        body.querySelectorAll(".st-wcard > a, .st-wrow > a"),
+        { opacity: 0, y: 36 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "expo.out", stagger: 0.035, clearProps: "opacity,transform" },
+      );
+    }
+    ScrollTrigger.refresh();
+  }, [filter, view]);
 
   return (
     <>
       <MetaTags
         title="Nos Réalisations | BoostAI Consulting - Projets Web & IA"
-        description="Découvrez nos réalisations en développement web et intelligence artificielle. Sites vitrines, outils IA, automatisations et projets innovants."
+        description="Découvrez nos réalisations en développement web et intelligence artificielle&nbsp;: plateformes, MVP, sites vitrines, agents IA et automatisations."
         keywords="réalisations, projets web, intelligence artificielle, développement, automatisation, BoostAI"
         image="/android-chrome-512x512.png"
       />
+      <main id="contenu" tabIndex={-1}>
+        <PageHero
+          label="(Index)"
+          line1="Projets"
+          line2="& agents IA"
+          title="Réalisations BoostAI&nbsp;: projets web et agents IA"
+          foot={<span>{pad(CASES.length)} réalisations</span>}
+        >
+          <p>
+            Plateformes, MVP, sites vitrines et agents IA&nbsp;: une sélection de {CASES.length} projets conçus et
+            développés par le studio.
+          </p>
+        </PageHero>
 
-      <div className="lumio-page min-h-screen overflow-x-hidden bg-[#FAF9F5] text-[#1B1B1B]">
-        <Header />
-
-        <main className="relative z-10 pt-36">
-          {/* Hero Section */}
-          <section className="pb-12 sm:pb-16">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center max-w-3xl mx-auto mb-12">
-                <motion.span
-                  className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#8C8880] mb-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
+        <section className="st-work-index" aria-label="Liste des réalisations">
+          <div className="st-wtools">
+            <div className="st-wfilters" role="group" aria-label="Filtrer les réalisations">
+              {FILTERS.map((f) => (
+                <button
+                  key={f.id}
+                  type="button"
+                  aria-pressed={filter === f.id}
+                  onClick={() => update({ filtre: f.id })}
                 >
-                  Nos Réalisations
-                </motion.span>
-                <motion.h1
-                  className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1B1B1B]"
-                  style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                  Ce qu'on a construit pour vous.
-                </motion.h1>
-              </div>
-
-              {/* Toggle Section */}
-              <motion.div
-                className="flex justify-center mb-6 lg:mb-12"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                <div className="relative flex items-center justify-center gap-1 sm:gap-2 p-1 bg-white rounded-full border border-[#D9D7D0] shadow-sm w-fit mx-auto">
-                  <button
-                    onClick={() => setActiveTab('web')}
-                    className={`px-3 py-1.5 sm:px-5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 ${
-                      activeTab === 'web'
-                        ? 'bg-[#1B1B1B] text-[#FAF9F5] shadow-sm'
-                        : 'text-[#8C8880] hover:text-[#1B1B1B]'
-                    }`}
-                  >
-                    Produits Web
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('agents')}
-                    className={`px-3 py-1.5 sm:px-5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 ${
-                      activeTab === 'agents'
-                        ? 'bg-[#1B1B1B] text-[#FAF9F5] shadow-sm'
-                        : 'text-[#8C8880] hover:text-[#1B1B1B]'
-                    }`}
-                  >
-                    Agents & Automatisations
-                  </button>
-                </div>
-              </motion.div>
+                  {f.label}
+                  <sup>{pad(f.items.length)}</sup>
+                </button>
+              ))}
             </div>
-          </section>
-
-          {/* Projects Grid */}
-          <section className="pt-4 pb-16 lg:pb-20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-7xl mx-auto">
-                {/* Web Projects */}
-                {activeTab === 'web' && (
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key="web"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.5 }}
-                      className="grid grid-cols-1 lg:grid-cols-2 gap-8"
-                    >
-                      {projectsData.web.map((project, index) => (
-                        <motion.div
-                          key={project.id}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: index * 0.1 }}
-                        >
-                          <div
-                            className="flex flex-col rounded-[32px] overflow-hidden bg-white border border-[#D9D7D0]/60 shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300 cursor-pointer"
-                            onClick={() => navigate(`/project/${project.id}`)}
-                          >
-                            <img
-                              src={project.image}
-                              alt={project.title}
-                              className="w-full h-48 object-cover"
-                            />
-                            <div className="p-6 flex flex-col justify-center">
-                              <h3
-                                className="text-[#1B1B1B] text-xl font-semibold mb-3 tracking-tight"
-                                style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-                              >
-                                {project.title}
-                              </h3>
-                              <div className="flex gap-2 flex-wrap text-sm mb-3">
-                                {project.tags.map((tag, tagIndex) => (
-                                  <span
-                                    key={tagIndex}
-                                    className="bg-[#E9E8E4] text-[#8C8880] px-2.5 py-1 rounded-full text-xs"
-                                  >
-                                    {tag}
-                                  </span>
-                                ))}
-                              </div>
-                              <p className="text-[#8C8880] text-sm leading-relaxed">
-                                {project.description}
-                              </p>
-                            </div>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </motion.div>
-                  </AnimatePresence>
-                )}
-
-                {/* Agents Projects */}
-                {activeTab === 'agents' && (
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key="agents"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <AgentsShowcase />
-                    </motion.div>
-                  </AnimatePresence>
-                )}
-              </div>
+            <div className="st-wviews" role="group" aria-label="Affichage">
+              <button type="button" aria-pressed={view === "grille"} onClick={() => update({ vue: "grille" })}>
+                Grille
+              </button>
+              <button type="button" aria-pressed={view === "liste"} onClick={() => update({ vue: "liste" })}>
+                Liste
+              </button>
             </div>
-          </section>
+          </div>
 
-          {/* CTA Section */}
-          <section className="py-16 border-t border-[#D9D7D0]/40">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-3xl mx-auto text-center">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                >
-                  <h2
-                    className="text-3xl sm:text-4xl font-bold text-[#1B1B1B] mb-6 tracking-tight"
-                    style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-                  >
-                    Votre projet nous intéresse ?
-                  </h2>
-                  <p className="text-xl text-[#8C8880] mb-8">
-                    Discutons de votre projet et transformons vos idées en réalité avec nos solutions sur-mesure.
-                  </p>
-                  <a
-                    href="/contact"
-                    className="inline-flex items-center px-8 py-4 bg-[#1B1B1B] text-[#FAF9F5] rounded-full hover:opacity-90 transition-all font-semibold text-lg"
-                  >
-                    Parlons de votre projet
-                  </a>
-                </motion.div>
-              </div>
-            </div>
-          </section>
-        </main>
+          <div className="st-wbody" ref={bodyRef} key={`${filter}-${view}`}>
+            {view === "grille" ? <WorkGrid items={current.items} /> : <WorkList items={current.items} />}
+          </div>
+        </section>
 
-        <Footer />
-      </div>
+        <CtaBlock line1="Votre projet" line2="sera le prochain&nbsp;?" />
+      </main>
     </>
   );
 };

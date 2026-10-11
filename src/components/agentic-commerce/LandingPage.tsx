@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
 import type { Locale } from "@/lib/agentic-commerce/i18n/config";
 import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import { StudioHeader } from "@/components/studio/StudioHeader";
+import { StudioFooter } from "@/components/studio/StudioFooter";
+import { StudioFonts } from "@/components/studio/StudioFonts";
+import "@/styles/studio.css";
 import { IconSprite, prefersReducedMotion } from "@/components/agentic-commerce/shared";
 import { Hero } from "@/components/agentic-commerce/sections/Hero";
 import { Marquee } from "@/components/agentic-commerce/sections/Marquee";
@@ -21,7 +23,7 @@ type Props = {
   dict: Dictionary;
 };
 
-/** Page layout from the Claude Design mockup, inside the shared site header/footer. */
+/** Page layout from the Claude Design mockup, inside the studio site header/footer. */
 export function AgenticLandingPage({ locale, dict }: Props) {
   const mainRef = useRef<HTMLElement>(null);
 
@@ -51,7 +53,10 @@ export function AgenticLandingPage({ locale, dict }: Props) {
   return (
     <>
       <IconSprite />
-      <Header showProgress />
+      <StudioFonts />
+      <div className="studio studio--bare">
+        <StudioHeader />
+      </div>
       <main ref={mainRef}>
         <Hero locale={locale} dict={dict} />
         <Marquee dict={dict} />
@@ -65,7 +70,9 @@ export function AgenticLandingPage({ locale, dict }: Props) {
         <AssessmentForm locale={locale} dict={dict} />
         <FinalCta dict={dict} />
       </main>
-      <Footer />
+      <div className="studio studio--bare">
+        <StudioFooter />
+      </div>
     </>
   );
 }

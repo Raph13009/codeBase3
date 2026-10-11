@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { BUDGETS, CONTACT_EMAIL, FORM_ENDPOINT, PROJECT_TYPES } from "@/components/studio/data";
+import { StLink } from "@/components/studio/motion";
+import { BUDGETS, CONTACT_EMAIL, FORM_ENDPOINT, LINKEDIN_URL, PROJECT_TYPES } from "@/components/studio/data";
 
 type Values = { name: string; email: string; type: string; budget: string; message: string };
 type Errors = Partial<Record<keyof Values, string>>;
 
 const EMPTY: Values = { name: "", email: "", type: "", budget: "", message: "" };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const TITLES = ["Qui êtes-vous ?", "Votre projet", "En quelques mots"];
+const TITLES = ["Qui êtes-vous\u00a0?", "Votre projet", "En quelques mots"];
 const LAST = TITLES.length - 1;
 
 function validate(step: number, v: Values): Errors {
@@ -20,8 +21,19 @@ function validate(step: number, v: Values): Errors {
   return e;
 }
 
-/** Big email + a three-step brief form (same FormSubmit inbox as /contact). */
-export function Contact() {
+const NEXT_STEPS = [
+  { title: "Réponse sous 24 h", text: "avec des premières pistes concrètes." },
+  { title: "Un premier échange gratuit", text: "pour cadrer le besoin\u00a0: objectifs, délais, budget." },
+  { title: "Une proposition claire", text: "avec le périmètre, le planning et le budget." },
+];
+
+type ContactProps = {
+  /** home: section of the homepage · page: body of /contact (the page hero holds the title). */
+  variant?: "home" | "page";
+};
+
+/** Big email + a three-step brief form (one FormSubmit inbox for the whole site). */
+export function Contact({ variant = "home" }: ContactProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const honeyRef = useRef<HTMLInputElement>(null);
   const [step, setStep] = useState(0);
@@ -56,7 +68,10 @@ export function Contact() {
     data.append("projet", values.type);
     data.append("budget", values.budget || "Non précisé");
     data.append("message", values.message.trim() || "(Aucun message)");
-    data.append("_subject", `Nouveau projet (${values.type}) depuis la page d'accueil`);
+    data.append(
+      "_subject",
+      `Nouveau projet (${values.type}) depuis ${variant === "page" ? "la page contact" : "la page d'accueil"}`,
+    );
     data.append("_template", "table");
     data.append("_captcha", "false");
     if (honeyRef.current?.value) data.append("_honey", honeyRef.current.value);
@@ -96,15 +111,48 @@ export function Contact() {
   const progress = status === "done" ? 1 : (step + 1) / TITLES.length;
 
   return (
-    <section className="st-contact" id="contact" aria-labelledby="st-contact-title">
-      <div className="st-contact-copy">
-        <span className="st-badge">Réponse sous 24 h</span>
-        <h2 id="st-contact-title">Un projet à lancer ?</h2>
-        <a className="st-mail" href={`mailto:${CONTACT_EMAIL}`} data-cursor="Écrire">
-          {CONTACT_EMAIL}
-        </a>
-        <p>Quelques lignes suffisent. On vous répond sous 24 h avec des premières pistes concrètes.</p>
-      </div>
+    <section
+      className="st-contact"
+      id={variant === "page" ? "formulaire" : "contact"}
+      data-variant={variant}
+      aria-labelledby="st-contact-title"
+    >
+      {variant === "page" ? (
+        <div className="st-contact-copy">
+          <h2 className="sr-only" id="st-contact-title">
+            Décrire votre projet
+          </h2>
+          <p className="st-paren">(Écrivez-nous)</p>
+          <a className="st-mail" href={`mailto:${CONTACT_EMAIL}`} data-cursor="Écrire">
+            {CONTACT_EMAIL}
+          </a>
+          <p className="st-contact-alt">
+            Ou sur <StLink href={LINKEDIN_URL}>LinkedIn</StLink>, ou via le formulaire.
+          </p>
+          <div className="st-next-steps">
+            <p className="st-paren">(Et ensuite&nbsp;?)</p>
+            <ol>
+              {NEXT_STEPS.map((step, i) => (
+                <li key={step.title}>
+                  <span className="n">0{i + 1}</span>
+                  <p>
+                    <b>{step.title}</b> {step.text}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      ) : (
+        <div className="st-contact-copy">
+          <span className="st-badge">Réponse sous 24 h</span>
+          <h2 id="st-contact-title">Un projet à lancer ?</h2>
+          <a className="st-mail" href={`mailto:${CONTACT_EMAIL}`} data-cursor="Écrire">
+            {CONTACT_EMAIL}
+          </a>
+          <p>Quelques lignes suffisent. On vous répond sous 24 h avec des premières pistes concrètes.</p>
+        </div>
+      )}
 
       <form className="st-form" ref={formRef} onSubmit={onSubmit} noValidate aria-label="Décrire votre projet">
         <div className="st-form-head">

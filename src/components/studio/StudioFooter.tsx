@@ -1,13 +1,20 @@
 import { useRef } from "react";
 import { gsap, MOTION_OK, StLink, useGSAP } from "@/components/studio/motion";
 import { BMark } from "@/components/studio/BMark";
-import { CONTACT_EMAIL, LINKEDIN_URL, MENU_PAGES } from "@/components/studio/data";
+import { CONTACT_EMAIL, LINKEDIN_URL } from "@/components/studio/data";
 
 const MENU = [
-  { label: "Projets", href: "#projets" },
-  { label: "Méthode", href: "#methode" },
-  { label: "Services", href: "#services" },
-  { label: "Contact", href: "#contact" },
+  { label: "Projets", href: "/realisations" },
+  { label: "Services", href: "/#services" },
+  { label: "Méthode", href: "/#methode" },
+  { label: "Studio", href: "/about" },
+];
+
+const PAGES = [
+  { label: "Commerce IA", href: "/fr/agentic-commerce" },
+  { label: "Agents IA", href: "/realisations?filtre=agents" },
+  { label: "Convertir un PDF", href: "/Convert" },
+  { label: "Contact", href: "/contact" },
 ];
 
 /** Columns, legal line and the giant wordmark rising from the bottom edge. */
@@ -40,7 +47,7 @@ export function StudioFooter() {
           <BMark />
           <p>Studio tech &amp; IA pour PME et startups. Sites, MVP et agents livrés vite, pensés pour convertir.</p>
         </div>
-        <nav className="st-foot-col" aria-label="Sur cette page">
+        <nav className="st-foot-col" aria-label="Menu du site">
           <h3>Menu</h3>
           <ul>
             {MENU.map((link) => (
@@ -53,7 +60,7 @@ export function StudioFooter() {
         <nav className="st-foot-col" aria-label="Pages">
           <h3>Pages</h3>
           <ul>
-            {MENU_PAGES.map((link) => (
+            {PAGES.map((link) => (
               <li key={link.href}>
                 <StLink href={link.href}>{link.label}</StLink>
               </li>

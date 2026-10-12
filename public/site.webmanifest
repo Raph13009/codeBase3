@@ -1,16 +1,19 @@
 {
   "name": "BoostAI Consulting",
   "short_name": "BoostAI",
+  "description": "Conseil digital et studio produit — plateformes, applications et systèmes.",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/favicon.svg",
@@ -19,7 +22,8 @@
       "purpose": "any"
     }
   ],
-  "theme_color": "#000000",
-  "background_color": "#FAF9F5",
-  "display": "standalone"
+  "theme_color": "#0B1028",
+  "background_color": "#F8F9FB",
+  "display": "standalone",
+  "start_url": "/"
 }

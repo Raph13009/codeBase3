@@ -14,8 +14,8 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 26px clamp(20px, 4vw, 58px) clamp(28px, 6vh, 64px);
-  background: #0e0e0d;
-  color: #f0efeb;
+  background: #0b1028;
+  color: #f8f9fb;
   /* Hidden by visibility only: GSAP would read a CSS transform as its own offset */
   visibility: hidden;
   will-change: transform;

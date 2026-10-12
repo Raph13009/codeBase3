@@ -1,9 +1,8 @@
-import { bSvgPath } from "@/components/studio/brand";
+/** Geometric BoostAI "B" mark (currentColor — works with header mix-blend). */
+const MARK_PATH =
+  "M74.41 94.63L41.70 53.52L12.01 18.36L11.82 6.45L12.30 4.00L62.50 4.00L66.80 4.79L72.27 6.93L76.17 9.47L80.18 13.48L83.89 20.70L84.86 26.17L84.47 31.84L82.71 37.30L79.79 41.60L74.22 46.39L71.48 47.95L62.40 50.39L70.51 51.66L77.34 54.98L81.45 58.30L83.11 60.35L85.84 64.65L87.21 68.55L87.99 73.24L87.79 77.34L86.62 82.23L85.45 84.77L80.47 90.72L74.41 94.63Z M55.66 95.61L55.08 95.02L34.57 95.02L34.18 95.41L33.40 95.02L23.63 95.02L23.24 95.61L21.88 95.61L21.48 95.02L12.01 94.92L12.11 41.31L13.18 41.99L48.34 84.77L56.15 94.53L55.66 95.61Z";
 
-const CIRCLE = "M50 2a48 48 0 1 1 0 96a48 48 0 1 1 0-96Z";
-const MARK_PATH = CIRCLE + bSvgPath(26);
-
-/** BoostAI mark: a disc in currentColor with the B cut out of it. */
+/** BoostAI geometric monogram filled with currentColor. */
 export function BMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 100 100" className={className} aria-hidden="true" focusable="false">

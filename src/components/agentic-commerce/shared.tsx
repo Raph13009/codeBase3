@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 
 export const ASSETS = {
-  logo: "/brand/boostai-logo-128.png",
+  logo: "/brand/boostai-symbol-128.png",
   headphonesSand: "/agentic-commerce/casque-sable.jpg",
   headphonesBlack: "/agentic-commerce/casque-noir.jpg",
   headphonesBlue: "/agentic-commerce/casque-bleu-nuit.jpg",

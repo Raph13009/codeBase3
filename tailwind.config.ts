@@ -210,6 +210,13 @@ export default {
 				'ac-surface-container': 'var(--ac-surface-container)',
 				'ac-secondary-container': 'var(--ac-secondary-container)',
 				'ac-on-secondary-container': 'var(--ac-on-secondary-container)',
+				/* BoostAI brand (New_branding guidelines) */
+				'boost-navy': '#0B1028',
+				'boost-indigo': '#4B49D1',
+				'boost-purple': '#3820E8',
+				'boost-paper': '#F8F9FB',
+				'boost-soft': '#E8E7FF',
+				'boost-muted': '#94A3B8',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

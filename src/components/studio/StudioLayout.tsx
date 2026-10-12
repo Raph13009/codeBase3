@@ -46,7 +46,7 @@ export default function StudioLayout() {
     const prev = { html: html.style.overflowX, body: body.style.overflowX, bg: body.style.backgroundColor };
     html.style.overflowX = "clip";
     body.style.overflowX = "clip";
-    body.style.backgroundColor = "#0e0e0d";
+    body.style.backgroundColor = "#0b1028";
     return () => {
       html.style.overflowX = prev.html;
       body.style.overflowX = prev.body;
@@ -111,7 +111,7 @@ export default function StudioLayout() {
         <StudioFonts />
         <Helmet>
           <html lang="fr" />
-          <meta name="theme-color" content="#0e0e0d" />
+          <meta name="theme-color" content="#0B1028" />
         </Helmet>
         <div className="studio">
           <a className="st-skip" href="#contenu" data-smooth-scroll="true">

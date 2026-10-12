@@ -6,7 +6,7 @@ type BoostAIMarkProps = {
   /** Pass null/false to render mark without a link */
   to?: string | null | false;
   className?: string;
-  /** Kept for call-site compatibility; always uses the dark mark */
+  /** Kept for call-site compatibility */
   variant?: 'onDark' | 'onLight' | 'onBlackFill';
   'aria-label'?: string;
 };
@@ -14,12 +14,15 @@ type BoostAIMarkProps = {
 function pickSrc(size: number) {
   const need = size * 2;
   if (need <= 64) {
-    return { webp: '/brand/boostai-logo-64.webp', png: '/brand/boostai-logo-64.png' };
+    return { webp: '/brand/boostai-symbol-64.webp', png: '/brand/boostai-symbol-64.png' };
   }
   if (need <= 128) {
-    return { webp: '/brand/boostai-logo-128.webp', png: '/brand/boostai-logo-128.png' };
+    return { webp: '/brand/boostai-symbol-128.webp', png: '/brand/boostai-symbol-128.png' };
   }
-  return { webp: '/brand/boostai-logo-192.webp', png: '/brand/boostai-logo.png' };
+  if (need <= 192) {
+    return { webp: '/brand/boostai-symbol-192.webp', png: '/brand/boostai-symbol-192.png' };
+  }
+  return { webp: '/brand/boostai-symbol-512.webp', png: '/brand/boostai-symbol-512.png' };
 }
 
 const BoostAIMark: React.FC<BoostAIMarkProps> = ({
@@ -40,7 +43,7 @@ const BoostAIMark: React.FC<BoostAIMarkProps> = ({
         width={size}
         height={size}
         decoding="async"
-        className={`shrink-0 rounded-full object-contain ${className}`}
+        className={`shrink-0 object-contain ${className}`}
         style={{ width: size, height: size }}
         aria-hidden={linked ? undefined : true}
       />

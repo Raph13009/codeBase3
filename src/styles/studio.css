@@ -3,19 +3,20 @@
    ========================================================================== */
 
 .studio {
-  --ink: #0e0e0d;
-  --ink-2: #181817;
-  --ink-3: #222220;
-  --paper: #f0efeb;
-  --paper-2: #e4e2dc;
-  --text: #f0efeb;
-  --muted: #8c8880;
-  --muted-2: #6b6862;
-  --soft: #bdbab3;
-  --line: rgba(240, 239, 235, 0.14);
-  --line-dark: rgba(14, 14, 13, 0.14);
-  --pink: #ff416c;
-  --rose: #e94057;
+  /* Brand palette — Deep Navy / Off White / Indigo (New_branding guidelines) */
+  --ink: #0b1028;
+  --ink-2: #121833;
+  --ink-3: #1a2140;
+  --paper: #f8f9fb;
+  --paper-2: #e8e7ff;
+  --text: #f8f9fb;
+  --muted: #94a3b8;
+  --muted-2: #64748b;
+  --soft: #c7cdd8;
+  --line: rgba(248, 249, 251, 0.14);
+  --line-dark: rgba(11, 16, 40, 0.14);
+  --pink: #4b49d1;
+  --rose: #3820e8;
   --live: #22c55e;
   --f-display: "Cabinet Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --f-body: "General Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -232,7 +233,7 @@ html.lenis body {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 0 var(--gutter);
-  color: #f0efeb;
+  color: #f8f9fb;
   mix-blend-mode: difference;
   pointer-events: none;
 }
@@ -303,8 +304,8 @@ html.lenis body {
 }
 
 .studio .st-header .st-pill:hover {
-  background: #f0efeb;
-  color: #000;
+  background: #f8f9fb;
+  color: #0b1028;
 }
 
 .studio .st-burger {
@@ -453,7 +454,7 @@ html.has-cursor .studio textarea {
   height: 6px;
   margin: -3px 0 0 -3px;
   border-radius: 50%;
-  background: #f0efeb;
+  background: #f8f9fb;
 }
 
 .studio .st-cursor-ring {
@@ -466,7 +467,7 @@ html.has-cursor .studio textarea {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 1px solid #f0efeb;
+  border: 1px solid #f8f9fb;
   transition:
     scale 0.45s var(--ease-out),
     opacity 0.3s ease;
@@ -493,10 +494,10 @@ html.has-cursor .studio textarea {
   align-items: center;
   gap: 8px;
   padding: 11px 16px;
-  border: 1px solid rgba(240, 239, 235, 0.22);
+  border: 1px solid rgba(248, 249, 251, 0.22);
   border-radius: 999px;
-  background: #0e0e0d;
-  color: #f0efeb;
+  background: #0b1028;
+  color: #f8f9fb;
   font-size: 11px;
   line-height: 1;
   letter-spacing: 0.12em;

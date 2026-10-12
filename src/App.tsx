@@ -47,7 +47,7 @@ const App = () => {
           <Toaster />
           <Sonner />
 
-          <div className="min-h-screen bg-[#FAF9F5]">
+          <div className="min-h-screen bg-[#F8F9FB]">
             <Navbar />
             <PageTransitionProvider>
               <Routes>

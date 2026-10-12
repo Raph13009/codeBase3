@@ -1,5 +1,4 @@
 {
-  "cleanUrls": true,
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
     {
@@ -10,6 +9,10 @@
       "source": "/fr/agentic-commerce",
       "destination": "/fr/agentic-commerce/index.html"
     },
+<<<<<<< HEAD
     { "source": "/(.*)", "destination": "/" }
+=======
+    { "source": "/((?!api/|en/agentic-commerce|fr/agentic-commerce|assets/).*)", "destination": "/" }
+>>>>>>> 9565962 (fix(vercel): serve SPA deep links like /realisations with 200)
   ]
 }

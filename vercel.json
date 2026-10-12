@@ -10,6 +10,6 @@
       "source": "/fr/agentic-commerce",
       "destination": "/fr/agentic-commerce/index.html"
     },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/(.*)", "destination": "/" }
   ]
 }

@@ -1,0 +1,245 @@
+{
+  "schema": "seo-playbook/liens@1",
+  "prospects": [
+    {
+      "id": "L1",
+      "nom": "La Fabrique du Net — agences IA",
+      "type": "annuaire",
+      "url": "https://www.lafabriquedunet.fr/agences/pages/agences-intelligence-artificielle",
+      "page_du_lien": "",
+      "cout": "0 € (formule Présence)",
+      "contact": "",
+      "note": "Grand annuaire français d'agences ; profil gratuit avec réalisations et avis ; inscription : https://www.lafabriquedunet.fr/aide/referencer-mon-agence. Viser aussi les catégories développement web et MVP.",
+      "etat": "a_contacter",
+      "ajoute_le": "2026-11-23",
+      "date_etat": "2026-11-23",
+      "indexee": "inconnu",
+      "qualif": {
+        "date": "2026-11-23",
+        "http": 200,
+        "indexable": true,
+        "raison_non_indexable": "",
+        "liens_externes": 11,
+        "liens_suivis": 9,
+        "suit_les_liens": "oui",
+        "pertinence": "metier",
+        "mots": 13198,
+        "inscription": "https://www.lafabriquedunet.fr/agences/inscrire-mon-agence",
+        "risque": "faible",
+        "raisons": [],
+        "priorite": 1
+      },
+      "lien": {},
+      "historique": [
+        {
+          "date": "2026-11-23",
+          "etat": "a_qualifier"
+        },
+        {
+          "date": "2026-11-23",
+          "etat": "a_contacter"
+        }
+      ]
+    },
+    {
+      "id": "L2",
+      "nom": "La Fabrique du Net — développement web",
+      "type": "annuaire",
+      "url": "https://www.lafabriquedunet.fr/agences/pages/agences-developpement-web",
+      "page_du_lien": "",
+      "cout": "0 € (même profil)",
+      "contact": "",
+      "note": "Même profil que la catégorie IA : cocher développement web et application.",
+      "etat": "a_contacter",
+      "ajoute_le": "2026-11-23",
+      "date_etat": "2026-11-23",
+      "indexee": "inconnu",
+      "qualif": {
+        "date": "2026-11-23",
+        "http": 200,
+        "indexable": true,
+        "raison_non_indexable": "",
+        "liens_externes": 17,
+        "liens_suivis": 15,
+        "suit_les_liens": "oui",
+        "pertinence": "metier",
+        "mots": 12007,
+        "inscription": "https://www.lafabriquedunet.fr/agences/inscrire-mon-agence",
+        "risque": "faible",
+        "raisons": [],
+        "priorite": 1
+      },
+      "lien": {},
+      "historique": [
+        {
+          "date": "2026-11-23",
+          "etat": "a_qualifier"
+        },
+        {
+          "date": "2026-11-23",
+          "etat": "a_contacter"
+        }
+      ]
+    },
+    {
+      "id": "L3",
+      "nom": "Sortlist",
+      "type": "annuaire",
+      "url": "https://www.sortlist.fr",
+      "page_du_lien": "",
+      "cout": "profil gratuit ; réponses aux projets payantes (Sortlist+)",
+      "contact": "",
+      "note": "Plateforme de mise en relation entreprises-agences ; profil gratuit à compléter (logo, réalisations, avis).",
+      "etat": "a_contacter",
+      "ajoute_le": "2026-11-23",
+      "date_etat": "2026-11-23",
+      "indexee": "inconnu",
+      "qualif": {
+        "date": "2026-11-23",
+        "http": 200,
+        "indexable": true,
+        "raison_non_indexable": "",
+        "liens_externes": 2,
+        "liens_suivis": 1,
+        "suit_les_liens": "oui",
+        "pertinence": "metier",
+        "mots": 3028,
+        "inscription": "https://www.sortlist.fr/join",
+        "risque": "faible",
+        "raisons": [],
+        "priorite": 1
+      },
+      "lien": {},
+      "historique": [
+        {
+          "date": "2026-11-23",
+          "etat": "a_qualifier"
+        },
+        {
+          "date": "2026-11-23",
+          "etat": "a_contacter"
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "nom": "Clutch",
+      "type": "annuaire",
+      "url": "https://clutch.co/get-listed",
+      "page_du_lien": "",
+      "cout": "0 € (Basic)",
+      "contact": "",
+      "note": "Annuaire international d'agences B2B ; profil gratuit validé par l'équipe Clutch ; collecte d'avis clients vérifiés.",
+      "etat": "a_contacter",
+      "ajoute_le": "2026-11-23",
+      "date_etat": "2026-11-23",
+      "indexee": "inconnu",
+      "qualif": {
+        "date": "2026-11-23",
+        "http": 200,
+        "indexable": true,
+        "raison_non_indexable": "",
+        "liens_externes": 13,
+        "liens_suivis": 4,
+        "suit_les_liens": "oui",
+        "pertinence": "metier",
+        "mots": 448,
+        "inscription": "",
+        "risque": "faible",
+        "raisons": [],
+        "priorite": 2
+      },
+      "lien": {},
+      "historique": [
+        {
+          "date": "2026-11-23",
+          "etat": "a_qualifier"
+        },
+        {
+          "date": "2026-11-23",
+          "etat": "a_contacter"
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "nom": "Digitiz — annuaire des agences IA",
+      "type": "annuaire",
+      "url": "https://digitiz.fr/annuaire/agences-ia/",
+      "page_du_lien": "",
+      "cout": "à vérifier",
+      "contact": "",
+      "note": "Classement éditorial des agences IA en France ; demander la prise en compte de BoostAI.",
+      "etat": "a_contacter",
+      "ajoute_le": "2026-11-23",
+      "date_etat": "2026-11-23",
+      "indexee": "inconnu",
+      "qualif": {
+        "date": "2026-11-23",
+        "http": 200,
+        "indexable": true,
+        "raison_non_indexable": "",
+        "liens_externes": 43,
+        "liens_suivis": 41,
+        "suit_les_liens": "oui",
+        "pertinence": "metier",
+        "mots": 3219,
+        "inscription": "https://digitiz.fr/contact/",
+        "risque": "faible",
+        "raisons": [],
+        "priorite": 2
+      },
+      "lien": {},
+      "historique": [
+        {
+          "date": "2026-11-23",
+          "etat": "a_qualifier"
+        },
+        {
+          "date": "2026-11-23",
+          "etat": "a_contacter"
+        }
+      ]
+    },
+    {
+      "id": "L6",
+      "nom": "Catalogue public des solutions IA pour PME et ETI (DGE, Hub France IA)",
+      "type": "autre",
+      "url": "https://www.entreprises.gouv.fr/la-dge/actualites/ami-ai-efficiency-les-laureats-en-detail",
+      "page_du_lien": "",
+      "cout": "candidature",
+      "contact": "",
+      "note": "Appel à manifestation d'intérêt : vérifier s'il est encore ouvert ou s'il y aura une prochaine session.",
+      "etat": "a_contacter",
+      "ajoute_le": "2026-11-23",
+      "date_etat": "2026-11-23",
+      "indexee": "inconnu",
+      "qualif": {
+        "date": "2026-11-23",
+        "http": 200,
+        "indexable": true,
+        "raison_non_indexable": "",
+        "liens_externes": 91,
+        "liens_suivis": 91,
+        "suit_les_liens": "oui",
+        "pertinence": "metier",
+        "mots": 54501,
+        "inscription": "https://www.entreprises.gouv.fr/la-dge/nous-rejoindre",
+        "risque": "faible",
+        "raisons": [],
+        "priorite": 1
+      },
+      "lien": {},
+      "historique": [
+        {
+          "date": "2026-11-23",
+          "etat": "a_qualifier"
+        },
+        {
+          "date": "2026-11-23",
+          "etat": "a_contacter"
+        }
+      ]
+    }
+  ]
+}

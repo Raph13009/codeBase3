@@ -1,0 +1,381 @@
+{
+  "schema": "seo-playbook/existant@1",
+  "releve_le": "2026-11-23",
+  "site": "https://www.boostaiconsulting.com",
+  "sources": [
+    {
+      "source": "https://www.boostaiconsulting.com/sitemap.xml",
+      "type": "sitemap",
+      "pages": 7
+    },
+    {
+      "source": "seo/rapports/lancement/lancement.json",
+      "type": "lancement",
+      "pages": 23
+    },
+    {
+      "source": "seo/routes.txt",
+      "type": "search_console_csv",
+      "pages": 23
+    }
+  ],
+  "notes": [],
+  "pages": [
+    {
+      "path": "/",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "sitemap",
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/Convert",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "sitemap",
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/about",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "sitemap",
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/agent/1",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/agent/2",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/agent/3",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/agent/4",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/blog",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "sitemap",
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/contact",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "sitemap",
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/en/agentic-commerce",
+      "title": "Agentic Commerce by BoostAI Consulting | Readiness Assessment & Pilot",
+      "h1": [
+        "Make your commerce shoppable by AI agents."
+      ],
+      "mots": 616,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": "en",
+      "sources": [
+        "sitemap",
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/fr/agentic-commerce",
+      "title": "Agentic Commerce by BoostAI Consulting | Évaluation & programme pilote",
+      "h1": [
+        "Rendez votre commerce achetable par les agents IA."
+      ],
+      "mots": 692,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": "fr",
+      "sources": [
+        "sitemap",
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/ocr-terms",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/project/1",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/project/10",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/project/2",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/project/3",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/project/4",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/project/5",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/project/6",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/project/7",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/project/8",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/project/9",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    },
+    {
+      "path": "/realisations",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "h1": [],
+      "mots": 0,
+      "clics": 0,
+      "impressions": 0,
+      "requetes": [],
+      "noindex": false,
+      "langue": null,
+      "sources": [
+        "lancement",
+        "search_console_csv"
+      ]
+    }
+  ]
+}

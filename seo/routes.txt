@@ -1,0 +1,24 @@
+# Routes de src/App.tsx (adresses fixes ; les adresses à paramètre sont listées une à une)
+/
+/realisations
+/about
+/contact
+/Convert
+/ocr-terms
+/blog
+/fr/agentic-commerce
+/en/agentic-commerce
+/project/1
+/project/2
+/project/3
+/project/4
+/project/5
+/project/6
+/project/7
+/project/8
+/project/9
+/project/10
+/agent/1
+/agent/2
+/agent/3
+/agent/4

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link } from "@/lib/router-compat";
 
 const LaptopSection: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -15,6 +15,8 @@ const LaptopSection: React.FC = () => {
       };
 
       video.addEventListener('loadeddata', handleVideoLoadedData);
+      // Rendered on the server, the video may have loaded before this listener existed
+      if (video.readyState >= 2) handleVideoLoadedData();
       video.loop = true;
       video.muted = true;
       video.playsInline = true;

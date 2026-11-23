@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "@/lib/helmet-compat";
 
 /** Cabinet Grotesk + General Sans (Fontshare) and Instrument Serif (Google). */
 export function StudioFonts() {

@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState, type CSSProperties } from "react";
-import { gsap, Icon, MaskChars, MOTION_OK, prefersReducedMotion, StLink, useGSAP } from "@/components/studio/motion";
+import { gsap, Icon, MaskChars, MOTION_OK, prefersReducedMotion, StLink, useGSAP, useBrowserValue } from "@/components/studio/motion";
 import { usePageReady } from "@/components/studio/PageTransition";
 import { BMark } from "@/components/studio/BMark";
 import { Lightbox } from "@/components/studio/Lightbox";
@@ -40,7 +40,7 @@ function galleryRows(shots: Shot[]): Row[] {
 export function CaseStudy({ item }: { item: Case }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const ready = usePageReady();
-  const [intro, setIntro] = useState<"pending" | "done">(() => (prefersReducedMotion() ? "done" : "pending"));
+  const [intro, setIntro] = useBrowserValue<"pending" | "done">("pending", () => (prefersReducedMotion() ? "done" : "pending"));
   const [viewer, setViewer] = useState<number | null>(null);
 
   const index = CASES.indexOf(item);

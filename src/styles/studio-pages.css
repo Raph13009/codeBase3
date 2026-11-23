@@ -2696,3 +2696,11 @@
     max-height: 82svh;
   }
 }
+
+/* Pages written with the SEO playbook (src/components/seo-article.*): brand colours, room under the fixed header */
+.studio {
+  --seo-top: calc(var(--header-h) + 3rem);
+  --seo-accent: var(--pink);
+  --seo-accent-ink: var(--paper);
+  --seo-soft: var(--ink-2);
+}

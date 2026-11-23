@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Globe, Smartphone, Zap } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from "@/lib/router-compat";
 import ServiceTiltedCard from '@/components/ui/ServiceTiltedCard';
 
 const HowWeHelp: React.FC = () => {

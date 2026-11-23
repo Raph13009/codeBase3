@@ -26,3 +26,7 @@ dist-ssr
 .env
 .cursor/
 
+# Next.js
+.next
+next-env.d.ts
+*.tsbuildinfo

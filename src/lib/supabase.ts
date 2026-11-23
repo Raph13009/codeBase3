@@ -6,8 +6,8 @@ const FALLBACK_URL = "https://rvgmvtjcbbrzuoripqwa.supabase.co";
 const FALLBACK_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ2Z212dGpjYmJyenVvcmlwcXdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI0ODI0NDEsImV4cCI6MjA1ODA1ODQ0MX0.XBWTN9os9Z09AkHGMItqOMVVFAk9QejzpSZsawRazOU";
 
-const envUrlRaw = String(import.meta.env.VITE_SUPABASE_URL ?? "").trim();
-const envKeyRaw = String(import.meta.env.VITE_SUPABASE_ANON_KEY ?? "").trim();
+const envUrlRaw = String(process.env.VITE_SUPABASE_URL ?? "").trim();
+const envKeyRaw = String(process.env.VITE_SUPABASE_ANON_KEY ?? "").trim();
 
 let supabaseUrl = FALLBACK_URL;
 if (envUrlRaw) {

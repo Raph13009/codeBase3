@@ -5,7 +5,7 @@ import { CONTACT_EMAIL, LINKEDIN_URL } from "@/components/studio/data";
 
 const MENU = [
   { label: "Projets", href: "/realisations" },
-  { label: "Services", href: "/#services" },
+  { label: "Services", href: "/services" },
   { label: "Méthode", href: "/#methode" },
   { label: "Studio", href: "/about" },
 ];

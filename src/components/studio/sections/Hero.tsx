@@ -1,8 +1,10 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { gsap, Icon, MaskChars, MOTION_OK, prefersReducedMotion, StLink, useGSAP } from "@/components/studio/motion";
+import { Suspense, useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import { gsap, Icon, MaskChars, MOTION_OK, prefersReducedMotion, StLink, useGSAP, useBrowserValue } from "@/components/studio/motion";
 import { HERO_PROJECTS } from "@/components/studio/data";
 
-const HeroMark3D = lazy(() => import("@/components/studio/HeroMark3D"));
+// Loaded in the browser only (WebGL), like the lazy() import of the Vite version
+const HeroMark3D = dynamic(() => import("@/components/studio/HeroMark3D"), { ssr: false });
 
 const MARQUEE_ITEMS = Array.from({ length: 5 });
 
@@ -10,7 +12,7 @@ const MARQUEE_ITEMS = Array.from({ length: 5 });
 export function Hero({ ready }: { ready: boolean }) {
   const rootRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const [intro, setIntro] = useState<"pending" | "done">(() => (prefersReducedMotion() ? "done" : "pending"));
+  const [intro, setIntro] = useBrowserValue<"pending" | "done">("pending", () => (prefersReducedMotion() ? "done" : "pending"));
 
   // Entrance, once the loader lifts (or straight away when there is no loader)
   useGSAP(
@@ -98,7 +100,8 @@ export function Hero({ ready }: { ready: boolean }) {
       <div className="st-hero-inner">
         <h1 className="st-hero-title">
           <span className="sr-only">
-            BoostAI Consulting, studio tech et IA : sites web, MVP et agents IA sur mesure pour les PME et les startups.
+            Agence web et IA : BoostAI Consulting, studio tech et IA, conçoit des sites web, des MVP et des agents IA sur
+            mesure pour les PME et les startups.
           </span>
           <MaskChars text="Studio" className="l1" />
           <span className="l2 serif" aria-hidden="true">
@@ -110,8 +113,8 @@ export function Hero({ ready }: { ready: boolean }) {
 
         <div className="st-hero-side">
           <p>
-            BoostAI conçoit et développe des sites, des MVP et des agents IA pour les PME et les startups. Livrés vite,
-            propres, et mesurables.
+            Agence web et IA, BoostAI conçoit et développe des sites, des MVP et des agents IA pour les PME et les
+            startups. Livrés vite, propres, et mesurables.
           </p>
           <ul className="st-hero-list" aria-label="Projets récents">
             {HERO_PROJECTS.map((project, i) => (

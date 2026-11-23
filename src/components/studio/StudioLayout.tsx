@@ -1,6 +1,8 @@
-import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
-import { Helmet } from "react-helmet-async";
-import { Outlet, useLocation } from "react-router-dom";
+"use client";
+
+import { Fragment, useCallback, useEffect, useLayoutEffect, useRef, type ReactNode } from "react";
+import { Helmet } from "@/lib/helmet-compat";
+import { useLocation } from "@/lib/router-compat";
 import Lenis from "lenis";
 import { gsap, LenisContext, prefersReducedMotion, ScrollLockContext, ScrollTrigger } from "@/components/studio/motion";
 import { StudioFonts } from "@/components/studio/StudioFonts";
@@ -27,7 +29,7 @@ function scrollToHash(hash: string, lenis: Lenis | null) {
  * Shell shared by every studio page: smooth scroll, header, footer and cursor
  * stay mounted between pages, only the routed content changes.
  */
-export default function StudioLayout() {
+export default function StudioLayout({ children }: { children?: ReactNode }) {
   const { pathname, hash } = useLocation();
   const lenisRef = useRef<Lenis | null>(null);
   const lockedRef = useRef(false);
@@ -118,7 +120,7 @@ export default function StudioLayout() {
             Aller au contenu
           </a>
           <StudioHeader />
-          <Outlet key={pathname} />
+          <Fragment key={pathname}>{children}</Fragment>
           <StudioFooter />
           <Cursor />
         </div>

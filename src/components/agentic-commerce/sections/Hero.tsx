@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useRef, type CSSProperties } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import type { Locale } from "@/lib/agentic-commerce/i18n/config";
 import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
 import { trackAgenticEvent } from "@/lib/agentic-commerce/analytics";

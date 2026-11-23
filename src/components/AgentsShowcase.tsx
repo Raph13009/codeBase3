@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "@/lib/router-compat";
 import { 
   Bot, 
   Zap, 

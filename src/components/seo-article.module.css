@@ -1,0 +1,146 @@
+/* Readable defaults. Brand them with variables set on a parent (or :root):
+   --seo-accent (links, button, quote border), --seo-accent-ink (button text), --seo-soft (quote background),
+   --seo-top (space above the text, e.g. under a fixed site header).
+   ":not(#seo-playbook)" only raises specificity: a site stylesheet that styles ".layout h2" or ".layout a" would
+   otherwise remove the margins and underlines the text needs (seen on a client site, 2026-11-23). */
+
+.article:not(#seo-playbook) {
+  max-width: 46rem;
+  margin-inline: auto;
+  padding: var(--seo-top, 3rem) 1.25rem 4rem;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+.article:not(#seo-playbook) h1 {
+  font-size: clamp(1.9rem, 4.5vw, 2.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.25rem;
+  text-wrap: balance;
+}
+
+.article:not(#seo-playbook) h2 {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin: 2.75rem 0 0.75rem;
+  text-wrap: balance;
+}
+
+.article:not(#seo-playbook) h3 {
+  font-size: 1.15rem;
+  line-height: 1.3;
+  margin: 1.75rem 0 0.4rem;
+}
+
+.article:not(#seo-playbook) p,
+.article:not(#seo-playbook) ul,
+.article:not(#seo-playbook) ol {
+  margin: 0 0 1rem;
+}
+
+.article:not(#seo-playbook) ul,
+.article:not(#seo-playbook) ol {
+  padding-left: 1.25rem;
+}
+
+.article:not(#seo-playbook) ul {
+  list-style: disc;
+}
+
+.article:not(#seo-playbook) ol {
+  list-style: decimal;
+}
+
+.article:not(#seo-playbook) li {
+  margin: 0.3rem 0;
+}
+
+.article:not(#seo-playbook) a {
+  color: var(--seo-accent, currentColor);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.article:not(#seo-playbook) :global(.seo-cta),
+.hub:not(#seo-playbook) :global(.seo-cta) {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  margin: 0.25rem 0.5rem 0.25rem 0;
+  border-radius: 999px;
+  background: var(--seo-accent, #1f2937);
+  color: var(--seo-accent-ink, #fff);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.article:not(#seo-playbook) :global(.seo-tel),
+.hub:not(#seo-playbook) :global(.seo-tel) {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.article:not(#seo-playbook) blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--seo-accent, currentColor);
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: var(--seo-soft, rgba(127, 127, 127, 0.08));
+}
+
+.article:not(#seo-playbook) blockquote p:last-child {
+  margin-bottom: 0;
+  font-size: 0.925rem;
+  opacity: 0.8;
+}
+
+.article:not(#seo-playbook) img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.article:not(#seo-playbook) hr {
+  border: 0;
+  border-top: 1px solid rgba(127, 127, 127, 0.25);
+  margin: 2.5rem 0;
+}
+
+.hub:not(#seo-playbook) {
+  max-width: 46rem;
+  margin-inline: auto;
+  padding: var(--seo-top, 3rem) 1.25rem 4rem;
+  line-height: 1.6;
+}
+
+.hub:not(#seo-playbook) h1 {
+  font-size: clamp(1.9rem, 4.5vw, 2.75rem);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+.hub:not(#seo-playbook) h2 {
+  font-size: 1.25rem;
+  margin: 2rem 0 0.5rem;
+}
+
+.hub:not(#seo-playbook) ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hub:not(#seo-playbook) li {
+  border-bottom: 1px solid rgba(127, 127, 127, 0.2);
+}
+
+.hub:not(#seo-playbook) li a {
+  display: block;
+  padding: 0.75rem 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.hub:not(#seo-playbook) li a:hover {
+  color: var(--seo-accent, inherit);
+}

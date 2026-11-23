@@ -44,7 +44,13 @@ ressemble à de la production en série.
 - **Une formule retirée des données cachées des pages** : « meilleure agence web ». En France, ce type d'affirmation
   doit pouvoir être prouvé.
 
-Ces changements sont prêts, vérifiés sur une copie du site, et seront en ligne au prochain déploiement.
+**Tout est en ligne depuis le 23 novembre 2026**, avec un changement de fond : le site est passé sur Next.js (même
+design, mêmes pages, mêmes adresses). Chaque page arrive maintenant avec son texte. L'accueil compte 552 mots
+lisibles sans JavaScript, contre 0 avant. Le contrôle technique du site ne relève plus qu'un point : les mentions
+légales, qui attendent vos informations (plus bas).
+
+Les 24 pages du site ont été signalées à Bing et aux autres moteurs du protocole IndexNow. Bing alimente aussi la
+recherche de ChatGPT.
 
 ## Ce dont nous avons besoin de vous
 
@@ -61,7 +67,10 @@ Ces changements sont prêts, vérifiés sur une copie du site, et seront en lign
 6. **Où travaillez-vous ?** Toute la France, l'Europe, certaines villes ? Google montre des recherches comme
    « agence automatisation ia lyon » ou « … paris » : nous n'écrirons une page de ville que si vous avez un vrai
    lien avec elle (bureau, clients).
-7. **Les outils que vous utilisez** : faites-vous de l'automatisation avec n8n ? La recherche « agence automatisation
+7. **Inscrire BoostAI dans trois annuaires d'agences.** Tout est rédigé (`seo/liens/brouillons/`). Il ne reste
+   qu'à créer les comptes : La Fabrique du Net et Clutch sont gratuits. Sur Sortlist, le profil est gratuit, et seule
+   la réponse aux demandes de projets est payante.
+8. **Les outils que vous utilisez** : faites-vous de l'automatisation avec n8n ? La recherche « agence automatisation
    ia n8n » existe.
 
 ## La suite
@@ -69,6 +78,6 @@ Ces changements sont prêts, vérifiés sur une copie du site, et seront en lign
 - Au prochain mois : la page « Création de site internet sur mesure », puis « Agence de création d'agents IA ».
 - Dès que Search Console est accessible : le premier rapport mensuel, avec les recherches sur lesquelles le site
   apparaît déjà.
-- Le site passe sur Next.js (même design, mêmes pages, mêmes adresses) : chaque page arrive désormais avec son texte, lisible par Google comme par les assistants qui n'exécutent pas le JavaScript. L'accueil compris : 552 mots lisibles au lieu de 0. Prêt, en attente de votre feu vert pour la mise en ligne.
+- Les inscriptions dans les annuaires d'agences sont prêtes à saisir (La Fabrique du Net, Sortlist, Clutch) : fiche et descriptions dans `seo/liens/brouillons/`. Elles se font avec votre compte, en deux minutes chacune.
 
 *Les positions dans Google se construisent en semaines et en mois : ce sont les tendances qui comptent.*

@@ -14,10 +14,10 @@ Site existant : 23 pages relevées le 2026-11-23 (https://www.boostaiconsulting.
 
 | # | Page | Mot-clé visé | Adresse | Title | Volume | Statut |
 |---|---|---|---|---|---|---|
-| 1 | Agence web et IA | agence web ia | `/` | Agence web et IA · De l'idée au produit en ligne · BoostAI Consulting | — | écrite |
+| 1 | Agence web et IA | agence web ia | `/` | Agence web et IA · De l'idée au produit en ligne · BoostAI Consulting | — | publiée |
 | 2 | Nos services | — | `/services/` | Nos services · … · BoostAI Consulting | — | à écrire |
 | 3 | Création de site internet sur mesure | création site internet sur mesure | `/services/creation-site-internet-sur-mesure` | Création de site internet sur mesure · … · BoostAI Consulting | — | à écrire |
-| 4 | Agence de développement de MVP | agence développement mvp | `/services/agence-developpement-mvp` | Agence de développement de MVP · De l'idée au produit en ligne · BoostAI Consulting | — | écrite |
+| 4 | Agence de développement de MVP | agence développement mvp | `/services/agence-developpement-mvp` | Agence de développement de MVP · De l'idée au produit en ligne · BoostAI Consulting | — | publiée |
 | 5 | Agence de création d'agents IA | agence création agent ia | `/services/agence-creation-agent-ia` | Agence de création d'agents IA · … · BoostAI Consulting | — | à écrire |
 | 6 | Agence d'automatisation IA | agence automatisation ia | `/services/agence-automatisation-ia` | Agence d'automatisation IA · … · BoostAI Consulting | — | à écrire |
 | 7 | Commerce agentique | commerce agentique | `/fr/agentic-commerce` | Commerce agentique · … · BoostAI Consulting | — | à reprendre (déjà en ligne) |
@@ -28,9 +28,7 @@ Site existant : 23 pages relevées le 2026-11-23 (https://www.boostaiconsulting.
 
 Notes :
 
-- `/` — écrite le 2026-11-23 (branche seo/playbook), à journaliser à la mise en ligne
 - `/services/` — liste toutes les pages de service ; lié dans le pied de page de tout le site
-- `/services/agence-developpement-mvp` — écrite le 2026-11-23 (branche seo/playbook), à journaliser à la mise en ligne
 - `/fr/agentic-commerce` — adresse déjà en ligne conservée, sans « agentique » ; si elle ne reçoit aucune visite, on peut passer à /services/commerce-agentique avec une redirection 301 : mettre « url »: "/services/commerce-agentique" dans la fiche et relancer
 
 ## Vague 3 — publics, comparaisons, avis

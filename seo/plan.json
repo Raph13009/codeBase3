@@ -23,12 +23,10 @@
         "/services/agence-developpement-mvp",
         "/services/agence-creation-agent-ia"
       ],
-      "statut": "ecrite",
+      "statut": "publiee",
       "volume": null,
       "source_volume": null,
-      "notes": [
-        "écrite le 2026-11-23 (branche seo/playbook), à journaliser à la mise en ligne"
-      ],
+      "notes": [],
       "ville": null,
       "origine": "existante",
       "existante": {
@@ -40,6 +38,7 @@
         "impressions": 0,
         "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes"
       },
+      "date_publication": "2026-11-23",
       "ordre": 1
     },
     {
@@ -110,15 +109,14 @@
         "/services/agence-creation-agent-ia",
         "/services/agence-automatisation-ia"
       ],
-      "statut": "ecrite",
+      "statut": "publiee",
       "volume": null,
       "source_volume": null,
-      "notes": [
-        "écrite le 2026-11-23 (branche seo/playbook), à journaliser à la mise en ligne"
-      ],
+      "notes": [],
       "ville": null,
       "service": "MVP",
       "origine": "nouvelle",
+      "date_publication": "2026-11-23",
       "ordre": 4
     },
     {

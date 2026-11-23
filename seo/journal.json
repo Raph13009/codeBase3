@@ -1,0 +1,23 @@
+{
+  "schema": "seo-playbook/journal@1",
+  "entrees": [
+    {
+      "date": "2026-11-23",
+      "page": "/services/agence-developpement-mvp",
+      "type": "creation",
+      "note": "page publiée (site passé sur Next.js), contrôle conforme en ligne, IndexNow envoyé"
+    },
+    {
+      "date": "2026-11-23",
+      "page": "/",
+      "type": "modification",
+      "note": "accueil réécrit en place sur « agence web ia » (title, description, accroche, H1) ; 552 mots lisibles sans JavaScript"
+    },
+    {
+      "date": "2026-11-23",
+      "page": "/",
+      "type": "technique",
+      "note": "site porté de Vite vers Next.js 16 : toutes les pages rendues côté serveur, vraie 404, sitemap-pages.xml, IndexNow (24 adresses)"
+    }
+  ]
+}

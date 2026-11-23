@@ -1,5 +1,5 @@
 import { useRef, useState, type ReactNode } from "react";
-import { gsap, Icon, MaskChars, MOTION_OK, prefersReducedMotion, useGSAP } from "@/components/studio/motion";
+import { gsap, Icon, MaskChars, MOTION_OK, prefersReducedMotion, useGSAP, useBrowserValue } from "@/components/studio/motion";
 import { usePageReady } from "@/components/studio/PageTransition";
 
 type Props = {
@@ -24,7 +24,7 @@ type Props = {
 export function PageHero({ label, line1, line2, title, children, foot, size = "xl", height = "full" }: Props) {
   const rootRef = useRef<HTMLElement>(null);
   const ready = usePageReady();
-  const [intro, setIntro] = useState<"pending" | "done">(() => (prefersReducedMotion() ? "done" : "pending"));
+  const [intro, setIntro] = useBrowserValue<"pending" | "done">("pending", () => (prefersReducedMotion() ? "done" : "pending"));
 
   useGSAP(
     () => {

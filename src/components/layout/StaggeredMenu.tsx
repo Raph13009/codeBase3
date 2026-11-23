@@ -1,5 +1,5 @@
 import React, { useCallback, useLayoutEffect, useRef, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "@/lib/router-compat";
 import { gsap } from "gsap";
 
 const MENU_LINKS = [

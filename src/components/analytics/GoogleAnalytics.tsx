@@ -1,24 +1,10 @@
 import React from 'react';
 
-const GoogleAnalytics: React.FC = () => {
-  return (
-    <>
-      <script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-8WY18DVJ39"
-      />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-8WY18DVJ39');
-          `,
-        }}
-      />
-    </>
-  );
-};
+/**
+ * Kept for the pages that render it. The Google tag (G-8WY18DVJ39) is loaded once for the whole site in the root
+ * layout. Under Vite this component's <script> tags were inserted by React on the client and never executed;
+ * rendered on the server they would run and count each visit twice, so it renders nothing.
+ */
+const GoogleAnalytics: React.FC = () => null;
 
-export default GoogleAnalytics; 
+export default GoogleAnalytics;

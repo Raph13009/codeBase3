@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import TextType from '../ui/TextType';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "@/lib/router-compat";
 
 const HeroSection: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -31,6 +31,8 @@ const HeroSection: React.FC = () => {
 
       video.addEventListener('loadeddata', handleVideoLoadedData);
       video.addEventListener('timeupdate', handleVideoTimeUpdate);
+      // Rendered on the server, the video may have loaded before this listener existed
+      if (video.readyState >= 2) handleVideoLoadedData();
 
       return () => {
         video.removeEventListener('loadeddata', handleVideoLoadedData);

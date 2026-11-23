@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "@/lib/router-compat";
 import { LenisContext, StLink } from "@/components/studio/motion";
 import { BMark } from "@/components/studio/BMark";
 import { MENU_PAGES, NAV } from "@/components/studio/data";

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { StLink } from "@/components/studio/motion";
 import { BUDGETS, CONTACT_EMAIL, FORM_ENDPOINT, LINKEDIN_URL, PROJECT_TYPES } from "@/components/studio/data";
 

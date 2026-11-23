@@ -1,5 +1,5 @@
 import { useRef, useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import type { Locale } from "@/lib/agentic-commerce/i18n/config";
 import type { Dictionary } from "@/lib/agentic-commerce/i18n/dictionaries/en";
 import { trackAgenticEvent } from "@/lib/agentic-commerce/analytics";
@@ -77,7 +77,7 @@ export function AssessmentForm({ locale, dict }: Props) {
   const [errors, setErrors] = useState<Errors>({});
   const [values, setValues] = useState<FormValues>(emptyValues);
 
-  const accessKey = String(import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? "").trim();
+  const accessKey = String(process.env.VITE_WEB3FORMS_ACCESS_KEY ?? "").trim();
 
   function setField<K extends keyof FormValues>(key: K, value: FormValues[K]) {
     setValues((prev) => ({ ...prev, [key]: value }));

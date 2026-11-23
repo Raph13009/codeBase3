@@ -1,5 +1,7 @@
+"use client";
+
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "@/lib/router-compat";
 import { gsap, prefersReducedMotion } from "@/components/studio/motion";
 import { BMark } from "@/components/studio/BMark";
 import { findCase } from "@/components/studio/work";

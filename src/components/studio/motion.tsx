@@ -1,5 +1,16 @@
-import { createContext, Fragment, useCallback, useContext, type MouseEvent, type ReactNode } from "react";
-import { Link, useLocation } from "react-router-dom";
+import {
+  createContext,
+  Fragment,
+  useCallback,
+  useContext,
+  useLayoutEffect,
+  useState,
+  type Dispatch,
+  type MouseEvent,
+  type ReactNode,
+  type SetStateAction,
+} from "react";
+import { Link, useLocation } from "@/lib/router-compat";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -13,6 +24,21 @@ export const prefersReducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+
+/**
+ * State that depends on the browser (screen size, motion setting, session storage). The page is rendered on the
+ * server, which knows none of these: the first render uses `serverValue` on both sides so hydration matches, then the
+ * browser's own value is set before the first paint after hydration.
+ */
+export function useBrowserValue<T>(serverValue: T, read: () => T): [T, Dispatch<SetStateAction<T>>] {
+  const [value, setValue] = useState(serverValue);
+  useLayoutEffect(() => {
+    setValue(read());
+    // Read once, on mount: later changes are the component's business (media query listeners…)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return [value, setValue];
+}
 
 /** Media query under which scroll-linked motion runs. */
 export const MOTION_OK = "(prefers-reduced-motion: no-preference)";

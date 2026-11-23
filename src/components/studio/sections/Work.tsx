@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState, type CSSProperties } from "react";
-import { Link } from "react-router-dom";
-import { gsap, Icon, LenisContext, MaskChars, MOTION_OK, ScrollTrigger, StLink, useGSAP } from "@/components/studio/motion";
+import { Link } from "@/lib/router-compat";
+import { gsap, Icon, LenisContext, MaskChars, MOTION_OK, ScrollTrigger, StLink, useGSAP, useBrowserValue } from "@/components/studio/motion";
 import { PROJECTS } from "@/components/studio/data";
 
 const PIN_QUERY = "(min-width: 961px) and (min-height: 600px) and (prefers-reduced-motion: no-preference)";
@@ -20,7 +20,7 @@ export function Work() {
   const reelRef = useRef<HTMLDivElement>(null);
   const countRef = useRef<HTMLSpanElement>(null);
   const lenis = useContext(LenisContext);
-  const [mode, setMode] = useState<"pin" | "swipe">(() => (pinAllowed() ? "pin" : "swipe"));
+  const [mode, setMode] = useBrowserValue<"pin" | "swipe">("swipe", () => (pinAllowed() ? "pin" : "swipe"));
 
   useEffect(() => {
     const mq = window.matchMedia(PIN_QUERY);

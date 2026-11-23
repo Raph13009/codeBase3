@@ -13,4 +13,5 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://boostaiconsulting.com/sitemap.xml
+Sitemap: https://www.boostaiconsulting.com/sitemap.xml
+Sitemap: https://www.boostaiconsulting.com/sitemap-pages.xml

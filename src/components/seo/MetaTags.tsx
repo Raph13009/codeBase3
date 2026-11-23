@@ -1,6 +1,6 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { useLocation } from 'react-router-dom';
+import { Helmet } from "@/lib/helmet-compat";
+import { useLocation } from "@/lib/router-compat";
 
 interface MetaTagsProps {
   title?: string;
@@ -15,7 +15,7 @@ const MetaTags: React.FC<MetaTagsProps> = ({
   description = "Agence digitale spécialisée dans le développement web, création de sites internet modernes, MVP sur-mesure et automatisations IA pour faire croître votre business.",
   image = "https://www.boostaiconsulting.com/images/og-image-boostai.png",
   type = "website",
-  keywords = "agence web, développement web sur-mesure, agence digitale, création site internet, agence code, audit site web, refonte de site, accompagnement digital, agence SEO, choisir agence web, meilleure agence web, devis agence web, MVP, automatisations IA, intelligence artificielle"
+  keywords
 }) => {
   const location = useLocation();
   const url = `https://www.boostaiconsulting.com${location.pathname}`;
@@ -29,7 +29,8 @@ const MetaTags: React.FC<MetaTagsProps> = ({
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
+      {/* Ignorée par Google ; gardée seulement si une page la fournit. */}
+      {keywords ? <meta name="keywords" content={keywords} /> : null}
       <meta name="author" content="BoostAI Consulting" />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href={url} />

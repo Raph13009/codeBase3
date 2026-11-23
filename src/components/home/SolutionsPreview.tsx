@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link } from "@/lib/router-compat";
 import { useInView } from 'react-intersection-observer';
 import { MessageSquare, TrendingUp, FileText, Globe, ArrowRight } from 'lucide-react';
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";

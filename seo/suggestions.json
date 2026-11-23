@@ -1,0 +1,440 @@
+{
+  "schema": "seo-playbook/suggestions@1",
+  "date": "2026-11-23",
+  "source": "saisie semi-automatique Google (fr)",
+  "mots_cles": [
+    {
+      "mot_cle": "agence web ia",
+      "url": "/",
+      "graine": false,
+      "attestee": true,
+      "suggestions": [
+        "agence web ia",
+        "agence web ia paris",
+        "agence digitale ia",
+        "agence communication ia",
+        "agence communication ia lyon",
+        "agence web à saint etienne",
+        "agence web à paris",
+        "agence web a archamps",
+        "agence web à andrézieux",
+        "agence web à lyon"
+      ]
+    },
+    {
+      "mot_cle": "création site internet sur mesure",
+      "url": "/services/creation-site-internet-sur-mesure",
+      "graine": false,
+      "attestee": true,
+      "suggestions": [
+        "création site internet sur mesure",
+        "création site internet sur mesure drôme"
+      ]
+    },
+    {
+      "mot_cle": "agence développement mvp",
+      "url": "/services/agence-developpement-mvp",
+      "graine": false,
+      "attestee": true,
+      "suggestions": [
+        "agence développement mvp"
+      ]
+    },
+    {
+      "mot_cle": "agence création agent ia",
+      "url": "/services/agence-creation-agent-ia",
+      "graine": false,
+      "attestee": true,
+      "suggestions": [
+        "agence creation agent ia"
+      ]
+    },
+    {
+      "mot_cle": "agence automatisation ia",
+      "url": "/services/agence-automatisation-ia",
+      "graine": false,
+      "attestee": true,
+      "suggestions": [
+        "agence automatisation ia",
+        "agence automatisation ia paris",
+        "agence automatisation ia maroc",
+        "agence automatisation ia france",
+        "agence automatisation ia lyon",
+        "agence automatisation ia toulouse",
+        "agence automatisation ia n8n",
+        "agence automatisation ia belgique",
+        "agence d automatisation ia c est quoi",
+        "agence d automatisation ia pour pme"
+      ]
+    },
+    {
+      "mot_cle": "commerce agentique",
+      "url": "/fr/agentic-commerce",
+      "graine": false,
+      "attestee": true,
+      "suggestions": [
+        "commerce agentique",
+        "commerce agentique définition",
+        "commerce agentique ia",
+        "commerce agentique en anglais",
+        "commerce agentique carrefour",
+        "commerce agentique en france",
+        "stripe commerce agentique",
+        "google commerce agentique",
+        "adyen commerce agentique",
+        "shopify commerce agentique"
+      ]
+    },
+    {
+      "mot_cle": "agence d'automatisation ia pme",
+      "url": "/services/agence-automatisation-ia-pme",
+      "graine": false,
+      "attestee": true,
+      "suggestions": [
+        "agence d automatisation ia pour pme"
+      ]
+    },
+    {
+      "mot_cle": "mvp startup",
+      "url": "/services/mvp-startup",
+      "graine": false,
+      "attestee": true,
+      "suggestions": [
+        "mvp startup",
+        "mvp startup definition",
+        "mvp startup signification",
+        "mvp startup phase",
+        "mvp startup example",
+        "mvp startup full form",
+        "mvp startup stage",
+        "mvp startup what does it mean",
+        "mvp startup means",
+        "mvp startup card mlbb"
+      ]
+    },
+    {
+      "mot_cle": "agence web ou freelance",
+      "url": "/agence-web-ou-freelance",
+      "graine": false,
+      "attestee": true,
+      "suggestions": [
+        "agence web freelance saint etienne",
+        "agence web freelance",
+        "agence web freelance à montbrison",
+        "agence web freelance andrézieux",
+        "agence web freelance saint chamond",
+        "agence web freelance firminy",
+        "agence web freelance maroc",
+        "agence communication freelance"
+      ]
+    },
+    {
+      "mot_cle": "boostai avis",
+      "url": "/avis",
+      "graine": false,
+      "attestee": false,
+      "suggestions": []
+    }
+  ],
+  "idees": [
+    {
+      "requete": "agence web ia paris",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence digitale ia",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence communication ia",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence communication ia lyon",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence web à saint etienne",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence web à paris",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence web a archamps",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence web à andrézieux",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence web à lyon",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "création site internet sur mesure drôme",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "création site internet sur mesure",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence automatisation ia paris",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence automatisation ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence automatisation ia maroc",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence automatisation ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence automatisation ia france",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence automatisation ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence automatisation ia lyon",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence automatisation ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence automatisation ia toulouse",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence automatisation ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence automatisation ia n8n",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence automatisation ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence automatisation ia belgique",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence automatisation ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "commerce agentique ia",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "commerce agentique",
+      "nom_propre": false
+    },
+    {
+      "requete": "commerce agentique en anglais",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "commerce agentique",
+      "nom_propre": false
+    },
+    {
+      "requete": "commerce agentique carrefour",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "commerce agentique",
+      "nom_propre": false
+    },
+    {
+      "requete": "commerce agentique en france",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "commerce agentique",
+      "nom_propre": false
+    },
+    {
+      "requete": "mvp startup phase",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "mvp startup",
+      "nom_propre": false
+    },
+    {
+      "requete": "mvp startup what does it mean",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "mvp startup",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence web freelance saint etienne",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ou freelance",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence web freelance à montbrison",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ou freelance",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence web freelance andrézieux",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ou freelance",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence web freelance saint chamond",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ou freelance",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence web freelance firminy",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ou freelance",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence web freelance maroc",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ou freelance",
+      "nom_propre": false
+    },
+    {
+      "requete": "agence communication freelance",
+      "intention": "achat",
+      "locale": false,
+      "depuis": "agence web ou freelance",
+      "nom_propre": false
+    }
+  ],
+  "questions": [
+    {
+      "requete": "agence d automatisation ia c est quoi",
+      "intention": "information",
+      "locale": false,
+      "depuis": "agence automatisation ia",
+      "nom_propre": false
+    },
+    {
+      "requete": "commerce agentique définition",
+      "intention": "information",
+      "locale": false,
+      "depuis": "commerce agentique",
+      "nom_propre": false
+    },
+    {
+      "requete": "mvp startup definition",
+      "intention": "information",
+      "locale": false,
+      "depuis": "mvp startup",
+      "nom_propre": false
+    },
+    {
+      "requete": "mvp startup signification",
+      "intention": "information",
+      "locale": false,
+      "depuis": "mvp startup",
+      "nom_propre": false
+    },
+    {
+      "requete": "mvp startup example",
+      "intention": "information",
+      "locale": false,
+      "depuis": "mvp startup",
+      "nom_propre": false
+    },
+    {
+      "requete": "mvp startup full form",
+      "intention": "information",
+      "locale": false,
+      "depuis": "mvp startup",
+      "nom_propre": false
+    },
+    {
+      "requete": "mvp startup means",
+      "intention": "information",
+      "locale": false,
+      "depuis": "mvp startup",
+      "nom_propre": false
+    }
+  ],
+  "a_juger": [
+    {
+      "requete": "stripe commerce agentique",
+      "intention": "autre",
+      "locale": false,
+      "depuis": "commerce agentique",
+      "nom_propre": true
+    },
+    {
+      "requete": "google commerce agentique",
+      "intention": "autre",
+      "locale": false,
+      "depuis": "commerce agentique",
+      "nom_propre": true
+    },
+    {
+      "requete": "adyen commerce agentique",
+      "intention": "autre",
+      "locale": false,
+      "depuis": "commerce agentique",
+      "nom_propre": true
+    },
+    {
+      "requete": "shopify commerce agentique",
+      "intention": "autre",
+      "locale": false,
+      "depuis": "commerce agentique",
+      "nom_propre": true
+    }
+  ],
+  "erreurs": [],
+  "interrompu": false,
+  "resume": {
+    "mots_cles": 10,
+    "attestes": 9,
+    "idees": 30,
+    "questions": 7
+  }
+}

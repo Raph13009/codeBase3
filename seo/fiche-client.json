@@ -1,0 +1,211 @@
+{
+  "_aide": "Fiche client BoostAI Consulting. Faits relevés le 2026-11-23 sur le site lui-même (src/components/studio/data.ts et work.ts, page contact). Tout ce qui manque est listé dans A-CONFIRMER.md : ne rien écrire qui n'est pas ici.",
+  "client": "BoostAI Consulting",
+  "marque": [
+    "boostai",
+    "boost ai",
+    "boostai consulting",
+    "boostaiconsulting"
+  ],
+  "site": "https://www.boostaiconsulting.com",
+  "propriete_gsc": "",
+  "_propriete_gsc": "À remplir quand le propriétaire de la Search Console de boostaiconsulting.com aura ajouté seo-playbook@seo-clients-mrhtry.iam.gserviceaccount.com (autorisation Complète).",
+  "portee": "nationale",
+  "metier": {
+    "nom": "agence web",
+    "mot_cle": "agence web ia",
+    "naturel": "Agence web et IA"
+  },
+  "metier_reglemente": "",
+  "zones": [],
+  "services": [
+    {
+      "nom": "site web sur mesure",
+      "mot_cle": "création site internet sur mesure",
+      "naturel": "Création de site internet sur mesure",
+      "priorite": 1,
+      "url": "/services/creation-site-internet-sur-mesure"
+    },
+    {
+      "nom": "MVP",
+      "mot_cle": "agence développement mvp",
+      "naturel": "Agence de développement de MVP",
+      "priorite": 1,
+      "url": "/services/agence-developpement-mvp"
+    },
+    {
+      "nom": "agents IA",
+      "mot_cle": "agence création agent ia",
+      "naturel": "Agence de création d'agents IA",
+      "priorite": 2,
+      "url": "/services/agence-creation-agent-ia"
+    },
+    {
+      "nom": "automatisation",
+      "mot_cle": "agence automatisation ia",
+      "naturel": "Agence d'automatisation IA",
+      "priorite": 2,
+      "url": "/services/agence-automatisation-ia"
+    },
+    {
+      "nom": "commerce agentique",
+      "mot_cle": "commerce agentique",
+      "naturel": "Commerce agentique",
+      "priorite": 3,
+      "url": "/fr/agentic-commerce"
+    }
+  ],
+  "publics": [
+    {
+      "mot_cle": "pme",
+      "naturel": "pour les PME",
+      "service": "agence d'automatisation IA"
+    },
+    {
+      "mot_cle": "startup",
+      "naturel": "pour les startups",
+      "service": "MVP"
+    }
+  ],
+  "comparaisons": [
+    {
+      "mot_cle": "agence web ou freelance",
+      "naturel": "Agence web ou freelance"
+    }
+  ],
+  "action": {
+    "libelle": "Démarrer un projet",
+    "url": "/contact"
+  },
+  "telephone": "",
+  "adresse": "",
+  "email": "contact@boostaiconsulting.com",
+  "hub": "/services/",
+  "fiche_google": "",
+  "profils": [
+    "https://www.linkedin.com/company/106565801/"
+  ],
+  "indexnow_cle": "",
+  "benefices": [
+    "De l'idée au produit en ligne",
+    "Prototype validé avant le code"
+  ],
+  "preuves": {
+    "note": {},
+    "avis": [],
+    "chiffres": [],
+    "partenaires": [],
+    "qualifications": [],
+    "locales": {},
+    "realisations": [
+      {
+        "nom": "Avenirea",
+        "livrable": "MVP d'orientation post-bac : test d'orientation, synthèse personnalisée générée par GPT-4, résultat débloqué après paiement Stripe",
+        "url": "/project/1",
+        "service": "MVP"
+      },
+      {
+        "nom": "MyTable",
+        "livrable": "plateforme où les clients réservent un chef à domicile, gèrent leurs demandes et communiquent en temps réel",
+        "url": "/project/9",
+        "service": "MVP"
+      },
+      {
+        "nom": "Musiclinks",
+        "livrable": "marketplace mobile-first où artistes et prestataires créent un compte et échangent par messagerie",
+        "url": "/project/2",
+        "service": "MVP"
+      },
+      {
+        "nom": "Getlazo",
+        "livrable": "plateforme pour orchestrer, vendre et gérer des tests de fidélité",
+        "url": "/project/3",
+        "service": "MVP"
+      },
+      {
+        "nom": "Kivaiakids",
+        "livrable": "plateforme d'apprentissage des langues pour enfants, avec interface professeur",
+        "url": "/project/6",
+        "service": "MVP"
+      },
+      {
+        "nom": "Oenoboost",
+        "livrable": "application web éducative autour du vin : carte des vignobles, modules d'apprentissage, quiz, abonnement",
+        "url": "/project/10",
+        "service": "MVP"
+      },
+      {
+        "nom": "Koacher",
+        "livrable": "site web B2B conçu pour présenter l'offre, rassurer les prospects et générer des prises de contact",
+        "url": "/project/8",
+        "service": "site web sur mesure"
+      },
+      {
+        "nom": "Blue Garden",
+        "livrable": "site vitrine pour une association, avec page contact et section événements",
+        "url": "/project/5",
+        "service": "site web sur mesure"
+      },
+      {
+        "nom": "Fast Consulting",
+        "livrable": "application qui automatise des démarches administratives : questionnaire, paiement, notifications e-mail",
+        "url": "/project/7",
+        "service": "automatisation"
+      },
+      {
+        "nom": "Agent OCR",
+        "livrable": "agent qui extrait les tableaux de PDF identiques et génère un fichier Excel prêt à l'analyse",
+        "url": "/agent/1",
+        "service": "agents IA"
+      },
+      {
+        "nom": "Reporting Notion",
+        "livrable": "agent qui calcule chaque semaine les statistiques d'une base client et publie un rapport dans Notion",
+        "url": "/agent/2",
+        "service": "agents IA"
+      },
+      {
+        "nom": "AutoReach",
+        "livrable": "outil d'envoi d'e-mails personnalisés à partir d'une liste, avec suivi des envois",
+        "url": "/agent/3",
+        "service": "automatisation"
+      },
+      {
+        "nom": "Factur-X",
+        "livrable": "générateur de factures au format Factur-X (PDF et XML) pour l'e-facturation",
+        "url": "/agent/4",
+        "service": "automatisation"
+      }
+    ]
+  },
+  "methode": [
+    "Cadrer : atelier de lancement, audit de l'existant et objectifs mesurables",
+    "Concevoir : parcours, maquettes et prototype cliquable, validés avant la première ligne de code",
+    "Développer : front, back, paiements et intégrations IA ; avancement suivi sur un lien de préproduction",
+    "Déployer : mise en ligne, suivi des performances et itérations"
+  ],
+  "_methode": "Champ libre (non lu par les scripts) : la méthode telle que le site la décrit.",
+  "reglementaire": {},
+  "termes_metier": [
+    "agence web",
+    "agence digitale",
+    "studio",
+    "développeur",
+    "agence ia",
+    "freelance"
+  ],
+  "lexique": {
+    "exclure": [
+      "cs2",
+      "mlbb",
+      "iad"
+    ]
+  },
+  "concurrents": [],
+  "metiers_voisins": [
+    "incubateur de startups",
+    "agence de communication",
+    "expert-comptable"
+  ],
+  "villes_alias": []
+}

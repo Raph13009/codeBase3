@@ -1,0 +1,120 @@
+{
+  "schema": "seo-playbook/autopilot@1",
+  "genere_le": "2026-11-23",
+  "client": "BoostAI Consulting",
+  "etapes": [
+    {
+      "nom": "Plan des pages",
+      "etat": "fait",
+      "detail": "15 pages (vague 1 : 11, vague 2 : 0, vague 3 : 4)."
+    },
+    {
+      "nom": "Suggestions Google",
+      "etat": "fait",
+      "detail": "10 recherche(s) interrogée(s) · 9 mot(s)-clé(s) du plan suggéré(s) · 30 idée(s) de page · 7 question(s)"
+    },
+    {
+      "nom": "Propriété Search Console",
+      "etat": "sauté",
+      "detail": "introuvable : faire ajouter l'adresse du compte de service dans la Search Console du client (`gsc_fetch.py --check` la donne), ou renseigner `propriete_gsc` dans la fiche"
+    },
+    {
+      "nom": "Routine mensuelle",
+      "etat": "sauté",
+      "detail": "pas de données Search Console cette fois"
+    }
+  ],
+  "travail": {
+    "budget_pages": 2,
+    "indexation": [],
+    "actions": [],
+    "pages": [
+      {
+        "id": "accueil",
+        "url": "/",
+        "mot_cle": "agence web ia",
+        "naturel": "Agence web et IA",
+        "type": "accueil",
+        "en_ligne": true
+      }
+    ],
+    "idees": [
+      {
+        "requete": "agence digitale ia",
+        "depuis": "agence web ia",
+        "verdict": "adoptable",
+        "champ_fiche": "services",
+        "raison": "tous les mots sont connus de la fiche et aucune page du plan ne couvre cette recherche"
+      },
+      {
+        "requete": "commerce agentique ia",
+        "depuis": "commerce agentique",
+        "verdict": "variante",
+        "plan_id": "service-commerce-agentique",
+        "page": "/fr/agentic-commerce",
+        "raison": "même recherche qu'une page du plan : à glisser dans son title, son H1 ou ses questions, sans changer le sens ni créer de seconde page"
+      }
+    ],
+    "faq": [
+      {
+        "page": "/services/agence-automatisation-ia",
+        "question": "agence d automatisation ia c est quoi"
+      },
+      {
+        "page": "/services/mvp-startup",
+        "question": "mvp startup signification"
+      },
+      {
+        "page": "/services/mvp-startup",
+        "question": "mvp startup full form"
+      },
+      {
+        "page": "/services/mvp-startup",
+        "question": "mvp startup means"
+      }
+    ],
+    "a_confirmer": [
+      {
+        "sujet": "agence web ia",
+        "question": "Page « Agence web et IA » : Google montre aussi des recherches avec des mots absents de la fiche (paris). Lesquels correspondent à une prestation ou à une zone réelle du client ? Les autres restent absents de la page.",
+        "origine": "1 idée(s) vue(s) chez Google"
+      },
+      {
+        "sujet": "recherches sans page du plan",
+        "question": "Autres recherches vues chez Google, avec des mots absents de la fiche : « agence communication ia », « agence communication ia lyon », « agence web à saint etienne », « agence web à paris », « agence web a archamps », « agence web à andrézieux », « agence web à lyon », « agence communication freelance ». Lesquelles correspondent à une offre réelle du client ?",
+        "origine": "8 idée(s) vue(s) chez Google"
+      },
+      {
+        "sujet": "création site internet sur mesure",
+        "question": "Page « Création de site internet sur mesure » : Google montre aussi des recherches avec des mots absents de la fiche (drome). Lesquels correspondent à une prestation ou à une zone réelle du client ? Les autres restent absents de la page.",
+        "origine": "1 idée(s) vue(s) chez Google"
+      },
+      {
+        "sujet": "agence automatisation ia",
+        "question": "Page « Agence d'automatisation IA » : Google montre aussi des recherches avec des mots absents de la fiche (belgique, france, lyon, maroc, n8n, paris, toulouse). Lesquels correspondent à une prestation ou à une zone réelle du client ? Les autres restent absents de la page.",
+        "origine": "7 idée(s) vue(s) chez Google"
+      },
+      {
+        "sujet": "commerce agentique",
+        "question": "Page « Commerce agentique » : Google montre aussi des recherches avec des mots absents de la fiche (anglais, carrefour, france). Lesquels correspondent à une prestation ou à une zone réelle du client ? Les autres restent absents de la page.",
+        "origine": "3 idée(s) vue(s) chez Google"
+      },
+      {
+        "sujet": "mvp startup",
+        "question": "Page « MVP pour les startups » : Google montre aussi des recherches avec des mots absents de la fiche (does, it, mean, phase, what). Lesquels correspondent à une prestation ou à une zone réelle du client ? Les autres restent absents de la page.",
+        "origine": "2 idée(s) vue(s) chez Google"
+      },
+      {
+        "sujet": "agence web ou freelance",
+        "question": "Page « Agence web ou freelance » : Google montre aussi des recherches avec des mots absents de la fiche (andrezieux, chamond, etienne, firminy, maroc, montbrison, saint). Lesquels correspondent à une prestation ou à une zone réelle du client ? Les autres restent absents de la page.",
+        "origine": "6 idée(s) vue(s) chez Google"
+      }
+    ],
+    "compte": {
+      "adoptable": 1,
+      "variante": 1,
+      "a_confirmer": 28,
+      "ecartee": 0
+    }
+  }
+}

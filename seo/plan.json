@@ -1,0 +1,553 @@
+{
+  "schema": "seo-playbook/plan@1",
+  "client": "BoostAI Consulting",
+  "site": "https://www.boostaiconsulting.com",
+  "genere_le": "2026-11-23",
+  "hub": "/services/",
+  "portee": "nationale",
+  "ville_principale": null,
+  "pages": [
+    {
+      "id": "accueil",
+      "type": "accueil",
+      "mot_cle": "agence web ia",
+      "naturel": "Agence web et IA",
+      "url": "/",
+      "title": "Agence web et IA | De l'idée au produit en ligne | BoostAI Consulting",
+      "title_base": "Agence web et IA | … | BoostAI Consulting",
+      "h1_base": "Agence web et IA",
+      "vague": 1,
+      "liens_vers": [
+        "/services/",
+        "/services/creation-site-internet-sur-mesure",
+        "/services/agence-developpement-mvp",
+        "/services/agence-creation-agent-ia"
+      ],
+      "statut": "ecrite",
+      "volume": null,
+      "source_volume": null,
+      "notes": [
+        "écrite le 2026-11-23 (branche seo/playbook), à journaliser à la mise en ligne"
+      ],
+      "ville": null,
+      "origine": "existante",
+      "existante": {
+        "url": "/",
+        "confiance": "sure",
+        "raison": "page d'accueil",
+        "mots": 0,
+        "clics": 0,
+        "impressions": 0,
+        "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes"
+      },
+      "ordre": 1
+    },
+    {
+      "id": "hub",
+      "type": "hub",
+      "mot_cle": null,
+      "naturel": "Nos services",
+      "url": "/services/",
+      "title": "",
+      "title_base": "Nos services | … | BoostAI Consulting",
+      "h1_base": "Nos services",
+      "vague": 1,
+      "liens_vers": [
+        "/services/creation-site-internet-sur-mesure",
+        "/services/agence-developpement-mvp",
+        "/services/agence-creation-agent-ia",
+        "/services/agence-automatisation-ia",
+        "/fr/agentic-commerce",
+        "/services/agence-automatisation-ia-pme",
+        "/services/mvp-startup",
+        "/agence-web-ou-freelance"
+      ],
+      "statut": "a_ecrire",
+      "volume": null,
+      "source_volume": null,
+      "notes": [
+        "liste toutes les pages de service ; lié dans le pied de page de tout le site"
+      ],
+      "origine": "nouvelle",
+      "ordre": 2
+    },
+    {
+      "id": "service-creation-site-internet-mesure",
+      "type": "service",
+      "mot_cle": "création site internet sur mesure",
+      "naturel": "Création de site internet sur mesure",
+      "url": "/services/creation-site-internet-sur-mesure",
+      "title": "",
+      "title_base": "Création de site internet sur mesure | … | BoostAI Consulting",
+      "h1_base": "Création de site internet sur mesure",
+      "vague": 1,
+      "liens_vers": [
+        "/services/",
+        "/services/agence-developpement-mvp",
+        "/services/agence-creation-agent-ia"
+      ],
+      "statut": "a_ecrire",
+      "volume": null,
+      "source_volume": null,
+      "notes": [],
+      "ville": null,
+      "service": "site web sur mesure",
+      "origine": "nouvelle",
+      "ordre": 3
+    },
+    {
+      "id": "service-agence-developpement-mvp",
+      "type": "service",
+      "mot_cle": "agence développement mvp",
+      "naturel": "Agence de développement de MVP",
+      "url": "/services/agence-developpement-mvp",
+      "title": "Agence de développement de MVP | De l'idée au produit en ligne | BoostAI Consulting",
+      "title_base": "Agence de développement de MVP | … | BoostAI Consulting",
+      "h1_base": "Agence de développement de MVP",
+      "vague": 1,
+      "liens_vers": [
+        "/services/",
+        "/services/agence-creation-agent-ia",
+        "/services/agence-automatisation-ia"
+      ],
+      "statut": "ecrite",
+      "volume": null,
+      "source_volume": null,
+      "notes": [
+        "écrite le 2026-11-23 (branche seo/playbook), à journaliser à la mise en ligne"
+      ],
+      "ville": null,
+      "service": "MVP",
+      "origine": "nouvelle",
+      "ordre": 4
+    },
+    {
+      "id": "service-agence-creation-agent-ia",
+      "type": "service",
+      "mot_cle": "agence création agent ia",
+      "naturel": "Agence de création d'agents IA",
+      "url": "/services/agence-creation-agent-ia",
+      "title": "",
+      "title_base": "Agence de création d'agents IA | … | BoostAI Consulting",
+      "h1_base": "Agence de création d'agents IA",
+      "vague": 1,
+      "liens_vers": [
+        "/services/",
+        "/services/agence-automatisation-ia",
+        "/fr/agentic-commerce"
+      ],
+      "statut": "a_ecrire",
+      "volume": null,
+      "source_volume": null,
+      "notes": [],
+      "ville": null,
+      "service": "agents IA",
+      "origine": "nouvelle",
+      "ordre": 5
+    },
+    {
+      "id": "service-agence-automatisation-ia",
+      "type": "service",
+      "mot_cle": "agence automatisation ia",
+      "naturel": "Agence d'automatisation IA",
+      "url": "/services/agence-automatisation-ia",
+      "title": "",
+      "title_base": "Agence d'automatisation IA | … | BoostAI Consulting",
+      "h1_base": "Agence d'automatisation IA",
+      "vague": 1,
+      "liens_vers": [
+        "/services/",
+        "/fr/agentic-commerce",
+        "/services/creation-site-internet-sur-mesure"
+      ],
+      "statut": "a_ecrire",
+      "volume": null,
+      "source_volume": null,
+      "notes": [],
+      "ville": null,
+      "service": "automatisation",
+      "origine": "nouvelle",
+      "ordre": 6
+    },
+    {
+      "id": "service-commerce-agentique",
+      "type": "service",
+      "mot_cle": "commerce agentique",
+      "naturel": "Commerce agentique",
+      "url": "/fr/agentic-commerce",
+      "title": "",
+      "title_base": "Commerce agentique | … | BoostAI Consulting",
+      "h1_base": "Commerce agentique",
+      "vague": 1,
+      "liens_vers": [
+        "/services/",
+        "/services/creation-site-internet-sur-mesure",
+        "/services/agence-developpement-mvp"
+      ],
+      "statut": "a_reprendre",
+      "volume": null,
+      "source_volume": null,
+      "notes": [
+        "adresse déjà en ligne conservée, sans « agentique » ; si elle ne reçoit aucune visite, on peut passer à /services/commerce-agentique avec une redirection 301 : mettre « url »: \"/services/commerce-agentique\" dans la fiche et relancer"
+      ],
+      "ville": null,
+      "service": "commerce agentique",
+      "url_proposee": "/services/commerce-agentique",
+      "origine": "existante",
+      "existante": {
+        "url": "/fr/agentic-commerce",
+        "confiance": "fiche",
+        "raison": "adresse indiquée dans la fiche client",
+        "mots": 692,
+        "clics": 0,
+        "impressions": 0,
+        "title": "Agentic Commerce by BoostAI Consulting | Évaluation & programme pilote"
+      },
+      "ordre": 7
+    },
+    {
+      "id": "a-propos",
+      "type": "fixe",
+      "mot_cle": null,
+      "naturel": "À propos",
+      "url": "/about",
+      "title": "",
+      "title_base": "À propos | BoostAI Consulting",
+      "h1_base": "À propos",
+      "vague": 1,
+      "liens_vers": [
+        "/services/"
+      ],
+      "statut": "a_reprendre",
+      "volume": null,
+      "source_volume": null,
+      "notes": [],
+      "url_proposee": "/a-propos",
+      "origine": "existante",
+      "existante": {
+        "url": "/about",
+        "confiance": "sure",
+        "raison": "adresse habituelle de cette page",
+        "mots": 0,
+        "clics": 0,
+        "impressions": 0,
+        "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes"
+      },
+      "ordre": 8
+    },
+    {
+      "id": "contact",
+      "type": "fixe",
+      "mot_cle": null,
+      "naturel": "Contact",
+      "url": "/contact",
+      "title": "",
+      "title_base": "Contact | BoostAI Consulting",
+      "h1_base": "Contact",
+      "vague": 1,
+      "liens_vers": [
+        "/services/"
+      ],
+      "statut": "a_reprendre",
+      "volume": null,
+      "source_volume": null,
+      "notes": [],
+      "origine": "existante",
+      "existante": {
+        "url": "/contact",
+        "confiance": "sure",
+        "raison": "même adresse",
+        "mots": 0,
+        "clics": 0,
+        "impressions": 0,
+        "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes"
+      },
+      "ordre": 9
+    },
+    {
+      "id": "mentions-legales",
+      "type": "fixe",
+      "mot_cle": null,
+      "naturel": "Mentions légales",
+      "url": "/mentions-legales",
+      "title": "",
+      "title_base": "Mentions légales | BoostAI Consulting",
+      "h1_base": "Mentions légales",
+      "vague": 1,
+      "liens_vers": [
+        "/services/"
+      ],
+      "statut": "a_ecrire",
+      "volume": null,
+      "source_volume": null,
+      "notes": [],
+      "origine": "nouvelle",
+      "ordre": 10
+    },
+    {
+      "id": "confidentialite",
+      "type": "fixe",
+      "mot_cle": null,
+      "naturel": "Politique de confidentialité",
+      "url": "/confidentialite",
+      "title": "",
+      "title_base": "Politique de confidentialité | BoostAI Consulting",
+      "h1_base": "Politique de confidentialité",
+      "vague": 1,
+      "liens_vers": [
+        "/services/"
+      ],
+      "statut": "a_ecrire",
+      "volume": null,
+      "source_volume": null,
+      "notes": [],
+      "origine": "nouvelle",
+      "ordre": 11
+    },
+    {
+      "id": "public-agence-automatisation-ia-pme",
+      "type": "public",
+      "mot_cle": "agence d'automatisation ia pme",
+      "naturel": "Agence d'automatisation IA pour les PME",
+      "url": "/services/agence-automatisation-ia-pme",
+      "title": "",
+      "title_base": "Agence d'automatisation IA pour les PME | … | BoostAI Consulting",
+      "h1_base": "Agence d'automatisation IA pour les PME",
+      "vague": 3,
+      "liens_vers": [
+        "/services/",
+        "/"
+      ],
+      "statut": "a_ecrire",
+      "volume": null,
+      "source_volume": null,
+      "notes": [],
+      "ville": null,
+      "service": "agence d'automatisation IA",
+      "origine": "nouvelle",
+      "ordre": 12
+    },
+    {
+      "id": "public-mvp-startup",
+      "type": "public",
+      "mot_cle": "mvp startup",
+      "naturel": "MVP pour les startups",
+      "url": "/services/mvp-startup",
+      "title": "",
+      "title_base": "MVP pour les startups | … | BoostAI Consulting",
+      "h1_base": "MVP pour les startups",
+      "vague": 3,
+      "liens_vers": [
+        "/services/",
+        "/services/agence-developpement-mvp"
+      ],
+      "statut": "a_ecrire",
+      "volume": null,
+      "source_volume": null,
+      "notes": [],
+      "ville": null,
+      "service": "MVP",
+      "origine": "nouvelle",
+      "ordre": 13
+    },
+    {
+      "id": "comparaison-agence-web-ou-freelance",
+      "type": "comparaison",
+      "mot_cle": "agence web ou freelance",
+      "naturel": "Agence web ou freelance",
+      "url": "/agence-web-ou-freelance",
+      "title": "",
+      "title_base": "Agence web ou freelance | … | BoostAI Consulting",
+      "h1_base": "Agence web ou freelance",
+      "vague": 3,
+      "liens_vers": [
+        "/services/",
+        "/"
+      ],
+      "statut": "a_ecrire",
+      "volume": null,
+      "source_volume": null,
+      "notes": [
+        "comparaison de catégories : n'écrire qu'avec des faits vérifiables"
+      ],
+      "origine": "nouvelle",
+      "ordre": 14
+    },
+    {
+      "id": "avis",
+      "type": "avis",
+      "mot_cle": "boostai avis",
+      "naturel": "Avis sur BoostAI Consulting",
+      "url": "/avis",
+      "title": "",
+      "title_base": "Avis sur BoostAI Consulting | … | BoostAI Consulting",
+      "h1_base": "Avis sur BoostAI Consulting",
+      "vague": 3,
+      "liens_vers": [
+        "/services/"
+      ],
+      "statut": "a_ecrire",
+      "volume": null,
+      "source_volume": null,
+      "notes": [
+        "page d'avis : tous les avis, ou les plus récents dans l'ordre chronologique, sans sélection, chacun avec sa source et sa date ; dire s'ils sont contrôlés et comment (art. L111-7-2) ; lien vers la plateforme",
+        "aucun avis dans la fiche : page à écrire quand le client en aura"
+      ],
+      "origine": "nouvelle",
+      "ordre": 15
+    }
+  ],
+  "ecartes": [],
+  "alertes": [
+    "Volumes de recherche non renseignés : priorités fixées par le métier. Pour les chiffrer gratuitement, voir seo/MOTS-CLES-A-CHIFFRER.md (Keyword Planner et Google Trends).",
+    "Portée nationale : mots-clés sans ville, plus disputés qu'une recherche locale. Vérifier qu'ils existent (suggest.py) et préférer les formes précises : prestation nommée, « pour [public] », comparaison.",
+    "4 page(s) du plan existent déjà sur le site : adresse conservée, statut « à reprendre » (réécrire en place, ne pas créer une seconde page)."
+  ],
+  "pages_de_ville": 0,
+  "site_existant": {
+    "releve_le": "2026-11-23",
+    "pages": 23,
+    "sources": [
+      "https://www.boostaiconsulting.com/sitemap.xml",
+      "seo/rapports/lancement/lancement.json",
+      "seo/routes.txt"
+    ],
+    "notes": []
+  },
+  "existantes_hors_plan": [
+    {
+      "url": "/Convert",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/agent/1",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/agent/2",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/agent/3",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/agent/4",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/blog",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/en/agentic-commerce",
+      "title": "Agentic Commerce by BoostAI Consulting | Readiness Assessment & Pilot",
+      "clics": 0,
+      "impressions": 0,
+      "note": "page en « en » : le plan est en français, rien à faire ici ; la garder"
+    },
+    {
+      "url": "/ocr-terms",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/project/1",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/project/10",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/project/2",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/project/3",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/project/4",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/project/5",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/project/6",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/project/7",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/project/8",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/project/9",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    },
+    {
+      "url": "/realisations",
+      "title": "Agence Web BoostAI - Site Internet Sur-Mesure | Code Rapide & Solutions Innovantes",
+      "clics": 0,
+      "impressions": 0,
+      "note": "hors des recherches d'acheteurs du plan : la garder si elle sert aux visiteurs"
+    }
+  ],
+  "redirections": []
+}
